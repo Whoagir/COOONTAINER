@@ -158,6 +158,16 @@ func _s_grab() -> void:
 	await get_tree().physics_frame
 	p.hands.host_grab(b1, 0)
 	_ok("grab", p.hands.any_held() == b1, b1.def.id)
+	# вещь должна сесть в ладонь, а не висеть в воздухе перед лицом
+	for i in 8:
+		await get_tree().physics_frame
+	var palm_d: float = b1.global_position.distance_to(p.hands.hand_r.global_position)
+	_ok("grab_in_palm", palm_d < 0.85, "d=%.2f" % palm_d)
+	p.hands.active_hand = 1
+	_ok("swap_hand", p.hands.active_hand == 1, "active=%d" % p.hands.active_hand)
+	p.hands.active_hand = 0
+	# короткий хват: точка за REACH недоступна
+	_ok("reach_short", not p.can_reach_point(p.shoulder_world(0) + Vector3(0, 0, -3.5)), "reach=%.2f" % Hands.REACH)
 	if b2:
 		p.host_pocket_put(b2)
 		_ok("pocket", p.pockets.has(b2), b2.def.id)
@@ -168,7 +178,7 @@ func _s_grab() -> void:
 			team_def = d
 			break
 	if team_def:
-		var b3 = Net.spawn_item(team_def.id, Transform3D(Basis(), pos + Vector3(2, 0, 0)))
+		var b3 = Net.spawn_item(team_def.id, Transform3D(Basis(), pos + Vector3(0.6, 0, 0)))
 		await get_tree().physics_frame
 		p.hands.host_release_all()
 		p.hands.host_grab(b3, 0)

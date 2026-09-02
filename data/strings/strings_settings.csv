@@ -75,6 +75,7 @@ SET_ACT_SPRINT,Бег,Sprint
 SET_ACT_GRAB,Хват,Grab
 SET_ACT_RELEASE,Отпустить,Release
 SET_ACT_SECOND_HAND,Вторая рука,Second hand
+SET_ACT_SWAP_HAND,Сменить руку,Swap hand
 SET_ACT_USE,Использовать,Use
 SET_ACT_THROW,Бросить,Throw
 SET_ACT_FLASHLIGHT,Фонарик,Flashlight

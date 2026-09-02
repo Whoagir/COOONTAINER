@@ -407,6 +407,8 @@ func _input(event: InputEvent) -> void:
 		hands.local_release(7.5)
 	elif event.is_action_pressed("second_hand"):
 		hands.local_second_hand()
+	elif event.is_action_pressed("swap_hand"):
+		hands.local_swap_hand()
 	elif event.is_action_pressed("use"):
 		_local_use()
 	elif event.is_action_pressed("alt_use"):
@@ -467,6 +469,17 @@ func _look_point() -> Vector3:
 	if look_ray.is_colliding():
 		return look_ray.get_collision_point()
 	return camera.global_position - camera.global_basis.z * Hands.REACH
+
+
+## Плечо в мире (для длины руки и срыва хвата). hand 0 = правое.
+func shoulder_world(hand: int = 0) -> Vector3:
+	var side := 1.0 if hand == 0 else -1.0
+	return head.global_position + head.global_basis * Vector3(0.20 * side, -0.14, 0.02)
+
+
+## Достаёт ли активная рука до точки (короткий хват — фича, не баг).
+func can_reach_point(world_pt: Vector3) -> bool:
+	return shoulder_world(hands.active_hand).distance_to(world_pt) <= Hands.REACH * 1.05
 
 
 func look_target() -> Node:
@@ -863,16 +876,14 @@ func _process(delta: float) -> void:
 
 # ------------------------------------------------------------------ процедурная анимация рук
 
-# покой: руки опущены к нижним углам экрана, не торчат перед лицом
-var _arm_base_r := Vector3(0.36, -0.42, -0.42)
-var _arm_base_l := Vector3(-0.36, -0.42, -0.42)
-# с вещью / у цели рука поднимается к центру, куда смотрит мышь
-const _ARM_UP_R := Vector3(-0.06, 0.13, -0.04)
-const _ARM_UP_L := Vector3(0.06, 0.13, -0.04)
-var _arm_reach := 0.0
+# покой: рука висит у нижнего угла кадра
+var _arm_hang_r := Vector3(0.34, -0.48, -0.28)
+var _arm_hang_l := Vector3(-0.34, -0.48, -0.28)
+var _arm_reach_punch := 0.0
 var _arm_swing := 0.0
-var _arm_aim := 0.0
-var _arm_aim_t := 0.0
+var _arm_smooth_r := Vector3.ZERO
+var _arm_smooth_l := Vector3.ZERO
+var _arm_smooth_init := false
 
 
 func _anim_arms(delta: float) -> void:
@@ -887,37 +898,48 @@ func _anim_arms(delta: float) -> void:
 		_arm_swing += delta * swing_rate
 	else:
 		_arm_swing = lerpf(_arm_swing, roundf(_arm_swing / PI) * PI, delta * 6.0)
-	_arm_reach = maxf(0.0, _arm_reach - delta * 4.0)
+	_arm_reach_punch = maxf(0.0, _arm_reach_punch - delta * 4.0)
 	var held_r := hands.held[0] != null
 	var held_l := hands.held[1] != null
+	var both := hands.two_hands_same
 	var amp := 1.4 if (sprinting and moving) else 1.0
-	var sway := sin(_arm_swing) * 0.06 * clampf(speed / SPEED, 0.0, 1.5) * amp
-	var bob := absf(cos(_arm_swing)) * 0.025 * clampf(speed / SPEED, 0.0, 1.5)
-	var drop := 0.0
-	if sprinting and moving:
-		drop -= 0.02
+	var sway := sin(_arm_swing) * 0.045 * clampf(speed / SPEED, 0.0, 1.5) * amp
+	var bob := absf(cos(_arm_swing)) * 0.02 * clampf(speed / SPEED, 0.0, 1.5)
+	var drop := -0.02 if (sprinting and moving) else 0.0
 	if heavy:
-		drop -= 0.04
-	var reach := Vector3(0, 0.05, -0.18) * _arm_reach
-	# правая рука тянется к тому, на что смотрим (вещь в радиусе хвата) — «рука за мышкой»
-	if is_local() and not held_r:
-		_arm_aim_t -= delta
-		if _arm_aim_t <= 0.0:
-			_arm_aim_t = 0.1
-			var t := look_target()
-			var want_aim := (t is ItemBody) or (t != null and t.has_method("interact"))
-			_arm_aim = lerpf(_arm_aim, 1.0 if want_aim else 0.0, 0.5)
-	else:
-		_arm_aim = 0.0
-	var hold_r := _ARM_UP_R + Vector3(-0.02, 0.04, -0.01) if held_r else (_ARM_UP_R + Vector3(-0.04, 0.0, -0.12)) * _arm_aim
-	var hold_l := _ARM_UP_L + Vector3(0.02, 0.04, -0.01) if held_l else Vector3.ZERO
+		drop -= 0.035
+
+	# целевые позиции ладоней в пространстве Hands (под Head)
+	var want_r := _hand_want_local(0, held_r, both)
+	var want_l := _hand_want_local(1, held_l, both)
+	# лёгкий walk bob только на висящей руке
+	if not held_r and hands.active_hand != 0 and not both:
+		want_r += Vector3(0, bob + drop, sway)
+	if not held_l and hands.active_hand != 1 and not both:
+		want_l += Vector3(0, bob + drop, -sway)
+	# punch: короткая вытяжка активной / той, что хватает
+	if _arm_reach_punch > 0.0:
+		var punch := Vector3(0, 0.04, -0.16) * _arm_reach_punch
+		if both or hands.active_hand == 0 or held_r:
+			want_r += punch
+		if both or hands.active_hand == 1 or held_l:
+			want_l += punch * (1.0 if both else 0.65)
 	if paddle_up:
-		hold_r = _ARM_UP_R + Vector3(-0.04, 0.08, -0.03)
-	if hands.two_hands_same:
-		hold_r = _ARM_UP_R + Vector3(-0.08, 0.01, -0.04)
-		hold_l = _ARM_UP_L + Vector3(0.08, 0.01, -0.04)
-	hands.hand_r.position = _arm_base_r + Vector3(0, bob + drop, sway if not held_r else 0.0) + reach + hold_r
-	hands.hand_l.position = _arm_base_l + Vector3(0, bob + drop, -sway if not held_l else 0.0) + reach * 0.5 + hold_l
+		want_r = Vector3(0.28, -0.18, -0.48)
+
+	if not _arm_smooth_init:
+		_arm_smooth_r = want_r
+		_arm_smooth_l = want_l
+		_arm_smooth_init = true
+	var follow := 18.0 if (held_r or held_l or both) else 14.0
+	_arm_smooth_r = _arm_smooth_r.lerp(want_r, clampf(delta * follow, 0.0, 1.0))
+	_arm_smooth_l = _arm_smooth_l.lerp(want_l, clampf(delta * follow, 0.0, 1.0))
+	hands.hand_r.position = _arm_smooth_r
+	hands.hand_l.position = _arm_smooth_l
+	_orient_fp_arm(hands.hand_r, 1.0)
+	_orient_fp_arm(hands.hand_l, -1.0)
+	_tint_active_fist()
+
 	_life_t += delta
 	var breath := sin((_life_t + _life_phase) * TAU * 1.1)
 	body_mesh.position.y = BODY_Y + bob * 2.0
@@ -929,7 +951,6 @@ func _anim_arms(delta: float) -> void:
 	else:
 		body_mesh.scale.y = 1.0 + breath * 0.015
 		head_mesh.position.y = _HEAD_MESH_Y + breath * 0.008
-	# 3P: мигание; yaw уже на Head (_yaw/_remote_yaw), pitch слегка на голове у чужих/катсцены
 	if _p_eye_l:
 		_p_blink_cd -= delta
 		if _p_blink_cd <= 0.0:
@@ -956,17 +977,91 @@ func _anim_arms(delta: float) -> void:
 		_rig_arm_r.rotation.x = lerpf(_rig_arm_r.rotation.x, target_r, delta * 10.0)
 	if dead:
 		return
-	# пьяный — руки гуляют
 	if drunk > 0.1:
-		hands.hand_r.position += Vector3(sin(Time.get_ticks_msec() * 0.003), cos(Time.get_ticks_msec() * 0.0021), 0) * drunk * 0.04
-	# горим — машем
+		var wob := Vector3(sin(Time.get_ticks_msec() * 0.003), cos(Time.get_ticks_msec() * 0.0021), 0) * drunk * 0.035
+		hands.hand_r.position += wob
+		hands.hand_l.position += wob * 0.7
 	if burning:
 		hands.hand_r.position.y += sin(Time.get_ticks_msec() * 0.02) * 0.1
 		hands.hand_l.position.y += cos(Time.get_ticks_msec() * 0.02) * 0.1
 
 
+## Куда должна ехать ладонь (локально в Hands). Активная пустая — за точкой взгляда в длину руки.
+func _hand_want_local(hand: int, holding: bool, both: bool) -> Vector3:
+	var hang := _arm_hang_r if hand == 0 else _arm_hang_l
+	var side := 1.0 if hand == 0 else -1.0
+	if both:
+		# обе руки за одной мышью: общая точка чуть ближе груди, ладони слева/справа
+		var look_w := _look_point()
+		var chest := head.global_position + head.global_basis * Vector3(0.0, -0.18, 0.0)
+		var to := look_w - chest
+		var len := clampf(to.length(), 0.35, Hands.ARM_LEN * 0.78)
+		if to.length() < 0.001:
+			to = -head.global_basis.z
+		var mid_w := chest + to.normalized() * len
+		var right := head.global_basis.x
+		var palm_w := mid_w + right * (0.14 * side)
+		return hands.to_local(palm_w)
+	if holding:
+		# несём: ладонь чуть впереди и ниже взгляда — вещь читается «в руке»
+		var look_w2 := _look_point()
+		var sh := shoulder_world(hand)
+		var to2 := look_w2 - sh
+		var len2 := clampf(to2.length(), 0.28, Hands.ARM_LEN * 0.62)
+		if to2.length() < 0.001:
+			to2 = -head.global_basis.z
+		return hands.to_local(sh + to2.normalized() * len2)
+	# пустая
+	if is_local() and hand == hands.active_hand and not paddle_up:
+		var look_w3 := _look_point()
+		var sh3 := shoulder_world(hand)
+		var to3 := look_w3 - sh3
+		var raw := to3.length()
+		var len3 := clampf(raw, 0.22, Hands.ARM_LEN)
+		if raw < 0.001:
+			to3 = -head.global_basis.z
+		# не уводим ладонь за спину / в камеру
+		var palm := sh3 + to3.normalized() * len3
+		var fwd := -head.global_basis.z
+		var from_head := palm - head.global_position
+		if from_head.dot(fwd) < 0.15:
+			palm = head.global_position + fwd * 0.35 + head.global_basis.x * (0.22 * side) + Vector3.DOWN * 0.25
+		return hands.to_local(palm)
+	# неактивная висит
+	return hang
+
+
+func _orient_fp_arm(hand: Node3D, side: float) -> void:
+	var arm: MeshInstance3D = hand.get_node_or_null("Arm") as MeshInstance3D
+	if arm == null:
+		return
+	var shoulder_w := shoulder_world(0 if side > 0.0 else 1)
+	var palm_w := hand.global_position
+	var delta_w := palm_w - shoulder_w
+	var length := delta_w.length()
+	var mid_w := shoulder_w + delta_w * 0.5
+	arm.global_position = mid_w
+	if length > 0.04:
+		var up := head.global_basis.x * side
+		if absf(delta_w.normalized().dot(up)) > 0.92:
+			up = head.global_basis.y
+		arm.look_at(palm_w, up)
+		arm.rotate_object_local(Vector3.RIGHT, -PI * 0.5)
+	var base_h := 0.30
+	arm.scale = Vector3(1.0, maxf(length / base_h, 0.35), 1.0)
+
+
+func _tint_active_fist() -> void:
+	var fr: MeshInstance3D = hands.hand_r.get_node_or_null("Fist") as MeshInstance3D
+	var fl: MeshInstance3D = hands.hand_l.get_node_or_null("Fist") as MeshInstance3D
+	if fr:
+		fr.scale = Vector3.ONE * (1.1 if hands.active_hand == 0 else 0.9)
+	if fl:
+		fl.scale = Vector3.ONE * (1.1 if hands.active_hand == 1 else 0.9)
+
+
 func punch_arm() -> void:
-	_arm_reach = 1.0
+	_arm_reach_punch = 1.0
 
 
 var _use_hold := 0.0
