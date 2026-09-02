@@ -1,12 +1,12 @@
-class_name StreetLoot
+﻿class_name StreetLoot
 extends Node3D
 ## Уличный хлам и мусорки: хост раскидывает подбираемые вещи по городу и держит
 ## порыться-в-баке (E). Клиенты видят геометрию и хинт; спавн только у хоста.
 
-const MAX_STREET := 80
-const SCATTER_N := 70
+const MAX_STREET := 130
+const SCATTER_N := 100
 const TRICKLE_SEC := 90.0
-const TRICKLE_KEEP := 50
+const TRICKLE_KEEP := 70
 const CHARGES := 3
 const RUMMAGE_SEC := 1.2
 const DAY_FALLBACK := 600.0
@@ -337,11 +337,11 @@ func _player_positions() -> Array[Vector3]:
 
 func _candidate(rng: RandomNumberGenerator) -> Vector2:
 	var roll := rng.randf()
-	if roll < 0.18:
+	if roll < 0.3: # трейлер-парк — треть уличного хлама: гетто должно быть завалено
 		var ang := rng.randf() * TAU
-		var r := rng.randf_range(11.0, 18.5)
+		var r := rng.randf_range(9.0, 19.0)
 		return Vector2(cos(ang) * r, -8.0 + sin(ang) * r)
-	if roll < 0.42:
+	if roll < 0.5:
 		var s: Vector4 = _ROADS[rng.randi() % _ROADS.size()]
 		var t := rng.randf()
 		var mid := Vector2(lerpf(s.x, s.z, t), lerpf(s.y, s.w, t))
@@ -351,7 +351,7 @@ func _candidate(rng: RandomNumberGenerator) -> Vector2:
 			nrm = Vector2.RIGHT
 		nrm = nrm.normalized() * rng.randf_range(5.8, 8.4) * (1.0 if rng.randf() < 0.5 else -1.0)
 		return mid + nrm
-	if roll < 0.68:
+	if roll < 0.74:
 		var p: Vector2 = _PROP_XZ[rng.randi() % _PROP_XZ.size()]
 		return p + Vector2(rng.randf_range(-1.5, 1.5), rng.randf_range(-1.5, 1.5))
 	var hubs: Array[Vector2] = [

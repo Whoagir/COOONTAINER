@@ -1015,38 +1015,49 @@ func _sim_tick(delta: float) -> void:
 
 
 var _sink_t := 0.0
+const SINK_DEPTH := 0.2
 
 func _sink_check(delta: float) -> void:
 	if proxy or freeze:
 		return
-	var any_contact := false
-	for w in _wheels:
-		if w is VehicleWheel3D and (w as VehicleWheel3D).is_in_contact():
-			any_contact = true
-			break
-	if any_contact or linear_velocity.length() > 1.5:
-		_sink_t = 0.0
-		return
+	# контакт колёс и скорость не смотрим: утонувшее колесо «касается» грунта изнутри, а сама тачка в грунте
+	# дёргается (Jolt пытается вытолкнуть, v ~2 м/с) — по ним не отфильтруешь. Чисто геометрия: низ колёс
+	# глубже земли под нами на SINK_DEPTH (0.2 м — больше полного хода подвески) → это никогда не легально.
 	_sink_t += delta
-	if _sink_t < 0.4:
+	if _sink_t < 0.15:
 		return
 	_sink_t = 0.0
 	var space := get_world_3d().direct_space_state
 	var from := global_position + global_basis.y * (CHASSIS_BOTTOM + body_size.y + cab_size.y + 0.5)
 	var q := PhysicsRayQueryParameters3D.create(from, from + Vector3.DOWN * 6.0, Types.L_WORLD)
-	q.exclude = [get_rid()]
-	var hit := space.intersect_ray(q)
-	if hit.is_empty():
+	var excl: Array[RID] = [get_rid()]
+	var ground_y := -INF
+	# сверху может висеть камера/козырёк/навес витрины — это не земля; пропускаем всё, что выше днища
+	for _i in 4:
+		q.exclude = excl
+		var hit := space.intersect_ray(q)
+		if hit.is_empty():
+			return
+		var hy: float = (hit["position"] as Vector3).y
+		if hy > global_position.y + CHASSIS_BOTTOM + 0.02:
+			excl.append(hit["rid"])
+			continue
+		ground_y = hy
+		break
+	if ground_y == -INF:
 		return
-	var ground_y: float = (hit["position"] as Vector3).y
 	var wheel_bottom := global_position.y + wheel_y - suspension_rest - wheel_radius
-	if wheel_bottom < ground_y - 0.08:
-		global_position.y += (ground_y - wheel_bottom) + 0.05
-		linear_velocity = Vector3.ZERO
+	if wheel_bottom < ground_y - SINK_DEPTH:
+		var lift := (ground_y - wheel_bottom) + 0.05
+		global_position.y += lift
+		linear_velocity = Vector3(linear_velocity.x, 0.0, linear_velocity.z)
+		angular_velocity = Vector3.ZERO
 		reset_physics_interpolation()
+		if OS.is_debug_build():
+			print("[Vehicle] %s unsunk by %.2f m" % [name, lift])
 		for b in bed_items:
 			if is_instance_valid(b):
-				b.global_position.y += (ground_y - wheel_bottom) + 0.05
+				b.global_position.y += lift
 
 
 func _on_bump() -> void:

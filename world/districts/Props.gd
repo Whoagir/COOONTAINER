@@ -54,10 +54,15 @@ const SAGE := Color(0.42, 0.48, 0.36)
 const TEX_RUST := "res://assets/textures/tex_rust_teal.png"
 const TEX_PLANKS := "res://assets/textures/tex_planks.png"
 const TEX_CARD := "res://assets/textures/tex_cardboard.png"
+const TEX_CORRUGATED := "res://assets/textures/tex_corrugated.png"
+const TEX_WALL := "res://assets/textures/tex_wall_exterior.png"
+const TEX_TRAILER := "res://assets/textures/tex_trailer_siding.png"
+const TEX_RUG := "res://assets/textures/tex_rug.png"
+const GHETTO_SEED := 20260902
 const TEX_AD_CASINO := "res://assets/textures/ad_casino.png"
 const TEX_AD_CAR := "res://assets/textures/ad_carmarket.png"
 const TEX_CONTAINER := "res://assets/textures/tex_container.png"
-const MESH_CAP := 960
+const MESH_CAP := 2400
 
 const _HUBS: Array[Vector2] = [
 	Vector2(0, -120), Vector2(110, -120), Vector2(-110, -120),
@@ -99,13 +104,14 @@ func _ready() -> void:
 		var d: Vector3 = flamingos[i]
 		_flamingo(i, Vector3(d.x, 0.0, d.y), d.z)
 	_dress_park()
+	_dress_ghetto()
 	_build_power_grid()
 	_build_wall_lamps()
 	_dress_facades()
 	_dress_plains()
 	call_deferred("_port_heavy_maybe")
 	if OS.is_debug_build():
-		print("[Props] meshes=%d lights=%d nodes=%d" % [_mesh_count, _light_count, get_child_count()])
+		print("[Props] ghetto meshes=%d lights=%d nodes=%d" % [_mesh_count, _light_count, get_child_count()])
 
 
 func light_count() -> int:
@@ -783,6 +789,805 @@ func _dress_park() -> void:
 	_barrel_table("ParkBarrelTable", Vector3(12.4, 0, -10.2), 25.0)
 	_lean_mailbox("ParkDriveMail", Vector3(6.2, 0, -33.4), 8.0)
 	_picket_bit("ParkPicket", Vector3(-8.4, 0, -4.6), 18.0)
+
+
+func _city() -> City:
+	return get_parent() as City
+
+
+func _trailer_xz() -> Vector2:
+	return Vector2(0.0, -14.0)
+
+
+func _road_clear(x: float, z: float, min_d := 7.0) -> bool:
+	if absf(x) <= 165.0 + min_d:
+		if absf(z + 60.0) <= min_d or absf(z - 45.0) <= min_d or absf(z - 110.0) <= min_d:
+			return false
+	for s in _VROADS:
+		var x1: float = s.x
+		var z1: float = s.y
+		var z2: float = s.w
+		if absf(x - x1) <= min_d and z >= minf(z1, z2) - min_d and z <= maxf(z1, z2) + min_d:
+			return false
+	return true
+
+
+func _wasteland_ok(x: float, z: float) -> bool:
+	if not _road_clear(x, z, 8.0):
+		return false
+	if _on_door_path(x, z):
+		return false
+	var city := _city()
+	if city and city.district_at(Vector3(x, 0.0, z)) != null:
+		return false
+	return true
+
+
+func _park_keepouts() -> Array[Vector3]:
+	## (x, z, radius)
+	return [
+		Vector3(0.0, -14.0, 6.2), Vector3(5.0, 0.0, 2.8), Vector3(-2.0, -14.7, 3.0),
+		Vector3(-8.0, -11.0, 2.2), Vector3(15.2, -5.0, 2.8), Vector3(-10.0, 22.0, 3.2),
+		Vector3(-7.6, -6.0, 1.6), Vector3(8.8, 3.2, 1.8), Vector3(18.0, -6.0, 2.5),
+		Vector3(-5.0, 25.0, 5.5), Vector3(21.0, 0.0, 4.5), Vector3(-4.0, -19.0, 2.5),
+		Vector3(9.0, 30.0, 1.8), Vector3(6.4, -13.2, 2.5), Vector3(-26.0, -6.0, 3.5),
+		Vector3(24.0, 22.0, 3.5),
+	]
+
+
+func _park_keepout_hit(x: float, z: float, rad: float) -> bool:
+	if not _road_clear(x, z, 5.5):
+		return true
+	if _on_door_path(x, z):
+		return true
+	for k in _park_keepouts():
+		if Vector2(k.x, k.y).distance_to(Vector2(x, z)) < k.z + rad:
+			return true
+	return false
+
+
+func _park_ok(x: float, z: float, rad := 0.5) -> bool:
+	var tp := _trailer_xz()
+	var p := Vector2(x, z)
+	if p.distance_to(tp) > 35.0 or p.distance_to(tp) < 6.5:
+		return false
+	return not _park_keepout_hit(x, z, rad)
+
+
+func _yard_ok(x: float, z: float, rad := 0.45) -> bool:
+	var tp := _trailer_xz()
+	var p := Vector2(x, z)
+	var d := p.distance_to(tp)
+	if d > 14.0 or d < 6.5:
+		return false
+	return not _park_keepout_hit(x, z, rad)
+
+
+func _neighbor_ok(x: float, z: float, rad: float, placed: Array[Vector2]) -> bool:
+	var tp := _trailer_xz()
+	var p := Vector2(x, z)
+	var d := p.distance_to(tp)
+	if d < 16.0 or d > 34.0:
+		return false
+	if not _road_clear(x, z, 7.0):
+		return false
+	if _park_keepout_hit(x, z, rad):
+		return false
+	for c in placed:
+		if p.distance_to(c) < 6.0 + rad:
+			return false
+	return true
+
+
+func _horizon_ok(x: float, z: float, rad := 2.5) -> bool:
+	var tp := _trailer_xz()
+	var d := Vector2(x, z).distance_to(tp)
+	if d < 36.0 or d > 60.0:
+		return false
+	if not _wasteland_ok(x, z):
+		return false
+	for c in _horizon_placed:
+		if Vector2(x, z).distance_to(c) < 5.0 + rad:
+			return false
+	return true
+
+
+var _horizon_placed: Array[Vector2] = []
+
+
+func _mat_shiny(c: Color, metal := 0.0, rough := 0.5) -> StandardMaterial3D:
+	var key := "sh|%s|%.2f|%.2f" % [c.to_html(), metal, rough]
+	if _mats.has(key):
+		return _mats[key] as StandardMaterial3D
+	var m := StandardMaterial3D.new()
+	m.albedo_color = c
+	m.metallic = metal
+	m.roughness = rough
+	_mats[key] = m
+	return m
+
+
+func _flat_disc(parent: Node3D, pos: Vector3, r: float, m: Material) -> void:
+	_mi(parent, LowPoly.cylinder(r, r, 0.016, 8), pos, m)
+
+
+func _sofa_stained(name: String, pos: Vector3, yaw: float) -> void:
+	var b := _body(name, pos, yaw)
+	var tan := _mat(Color(0.62, 0.42, 0.26))
+	var dark := _mat(Color(0.38, 0.24, 0.14))
+	var stain := _mat(Color(0.42, 0.18, 0.22))
+	_box(b, Vector3(0, 0.28, 0), Vector3(1.85, 0.36, 0.78), tan, true)
+	_box(b, Vector3(0, 0.62, -0.28), Vector3(1.85, 0.55, 0.24), tan)
+	_box(b, Vector3(-0.92, 0.42, 0.04), Vector3(0.18, 0.42, 0.78), dark)
+	_box(b, Vector3(0.92, 0.42, 0.04), Vector3(0.18, 0.42, 0.78), dark)
+	_box(b, Vector3(0.22, 0.48, 0.12), Vector3(0.55, 0.12, 0.42), stain)
+
+
+func _tent(name: String, pos: Vector3, yaw: float) -> void:
+	var n := _group(name, pos, yaw)
+	var canvas := _mat(Color(0.68, 0.62, 0.46))
+	var floor_m := _mat(Color(0.34, 0.30, 0.26))
+	var rope := _mat(Color(0.14, 0.13, 0.12))
+	_box(n, Vector3(0, 0.05, 0), Vector3(2.2, 0.1, 2.2), floor_m)
+	var lean_l := Basis(Vector3.FORWARD, deg_to_rad(54))
+	var lean_r := Basis(Vector3.FORWARD, deg_to_rad(-54))
+	_box(n, Vector3(-0.55, 0.88, 0), Vector3(0.07, 1.62, 2.2), canvas, false, lean_l)
+	_box(n, Vector3(0.55, 0.88, 0), Vector3(0.07, 1.62, 2.2), canvas, false, lean_r)
+	_box(n, Vector3(0, 1.52, 0), Vector3(2.0, 0.06, 2.0), canvas)
+	for peg in [-1.0, 1.0]:
+		_cyl(n, Vector3(peg * 1.05, 0.35, 1.05), 0.012, 0.7, rope, false, _align_y(Vector3(peg * 0.35, 0.55, 0.35)))
+		_cyl(n, Vector3(peg * 1.05, 0.35, -1.05), 0.012, 0.7, rope, false, _align_y(Vector3(peg * 0.35, 0.55, -0.35)))
+
+
+func _sheet_fence(name: String, pos: Vector3, yaw: float, graffiti := false) -> void:
+	if not _room():
+		return
+	var n := _group(name, pos, yaw)
+	var metal := _mat(Color(0.48, 0.50, 0.52), Color(0, 0, 0, 0), 1.0, TEX_CORRUGATED)
+	var wood := _mat(Color(0.52, 0.38, 0.22), Color(0, 0, 0, 0), 1.0, TEX_PLANKS)
+	var lean := Basis(Vector3.FORWARD, deg_to_rad(12.0 if graffiti else -8.0))
+	_box(n, Vector3(0, 0.95, 0), Vector3(2.4, 1.9, 0.06), metal if not graffiti else wood, false, lean)
+	if graffiti:
+		_box(n, Vector3(0.35, 1.05, 0.05), Vector3(0.55, 0.42, 0.02), _mat(Color(0.92, 0.18, 0.55)), false, lean)
+
+
+func _clothesline_ghetto(name: String, pos: Vector3, yaw: float) -> void:
+	var n := _group(name, pos, yaw)
+	var wood := _mat(Color(0.45, 0.28, 0.14), Color(0, 0, 0, 0), 1.0, TEX_PLANKS)
+	var wire := _mat(Color(0.15, 0.14, 0.13))
+	_box(n, Vector3(-2.8, 1.05, 0), Vector3(0.09, 2.1, 0.09), wood)
+	_box(n, Vector3(2.8, 1.05, 0), Vector3(0.09, 2.1, 0.09), wood)
+	var a := Vector3(-2.75, 2.05, 0)
+	var mid := Vector3(0, 1.52, 0)
+	var c := Vector3(2.75, 2.05, 0)
+	_wire_seg(n, a, mid, wire)
+	_wire_seg(n, mid, c, wire)
+	var cols: Array[Color] = [
+		Color(0.95, 0.35, 0.7), Color(0.25, 0.58, 0.32), Color(0.95, 0.55, 0.12),
+		Color(0.22, 0.48, 0.82), Color(0.88, 0.22, 0.38),
+	]
+	var xs: Array[float] = [-1.6, -0.55, 0.55, 1.55, 0.0]
+	for i in 5:
+		_box(n, Vector3(xs[i], 1.22, 0), Vector3(0.52, 0.68, 0.035), _mat(cols[i]))
+
+
+func _tv_antenna(pos: Vector3) -> void:
+	var n := _group("ParkAntenna", pos, 22.0)
+	var metal := _mat(Color(0.38, 0.38, 0.4))
+	_cyl(n, Vector3(0, 0.55, 0), 0.018, 1.1, metal)
+	_box(n, Vector3(0, 1.12, 0), Vector3(0.9, 0.04, 0.04), metal)
+	_box(n, Vector3(0, 1.02, 0), Vector3(0.04, 0.04, 0.55), metal)
+	_cyl(n, Vector3(0.38, 1.12, 0), 0.012, 0.38, metal, false, Basis(Vector3.FORWARD, deg_to_rad(90)))
+
+
+func _mattress(name: String, pos: Vector3, yaw: float, lean := false) -> void:
+	var n := _group(name, pos, yaw)
+	var cloth := _mat(Color(0.58, 0.48, 0.38))
+	var stain := _mat(Color(0.35, 0.28, 0.22))
+	var basis := Basis(Vector3.FORWARD, deg_to_rad(-22.0)) if lean else Basis()
+	_box(n, Vector3(0, 0.55 if lean else 0.12, 0), Vector3(1.85, 0.22, 0.95), cloth, false, basis)
+	if lean:
+		_box(n, Vector3(0.15, 0.42, 0.08), Vector3(0.65, 0.18, 0.55), stain, false, basis)
+
+
+func _trash_bag(parent: Node3D, pos: Vector3, seed_i: int) -> void:
+	var dark := _mat(Color(0.12, 0.11, 0.10))
+	var squash := 0.72 + float(seed_i % 5) * 0.04
+	_mi(parent, LowPoly.sphere(0.16, 8, 4, false, 0.12 * squash), pos + Vector3(0, 0.08 * squash, 0), dark)
+
+
+func _puddle(name: String, pos: Vector3, r: float) -> void:
+	var n := _group(name, pos)
+	var wet := _mat_shiny(Color(0.14, 0.18, 0.24), 0.6, 0.1)
+	_flat_disc(n, Vector3(0, 0.015, 0), r, wet)
+
+
+func _oil_stain(name: String, pos: Vector3, r: float) -> void:
+	var n := _group(name, pos)
+	var oil := _mat_shiny(Color(0.12, 0.10, 0.08), 0.0, 0.3)
+	_flat_disc(n, Vector3(0, 0.012, 0), r, oil)
+
+
+func _paint_bucket(name: String, pos: Vector3, yaw: float, tipped := false) -> void:
+	var n := _group(name, pos, yaw)
+	var bucket_m := _mat(Color(0.32, 0.33, 0.35))
+	if not tipped:
+		_cyl(n, Vector3(0, 0.16, 0), 0.14, 0.32, bucket_m, false, Basis(), 0.16)
+		_cyl(n, Vector3(0, 0.34, 0), 0.15, 0.04, _mat(Color(0.22, 0.22, 0.24)))
+	else:
+		var side := Basis(Vector3.FORWARD, deg_to_rad(88))
+		_cyl(n, Vector3(0.12, 0.09, 0), 0.14, 0.32, bucket_m, false, side, 0.16)
+		var mag := _mat(Color(0.86, 0.08, 0.52))
+		_flat_disc(n, Vector3(0.42, 0.011, 0.08), 0.38, mag)
+		_flat_disc(n, Vector3(0.58, 0.012, 0.18), 0.28, mag)
+
+
+func _shopping_cart(name: String, pos: Vector3, yaw: float) -> void:
+	if not _room():
+		return
+	var n := _group(name, pos, yaw)
+	var wire := _mat(Color(0.55, 0.56, 0.58))
+	var dark := _mat(Color(0.18, 0.18, 0.2))
+	var wb := Basis(Vector3.FORWARD, deg_to_rad(90))
+	_cyl(n, Vector3(-0.2, 0.42, 0), 0.018, 0.82, wire)
+	_cyl(n, Vector3(0.2, 0.42, 0), 0.018, 0.82, wire)
+	_cyl(n, Vector3(0, 0.42, -0.2), 0.018, 0.82, wire, false, Basis(Vector3.RIGHT, deg_to_rad(90)))
+	_cyl(n, Vector3(0, 0.42, 0.2), 0.018, 0.82, wire, false, Basis(Vector3.RIGHT, deg_to_rad(90)))
+	_cyl(n, Vector3(-0.2, 0.82, -0.2), 0.018, 0.42, wire)
+	_cyl(n, Vector3(0.2, 0.82, -0.2), 0.018, 0.42, wire)
+	_cyl(n, Vector3(0, 0.88, -0.2), 0.018, 0.38, wire, false, Basis(Vector3.RIGHT, deg_to_rad(18)))
+	for wx in [-0.18, 0.18]:
+		for wz in [-0.14, 0.14]:
+			_cyl(n, Vector3(wx, 0.06, wz), 0.05, 0.04, dark, false, wb)
+
+
+func _burnt_car(name: String, pos: Vector3, yaw: float) -> void:
+	var b := _body(name, pos, yaw)
+	b.rotate_object_local(Vector3.RIGHT, deg_to_rad(4.0))
+	var blk := _mat(Color(0.07, 0.06, 0.05))
+	var rust := _mat(Color(0.18, 0.12, 0.08), Color(0, 0, 0, 0), 1.0, TEX_RUST)
+	_box(b, Vector3(0, 0.72, 0), Vector3(3.6, 0.65, 1.7), blk)
+	_box(b, Vector3(-0.2, 1.28, 0), Vector3(1.8, 0.42, 1.5), rust)
+	_box_col(b, Vector3(0, 0.85, 0), Vector3(3.6, 1.2, 1.7))
+	var tire := _mat(Color(0.05, 0.05, 0.05))
+	var wheel_basis := Basis(Vector3.BACK, deg_to_rad(90))
+	var wxs: Array[float] = [-1.2, 1.2]
+	var wzs: Array[float] = [-0.9, 0.9]
+	for wx in wxs:
+		for wz in wzs:
+			_cyl(b, Vector3(wx, 0.28, wz), 0.32, 0.22, tire, false, wheel_basis)
+
+
+func _shack(name: String, pos: Vector3, yaw: float, seed_i: int) -> void:
+	if not _room():
+		return
+	var w := 3.8 + float(seed_i % 3) * 0.7
+	var d := 4.2 + float((seed_i + 1) % 3) * 0.6
+	var h := 2.6 + float(seed_i % 2) * 0.4
+	var b := _body(name, pos, yaw)
+	var wall_tex := TEX_CORRUGATED if seed_i % 2 == 0 else TEX_PLANKS
+	var wall := _mat(Color(0.62, 0.48, 0.34), Color(0, 0, 0, 0), 1.0, wall_tex)
+	var roof := _mat(Color(0.38, 0.22, 0.16))
+	var glass := _mat(Color(0.55, 0.75, 0.9), Color(0.3, 0.45, 0.6), 0.5)
+	_box(b, Vector3(0, h * 0.5, 0), Vector3(w, h, d), wall, true)
+	if seed_i % 3 != 1:
+		var pitch := Basis(Vector3.FORWARD, deg_to_rad(26))
+		_box(b, Vector3(0, h + 0.35, 0), Vector3(w + 0.5, 0.12, d + 0.4), roof, false, pitch)
+	else:
+		_box(b, Vector3(0, h + 0.08, 0), Vector3(w + 0.2, 0.14, d + 0.2), roof)
+	_box(b, Vector3(0, h * 0.42, d * 0.5 + 0.04), Vector3(0.75, 1.35, 0.05), _mat(Color(0.32, 0.20, 0.12)))
+	var wx := -w * 0.22 if seed_i % 2 == 0 else w * 0.18
+	_box(b, Vector3(wx, h * 0.55, d * 0.5 + 0.04), Vector3(0.65, 0.55, 0.04), glass)
+	if seed_i % 2 == 0:
+		_box(b, Vector3(w * 0.5 + 0.04, h * 0.55, 0.2), Vector3(0.65, 0.55, 0.04), glass)
+	_cyl(b, Vector3(w * 0.42, 0.55, d * 0.42), 0.05, 1.1, _mat(Color(0.42, 0.28, 0.16), Color(0, 0, 0, 0), 1.0, TEX_PLANKS))
+	_cyl(b, Vector3(w * 0.42, 0.55, d * 0.42 + 0.55), 0.05, 1.1, _mat(Color(0.42, 0.28, 0.16), Color(0, 0, 0, 0), 1.0, TEX_PLANKS))
+	if seed_i % 3 == 0:
+		_cyl(b, Vector3(-w * 0.35, h + 0.55, 0), 0.22, 0.55, _mat(Color(0.55, 0.32, 0.18), Color(0, 0, 0, 0), 1.0, TEX_RUST), false, Basis(), 0.08)
+	elif seed_i % 3 == 1:
+		_cyl(b, Vector3(w * 0.2, h + 0.35, -d * 0.2), 0.12, 0.85, _mat(Color(0.28, 0.26, 0.24)))
+
+
+func _junk_cluster(name: String, pos: Vector3, yaw: float, seed_i: int) -> void:
+	if not _room():
+		return
+	var n := _group(name, pos, yaw)
+	_tire(n, Vector3(0, 0.08, 0), Basis(), 0.36)
+	_cyl(n, Vector3(0.55, 0.38, 0.22), 0.22, 0.72, _mat(Color(0.55, 0.32, 0.16), Color(0, 0, 0, 0), 1.0, TEX_RUST))
+	_box(n, Vector3(-0.35, 0.04, 0.35), Vector3(0.75, 0.08, 0.14), _mat(Color(0.52, 0.38, 0.22), Color(0, 0, 0, 0), 1.0, TEX_PLANKS), false, Basis(Vector3.UP, deg_to_rad(18.0)))
+	_chair(name + "C", pos + Vector3(-0.4, 0, -0.35), yaw + 40.0)
+	_cinder_pile(name + "B", pos + Vector3(0.42, 0, -0.28), yaw + 12.0)
+	var bag := _group(name + "G", pos + Vector3(0.15, 0, 0.45), yaw)
+	_trash_bag(bag, Vector3.ZERO, seed_i)
+
+
+func _mat_fence_wire() -> StandardMaterial3D:
+	var key := "wire_fence"
+	if _mats.has(key):
+		return _mats[key] as StandardMaterial3D
+	var m := StandardMaterial3D.new()
+	m.albedo_color = Color(0.52, 0.54, 0.56, 0.42)
+	m.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	m.roughness = 0.85
+	_mats[key] = m
+	return m
+
+
+func _chain_fence(name: String, pos: Vector3, yaw: float, span := 4.2) -> void:
+	if not _room():
+		return
+	var n := _group(name, pos, yaw)
+	var post := _mat(Color(0.35, 0.36, 0.38))
+	var wire := _mat_fence_wire()
+	_cyl(n, Vector3(-span * 0.5, 0.55, 0), 0.035, 1.1, post)
+	_cyl(n, Vector3(span * 0.5, 0.55, 0), 0.035, 1.1, post)
+	_box(n, Vector3(0, 0.72, 0), Vector3(span, 0.9, 0.02), wire)
+
+
+func _wood_fence(name: String, pos: Vector3, yaw: float, span := 3.8) -> void:
+	if not _room():
+		return
+	var n := _group(name, pos, yaw)
+	var white := _mat(Color(0.93, 0.91, 0.86))
+	_box(n, Vector3(0, 0.42, 0), Vector3(span, 0.05, 0.04), white)
+	for i in 5:
+		var x := -span * 0.42 + float(i) * span * 0.21
+		_box(n, Vector3(x, 0.5, 0), Vector3(0.07, 0.95, 0.04), white)
+
+
+func _neighbor_trailer(name: String, pos: Vector3, yaw: float, seed_i: int) -> void:
+	if not _room():
+		return
+	var w := 9.0 + float(seed_i % 2) * 0.8
+	var h := 2.8
+	var d := 3.0
+	var b := _body(name, pos, yaw)
+	var tex := TEX_TRAILER if seed_i % 2 == 0 else TEX_CORRUGATED
+	var body_c := Color(0.82, 0.78, 0.68) if seed_i % 2 == 0 else Color(0.62, 0.58, 0.52)
+	var body_m := _mat(body_c, Color(0, 0, 0, 0), 1.0, tex)
+	var stripe_cols: Array[Color] = [Color(0.12, 0.55, 0.62), Color(0.82, 0.18, 0.42), Color(0.22, 0.48, 0.32)]
+	var stripe := stripe_cols[seed_i % 3]
+	var roof_m := _mat(Color(0.38, 0.24, 0.16))
+	var glass := _mat(Color(0.55, 0.75, 0.9), Color(0.3, 0.45, 0.6), 0.5)
+	_box(b, Vector3(0, h * 0.5, 0), Vector3(w, h, d), body_m, true)
+	_box(b, Vector3(0, h + 0.06, 0), Vector3(w + 0.12, 0.12, d + 0.1), roof_m)
+	_box(b, Vector3(0, h * 0.62, d * 0.5 + 0.03), Vector3(w * 0.92, 0.14, 0.05), _mat(stripe))
+	_box(b, Vector3(w * 0.22, h + 0.18, -0.15), Vector3(0.55, 0.32, 0.42), _mat(Color(0.72, 0.74, 0.76)))
+	var door_z := d * 0.5 + 0.04
+	_box(b, Vector3(0, h * 0.42, door_z), Vector3(0.72, 1.45, 0.05), _mat(Color(0.32, 0.22, 0.14)))
+	_box(b, Vector3(-w * 0.28, h * 0.58, door_z), Vector3(0.85, 0.62, 0.04), glass)
+	_box(b, Vector3(w * 0.22, h * 0.58, door_z), Vector3(0.85, 0.62, 0.04), glass)
+	_box(b, Vector3(0, 0.22, door_z + 0.08), Vector3(0.72, 0.44, 0.42), _mat(Color(0.48, 0.32, 0.18), Color(0, 0, 0, 0), 1.0, TEX_PLANKS))
+	_cyl(b, Vector3(-w * 0.38, 0.42, -d * 0.35), 0.18, 0.72, _mat(Color(0.78, 0.72, 0.68)), false, Basis(), 0.16)
+	var wood := _mat(Color(0.45, 0.28, 0.14), Color(0, 0, 0, 0), 1.0, TEX_PLANKS)
+	_cyl(b, Vector3(w * 0.35, 1.85, door_z + 0.55), 0.045, 1.65, wood)
+	_cyl(b, Vector3(w * 0.35 + 1.4, 1.85, door_z + 0.55), 0.045, 1.65, wood)
+	_box(b, Vector3(w * 0.35 + 0.7, 2.55, door_z + 0.62), Vector3(1.5, 0.06, 0.55), _mat(Color(0.95, 0.55, 0.12)))
+	_box(b, Vector3(w * 0.35 + 0.7, 2.48, door_z + 0.62), Vector3(1.5, 0.04, 0.55), _mat(Color(0.15, 0.42, 0.62)))
+	if seed_i % 3 == 0:
+		_box(b, Vector3(-w * 0.42, 0.12, door_z + 0.65), Vector3(1.1, 0.24, 0.85), _mat(Color(0.52, 0.38, 0.22), Color(0, 0, 0, 0), 1.0, TEX_PLANKS))
+
+
+func _neighbor_yard(name: String, pos: Vector3, yaw: float, seed_i: int) -> void:
+	if not _room():
+		return
+	if seed_i % 2 == 0:
+		_chain_fence(name + "F", pos + Vector3(0, 0, 2.2), yaw, 4.0)
+	else:
+		_wood_fence(name + "F", pos + Vector3(0, 0, 2.0), yaw, 3.6)
+	_mailbox(name + "M", pos + Vector3(1.8, 0, 3.2), yaw + float(seed_i * 7))
+	var props: Array[int] = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+	var p0: int = props[(seed_i * 3) % props.size()]
+	var p1: int = props[(seed_i * 3 + 5) % props.size()]
+	var off := Vector3(-1.6 + float(seed_i % 3) * 0.4, 0, 3.8)
+	match p0:
+		0: _sofa(name + "S", pos + off, yaw + 12.0)
+		1: _tire_pile(name + "T", pos + off, yaw, false)
+		2:
+			var bg := _group(name + "B", pos + off, yaw)
+			_trash_bag(bg, Vector3.ZERO, seed_i)
+			_trash_bag(bg, Vector3(0.35, 0, 0.12), seed_i + 1)
+		3: _mattress(name + "M2", pos + off, yaw, seed_i % 2 == 0)
+		4: _clothesline_ghetto(name + "L", pos + off, yaw)
+		5: _cinder_pile(name + "C", pos + off, yaw)
+		6: _barrel(name + "Bar", pos + off, yaw)
+		7: _pallet_out(name + "P", pos + off, yaw)
+		8: _shopping_cart(name + "Cart", pos + off, yaw)
+		9: _puddle(name + "Pd", pos + off, 0.75)
+		10: _oil_stain(name + "Oil", pos + off, 0.55)
+		11: _dish(name + "D", pos + off + Vector3(0, 2.85, 0), yaw, true)
+	match p1:
+		0: _flamingo(seed_i + 200, pos + Vector3(2.2, 0, 2.8), yaw + 20.0)
+		1: _tire_pile(name + "T2", pos + Vector3(-2.0, 0, 3.5), yaw + 30.0, false)
+		2: _barrel(name + "Bar2", pos + Vector3(0.8, 0, 4.2), yaw - 10.0)
+		3: _crate(name + "Cr", pos + Vector3(-1.2, 0, 4.0), yaw, Vector3(0.52, 0.38, 0.48))
+		_: _oil_stain(name + "O2", pos + Vector3(1.5, 0, 2.5), 0.45)
+
+
+func _junk_heap(name: String, pos: Vector3, yaw: float, seed_i: int) -> void:
+	if not _room():
+		return
+	var n := _group(name, pos, yaw)
+	var cols: Array[Color] = [
+		Color(0.55, 0.32, 0.16), Color(0.18, 0.42, 0.48), Color(0.42, 0.28, 0.18),
+	]
+	var rng := RandomNumberGenerator.new()
+	rng.seed = GHETTO_SEED + seed_i * 17
+	for i in 8:
+		var cm: Color = cols[i % cols.size()]
+		var tex := TEX_RUST if i % 2 == 0 else TEX_CORRUGATED
+		var m := _mat(cm, Color(0, 0, 0, 0), 1.0, tex)
+		var ox := rng.randf_range(-0.9, 0.9)
+		var oz := rng.randf_range(-0.8, 0.8)
+		var oy := float(i) * 0.08
+		if i % 3 == 0:
+			_cyl(n, Vector3(ox, 0.12 + oy, oz), rng.randf_range(0.14, 0.28), rng.randf_range(0.12, 0.38), m, false, Basis(), rng.randf_range(0.1, 0.22))
+		else:
+			_box(n, Vector3(ox, 0.14 + oy, oz), Vector3(rng.randf_range(0.3, 0.75), rng.randf_range(0.12, 0.42), rng.randf_range(0.25, 0.65)), m, false, Basis(Vector3.UP, rng.randf_range(-0.5, 0.5)))
+
+
+func _tire_stack10(name: String, pos: Vector3, yaw: float) -> void:
+	if not _room():
+		return
+	var n := _group(name, pos, yaw)
+	var rub := _mat(Color(0.08, 0.08, 0.09))
+	var mm := MultiMeshInstance3D.new()
+	var mm_res := MultiMesh.new()
+	mm_res.transform_format = MultiMesh.TRANSFORM_3D
+	mm_res.mesh = LowPoly.cylinder(0.36, 0.36, 0.14, 8)
+	mm_res.instance_count = 9
+	var idx := 0
+	for row in 3:
+		for col in 3:
+			if idx >= 9:
+				break
+			var ox := float(col - 1) * 0.42 + float(row) * 0.04
+			var oz := float(row) * 0.38
+			var oy := 0.08 + float(row) * 0.15
+			mm_res.set_instance_transform(idx, Transform3D(Basis.IDENTITY, Vector3(ox, oy, oz)))
+			idx += 1
+	mm.multimesh = mm_res
+	mm.material_override = rub
+	n.add_child(mm)
+	_mesh_count += 1
+
+
+func _broken_tv(name: String, pos: Vector3, yaw: float) -> void:
+	var n := _group(name, pos, yaw)
+	var shell := _mat(Color(0.22, 0.22, 0.24))
+	var crack := _mat(Color(0.12, 0.14, 0.18))
+	_box(n, Vector3(0, 0.42, 0), Vector3(0.95, 0.72, 0.42), shell)
+	_box(n, Vector3(0, 0.42, 0.22), Vector3(0.82, 0.58, 0.03), crack)
+	_box(n, Vector3(0.12, 0.52, 0.24), Vector3(0.04, 0.32, 0.02), _mat(Color(0.35, 0.36, 0.38)))
+
+
+func _rolled_carpet(name: String, pos: Vector3, yaw: float) -> void:
+	var n := _group(name, pos, yaw)
+	var rug := _mat(Color(0.62, 0.38, 0.22), Color(0, 0, 0, 0), 1.0, TEX_RUG)
+	_cyl(n, Vector3(0, 0.18, 0), 0.22, 0.36, rug, false, Basis(Vector3.FORWARD, deg_to_rad(90)))
+
+
+func _bathtub(name: String, pos: Vector3, yaw: float) -> void:
+	var n := _group(name, pos, yaw)
+	var white := _mat(Color(0.88, 0.89, 0.86))
+	var inner := _mat(Color(0.72, 0.74, 0.76))
+	_box(n, Vector3(0, 0.28, 0), Vector3(1.55, 0.56, 0.72), white)
+	_box(n, Vector3(0, 0.34, 0.02), Vector3(1.25, 0.38, 0.52), inner)
+
+
+func _lawn_chair(name: String, pos: Vector3, yaw: float) -> void:
+	var n := _group(name, pos, yaw)
+	var plastic := _mat(Color(0.15, 0.52, 0.68) if int(yaw) % 2 == 0 else Color(0.88, 0.35, 0.55))
+	var metal := _mat(Color(0.35, 0.36, 0.38))
+	_box(n, Vector3(0, 0.38, 0), Vector3(0.48, 0.05, 0.46), plastic)
+	_box(n, Vector3(0, 0.62, -0.18), Vector3(0.48, 0.42, 0.05), plastic, false, Basis(Vector3.RIGHT, deg_to_rad(-16)))
+	_cyl(n, Vector3(-0.18, 0.18, 0.16), 0.018, 0.36, metal)
+	_cyl(n, Vector3(0.18, 0.18, 0.16), 0.018, 0.36, metal)
+
+
+func _bbq_grill(name: String, pos: Vector3, yaw: float) -> void:
+	var n := _group(name, pos, yaw)
+	var blk := _mat(Color(0.12, 0.12, 0.13))
+	var coal := _mat(Color(0.18, 0.16, 0.14))
+	_cyl(n, Vector3(0, 0.42, 0), 0.28, 0.84, blk, false, Basis(), 0.22)
+	_cyl(n, Vector3(0, 0.88, 0), 0.32, 0.06, blk)
+	_box(n, Vector3(0, 0.78, 0), Vector3(0.55, 0.04, 0.55), coal)
+
+
+func _bicycle_lean(pos: Vector3, yaw: float) -> void:
+	var n := _group("GhettoBike", pos, yaw)
+	var metal := _mat(Color(0.45, 0.46, 0.48))
+	var lean := Basis(Vector3.FORWARD, deg_to_rad(72))
+	_cyl(n, Vector3(0, 0.55, 0), 0.018, 1.05, metal, false, lean)
+	_cyl(n, Vector3(0.35, 0.35, 0.08), 0.32, 0.04, metal, false, Basis(Vector3.FORWARD, deg_to_rad(90)))
+	_cyl(n, Vector3(-0.08, 0.12, 0.22), 0.14, 0.04, metal, false, Basis(Vector3.FORWARD, deg_to_rad(90)))
+	_cyl(n, Vector3(0.42, 0.12, -0.08), 0.14, 0.04, metal, false, Basis(Vector3.FORWARD, deg_to_rad(90)))
+
+
+func _dog_house(name: String, pos: Vector3, yaw: float) -> void:
+	var n := _group(name, pos, yaw)
+	var wood := _mat(Color(0.52, 0.36, 0.2), Color(0, 0, 0, 0), 1.0, TEX_PLANKS)
+	_box(n, Vector3(0, 0.28, 0), Vector3(0.85, 0.56, 0.72), wood)
+	_box(n, Vector3(0, 0.62, 0), Vector3(0.95, 0.12, 0.82), wood, false, Basis(Vector3.FORWARD, deg_to_rad(28)))
+	_box(n, Vector3(0, 0.22, 0.38), Vector3(0.32, 0.32, 0.05), _mat(Color(0.18, 0.14, 0.12)))
+
+
+func _shack_near(name: String, pos: Vector3, yaw: float, variant: int) -> void:
+	if not _room():
+		return
+	var w := 4.2 + float(variant % 3) * 0.6
+	var d := 4.8 + float((variant + 1) % 2) * 0.5
+	var h := 2.8 + float(variant % 2) * 0.5
+	var b := _body(name, pos, yaw)
+	var wall_tex := TEX_CORRUGATED if variant % 2 == 0 else TEX_PLANKS
+	var wall := _mat(Color(0.58, 0.46, 0.32), Color(0, 0, 0, 0), 1.0, wall_tex)
+	var roof := _mat(Color(0.35, 0.20, 0.14))
+	var glass := _mat(Color(0.55, 0.75, 0.9), Color(0.3, 0.45, 0.6), 0.5)
+	match variant % 4:
+		0:
+			_box(b, Vector3(0, h * 0.5, 0), Vector3(w, h, d), wall, true)
+			_box(b, Vector3(0, h + 0.32, 0), Vector3(w + 0.4, 0.12, d + 0.35), roof, false, Basis(Vector3.FORWARD, deg_to_rad(26)))
+			_cyl(b, Vector3(w * 0.3, h + 0.75, 0), 0.1, 0.65, _mat(Color(0.28, 0.26, 0.24)))
+		1:
+			_box(b, Vector3(0, h * 0.5, 0), Vector3(w, h, d), wall, true)
+			_box(b, Vector3(0, h + 0.08, 0), Vector3(w + 0.15, 0.14, d + 0.12), roof)
+			_box(b, Vector3(0, h + 1.05, 0), Vector3(w * 0.82, 1.35, d * 0.82), wall)
+			_box(b, Vector3(0, h + 1.85, 0), Vector3(w * 0.72, 0.12, d * 0.72), roof)
+		2:
+			_box(b, Vector3(0, h * 0.5, 0), Vector3(w, h, d), wall, true)
+			_box(b, Vector3(0, h + 0.08, 0), Vector3(w + 0.15, 0.14, d + 0.12), roof)
+			_box(b, Vector3(0, h * 0.38, d * 0.5 + 0.04), Vector3(w * 0.72, 1.15, 0.06), _mat(Color(0.42, 0.44, 0.46), Color(0, 0, 0, 0), 1.0, TEX_CORRUGATED))
+		3:
+			_box(b, Vector3(0, h * 0.5, 0), Vector3(w, h, d), wall, true)
+			_box(b, Vector3(0, h + 0.08, 0), Vector3(w + 0.15, 0.14, d + 0.12), roof)
+			for leg in [-0.35, 0.35]:
+				_cyl(b, Vector3(leg * w, h + 0.55, 0), 0.05, 1.1, _mat(Color(0.35, 0.34, 0.32)))
+			_cyl(b, Vector3(0, h + 1.35, 0), 0.42, 0.55, _mat(Color(0.55, 0.32, 0.18), Color(0, 0, 0, 0), 1.0, TEX_RUST), false, Basis(), 0.35)
+	_box(b, Vector3(-w * 0.2, h * 0.55, d * 0.5 + 0.04), Vector3(0.62, 0.52, 0.04), glass)
+	_box(b, Vector3(0, h * 0.42, d * 0.5 + 0.04), Vector3(0.68, 1.25, 0.05), _mat(Color(0.30, 0.18, 0.12)))
+
+
+func _build_neighbors() -> int:
+	var rng := RandomNumberGenerator.new()
+	rng.seed = GHETTO_SEED + 77
+	var tp := _trailer_xz()
+	var placed: Array[Vector2] = []
+	var built := 0
+	var guard := 0
+	while built < 6 and guard < 160 and _room():
+		guard += 1
+		var ang := rng.randf_range(0.0, TAU)
+		var dist := rng.randf_range(17.0, 33.0)
+		var x := tp.x + cos(ang) * dist
+		var z := tp.y + sin(ang) * dist
+		if not _neighbor_ok(x, z, 5.5, placed):
+			continue
+		var yaw := rad_to_deg(ang) + 90.0 + rng.randf_range(-25.0, 25.0)
+		_neighbor_trailer("Neighbor%d" % built, Vector3(x, 0, z), yaw, built)
+		_neighbor_yard("NeighborYard%d" % built, Vector3(x, 0, z), yaw, built)
+		placed.append(Vector2(x, z))
+		built += 1
+	return built
+
+
+func _build_horizon_near() -> int:
+	_horizon_placed.clear()
+	var tp := _trailer_xz()
+	## art_00 / art_01 look past trailer toward +x / −z (see ArtShot.gd)
+	var view := Vector2(0.707, -0.707).normalized()
+	var perp := Vector2(-view.y, view.x)
+	var rng := RandomNumberGenerator.new()
+	rng.seed = GHETTO_SEED + 311
+	var built := 0
+	var guard := 0
+	while built < 6 and guard < 100 and _room():
+		guard += 1
+		var dist := rng.randf_range(38.0, 56.0)
+		var lat := rng.randf_range(-14.0, 14.0)
+		var p := tp + view * dist + perp * lat
+		if not _horizon_ok(p.x, p.y, 2.5):
+			continue
+		var yaw := rad_to_deg(atan2(view.x, view.y)) + rng.randf_range(-30.0, 30.0)
+		_shack_near("NearShack%d" % built, Vector3(p.x, 0, p.y), yaw, built)
+		_horizon_placed.append(p)
+		built += 1
+	if built >= 2 and _room():
+		var wires := _group("NearShackWires", Vector3.ZERO)
+		var a := _pole("NearPole0", Vector3(tp.x + view.x * 42.0, 0, tp.y + view.y * 42.0), 0.0)
+		var b := _pole("NearPole1", Vector3(tp.x + view.x * 50.0 + perp.x * 8.0, 0, tp.y + view.y * 50.0 + perp.y * 8.0), 0.0)
+		_span_wires(wires, a, b)
+	return built
+
+
+func _dress_yard_dense() -> void:
+	if _yard_ok(-8.5, -22.5, 0.8):
+		_junk_heap("YardHeap0", Vector3(-8.5, 0, -22.5), 35.0, 0)
+	if _yard_ok(9.5, -20.8, 0.8):
+		_junk_heap("YardHeap1", Vector3(9.5, 0, -20.8), -20.0, 1)
+	if _yard_ok(-5.5, -24.2, 0.6):
+		_tire_stack10("YardTires10", Vector3(-5.5, 0, -24.2), 15.0)
+	if _yard_ok(7.8, -23.5, 0.5):
+		_broken_tv("YardTV", Vector3(7.8, 0, -23.5), -12.0)
+	if _yard_ok(-3.2, -25.8, 0.45):
+		_rolled_carpet("YardRug", Vector3(-3.2, 0, -25.8), 22.0)
+	if _yard_ok(11.2, -22.0, 0.55):
+		_bathtub("YardTub", Vector3(11.2, 0, -22.0), -8.0)
+	if _yard_ok(3.5, -25.2, 0.35):
+		_lawn_chair("YardChair0", Vector3(3.5, 0, -25.2), 40.0)
+	if _yard_ok(5.2, -24.8, 0.35):
+		_lawn_chair("YardChair1", Vector3(5.2, 0, -24.8), -25.0)
+	if _yard_ok(-6.8, -20.5, 0.45):
+		_bbq_grill("YardBBQ", Vector3(-6.8, 0, -20.5), 18.0)
+	if _yard_ok(-4.5, -11.8, 0.35):
+		_bicycle_lean(Vector3(-4.5, 0, -11.8), 75.0)
+	if _yard_ok(10.8, -18.5, 0.5):
+		_dog_house("YardDog", Vector3(10.8, 0, -18.5), -15.0)
+	var bag2 := _group("YardBags", Vector3.ZERO)
+	var bag2_pts: Array[Vector3] = [
+		Vector3(-7.2, 0, -21.8), Vector3(-2.8, 0, -23.2), Vector3(6.5, 0, -21.5),
+		Vector3(8.8, 0, -24.5), Vector3(-9.5, 0, -19.2), Vector3(12.2, 0, -20.8),
+	]
+	var bi2 := 0
+	for bp in bag2_pts:
+		if _yard_ok(bp.x, bp.z, 0.22):
+			_trash_bag(bag2, bp, bi2)
+			bi2 += 1
+	var card2_pts: Array[Vector3] = [
+		Vector3(-10.2, 0, -22.8), Vector3(-6.5, 0, -24.5), Vector3(4.2, 0, -22.2),
+		Vector3(9.8, 0, -23.8), Vector3(-1.5, 0, -26.2), Vector3(13.5, 0, -21.2),
+	]
+	for i in card2_pts.size():
+		var cp: Vector3 = card2_pts[i]
+		if _yard_ok(cp.x, cp.z, 0.35):
+			_crate("YardCard%d" % i, cp, float(i * 19 - 8), Vector3(0.52, 0.38, 0.48))
+
+
+func _dress_ghetto() -> void:
+	var g0 := _mesh_count
+	_dress_yard_dense()
+	var neighbors := _build_neighbors()
+	var near_shacks := _build_horizon_near()
+	## --- yard pack (within ~35 m of trailer) ---
+	if _park_ok(16.2, -18.4, 1.0):
+		_sofa_stained("GhettoSofa1", Vector3(16.2, 0, -18.4), -28.0)
+	if _park_ok(-19.5, -5.8, 1.2):
+		_tent("GhettoTent0", Vector3(-19.5, 0, -5.8), 35.0)
+	if _park_ok(22.8, -22.5, 1.2):
+		_tent("GhettoTent1", Vector3(22.8, 0, -22.5), -18.0)
+	if _park_ok(28.5, -19.8, 0.6):
+		_tire_pile("GhettoTires1", Vector3(28.5, 0, -19.8), -12.0, false)
+	if _park_ok(-20.8, 3.5, 0.6):
+		_cinder_pile("GhettoCinder0", Vector3(-20.8, 0, 3.5), 22.0)
+	if _park_ok(11.5, -28.2, 0.6):
+		_cinder_pile("GhettoCinder1", Vector3(11.5, 0, -28.2), -15.0)
+	var fences: Array[Vector4] = [
+		Vector4(-28.5, -24.0, 90.0, 0.0), Vector4(30.2, -10.5, -75.0, 1.0),
+		Vector4(-12.8, 24.5, 12.0, 0.0), Vector4(25.5, 8.0, -105.0, 1.0),
+	]
+	for i in fences.size():
+		var f: Vector4 = fences[i]
+		if _park_ok(f.x, f.y, 0.4):
+			_sheet_fence("GhettoFence%d" % i, Vector3(f.x, 0, f.y), f.z, int(f.w) == 1)
+	if _park_ok(-22.5, 12.8, 1.5):
+		_clothesline_ghetto("GhettoLine", Vector3(-22.5, 0, 12.8), 8.0)
+	_dish("GhettoDish0", Vector3(1.8, 3.02, -12.1), -35.0, true)
+	_dish("GhettoDish1", Vector3(-3.4, 3.02, -11.6), 48.0, true)
+	_tv_antenna(Vector3(0.6, 2.85, -12.8))
+	if _park_ok(12.5, -25.8, 0.5):
+		_shopping_cart("GhettoCart", Vector3(12.5, 0, -25.8), 42.0)
+	if _park_ok(4.8, -11.2, 0.6):
+		_mattress("GhettoMatt0", Vector3(4.8, 0, -11.2), 90.0, true)
+	if _park_ok(-15.8, 6.2, 0.6):
+		_mattress("GhettoMatt1", Vector3(-15.8, 0, 6.2), -20.0, false)
+	var bags := _group("GhettoBags", Vector3.ZERO)
+	var bag_pts: Array[Vector3] = [
+		Vector3(-17.2, 0, -16.5), Vector3(-11.8, 0, -22.8), Vector3(8.5, 0, -24.2),
+		Vector3(18.8, 0, -12.5), Vector3(-24.5, 0, -2.5), Vector3(26.2, 0, -6.8),
+		Vector3(-6.5, 0, 18.5), Vector3(14.2, 0, 14.8),
+	]
+	var bi := 0
+	for bp in bag_pts:
+		if _park_ok(bp.x, bp.z, 0.25):
+			_trash_bag(bags, bp, bi)
+			bi += 1
+	var crates: Array[Vector3] = [Vector3(-21.5, 0, -12.8), Vector3(19.5, 0, -15.2), Vector3(-9.5, 0, 22.5)]
+	for i in crates.size():
+		var cp: Vector3 = crates[i]
+		if _park_ok(cp.x, cp.z, 0.4):
+			_crate("GhettoCard%d" % i, cp, float(i * 29 - 10), Vector3(0.58, 0.42, 0.55))
+	var puddle_rs: Array[float] = [1.1, 0.9, 1.8, 1.4, 2.0, 0.85]
+	var puddle_pts: Array[Vector3] = [
+		Vector3(-13.5, 0, -18.2), Vector3(7.2, 0, -20.5), Vector3(-25.2, 0, 8.5),
+		Vector3(20.5, 0, -8.2), Vector3(-8.5, 0, 16.2), Vector3(16.8, 0, 6.5),
+	]
+	for i in mini(puddle_pts.size(), puddle_rs.size()):
+		var pp: Vector3 = puddle_pts[i]
+		if _park_ok(pp.x, pp.z, 0.2):
+			_puddle("GhettoPuddle%d" % i, pp, puddle_rs[i])
+	var oil_pts: Array[Vector3] = [Vector3(-18.8, 0, -8.5), Vector3(24.2, 0, -14.5), Vector3(-5.5, 0, 24.8)]
+	for i in oil_pts.size():
+		var op: Vector3 = oil_pts[i]
+		if _park_ok(op.x, op.z, 0.2):
+			_oil_stain("GhettoOil%d" % i, op, 0.75 + float(i) * 0.18)
+	if _park_ok(-14.5, 19.5, 2.5):
+		_burnt_car("GhettoBurnt", Vector3(-14.5, 0, 19.5), 65.0)
+	var pal_pts: Array[Vector3] = [Vector3(-22.8, 0, -15.5), Vector3(18.2, 0, -8.5), Vector3(-7.8, 0, 27.5)]
+	for i in pal_pts.size():
+		var pp2: Vector3 = pal_pts[i]
+		if _park_ok(pp2.x, pp2.z, 0.55):
+			_pallet_out("GhettoPal%d" % i, pp2, float(i * 24))
+	if _park_ok(-16.5, -10.2, 0.2):
+		_paint_bucket("GhettoPaint0", Vector3(-16.5, 0, -10.2), 15.0, false)
+	if _park_ok(20.2, -17.5, 0.2):
+		_paint_bucket("GhettoPaint1", Vector3(20.2, 0, -17.5), -22.0, false)
+	if _park_ok(-23.8, 15.2, 0.3):
+		_paint_bucket("GhettoPaint2", Vector3(-23.8, 0, 15.2), 48.0, true)
+	## extra perimeter clutter (reads in art_00 / wide shots)
+	if _park_ok(-27.5, -8.5, 0.5):
+		_tire_pile("GhettoTires2", Vector3(-27.5, 0, -8.5), 40.0, false)
+	if _park_ok(26.8, -4.2, 0.5):
+		_barrel("GhettoBarrelY", Vector3(26.8, 0, -4.2), -30.0)
+	if _park_ok(-25.5, 18.5, 0.5):
+		_pallet_out("GhettoPalY0", Vector3(-25.5, 0, 18.5), 15.0)
+	if _park_ok(23.5, 14.2, 0.5):
+		_crate("GhettoCardY", Vector3(23.5, 0, 14.2), -8.0, Vector3(0.55, 0.4, 0.52))
+	if _park_ok(10.5, 22.5, 0.5):
+		_cart("GhettoCartY", Vector3(10.5, 0, 22.5), -55.0)
+	if _park_ok(-30.5, 2.5, 0.5):
+		_sheet_fence("GhettoFenceY", Vector3(-30.5, 0, 2.5), 0.0, true)
+	if _park_ok(31.2, -18.5, 0.4):
+		_oil_stain("GhettoOilY", Vector3(31.2, 0, -18.5), 0.95)
+	if _park_ok(-18.5, 26.5, 0.3):
+		_puddle("GhettoPuddleY", Vector3(-18.5, 0, 26.5), 1.6)
+	## --- horizon shacks (45–90 m, wasteland only) ---
+	var rng := RandomNumberGenerator.new()
+	rng.seed = GHETTO_SEED
+	var tp := _trailer_xz()
+	var shack_angles: Array[float] = [0.35, 0.95, 1.65, 2.35, 3.05, 3.75, 4.45, 5.15]
+	var shack_dists: Array[float] = [58.0, 64.0, 70.0, 76.0, 62.0, 68.0, 74.0, 80.0]
+	var shack_n := 0
+	for i in mini(shack_angles.size(), shack_dists.size()):
+		if not _room():
+			break
+		var ang: float = shack_angles[i]
+		var dist: float = shack_dists[i]
+		var x := tp.x + cos(ang) * dist
+		var z := tp.y + sin(ang) * dist
+		if not _wasteland_ok(x, z):
+			continue
+		if Vector2(x, z).distance_to(tp) < 45.0 or Vector2(x, z).distance_to(tp) > 92.0:
+			continue
+		var yaw := rad_to_deg(ang) + 90.0 + float(i * 11 - 22)
+		_shack("HorizonShack%d" % shack_n, Vector3(x, 0, z), yaw, shack_n)
+		shack_n += 1
+	var guard := 0
+	while shack_n < 8 and guard < 80 and _room():
+		guard += 1
+		var ang2 := rng.randf_range(0.0, TAU)
+		var dist2 := rng.randf_range(48.0, 88.0)
+		var x2 := tp.x + cos(ang2) * dist2
+		var z2 := tp.y + sin(ang2) * dist2
+		if not _wasteland_ok(x2, z2):
+			continue
+		if Vector2(x2, z2).distance_to(tp) < 45.0 or Vector2(x2, z2).distance_to(tp) > 92.0:
+			continue
+		_shack("HorizonShack%d" % shack_n, Vector3(x2, 0, z2), rad_to_deg(ang2) + 90.0, shack_n)
+		shack_n += 1
+	## --- wasteland junk clusters between districts ---
+	var cluster_n := 0
+	guard = 0
+	while cluster_n < 14 and guard < 280 and _room():
+		guard += 1
+		var x2 := rng.randf_range(-150.0, 150.0)
+		var z2 := rng.randf_range(-135.0, 165.0)
+		if not _wasteland_ok(x2, z2):
+			continue
+		if Vector2(x2, z2).distance_to(tp) < 38.0:
+			continue
+		_junk_cluster("WasteJunk%d" % cluster_n, Vector3(x2, 0, z2), rng.randf_range(0.0, 180.0), cluster_n)
+		cluster_n += 1
+	if OS.is_debug_build():
+		print("[Props] ghetto added=%d neighbors=%d near_shacks=%d far_shacks=%d clusters=%d" % [_mesh_count - g0, neighbors, near_shacks, shack_n, cluster_n])
 
 
 func _dress_edges() -> void:

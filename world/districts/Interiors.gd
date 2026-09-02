@@ -638,8 +638,9 @@ static func _storage() -> void:
 	_barrels("StorBar1", Vector3(0.8, 0, 13.8), -8.0)
 	_tyre_stack("StorTires", Vector3(-14.2, 0, 14.8), 30.0)
 	# в кадре ground-камеры (6,1.7,10) → origin: торец коридора справа
-	_crate_tower("StorCam0", Vector3(9.4, 0, 6.2), -18.0, 4)
-	_barrels("StorCam1", Vector3(8.6, 0, 9.0), 22.0)
+	# не ближе 2 м к (9, 0, 9): там стоит NPC-пикап (Vehicles.NPC_CARS), иначе он спавнится на бочках
+	_crate_tower("StorCam0", Vector3(12.9, 0, 5.2), -18.0, 4)
+	_barrels("StorCam1", Vector3(12.6, 0, 8.6), 22.0)
 	_pallet_stack("StorCam2", Vector3(-8.8, 0, 6.8), 14.0, 3)
 	# огнетушитель + камера
 	var wall := _grp("WallKit", Vector3(-10.85, 0, 0.0), 90.0)

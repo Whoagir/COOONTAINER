@@ -57,6 +57,11 @@ func _ready() -> void:
 	if w == null or w.city == null:
 		return
 	_walk(w.city, -1, 0)
+	var t0 := Time.get_ticks_msec()
+	var terrain: GDScript = load("res://world/Terrain.gd") # через load: кэш классов редактора может отставать
+	dressed += int(terrain.dress(w)) # гранёная земля с выбоинами + галька/кирпичи (после _walk: материалы уже стоят)
+	if OS.is_debug_build():
+		print("[CityDress] terrain %d ms" % (Time.get_ticks_msec() - t0))
 	_dress_billboards(w.city)
 	_fill_interiors(w)
 	_light_campfire(w)

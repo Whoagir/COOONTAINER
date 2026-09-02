@@ -207,10 +207,27 @@ func _run() -> void:
 		v.angular_velocity = Vector3.ZERO
 		await get_tree().physics_frame
 		await get_tree().physics_frame
+		# лут кладём в кузов заранее и мягко: тачка заморожена, вещи — небольшие, с высоты пола кузова,
+		# иначе куча падает с метра, пробивает подвеску и тачка «тонет» в грунте на камеру
+		v.freeze = true
+		var small: Array = []
+		for d in Registry.all_items():
+			if d.value_base >= 20 and not d.illegal and not d.is_cash() and d.liquid_id == Types.LiquidId.NONE:
+				var a: Archetype = Registry.archetype_for(d)
+				if a == null or a.size_class == Types.SizeClass.ONE_HAND or a.size_class == Types.SizeClass.TWO_HAND:
+					small.append(d)
+		if small.is_empty():
+			small = Registry.all_items()
+		var floor_y: float = v.bed_floor_world_y() if v.has_method("bed_floor_world_y") else bed.global_position.y + 0.8
 		for i in 7:
-			var d: ItemDef = Registry.all_items()[randi() % Registry.all_items().size()]
-			var b = Net.spawn_item(d.id, Transform3D(Basis(), bed.global_position + Vector3(randf_range(-0.4, 0.4), 0.9 + i * 0.25, randf_range(-0.6, 0.6))))
-		await _wait(0.6)
+			var d: ItemDef = small[randi() % small.size()]
+			var lp: Vector3 = v.bed_point(Vector2(randf_range(-0.35, 0.35), randf_range(-0.55, 0.55)), 0.15 + (i / 4) * 0.3) if v.has_method("bed_point") else bed.global_position + Vector3(randf_range(-0.4, 0.4), floor_y - bed.global_position.y + 0.2, randf_range(-0.6, 0.6))
+			Net.spawn_item(d.id, Transform3D(Basis(Vector3.UP, randf() * TAU), lp))
+			await get_tree().physics_frame
+		await _wait(0.8)
+		v.freeze = false
+		await _wait(0.4)
+		print("[trailer] pickup loaded: y=%.2f bed_items=%d" % [v.global_position.y, v.bed_items.size()])
 		AudioBus.play_music("car_rock_loop", -8.0)
 		v.test_drive = true
 		v.apply_input(0.0, 1.0, 0.0, false)
