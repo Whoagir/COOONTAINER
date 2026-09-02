@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/ItemDef.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "trumpet_school"
+name_ru = "Труба школьная"
+name_en = "School Trumpet"
+archetype_id = "trumpet"
+facets = Array[int]([1, 0])
+value_base = 45
+mass_override = 0.0
+liquid_id = 0
+liquid_amount = 1.0
+flammable = false
+illegal = false
+dusty_default = 0.4
+vendor_affinity = Array[String](["vendor_antique"])
+wearable_slot = "none"
+break_threshold = 5.5
+color = Color(0.7529, 0.6275, 0.251, 1.0)
+scale = 1.0
+tags = Array[String](["music"])
+lore_ru = "Только «ту-ту» и слёзы."
+lore_en = "Only toots and tears."

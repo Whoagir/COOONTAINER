@@ -45,7 +45,7 @@ dirt_override = -1.0
 
 [sub_resource type="Resource" id="s6"]
 script = ExtResource("2")
-item_id = "cup_okayest"
+item_id = "hourglass_desk"
 xform = Transform3D(0.9945, 0, 0.1045, 0, 1.0, 0, -0.1045, 0, 0.9945, 0.44, 0.0, 0.38)
 nested = Array[String]([])
 locked_override = -1
@@ -53,7 +53,7 @@ dirt_override = -1.0
 
 [sub_resource type="Resource" id="s7"]
 script = ExtResource("2")
-item_id = "perfume_cheap"
+item_id = "perfume_ex"
 xform = Transform3D(0.9903, 0, -0.1392, 0, 1.0, 0, 0.1392, 0, 0.9903, 0.18, 0.0, 0.48)
 nested = Array[String]([])
 locked_override = -1

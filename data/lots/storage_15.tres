@@ -93,7 +93,7 @@ dirt_override = -1.0
 
 [sub_resource type="Resource" id="s12"]
 script = ExtResource("2")
-item_id = "plant_pot_dead"
+item_id = "aquarium_cracked"
 xform = Transform3D(1.0, 0, 0.0, 0, 1.0, 0, 0.0, 0, 1.0, 1.22, 0.0, 0.85)
 nested = Array[String]([])
 locked_override = -1

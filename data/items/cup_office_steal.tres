@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/ItemDef.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "cup_office_steal"
+name_ru = "Кружка с работы"
+name_en = "Stolen Office Mug"
+archetype_id = "cup"
+facets = Array[int]([0, 1])
+value_base = 4
+mass_override = 0.0
+liquid_id = 0
+liquid_amount = 1.0
+flammable = false
+illegal = false
+dusty_default = 0.35
+vendor_affinity = Array[String](["vendor_tiny"])
+wearable_slot = "none"
+break_threshold = 4.5
+color = Color(1.0, 1.0, 1.0, 1.0)
+scale = 1.0
+tags = Array[String](["fragile"])
+lore_ru = "Логотип компании-банкрота."
+lore_en = "Logo of a dead company."

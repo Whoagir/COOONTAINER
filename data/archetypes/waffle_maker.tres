@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Archetype" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/Archetype.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "waffle_maker"
+builder = "waffle_maker"
+shard_count = 4
+size_class = 1
+mass_default = 2.4
+dims = Vector3(0.28, 0.14, 0.28)
+cloth = false
+container = false
+container_capacity = 3
+light_fixture = false
+base_color = Color(0.7529, 0.1882, 0.1882, 1.0)
+secondary_color = Color(0.1333, 0.1333, 0.1333, 1.0)
+friction = 0.8
+bounce = 0.02

@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/ItemDef.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "telescope_pirate"
+name_ru = "Подзорная труба"
+name_en = "Pirate Spyglass"
+archetype_id = "telescope"
+facets = Array[int]([0])
+value_base = 90
+mass_override = 0.0
+liquid_id = 0
+liquid_amount = 1.0
+flammable = false
+illegal = false
+dusty_default = 0.3
+vendor_affinity = Array[String](["vendor_antique"])
+wearable_slot = "none"
+break_threshold = 5.5
+color = Color(0.1647, 0.1647, 0.1882, 1.0)
+scale = 1.0
+tags = Array[String](["science", "souvenir"])
+lore_ru = "Видит только долги."
+lore_en = "Only sees debts."

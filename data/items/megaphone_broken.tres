@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/ItemDef.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "megaphone_broken"
+name_ru = "Мегафон без рупора"
+name_en = "Broken Megaphone"
+archetype_id = "megaphone"
+facets = Array[int]([1])
+value_base = 4
+mass_override = 0.0
+liquid_id = 0
+liquid_amount = 1.0
+flammable = false
+illegal = false
+dusty_default = 0.5
+vendor_affinity = Array[String](["vendor_tiny"])
+wearable_slot = "none"
+break_threshold = 25.0
+color = Color(0.6275, 0.4392, 0.1255, 1.0)
+scale = 1.0
+tags = Array[String](["appliance"])
+lore_ru = "Шёпот усиленный."
+lore_en = "Amplified whisper."

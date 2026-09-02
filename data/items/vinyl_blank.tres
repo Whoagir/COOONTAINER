@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/ItemDef.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "vinyl_blank"
+name_ru = "Пластинка пустая"
+name_en = "Blank Vinyl"
+archetype_id = "vinyl"
+facets = Array[int]([0])
+value_base = 8
+mass_override = 0.0
+liquid_id = 0
+liquid_amount = 1.0
+flammable = false
+illegal = false
+dusty_default = 0.1
+vendor_affinity = Array[String](["vendor_tiny"])
+wearable_slot = "none"
+break_threshold = 5.5
+color = Color(0.0627, 0.0627, 0.0627, 1.0)
+scale = 1.0
+tags = Array[String](["music"])
+lore_ru = "Можно нацарапать судьбу."
+lore_en = "Scratch your own destiny."

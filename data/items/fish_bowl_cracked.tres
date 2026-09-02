@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/ItemDef.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "fish_bowl_cracked"
+name_ru = "Круглый аквариум"
+name_en = "Cracked Fish Bowl"
+archetype_id = "fish_bowl"
+facets = Array[int]([0, 6, 1])
+value_base = 20
+mass_override = 0.0
+liquid_id = 6
+liquid_amount = 0.4
+flammable = false
+illegal = false
+dusty_default = 0.5
+vendor_affinity = Array[String](["vendor_tiny"])
+wearable_slot = "none"
+break_threshold = 3.0
+color = Color(0.6275, 0.8157, 0.9412, 1.0)
+scale = 1.0
+tags = Array[String](["fragile", "pet"])
+lore_ru = "Рыбки съехали раньше."
+lore_en = "Fish moved out first."

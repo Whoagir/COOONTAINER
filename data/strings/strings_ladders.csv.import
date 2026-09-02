@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://b8woa2ebrtd7i"
+
+[deps]
+
+files=["res://data/strings/strings_ladders.ru.translation", "res://data/strings/strings_ladders.en.translation"]
+
+source_file="res://data/strings/strings_ladders.csv"
+dest_files=["res://data/strings/strings_ladders.ru.translation", "res://data/strings/strings_ladders.en.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

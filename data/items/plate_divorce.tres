@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/ItemDef.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "plate_divorce"
+name_ru = "Тарелка «его/её»"
+name_en = "Divorce Plate"
+archetype_id = "plate"
+facets = Array[int]([0, 1])
+value_base = 9
+mass_override = 0.0
+liquid_id = 0
+liquid_amount = 1.0
+flammable = false
+illegal = false
+dusty_default = 0.45
+vendor_affinity = Array[String](["vendor_tiny"])
+wearable_slot = "none"
+break_threshold = 4.0
+color = Color(0.9412, 0.9412, 0.9333, 1.0)
+scale = 1.0
+tags = Array[String](["fragile"])
+lore_ru = "Разбита пополам идеально."
+lore_en = "Perfectly half-broken vibe."

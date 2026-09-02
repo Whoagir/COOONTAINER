@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/ItemDef.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "jar_glitter"
+name_ru = "Банка блёсток"
+name_en = "Glitter Jar"
+archetype_id = "jar"
+facets = Array[int]([0, 6, 1])
+value_base = 8
+mass_override = 0.0
+liquid_id = 6
+liquid_amount = 0.6
+flammable = false
+illegal = false
+dusty_default = 0.1
+vendor_affinity = Array[String](["vendor_tiny"])
+wearable_slot = "none"
+break_threshold = 3.5
+color = Color(0.9412, 0.6275, 0.8157, 1.0)
+scale = 1.0
+tags = Array[String](["fragile", "gag"])
+lore_ru = "Блёстки вечны. Как сожаления."
+lore_en = "Glitter is forever."

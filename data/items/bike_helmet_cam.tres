@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/ItemDef.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "bike_helmet_cam"
+name_ru = "Шлем с «камерой»"
+name_en = "Helmet Cam Fake"
+archetype_id = "helmet"
+facets = Array[int]([5, 1])
+value_base = 28
+mass_override = 0.0
+liquid_id = 0
+liquid_amount = 1.0
+flammable = false
+illegal = false
+dusty_default = 0.25
+vendor_affinity = Array[String](["vendor_tiny"])
+wearable_slot = "body"
+break_threshold = 25.0
+color = Color(0.0627, 0.0627, 0.0941, 1.0)
+scale = 1.0
+tags = Array[String](["wear", "electronics"])
+lore_ru = "Камера — наклейка."
+lore_en = "Camera is a sticker."

@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/ItemDef.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "telescope_kids"
+name_ru = "Телескоп детский"
+name_en = "Kids Telescope"
+archetype_id = "telescope"
+facets = Array[int]([0])
+value_base = 20
+mass_override = 0.0
+liquid_id = 0
+liquid_amount = 1.0
+flammable = false
+illegal = false
+dusty_default = 0.2
+vendor_affinity = Array[String](["vendor_tiny"])
+wearable_slot = "none"
+break_threshold = 5.0
+color = Color(0.8157, 0.1882, 0.1882, 1.0)
+scale = 0.8
+tags = Array[String](["science"])
+lore_ru = "Луна размером с горошину."
+lore_en = "Moon is pea-sized."

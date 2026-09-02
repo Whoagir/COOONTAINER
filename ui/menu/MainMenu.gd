@@ -212,7 +212,7 @@ func _toggle_howto() -> void:
 	title.add_theme_color_override("font_color", Color(0.35, 0.2, 0.08))
 	title.add_theme_color_override("font_shadow_color", Color(0, 0, 0, 0))
 	v.add_child(title)
-	for i in range(1, 9):
+	for i in range(1, 10):
 		var l := Label.new()
 		l.text = tr("HOWTO_%d" % i)
 		l.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART

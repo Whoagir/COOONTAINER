@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/ItemDef.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "radio_shower"
+name_ru = "Радио в душ"
+name_en = "Shower Radio"
+archetype_id = "radio"
+facets = Array[int]([1, 0])
+value_base = 16
+mass_override = 0.0
+liquid_id = 0
+liquid_amount = 1.0
+flammable = false
+illegal = false
+dusty_default = 0.4
+vendor_affinity = Array[String](["vendor_household"])
+wearable_slot = "none"
+break_threshold = 6.0
+color = Color(0.1882, 0.502, 0.7529, 1.0)
+scale = 1.0
+tags = Array[String](["electronics"])
+lore_ru = "Всё ещё играет рекламу."
+lore_en = "Still plays ads."

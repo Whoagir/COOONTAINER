@@ -146,3 +146,32 @@ hero_gag_gun,gun_gag,ONE_HAND,0.04,0.15,0.22,0.7,4,0,3,0,0,1a1a1a,7a4a2a,0.7,0.0
 hero_plasma,tv_plasma,TWO_HAND,1.25,0.75,0.06,18.0,6,0,3,0,0,181820,303038,0.7,0.02
 hero_costume_clown,costume,TWO_HAND,0.5,1.7,0.35,3.0,4,0,3,1,0,f03030,f0e0c0,1.0,0.0
 hero_costume_unicorn,costume,TWO_HAND,0.5,1.7,0.35,3.0,4,0,3,1,0,f0f0f8,f080c0,1.0,0.0
+# ---- shatter debris (code expects this id)
+shard_piece,box_small,ONE_HAND,0.12,0.1,0.12,0.25,0,0,0,0,0,a6998c,736659,0.7,0.05
+
+# ==== WAVE3 storage finds (procedural builders in ArchetypeMeshes)
+toaster,toaster,ONE_HAND,0.28,0.18,0.18,1.8,5,0,3,0,0,c0c4c8,888888,0.7,0.05
+blender,blender,ONE_HAND,0.2,0.4,0.2,2.2,5,0,3,0,0,222222,a0c8e0,0.7,0.05
+coffee_maker,coffee_maker,ONE_HAND,0.28,0.35,0.22,2.5,4,0,3,0,0,101018,c0c0c8,0.8,0.02
+snowglobe,snowglobe,POCKET,0.12,0.16,0.12,0.4,6,0,3,0,0,8a6a40,d0e8f8,0.5,0.05
+vinyl,vinyl,ONE_HAND,0.3,0.02,0.3,0.25,3,0,3,0,0,e03030,101010,0.6,0.02
+turntable,turntable,TWO_HAND,0.45,0.12,0.4,4.5,4,0,3,0,0,1a1a1a,c0a040,0.8,0.02
+accordion,accordion,TWO_HAND,0.45,0.35,0.22,6.0,4,0,3,0,0,a02020,e8d0a0,0.8,0.02
+harmonica,harmonica,POCKET,0.12,0.03,0.04,0.15,3,0,3,0,0,c0c0c8,222222,0.7,0.05
+microscope,microscope,ONE_HAND,0.18,0.35,0.22,2.8,4,0,3,0,0,303038,a0a0a8,0.8,0.02
+telescope,telescope,TWO_HAND,0.18,0.25,0.7,3.5,4,0,3,0,0,2a2a30,8a6a40,0.7,0.05
+hairdryer,hairdryer,ONE_HAND,0.14,0.2,0.28,0.7,4,0,3,0,0,f0a0c0,333333,0.7,0.05
+clothes_iron,clothes_iron,ONE_HAND,0.28,0.14,0.14,1.6,4,0,3,0,0,7090b0,333333,0.8,0.02
+waffle_maker,waffle_maker,ONE_HAND,0.28,0.14,0.28,2.4,4,0,3,0,0,c03030,222222,0.8,0.02
+juicer,juicer,ONE_HAND,0.2,0.28,0.2,1.8,5,0,3,0,0,f0f0f0,ff8020,0.7,0.05
+gramophone,gramophone,TWO_HAND,0.4,0.45,0.4,8.0,5,0,3,0,0,6a4a28,c0a040,0.8,0.02
+cash_register,cash_register,TWO_HAND,0.4,0.35,0.35,12.0,4,1,2,0,0,c02020,222222,0.9,0.0
+abacus,abacus,ONE_HAND,0.35,0.22,0.08,0.8,4,0,3,0,0,8a5a30,d03030,0.7,0.05
+hourglass,hourglass,ONE_HAND,0.12,0.28,0.12,0.5,6,0,3,0,0,6a4a28,e8d8a0,0.5,0.05
+bowling_pin,bowling_pin,ONE_HAND,0.12,0.38,0.12,1.4,5,0,3,0,0,f0f0ee,d03030,0.6,0.1
+helmet,helmet,ONE_HAND,0.28,0.22,0.28,1.2,4,0,3,0,0,2030a0,c0c0c0,0.8,0.05
+megaphone,megaphone,ONE_HAND,0.22,0.18,0.4,1.0,4,0,3,0,0,f0a020,222222,0.7,0.05
+aquarium,aquarium,TWO_HAND,0.55,0.35,0.3,6.0,7,0,3,0,0,404048,a0d0f0,0.5,0.02
+rubber_duck,rubber_duck,POCKET,0.12,0.12,0.14,0.15,3,0,3,0,0,f0d020,f08020,0.8,0.15
+lava_lamp,lava_lamp,ONE_HAND,0.14,0.4,0.14,1.1,5,0,3,0,1,303038,f040a0,0.6,0.05
+crystal_ball,crystal_ball,ONE_HAND,0.18,0.22,0.18,1.0,6,0,3,0,0,6a4a28,d0e8f8,0.5,0.05

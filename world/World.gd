@@ -281,6 +281,15 @@ func handle_action(peer: int, kind: String, data: Dictionary) -> void:
 			if n and n.has_method("interact") and n.global_position.distance_to(p.head_position()) < 4.0:
 				n.interact(p)
 			return
+		"ladder_dismount":
+			var lad_sys := system("Ladders")
+			if lad_sys and p.on_ladder != null and lad_sys.has_method("_host_dismount"):
+				lad_sys._host_dismount(p, Vector3(
+					float(data.get("px", 0.0)),
+					float(data.get("py", 0.0)),
+					float(data.get("pz", 0.0))
+				))
+			return
 		"grab_special":
 			var n := get_node_or_null(NodePath(str(data.get("path", ""))))
 			if n and n.has_method("on_grab"):

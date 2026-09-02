@@ -62,7 +62,7 @@ const GHETTO_SEED := 20260902
 const TEX_AD_CASINO := "res://assets/textures/ad_casino.png"
 const TEX_AD_CAR := "res://assets/textures/ad_carmarket.png"
 const TEX_CONTAINER := "res://assets/textures/tex_container.png"
-const MESH_CAP := 2400
+const MESH_CAP := 3200
 
 const _HUBS: Array[Vector2] = [
 	Vector2(0, -120), Vector2(110, -120), Vector2(-110, -120),
@@ -72,7 +72,8 @@ const _VROADS: Array[Vector4] = [
 	Vector4(-165, -60, -165, 110), Vector4(165, -60, 165, 110), Vector4(0, 45, 0, 135),
 	Vector4(-75, -60, -75, 45), Vector4(75, -60, 75, 45), Vector4(0, -100, 0, -60),
 	Vector4(120, -100, 120, -60), Vector4(-110, -100, -110, -60), Vector4(110, 45, 110, 64),
-	Vector4(-120, 45, -120, 64),
+	Vector4(-120, 45, -120, 64), Vector4(-165, -20, 165, -20), Vector4(-165, 78, 165, 78),
+	Vector4(0, 110, 0, 160), Vector4(40, -100, 40, -60), Vector4(-40, -100, -40, -60),
 ]
 
 var _mats: Dictionary = {}
@@ -772,6 +773,7 @@ func _gnome(name: String, pos: Vector3, yaw: float) -> void:
 
 
 func _dress_park() -> void:
+	_skin_player_trailer()
 	_tire_pile("ParkTires", Vector3(-12.4, 0, -9.2), 22.0)
 	_sofa("ParkSofa", Vector3(-14.2, 0, -4.6), 32.0)
 	_barrel("ParkBarrel0", Vector3(-13.2, 0, -11.6), 10.0)
@@ -789,6 +791,51 @@ func _dress_park() -> void:
 	_barrel_table("ParkBarrelTable", Vector3(12.4, 0, -10.2), 25.0)
 	_lean_mailbox("ParkDriveMail", Vector3(6.2, 0, -33.4), 8.0)
 	_picket_bit("ParkPicket", Vector3(-8.4, 0, -4.6), 18.0)
+
+
+## Сайдинг + бирюзовая полоса на геройском трейлере (как у соседей).
+func _skin_player_trailer() -> void:
+	var city := _city()
+	if city == null:
+		return
+	var dist: Node = null
+	if city.has_method("district_root"):
+		dist = city.district_root(Types.District.TRAILER_PARK)
+	if dist == null:
+		return
+	var tr: Node = dist.get_node_or_null("Trailer")
+	if tr == null:
+		return
+	var wall := _mat(Color(0.92, 0.88, 0.78), Color(0, 0, 0, 0), 1.0, TEX_TRAILER)
+	var stripe := _mat(Color(0.12, 0.55, 0.62))
+	var cream := Color(0.9, 0.86, 0.72)
+	var teal := Color(0.12, 0.6, 0.6)
+	for c in tr.get_children():
+		if not (c is MeshInstance3D):
+			continue
+		var mi := c as MeshInstance3D
+		var m: Material = mi.material_override
+		if m == null or not (m is StandardMaterial3D):
+			continue
+		var sm := m as StandardMaterial3D
+		var col := sm.albedo_color
+		if col.is_equal_approx(cream) or (absf(col.r - cream.r) < 0.04 and absf(col.g - cream.g) < 0.04 and absf(col.b - cream.b) < 0.04):
+			mi.material_override = wall
+		elif col.is_equal_approx(teal) or (absf(col.r - teal.r) < 0.04 and absf(col.g - teal.g) < 0.04):
+			mi.material_override = stripe
+	# внешняя полоса сайдинга по длинной стене
+	var stripe_bar := MeshInstance3D.new()
+	var bm := BoxMesh.new()
+	bm.size = Vector3(8.2, 0.16, 0.06)
+	stripe_bar.mesh = bm
+	stripe_bar.material_override = stripe
+	stripe_bar.position = Vector3(0, 1.7, 1.92)
+	tr.add_child(stripe_bar)
+	_mesh_count += 1
+	var stripe_back := stripe_bar.duplicate() as MeshInstance3D
+	stripe_back.position = Vector3(0, 1.7, -1.92)
+	tr.add_child(stripe_back)
+	_mesh_count += 1
 
 
 func _city() -> City:
@@ -1086,6 +1133,7 @@ func _shack(name: String, pos: Vector3, yaw: float, seed_i: int) -> void:
 		_cyl(b, Vector3(-w * 0.35, h + 0.55, 0), 0.22, 0.55, _mat(Color(0.55, 0.32, 0.18), Color(0, 0, 0, 0), 1.0, TEX_RUST), false, Basis(), 0.08)
 	elif seed_i % 3 == 1:
 		_cyl(b, Vector3(w * 0.2, h + 0.35, -d * 0.2), 0.12, 0.85, _mat(Color(0.28, 0.26, 0.24)))
+	_mark_enter(b, Vector3(0, 1.05, d * 0.5 + 0.55), "shack")
 
 
 func _junk_cluster(name: String, pos: Vector3, yaw: float, seed_i: int) -> void:
@@ -1166,6 +1214,16 @@ func _neighbor_trailer(name: String, pos: Vector3, yaw: float, seed_i: int) -> v
 	_box(b, Vector3(w * 0.35 + 0.7, 2.48, door_z + 0.62), Vector3(1.5, 0.04, 0.55), _mat(Color(0.15, 0.42, 0.62)))
 	if seed_i % 3 == 0:
 		_box(b, Vector3(-w * 0.42, 0.12, door_z + 0.65), Vector3(1.1, 0.24, 0.85), _mat(Color(0.52, 0.38, 0.22), Color(0, 0, 0, 0), 1.0, TEX_PLANKS))
+	_mark_enter(b, Vector3(0, 1.05, door_z + 0.55), "trailer")
+
+
+func _mark_enter(b: StaticBody3D, local_pos: Vector3, kind: String) -> void:
+	var m := Marker3D.new()
+	m.name = "EnterDoor"
+	m.position = local_pos
+	m.set_meta("building_kind", kind)
+	b.add_child(m)
+	b.add_to_group("enterable_building")
 
 
 func _neighbor_yard(name: String, pos: Vector3, yaw: float, seed_i: int) -> void:
@@ -1345,6 +1403,7 @@ func _shack_near(name: String, pos: Vector3, yaw: float, variant: int) -> void:
 			_cyl(b, Vector3(0, h + 1.35, 0), 0.42, 0.55, _mat(Color(0.55, 0.32, 0.18), Color(0, 0, 0, 0), 1.0, TEX_RUST), false, Basis(), 0.35)
 	_box(b, Vector3(-w * 0.2, h * 0.55, d * 0.5 + 0.04), Vector3(0.62, 0.52, 0.04), glass)
 	_box(b, Vector3(0, h * 0.42, d * 0.5 + 0.04), Vector3(0.68, 1.25, 0.05), _mat(Color(0.30, 0.18, 0.12)))
+	_mark_enter(b, Vector3(0, 1.0, d * 0.5 + 0.55), "shack")
 
 
 func _build_neighbors() -> int:
@@ -1354,7 +1413,7 @@ func _build_neighbors() -> int:
 	var placed: Array[Vector2] = []
 	var built := 0
 	var guard := 0
-	while built < 6 and guard < 160 and _room():
+	while built < 9 and guard < 200 and _room():
 		guard += 1
 		var ang := rng.randf_range(0.0, TAU)
 		var dist := rng.randf_range(17.0, 33.0)
@@ -1380,7 +1439,7 @@ func _build_horizon_near() -> int:
 	rng.seed = GHETTO_SEED + 311
 	var built := 0
 	var guard := 0
-	while built < 6 and guard < 100 and _room():
+	while built < 9 and guard < 140 and _room():
 		guard += 1
 		var dist := rng.randf_range(38.0, 56.0)
 		var lat := rng.randf_range(-14.0, 14.0)
@@ -1561,7 +1620,7 @@ func _dress_ghetto() -> void:
 		_shack("HorizonShack%d" % shack_n, Vector3(x, 0, z), yaw, shack_n)
 		shack_n += 1
 	var guard := 0
-	while shack_n < 8 and guard < 80 and _room():
+	while shack_n < 12 and guard < 100 and _room():
 		guard += 1
 		var ang2 := rng.randf_range(0.0, TAU)
 		var dist2 := rng.randf_range(48.0, 88.0)
@@ -1576,7 +1635,7 @@ func _dress_ghetto() -> void:
 	## --- wasteland junk clusters between districts ---
 	var cluster_n := 0
 	guard = 0
-	while cluster_n < 14 and guard < 280 and _room():
+	while cluster_n < 20 and guard < 320 and _room():
 		guard += 1
 		var x2 := rng.randf_range(-150.0, 150.0)
 		var z2 := rng.randf_range(-135.0, 165.0)

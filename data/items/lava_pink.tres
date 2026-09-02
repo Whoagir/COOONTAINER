@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/ItemDef.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "lava_pink"
+name_ru = "Лавовая лампа"
+name_en = "Pink Lava Lamp"
+archetype_id = "lava_lamp"
+facets = Array[int]([0, 1])
+value_base = 70
+mass_override = 0.0
+liquid_id = 0
+liquid_amount = 1.0
+flammable = false
+illegal = false
+dusty_default = 0.2
+vendor_affinity = Array[String](["vendor_antique", "vendor_tech"])
+wearable_slot = "none"
+break_threshold = 4.0
+color = Color(0.1882, 0.1882, 0.2196, 1.0)
+scale = 1.0
+tags = Array[String](["fragile", "light"])
+lore_ru = "Пузыри ленивые как хозяин."
+lore_en = "Blobs lazy as the owner."

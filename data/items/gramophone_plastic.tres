@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/ItemDef.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "gramophone_plastic"
+name_ru = "Граммофон пластик"
+name_en = "Plastic Gramophone"
+archetype_id = "gramophone"
+facets = Array[int]([0])
+value_base = 40
+mass_override = 0.0
+liquid_id = 0
+liquid_amount = 1.0
+flammable = false
+illegal = false
+dusty_default = 0.15
+vendor_affinity = Array[String](["vendor_tiny", "vendor_antique"])
+wearable_slot = "none"
+break_threshold = 4.5
+color = Color(0.7529, 0.1882, 0.1882, 1.0)
+scale = 0.85
+tags = Array[String](["music"])
+lore_ru = "Раструб клееный скотчем."
+lore_en = "Horn held by tape."

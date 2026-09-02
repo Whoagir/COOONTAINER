@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/ItemDef.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "toaster_chrome"
+name_ru = "Тостер хромированный"
+name_en = "Chrome Toaster"
+archetype_id = "toaster"
+facets = Array[int]([1])
+value_base = 18
+mass_override = 0.0
+liquid_id = 0
+liquid_amount = 1.0
+flammable = false
+illegal = false
+dusty_default = 0.2
+vendor_affinity = Array[String](["vendor_household"])
+wearable_slot = "none"
+break_threshold = 25.0
+color = Color(0.7843, 0.8157, 0.8471, 1.0)
+scale = 1.0
+tags = Array[String](["appliance"])
+lore_ru = "Жрёт вилки. Хлеб опционален."
+lore_en = "Eats forks. Bread optional."

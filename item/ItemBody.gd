@@ -44,6 +44,7 @@ var held_by: Array = [] # Hands, до 2 (TEAM)
 var worn_by: Node = null
 var in_vehicle_bed := false
 var lot_id: String = "" # из какого лота вынесен (для janitor/broom)
+var stolen := false # поднято с чужой зоны / у хантера — горячий товар
 
 # --- меш
 var mesh_root: Node3D
@@ -302,6 +303,7 @@ func state_dict() -> Dictionary:
 		"i": integrity, "d": dirt, "p": [paint_color.r, paint_color.g, paint_color.b, paint_color.a],
 		"w": wet, "t": taped, "b": boarded, "lk": locked, "l": lit, "bu": burnt, "lq": liquid_left,
 		"o": is_open, "od": open_drawers, "tr": torn, "g": glued, "lot": lot_id, "sl": sleeping,
+		"st": stolen,
 	}
 	if get_meta("shatter_piece", false):
 		d["shatter_piece"] = true
@@ -337,6 +339,7 @@ func apply_state(s: Dictionary) -> void:
 	torn = bool(s.get("tr", torn))
 	glued = bool(s.get("g", glued))
 	lot_id = str(s.get("lot", lot_id))
+	stolen = bool(s.get("st", stolen))
 	if s.get("shatter_piece", false) and not get_meta("shatter_piece", false):
 		var pc: Array = s.get("pc", [0.6, 0.55, 0.5, 1.0])
 		var ext: Array = s.get("ext", [0.1, 0.08, 0.1])
@@ -356,6 +359,13 @@ func _push_state() -> void:
 	state_changed.emit(self)
 	if not proxy:
 		Net.sync_item_state(self)
+
+
+func mark_stolen() -> void:
+	if stolen:
+		return
+	stolen = true
+	_push_state()
 
 
 func parent_net_id() -> int:
@@ -408,6 +418,14 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 
 func _on_impact(dv: float, at: Vector3) -> void:
 	var now := Time.get_ticks_msec() / 1000.0
+	var swing_ms_early: int = get_meta("swinging", 0)
+	var swinging_early := swing_ms_early > 0 and Time.get_ticks_msec() - swing_ms_early < 700
+	# несём в руках: follow упирается в стену — не дробим. Замах (swinging) ломает как раньше.
+	if not held_by.is_empty() and not swinging_early:
+		if now - _last_impact_sound > 0.18 and dv > 2.5:
+			_last_impact_sound = now
+			AudioBus.play_at("thud", global_position, clampf(-16.0 + dv, -16.0, -4.0), 0.15)
+		return
 	var threshold := def.break_threshold
 	if taped:
 		threshold *= 1.6
@@ -1242,12 +1260,63 @@ func on_grabbed(hands: Node) -> void:
 	if not held_by.has(hands):
 		held_by.append(hands)
 	sleeping = false
+	# не толкаем носителя капсулой — иначе «притянул к груди» = ракета
+	_hold_collision_with(hands, true)
+	# в руках: кинематика — пружина по velocity всегда отстаёт при ходьбе/взгляде.
+	if held_by.size() == 1:
+		set_meta("_mask_pre_hold", collision_mask)
+		set_meta("_grav_pre_hold", gravity_scale)
+		set_meta("_freeze_pre_hold", freeze)
+		collision_mask = 0
+		gravity_scale = 0.0
+		freeze = true
+		freeze_mode = RigidBody3D.FREEZE_MODE_KINEMATIC
+		linear_velocity = Vector3.ZERO
+		angular_velocity = Vector3.ZERO
 	picked.emit(self, hands)
 
 
 func on_released(hands: Node) -> void:
 	held_by.erase(hands)
+	_hold_collision_with(hands, false)
+	if held_by.is_empty():
+		if has_meta("_mask_pre_hold"):
+			collision_mask = int(get_meta("_mask_pre_hold"))
+			remove_meta("_mask_pre_hold")
+		else:
+			collision_mask = Types.L_WORLD | Types.L_PLAYER | Types.L_ITEM | Types.L_VEHICLE | Types.L_NPC | Types.L_SHARD
+		if has_meta("_grav_pre_hold"):
+			gravity_scale = float(get_meta("_grav_pre_hold"))
+			remove_meta("_grav_pre_hold")
+		else:
+			gravity_scale = 1.0
+		if has_meta("_freeze_pre_hold"):
+			freeze = bool(get_meta("_freeze_pre_hold"))
+			remove_meta("_freeze_pre_hold")
+		else:
+			freeze = false
+		linear_damp = 0.1
+		angular_damp = 0.1
 	dropped.emit(self)
+
+
+func _hold_collision_with(hands: Node, grab: bool) -> void:
+	if not (hands is Hands):
+		return
+	var p: Player = (hands as Hands).player
+	if p == null or not is_instance_valid(p):
+		return
+	# TEAM: не снимаем исключение, пока другая рука того же игрока ещё держит
+	if not grab:
+		for h in held_by:
+			if h is Hands and (h as Hands).player == p:
+				return
+	if grab:
+		add_collision_exception_with(p)
+		p.add_collision_exception_with(self)
+	else:
+		remove_collision_exception_with(p)
+		p.remove_collision_exception_with(self)
 
 
 func is_held() -> bool:

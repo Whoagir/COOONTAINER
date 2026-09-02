@@ -451,16 +451,20 @@ func _on_landed(b: ItemBody, s: Stand) -> void:
 		Achievements.unlock("phobia")
 		Net.broadcast_event("vendor_scare", {"stand": s.def.id})
 		return
-	if _is_illegal(b):
+	if _is_illegal(b) or b.stolen:
 		if s.def.buys_illegal:
-			v.say(tr("VEND_ILLEGAL_OK"), 2.5, "deal")
+			if b.stolen:
+				v.say(tr("VEND_STOLEN_OK"), 2.5, "deal")
+			else:
+				v.say(tr("VEND_ILLEGAL_OK"), 2.5, "deal")
 		elif s.def.calls_police_on_illegal:
-			v.say(tr("VEND_ILLEGAL_POLICE"), 3.0, "scream")
+			v.say(tr("VEND_STOLEN_POLICE") if b.stolen else tr("VEND_ILLEGAL_POLICE"), 3.0, "scream")
 			b.set_meta("vendor_refused", true)
 			var w := _world()
 			var police: Node = w.system("Police") if w else null
 			if police and police.has_method("trigger"):
-				police.trigger(Types.PoliceTrigger.ILLEGAL_SALE, b.global_position, _nearest_player(b.global_position))
+				var kind := Types.PoliceTrigger.PROPERTY_THEFT if b.stolen else Types.PoliceTrigger.ILLEGAL_SALE
+				police.trigger(kind, b.global_position, _nearest_player(b.global_position))
 			return
 	if b.integrity == Types.Integrity.SHARDS:
 		v.say(tr("VEND_SHARDS_LAND"), 2.5, "scream")
@@ -517,7 +521,7 @@ func _price_for(s: Stand, b: ItemBody) -> int:
 	var v := float(b.current_value(s.def))
 	if b.get_meta("phobia_discount", false):
 		v *= 0.5
-	if _is_illegal(b) and s.def.buys_illegal:
+	if (_is_illegal(b) or b.stolen) and s.def.buys_illegal:
 		v *= 1.3
 	return maxi(1, int(round(v)))
 

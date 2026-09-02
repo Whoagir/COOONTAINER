@@ -1,0 +1,42 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://core/ItemDef.gd" id="1"]
+[ext_resource type="Script" path="res://core/LootRef.gd" id="2"]
+
+[sub_resource type="Resource" id="lr1"]
+script = ExtResource("2")
+item_id = "cash_20"
+chance = 0.4
+count_min = 1
+count_max = 2
+
+[sub_resource type="Resource" id="lr2"]
+script = ExtResource("2")
+item_id = "cash_5"
+chance = 0.6
+count_min = 1
+count_max = 3
+
+[resource]
+script = ExtResource("1")
+id = "register_diner"
+name_ru = "Касса забегаловки"
+name_en = "Diner Register"
+archetype_id = "cash_register"
+facets = Array[int]([2, 1, 13])
+value_base = 160
+mass_override = 0.0
+liquid_id = 0
+liquid_amount = 1.0
+flammable = false
+illegal = false
+dusty_default = 0.4
+nest_loot = Array[Resource]([SubResource("lr1"), SubResource("lr2")])
+vendor_affinity = Array[String](["vendor_household", "vendor_antique"])
+wearable_slot = "none"
+break_threshold = 60.0
+color = Color(0.7529, 0.0941, 0.0941, 1.0)
+scale = 1.0
+tags = Array[String](["appliance"])
+lore_ru = "Ящик заедает на «нет сдачи»."
+lore_en = "Drawer jams on no change."

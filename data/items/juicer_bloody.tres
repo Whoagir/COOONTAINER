@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/ItemDef.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "juicer_bloody"
+name_ru = "Соковыжималка «томаты»"
+name_en = "Tomato Juicer"
+archetype_id = "juicer"
+facets = Array[int]([0, 6, 1])
+value_base = 9
+mass_override = 0.0
+liquid_id = 6
+liquid_amount = 0.5
+flammable = false
+illegal = false
+dusty_default = 0.55
+vendor_affinity = Array[String](["vendor_tiny"])
+wearable_slot = "none"
+break_threshold = 4.5
+color = Color(0.502, 0.1255, 0.1255, 1.0)
+scale = 1.0
+tags = Array[String](["appliance"])
+lore_ru = "Надеемся что томаты."
+lore_en = "Hoping it's tomatoes."

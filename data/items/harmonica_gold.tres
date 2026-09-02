@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/ItemDef.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "harmonica_gold"
+name_ru = "Гармошка «золото»"
+name_en = "Gold Harmonica"
+archetype_id = "harmonica"
+facets = Array[int]([])
+value_base = 80
+mass_override = 0.0
+liquid_id = 0
+liquid_amount = 1.0
+flammable = false
+illegal = false
+dusty_default = 0.05
+vendor_affinity = Array[String](["vendor_antique"])
+wearable_slot = "none"
+break_threshold = 25.0
+color = Color(0.8784, 0.7529, 0.251, 1.0)
+scale = 1.0
+tags = Array[String](["music"])
+lore_ru = "Позолота слезает на язык."
+lore_en = "Gold leaf on your tongue."

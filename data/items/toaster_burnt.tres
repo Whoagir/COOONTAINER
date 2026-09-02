@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/ItemDef.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "toaster_burnt"
+name_ru = "Тостер подгоревший"
+name_en = "Burnt Toaster"
+archetype_id = "toaster"
+facets = Array[int]([1])
+value_base = 4
+mass_override = 0.0
+liquid_id = 0
+liquid_amount = 1.0
+flammable = true
+illegal = false
+dusty_default = 0.6
+vendor_affinity = Array[String](["vendor_tiny"])
+wearable_slot = "none"
+break_threshold = 25.0
+color = Color(0.2902, 0.1882, 0.1882, 1.0)
+scale = 1.0
+tags = Array[String](["appliance"])
+lore_ru = "Пахнет как 1998-й."
+lore_en = "Smells like 1998."

@@ -199,6 +199,9 @@ func begin(p_anchor: LotAnchor, p_preset: LotPreset, p_winner_peer: int, price: 
 		cell.build_visual()
 	else:
 		cell = null
+	var ladders: Node = Game.world.system("Ladders") if Game.world else null
+	if ladders and ladders.has_method("spawn_for_lot"):
+		ladders.spawn_for_lot(anchor)
 	phase = Phase.RUNNING
 	time_left = maxf(5.0, preset.clearout_seconds)
 	Game.set_world_mode(Types.WorldMode.CLEAR_OUT)
@@ -287,6 +290,9 @@ func finish() -> void:
 		"overtime": was_overtime, "locked": locked,
 	})
 	finished.emit(pid)
+	var ladders: Node = Game.world.system("Ladders") if Game.world else null
+	if ladders and ladders.has_method("clear_lot_ladder"):
+		ladders.clear_lot_ladder()
 	# дверь и Auction — позже, чтобы запертые успели выйти; временный смотритель уходит с ними
 	var reopen := DOOR_REOPEN_LOCKED if locked else DOOR_REOPEN_NORMAL
 	var temp_npc: Npc = _caretaker if _temp_caretaker else null

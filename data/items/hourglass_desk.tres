@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/ItemDef.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "hourglass_desk"
+name_ru = "Песочные часы"
+name_en = "Desk Hourglass"
+archetype_id = "hourglass"
+facets = Array[int]([0])
+value_base = 35
+mass_override = 0.0
+liquid_id = 0
+liquid_amount = 1.0
+flammable = false
+illegal = false
+dusty_default = 0.15
+vendor_affinity = Array[String](["vendor_antique", "vendor_household"])
+wearable_slot = "none"
+break_threshold = 3.5
+color = Color(0.4157, 0.2902, 0.1569, 1.0)
+scale = 1.0
+tags = Array[String](["fragile", "souvenir"])
+lore_ru = "Песок кончился раньше срока."
+lore_en = "Sand quit early."

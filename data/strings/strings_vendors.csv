@@ -12,6 +12,8 @@ VEND_SHARDS_LAND,"Это… осколки. Ты серьёзно?","That's… s
 VEND_SHARDS_DEAL,"Доллар. За мусор — доллар. И то из жалости.","One dollar. For trash — one dollar. Out of pity."
 VEND_ILLEGAL_OK,"Тихо. Не ори. Беру, надбавка за молчание.","Quiet. Don't shout. I'll take it, silence tax included."
 VEND_ILLEGAL_POLICE,"ЭТО ЧТО, КРАДЕНОЕ?! АЛЛО, ПОЛИЦИЯ!","IS THAT STOLEN?! HELLO, POLICE!"
+VEND_STOLEN_OK,"Горячее. Беру. Надбавка за риск.","Hot goods. Taking it. Risk premium."
+VEND_STOLEN_POLICE,"ЭТО С ЧУЖОГО ДВОРА?! АЛЛО, ПОЛИЦИЯ!","THAT'S FROM SOMEONE'S YARD?! HELLO, POLICE!"
 VEND_COUNTER_EMPTY,"Прилавок пустой. Положи что-нибудь.","Counter's empty. Put something down."
 VEND_CLOSED,"ЗАКРЫТО — открыть за $%d","CLOSED — open for $%d"
 VEND_UNLOCK_HINT,"[E] Открыть скупщика за $%d","[E] Unlock vendor for $%d"

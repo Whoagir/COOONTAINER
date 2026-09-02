@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://core/ItemDef.gd" id="1"]
+[ext_resource type="Script" path="res://core/LootRef.gd" id="2"]
+
+[sub_resource type="Resource" id="lr1"]
+script = ExtResource("2")
+item_id = "vinyl_bootleg"
+chance = 0.5
+count_min = 1
+count_max = 1
+
+[resource]
+script = ExtResource("1")
+id = "turntable_suitcase"
+name_ru = "Вертушка-чемодан"
+name_en = "Suitcase Turntable"
+archetype_id = "turntable"
+facets = Array[int]([1, 0, 2])
+value_base = 95
+mass_override = 0.0
+liquid_id = 0
+liquid_amount = 1.0
+flammable = false
+illegal = false
+dusty_default = 0.3
+nest_loot = Array[Resource]([SubResource("lr1")])
+vendor_affinity = Array[String](["vendor_tech"])
+wearable_slot = "none"
+break_threshold = 6.5
+color = Color(0.4157, 0.2902, 0.1569, 1.0)
+scale = 1.0
+tags = Array[String](["music", "electronics"])
+lore_ru = "Портативное разочарование."
+lore_en = "Portable disappointment."

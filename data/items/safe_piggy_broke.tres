@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://core/ItemDef.gd" id="1"]
+[ext_resource type="Script" path="res://core/LootRef.gd" id="2"]
+
+[sub_resource type="Resource" id="lr1"]
+script = ExtResource("2")
+item_id = "cash_10"
+chance = 0.5
+count_min = 1
+count_max = 2
+
+[resource]
+script = ExtResource("1")
+id = "safe_piggy_broke"
+name_ru = "Копилка-сейф"
+name_en = "Broken Piggy Safe"
+archetype_id = "coin_jar"
+facets = Array[int]([2, 0, 3])
+value_base = 25
+mass_override = 0.0
+liquid_id = 0
+liquid_amount = 1.0
+flammable = false
+illegal = false
+dusty_default = 0.3
+nest_loot = Array[Resource]([SubResource("lr1")])
+vendor_affinity = Array[String](["vendor_tiny"])
+wearable_slot = "none"
+break_threshold = 4.0
+color = Color(0.9412, 0.6275, 0.7529, 1.0)
+scale = 1.2
+tags = Array[String](["container", "fragile"])
+lore_ru = "Уже треснута для изъятия."
+lore_en = "Pre-cracked for withdrawal."

@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/ItemDef.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "mirror_compact"
+name_ru = "Зеркальце карманное"
+name_en = "Pocket Mirror"
+archetype_id = "mirror"
+facets = Array[int]([0])
+value_base = 14
+mass_override = 0.0
+liquid_id = 0
+liquid_amount = 1.0
+flammable = false
+illegal = false
+dusty_default = 0.15
+vendor_affinity = Array[String](["vendor_tiny", "vendor_antique"])
+wearable_slot = "none"
+break_threshold = 3.2
+color = Color(0.7529, 0.7529, 0.7843, 1.0)
+scale = 0.45
+tags = Array[String](["fragile"])
+lore_ru = "Врёт о возрасте."
+lore_en = "Lies about your age."

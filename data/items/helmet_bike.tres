@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/ItemDef.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "helmet_bike"
+name_ru = "Шлем велосипедный"
+name_en = "Bike Helmet"
+archetype_id = "helmet"
+facets = Array[int]([5, 1])
+value_base = 20
+mass_override = 0.0
+liquid_id = 0
+liquid_amount = 1.0
+flammable = false
+illegal = false
+dusty_default = 0.3
+vendor_affinity = Array[String](["vendor_tiny"])
+wearable_slot = "body"
+break_threshold = 25.0
+color = Color(0.1255, 0.1882, 0.6275, 1.0)
+scale = 1.0
+tags = Array[String](["wear"])
+lore_ru = "Трещины — это стиль."
+lore_en = "Cracks are style."

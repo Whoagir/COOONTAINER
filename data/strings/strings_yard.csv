@@ -1,0 +1,6 @@
+keys,ru,en
+YARD_OURS,СВОЁ,YOURS
+YARD_THEIRS,ЧУЖОЕ,THEIRS
+YARD_HINT_OURS,"Это твой двор — продавай спокойно","Your yard — sell freely"
+YARD_HINT_STOLEN,"Спёр с чужого! Обычный скупщик не возьмёт — только «Без Вопросов». Менты уже нюхают.","Stole from a neighbor! Normal vendors won't buy — only No Questions. Cops are sniffing."
+YARD_STOLEN_TOAST,Кража. Горячий товар.,Theft. Hot goods.

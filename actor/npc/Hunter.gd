@@ -366,6 +366,12 @@ func drop_carry(steal: bool) -> ItemBody:
 		b.sleeping = false
 		if steal:
 			b.lot_id = ""
+			var yards: Node = Game.world.system("YardZones") if Game.world else null
+			if yards and yards.has_method("on_hunter_steal"):
+				var cul: Player = _last_shover as Player if _last_shover is Player else null
+				yards.on_hunter_steal(cul, b)
+			elif not b.stolen:
+				b.mark_stolen()
 	return b
 
 

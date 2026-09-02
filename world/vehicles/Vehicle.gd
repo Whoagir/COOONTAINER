@@ -154,21 +154,28 @@ func _ready() -> void:
 
 # ------------------------------------------------------------------ геометрия
 
-## Краска кузова: у «ржавого пикапа» — облезлая бирюза с ржавчиной (кей-арт), у остальных — плоский цвет.
+## Краска кузова: rust texture на всех типах, чуть разный оттенок.
 func _mat(c: Color) -> StandardMaterial3D:
 	var key := c.to_rgba32()
 	if not _mats.has(key):
 		var m := StandardMaterial3D.new()
 		m.albedo_color = c
-		m.roughness = 0.85
-		var painted := c.is_equal_approx(body_color) or c.is_equal_approx(body_color.darkened(0.15)) or c.is_equal_approx(body_color.darkened(0.3))
-		if painted and vtype == "pickup_rusty" and ResourceLoader.exists("res://assets/textures/tex_rust_teal.png"):
-			var t: Texture2D = load("res://assets/textures/tex_rust_teal.png")
+		m.roughness = 0.88
+		var painted := c.is_equal_approx(body_color) or c.is_equal_approx(body_color.darkened(0.15)) or c.is_equal_approx(body_color.darkened(0.3)) or c.is_equal_approx(body_color.darkened(0.06)) or c.is_equal_approx(body_color.darkened(0.08)) or c.is_equal_approx(body_color.darkened(0.12))
+		var rust_path := "res://assets/textures/tex_rust_teal.png"
+		if painted and ResourceLoader.exists(rust_path):
+			var t: Texture2D = load(rust_path)
 			m.albedo_texture = t
-			m.albedo_color = Color(1, 1, 1).lerp(c, 0.25).lightened(0.05) if c.is_equal_approx(body_color) else Color(0.85, 0.85, 0.85).lerp(c, 0.25)
 			m.uv1_triplanar = true
-			m.uv1_scale = Vector3.ONE / 1.6
+			m.uv1_scale = Vector3.ONE / (1.45 if vtype == "pickup_rusty" else 1.9)
 			m.roughness = 0.95
+			match vtype:
+				"pickup_rusty":
+					m.albedo_color = Color(1, 1, 1).lerp(c, 0.28).lightened(0.04) if c.is_equal_approx(body_color) else Color(0.85, 0.85, 0.85).lerp(c, 0.3)
+				"van_leaky":
+					m.albedo_color = Color(0.92, 0.9, 0.88).lerp(c, 0.45)
+				_:
+					m.albedo_color = Color(0.9, 0.88, 0.86).lerp(c, 0.55)
 		_mats[key] = m
 	return _mats[key]
 
@@ -391,6 +398,23 @@ func _build_pickup(top: float) -> void:
 	_vis(Vector3(0.05, 0.05, 0.06), Vector3(0, top - 0.02, rear_z + 0.24), chrome)
 	# выхлоп
 	_vis(Vector3(0.08, 0.08, 0.22), Vector3(-body_size.x * 0.5 - 0.02, top - 0.04, axle_rear + 0.15), Color(0.2, 0.2, 0.22))
+	_detail_wipers(top, cab_front, bw)
+	_detail_plates(top, front_end, body_size.z * 0.5)
+
+
+func _detail_wipers(top: float, cab_front: float, bw: float) -> void:
+	var blk := Color(0.12, 0.12, 0.13)
+	for sx in [-1.0, 1.0]:
+		_vis(Vector3(0.02, 0.02, 0.28), Vector3(sx * 0.22, top + cab_size.y * 0.78, cab_front + 0.06), blk)
+
+
+func _detail_plates(top: float, front_z: float, rear_z: float) -> void:
+	var plate := Color(0.92, 0.9, 0.82)
+	var frame := Color(0.25, 0.25, 0.28)
+	_vis(Vector3(0.42, 0.12, 0.03), Vector3(0, top + 0.12, front_z - 0.02), frame)
+	_vis(Vector3(0.38, 0.09, 0.02), Vector3(0, top + 0.12, front_z - 0.035), plate)
+	_vis(Vector3(0.42, 0.12, 0.03), Vector3(0, top + 0.14, rear_z + 0.1), frame)
+	_vis(Vector3(0.38, 0.09, 0.02), Vector3(0, top + 0.14, rear_z + 0.115), plate)
 
 
 func _build_van(top: float) -> void:
@@ -400,9 +424,12 @@ func _build_van(top: float) -> void:
 	var grey := Color(0.32, 0.32, 0.34)
 	var chrome := Color(0.72, 0.72, 0.75)
 	var bw := cab_size.x
-	# короткий капот
+	# короткий капот + решётка
 	_vis(Vector3(bw * 0.94, 0.38, hood_length), Vector3(0, top + 0.19, cab_front - hood_length * 0.5), body_color)
+	_vis(Vector3(bw * 0.88, 0.06, hood_length * 0.9), Vector3(0, top + 0.4, cab_front - hood_length * 0.5), body_color.darkened(0.08))
 	_vis(Vector3(bw * 0.55, 0.22, 0.06), Vector3(0, top + 0.14, front_end + 0.03), grey)
+	for i in 4:
+		_vis(Vector3(0.03, 0.16, 0.03), Vector3(-0.18 + i * 0.12, top + 0.14, front_end + 0.02), Color(0.12, 0.12, 0.13))
 	_vis(Vector3(bw * 0.9, 0.12, 0.1), Vector3(0, top + 0.04, front_end - 0.04), rust)
 	for sx in [-1.0, 1.0]:
 		var hx: float = sx * (bw * 0.5 - 0.28)
@@ -411,6 +438,7 @@ func _build_van(top: float) -> void:
 		lamp.material_override = _mat_emissive(Color(1, 0.95, 0.78), 1.4)
 		lamp.position = Vector3(hx, top + 0.16, front_end + 0.02)
 		_visual.add_child(lamp)
+		_vis(Vector3(0.14, 0.14, 0.03), Vector3(hx, top + 0.16, front_end + 0.005), grey)
 		var sl := SpotLight3D.new()
 		sl.shadow_enabled = false
 		sl.light_energy = 1.2
@@ -427,6 +455,12 @@ func _build_van(top: float) -> void:
 	var body_h := cab_size.y + bed_size.y * 0.5
 	_vis(Vector3(bw, 0.1, body_len), Vector3(0, top + 0.05, body_z), body_color)
 	_vis(Vector3(bw * 0.96, body_h, body_len * 0.96), Vector3(0, top + body_h * 0.5 + 0.05, body_z), body_color)
+	# шов кабины / кузова + боковые ручки
+	_vis(Vector3(bw * 0.98, body_h * 0.92, 0.04), Vector3(0, top + body_h * 0.5 + 0.05, cab_front + cab_size.z * 0.35), body_color.darkened(0.12))
+	for sx in [-1.0, 1.0]:
+		_vis(Vector3(0.04, body_h * 0.55, 0.55), Vector3(sx * (bw * 0.5 + 0.01), top + body_h * 0.48, cab_z + 0.2), body_color.darkened(0.08))
+		_vis(Vector3(0.08, 0.04, 0.14), Vector3(sx * (bw * 0.5 + 0.04), top + 0.55, cab_front + 0.45), chrome)
+		_vis(Vector3(0.06, 0.55, 0.04), Vector3(sx * (bw * 0.5 + 0.03), top + body_h * 0.55, body_z + body_len * 0.15), grey)
 	_glass(Vector3(bw * 0.86, cab_size.y * 0.4, 0.05), Vector3(0, top + cab_size.y * 0.62, cab_front + 0.04))
 	for sx in [-1.0, 1.0]:
 		_glass(Vector3(0.04, body_h * 0.55, body_len * 0.7), Vector3(sx * (bw * 0.5 - 0.02), top + body_h * 0.55, body_z + 0.1))
@@ -434,12 +468,16 @@ func _build_van(top: float) -> void:
 		_vis(Vector3(0.2, 0.12, 0.4), Vector3(sx * (bw * 0.5 + 0.05), top + 0.06, -axle_front), body_color)
 		_vis(Vector3(0.18, 0.1, 0.36), Vector3(sx * (bw * 0.5 + 0.05), top + 0.06, axle_rear), body_color)
 	_vis(Vector3(bw * 0.96, 0.08, body_len * 0.96), Vector3(0, top + body_h + 0.09, body_z), body_color)
+	# ржавые потёки / «дырки»
+	_vis(Vector3(0.18, 0.35, 0.04), Vector3(bw * 0.35, top + 0.35, body_z + body_len * 0.2), rust)
+	_vis(Vector3(0.22, 0.08, 0.08), Vector3(-bw * 0.28, top + 0.12, body_z - body_len * 0.15), rust)
 	# задние распашные двери
 	var rear_z := bed_z + bed_size.z * 0.5
 	_vis(Vector3(bw * 0.94, bed_size.y * 0.85, 0.06), Vector3(0, top + bed_size.y * 0.48, rear_z + 0.03), body_color.darkened(0.08))
 	for sx in [-1.0, 1.0]:
 		_vis(Vector3(bw * 0.46, bed_size.y * 0.8, 0.04), Vector3(sx * bw * 0.24, top + bed_size.y * 0.48, rear_z + 0.05), body_color.darkened(0.12))
 		_vis(Vector3(0.04, 0.04, 0.08), Vector3(sx * 0.08, top + bed_size.y * 0.48, rear_z + 0.07), chrome)
+		_vis(Vector3(0.05, 0.35, 0.03), Vector3(sx * 0.22, top + bed_size.y * 0.55, rear_z + 0.08), grey)
 	_vis(Vector3(bw * 0.9, 0.12, 0.1), Vector3(0, top + 0.04, rear_z + 0.08), rust)
 	for sx in [-1.0, 1.0]:
 		_emis(Vector3(0.1, 0.08, 0.04), Vector3(sx * (bw * 0.5 - 0.2), top + 0.14, rear_z + 0.05), Color(0.95, 0.08, 0.05), 1.8)
@@ -449,6 +487,8 @@ func _build_van(top: float) -> void:
 			for sz in [-1.0, 1.0]:
 				_vis(Vector3(0.08, bed_roof_height, 0.08), Vector3(sx * (bed_size.x * 0.5 - 0.04), _bed_floor_y + bed_roof_height * 0.5, bed_z + sz * (bed_size.z * 0.5 - 0.04)), Color(0.3, 0.3, 0.32))
 		_vis(Vector3(bed_size.x + 0.12, 0.06, bed_size.z + 0.12), Vector3(0, _bed_floor_y + bed_roof_height + 0.03, bed_z), body_color)
+	_detail_wipers(top, cab_front, bw)
+	_detail_plates(top, front_end, rear_z)
 
 
 func _build_truck(top: float) -> void:
@@ -505,6 +545,12 @@ func _build_truck(top: float) -> void:
 	for sx in [-1.0, 1.0]:
 		_emis(Vector3(0.14, 0.12, 0.06), Vector3(sx * (body_size.x * 0.5 - 0.22), top + 0.18, rear_z + 0.05), Color(0.95, 0.08, 0.05), 2.0)
 	_vis(Vector3(0.08, 0.08, 0.22), Vector3(-body_size.x * 0.5 - 0.02, top - 0.02, axle_rear + 0.2), Color(0.2, 0.2, 0.22))
+	# вертикальные жалюзи решётки
+	for i in 6:
+		_vis(Vector3(0.04, 0.26, 0.03), Vector3(-0.28 + i * 0.11, top + 0.22, front_end + 0.05), Color(0.14, 0.14, 0.15))
+	_vis(Vector3(bw * 0.5, 0.05, cab_size.z * 0.85), Vector3(0, top + cab_size.y * 0.35, cab_z), body_color.darkened(0.18))
+	_detail_wipers(top, cab_front, bw)
+	_detail_plates(top, front_end, rear_z)
 
 
 func _build_bed_walls(top: float) -> void:

@@ -107,14 +107,53 @@ func _timeout(name: String, limit: float = STAGE_TIMEOUT) -> bool:
 # ------------------------------------------------------------------ этапы
 
 func _s_boot() -> void:
-	if _stage_t < 1.5:
+	if _stage_t < 2.2:
 		return
-	var systems := ["Liquids", "Fire", "Auction", "ClearOut", "Vendors", "Casino", "Police", "Janitor", "Vehicles", "Locksmith", "TrailerHub", "Gags", "DayNight", "Jobs", "Interactables", "HomeClutter"]
+	var systems := ["Liquids", "Fire", "Auction", "ClearOut", "Vendors", "Casino", "Police", "Janitor", "Vehicles", "Locksmith", "TrailerHub", "Gags", "DayNight", "Jobs", "Interactables", "HomeClutter", "YardZones", "Sleep", "Traffic", "BuildingDoors", "Ladders"]
 	var missing: Array = []
 	for s in systems:
 		if w.system(s) == null:
 			missing.append(s)
 	_ok("systems", missing.is_empty(), "missing=%s" % str(missing))
+	var ladders = w.system("Ladders")
+	_ok("ladders_sys", ladders != null and ladders.ladders.size() >= 2, "n=%d" % (ladders.ladders.size() if ladders else 0))
+	var sleep_sys = w.system("Sleep")
+	_ok("sleep_sys", sleep_sys != null, "Sleep node")
+	if sleep_sys and sleep_sys.has_method("can_sleep_now"):
+		var dn = w.system("DayNight")
+		if dn:
+			var was_t: float = dn.time_of_day
+			dn.time_of_day = 0.5 # день
+			_ok("sleep_day_block", not sleep_sys.can_sleep_now(), "t=%.2f" % dn.time_of_day)
+			dn.time_of_day = 0.95 # ночь
+			_ok("sleep_night_ok", sleep_sys.can_sleep_now(), "t=%.2f" % dn.time_of_day)
+			dn.time_of_day = was_t
+			_ok("day_cycle_24m", is_equal_approx(dn.CYCLE_SECONDS, 1440.0), "cycle=%.0f" % dn.CYCLE_SECONDS)
+	# регресс: bind(bed) + call(player) — сигнатура (player, bed), иначе Invalid type в HUD
+	var hint_ok := true
+	var hint_sample := ""
+	if sleep_sys and p:
+		for bed in sleep_sys._beds:
+			if bed == null or not bed.has_method("interact_hint"):
+				continue
+			var h := str(bed.interact_hint(p))
+			if h.is_empty():
+				hint_ok = false
+			hint_sample = h
+			break
+	_ok("sleep_hint", hint_ok and not hint_sample.is_empty(), "hint=%s" % hint_sample)
+	var traffic = w.system("Traffic")
+	var t_cars: Array = traffic._cars if traffic else []
+	_ok("traffic_sys", traffic != null and t_cars.size() >= 2, "cars=%d" % t_cars.size())
+	var bdoors = w.system("BuildingDoors")
+	var bent: Array = bdoors._entries if bdoors else []
+	_ok("building_doors", bdoors != null and bent.size() >= 4, "entries=%d" % bent.size())
+	if bdoors and p and bent.size() > 0:
+		var door = bent[0].get("door")
+		var dh := ""
+		if door and door.has_method("interact_hint"):
+			dh = str(door.interact_hint(p))
+		_ok("door_hint", not dh.is_empty(), "hint=%s" % dh)
 	var districts: Array = w.city.districts() if w.city.has_method("districts") else []
 	_ok("districts", districts.size() >= 8, "%d districts" % districts.size())
 	var anchors := get_tree().get_nodes_in_group("lot_anchors")
@@ -125,6 +164,20 @@ func _s_boot() -> void:
 		if hb != null and is_instance_valid(hb) and bool(hb.get_meta("home", false)):
 			home_n += 1
 	_ok("home_clutter", home_n >= 30, "%d home items" % home_n)
+	var yards = w.system("YardZones")
+	_ok("yard_zones", yards != null, "YardZones")
+	var neigh_n := 0
+	var stolen_ready := 0
+	for nid2 in Net.items:
+		var nb: ItemBody = Net.items[nid2] as ItemBody
+		if nb == null or not is_instance_valid(nb):
+			continue
+		if bool(nb.get_meta("neighbor", false)):
+			neigh_n += 1
+		if yards and yards.has_method("should_mark_stolen") and yards.should_mark_stolen(nb):
+			stolen_ready += 1
+	_ok("neighbor_loot", neigh_n >= 6, "%d neighbor items" % neigh_n)
+	_ok("yard_hot_ready", stolen_ready >= 3, "%d hot candidates" % stolen_ready)
 	_ok("player_spawn", p != null and p.global_position.length() < 500.0, str(p.global_position.round()))
 	var inter = w.system("Interactables")
 	var vm: Node = inter.get_node_or_null("Vending_0") if inter else null
@@ -162,7 +215,30 @@ func _s_grab() -> void:
 	for i in 8:
 		await get_tree().physics_frame
 	var palm_d: float = b1.global_position.distance_to(p.hands.hand_r.global_position)
-	_ok("grab_in_palm", palm_d < 0.85, "d=%.2f" % palm_d)
+	var bulk: float = maxf(b1.arch.dims.x, b1.arch.dims.z) * 0.5 * b1.def.scale
+	var palm_slack: float = 0.55 + b1.arch.dims.y * 0.5 * b1.def.scale * Hands.PALM_LIFT + (0.06 + bulk * 0.45) + 0.12
+	_ok("grab_in_palm", palm_d < palm_slack, "d=%.2f slack=%.2f" % [palm_d, palm_slack])
+	# согнуть / разогнуть руку + коллизия с носителем не орёт
+	var arm0 := p.hands.arm_len
+	p.hands.local_nudge_arm(-1.0)
+	_ok("arm_bend", p.hands.arm_len < arm0 - 0.01, "len=%.2f→%.2f" % [arm0, p.hands.arm_len])
+	p.hands.local_nudge_arm(1.0)
+	p.hands.local_nudge_arm(1.0)
+	_ok("arm_extend", p.hands.arm_len > arm0 - 0.001, "len=%.2f" % p.hands.arm_len)
+	_ok("hold_no_player_col", b1.get_collision_exceptions().has(p), "exc=%d" % b1.get_collision_exceptions().size())
+	# лестница: залезть выше полки (~1.6)
+	var ladders = Game.world.system("Ladders") if Game.world else null
+	var hub_lad = ladders.ladders.get("hub_shelf") if ladders else null
+	if hub_lad == null and ladders and not ladders.ladders.is_empty():
+		hub_lad = ladders.ladders.values()[0]
+	if hub_lad:
+		var y0 := p.global_position.y
+		p.mount_ladder(hub_lad)
+		p.global_position = hub_lad.rail_world(hub_lad.y_max())
+		_ok("ladder_climb", p.on_ladder == hub_lad and p.global_position.y > 1.55, "y=%.2f→%.2f" % [y0, p.global_position.y])
+		p.dismount_ladder()
+	else:
+		_ok("ladder_climb", false, "no ladder")
 	p.hands.active_hand = 1
 	_ok("swap_hand", p.hands.active_hand == 1, "active=%d" % p.hands.active_hand)
 	p.hands.active_hand = 0

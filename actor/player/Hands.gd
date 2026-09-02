@@ -3,20 +3,24 @@ extends Node3D
 ## Руки (§6.1). Хват без инвентаря. Физику хвата считает ХОСТ для всех игроков;
 ## локальный клиент только выбирает цель и шлёт запрос.
 ## hand 0 = правая, hand 1 = левая. Мышь ведёт active_hand (по умолчанию правую);
-## Q переключает. Вещь сидит В ладони, а не «висит в воздухе» перед лицом.
-## Длина руки короткая — высоко/далеко не достать без лестницы.
+## Q переключает. Вещь сидит В ладони. Колесо — согнуть/разогнуть (arm_len).
+## Дальность хвата короткая — высоко/далеко не достать без лестницы.
+
+const _Feel := preload("res://core/FeelLog.gd")
 
 signal held_changed()
 
 ## Дальность луча взгляда / срыва хвата (≈ длина руки + чуть-чуть).
 const REACH := 1.45
-## Мягкий предел ладони от плеча (визуал + куда едет вещь).
+## Полностью разогнутая рука (ладонь от плеча).
 const ARM_LEN := 1.08
-const FOLLOW_K := 22.0
-const MAX_FOLLOW_SPEED := 12.0
-const TEAM_SOLO_SPEED := 0.9
+## Максимально согнутая — вещь у груди, не в камере.
+const ARM_LEN_MIN := 0.30
+## Шаг колеса «согнуть / разогнуть».
+const ARM_STEP := 0.07
 ## Насколько центр вещи выше ладони (сидит «в кулаке»).
 const PALM_LIFT := 0.42
+const ANG_DEADZONE := 0.10
 
 @onready var player: Player = get_node("../..") as Player
 @onready var hand_r: Node3D = $HandR
@@ -26,7 +30,27 @@ var held: Array = [null, null] # ItemBody
 var two_hands_same := false # обе руки на одном предмете
 var flip_held := false # E удерживается → вещь вверх дном (вытряхнуть / вылить)
 var active_hand := 0 # 0 правая (старт), 1 левая — за мышкой
+## Текущая длина руки от плеча (колесо): притянуть / оттянуть вещь.
+var arm_len: float = ARM_LEN * 0.62
 var _drop_timer := 0.0
+
+
+func local_nudge_arm(dir: float) -> void:
+	## dir > 0 — разогнуть (дальше), < 0 — согнуть (ближе к себе).
+	if player == null or player.paddle_up or player.dead or player.cinematic:
+		return
+	arm_len = clampf(arm_len + dir * ARM_STEP, ARM_LEN_MIN, ARM_LEN)
+
+
+func set_arm_len_norm(t: float) -> void:
+	arm_len = lerpf(ARM_LEN_MIN, ARM_LEN, clampf(t, 0.0, 1.0))
+
+
+func arm_len_norm() -> float:
+	var span := ARM_LEN - ARM_LEN_MIN
+	if span <= 0.001:
+		return 1.0
+	return clampf((arm_len - ARM_LEN_MIN) / span, 0.0, 1.0)
 
 
 func other_held(b: ItemBody) -> ItemBody:
@@ -86,7 +110,12 @@ func local_try_grab() -> void:
 		if b.nested_in and not b.visible:
 			return
 		# не достаём через полкарты — точка луча (поверхность), не центр огромного шкафа
-		if not player.can_reach_point(player._look_point()):
+		var look_pt := player._look_point()
+		var shoulder_d := player.shoulder_world(active_hand).distance_to(look_pt)
+		var center_d := player.shoulder_world(active_hand).distance_to(b.global_position)
+		var ok_reach := player.can_reach_point(look_pt)
+		_Feel.grab("try", b.def.id if b.def else "?", shoulder_d, look_pt.distance_to(player.camera.global_position), REACH, arm_len, ok_reach, "center=%.2f nid=%d" % [center_d, b.net_id])
+		if not ok_reach:
 			player.say(tr("HANDS_TOO_FAR"), 1.4)
 			return
 		var hand := free_hand()
@@ -99,7 +128,10 @@ func local_try_grab() -> void:
 		return
 	# хват за ручку тачки / за NPC / за дверь — делегируем миру
 	if target and target.has_method("on_grab"):
-		if not player.can_reach_point(player._look_point()):
+		var look_pt2 := player._look_point()
+		var ok2 := player.can_reach_point(look_pt2)
+		_Feel.grab("special", str(target.name), player.shoulder_world(active_hand).distance_to(look_pt2), look_pt2.distance_to(player.camera.global_position), REACH, arm_len, ok2, str(target.get_path()))
+		if not ok2:
 			player.say(tr("HANDS_TOO_FAR"), 1.4)
 			return
 		Net.request_action("grab_special", {"path": str(target.get_path())})
@@ -138,6 +170,7 @@ func host_grab(b: ItemBody, hand: int) -> void:
 	if is_holding(b) and hand == 1 and not two_hands_same:
 		two_hands_same = true
 		held[1] = b
+		_attach_held(b, 0) # переносим с одной ладони на Hands (середина)
 		AudioBus.play_at("grab", b.global_position, -8.0)
 		_sync()
 		return
@@ -173,9 +206,12 @@ func host_grab(b: ItemBody, hand: int) -> void:
 			palm = (hand_r.global_position + hand_l.global_position) * 0.5
 		else:
 			palm = hand_node(hand).global_position
+		var snap_d := b.global_position.distance_to(palm)
+		_Feel.grab("host", b.def.id if b.def else "?", player.shoulder_world(hand).distance_to(b.global_position), snap_d, REACH, arm_len, true, "hand=%d snap_err=%.2f mass=%.1f" % [hand, snap_d, b.mass])
 		b.global_position = palm + Vector3.UP * (b.arch.dims.y * 0.5 * b.def.scale * PALM_LIFT)
 		b.linear_velocity = Vector3.ZERO
 		b.reset_physics_interpolation()
+		_attach_held(b, hand)
 	if b.arch.size_class == Types.SizeClass.TEAM:
 		player.encumbrance = 0.45 if b.held_by.size() < 2 else 0.7
 	elif b.mass > 12.0:
@@ -183,6 +219,9 @@ func host_grab(b: ItemBody, hand: int) -> void:
 	AudioBus.play_at("grab", b.global_position, -8.0)
 	if b.def.has_facet(Types.Facet.ALIVE):
 		AudioBus.play_at("squeak", b.global_position, -2.0, 0.4)
+	var yards: Node = Game.world.system("YardZones") if Game.world else null
+	if yards and yards.has_method("on_host_grab"):
+		yards.on_host_grab(player, b)
 	_sync()
 
 
@@ -205,7 +244,15 @@ func host_release_body(b: ItemBody, throw_force: float = 0.0) -> void:
 	if hands_empty():
 		player.encumbrance = 1.0
 	if is_instance_valid(b):
+		_detach_held(b)
 		b.on_released(self)
+		# после снятия exception: если вещь ещё в капсуле — чуть вперёд взгляда, без ракеты
+		if throw_force <= 0.0 and b.held_by.is_empty():
+			var chest := player.global_position + Vector3(0, 0.9, 0)
+			if b.global_position.distance_to(chest) < 0.8:
+				b.global_position += -player.head.global_basis.z * 0.28 + Vector3.UP * 0.05
+				b.linear_velocity = Vector3.ZERO
+				b.reset_physics_interpolation()
 		# отпустил над открытой сумкой/чемоданом/ящиком → внутрь (§6.2, §7.2 вложенность)
 		if throw_force <= 0.0 and b.held_by.is_empty():
 			var target = player.look_target()
@@ -244,12 +291,68 @@ func apply_remote_hands(ids: Array, same: bool) -> void:
 	held_changed.emit()
 
 
+func _attach_held(b: ItemBody, hand: int) -> void:
+	## Вещь — ребёнок ладони: едет с игроком без лага physics/_process.
+	if b.arch.size_class == Types.SizeClass.TEAM:
+		return # TEAM волочётся в мире
+	var anchor: Node3D = self if two_hands_same else hand_node(hand)
+	if b.get_parent() == anchor:
+		return
+	var gt := b.global_transform
+	var old := b.get_parent()
+	if old:
+		old.remove_child(b)
+	anchor.add_child(b)
+	b.global_transform = gt
+	b.physics_interpolation_mode = Node.PHYSICS_INTERPOLATION_MODE_OFF
+	b.set_meta("_hold_attached", true)
+
+
+func _detach_held(b: ItemBody) -> void:
+	if not is_instance_valid(b):
+		return
+	if not b.has_meta("_hold_attached") and b.get_parent() != hand_r and b.get_parent() != hand_l and b.get_parent() != self:
+		return
+	var gt := b.global_transform
+	var old := b.get_parent()
+	var root: Node = null
+	if Game.world and Game.world.has_method("items_root"):
+		root = Game.world.items_root()
+	if root == null:
+		root = Game.world
+	if old:
+		old.remove_child(b)
+	if root:
+		root.add_child(b)
+	b.global_transform = gt
+	b.physics_interpolation_mode = Node.PHYSICS_INTERPOLATION_MODE_INHERIT
+	if b.has_meta("_hold_attached"):
+		b.remove_meta("_hold_attached")
+	b.reset_physics_interpolation()
+
+
+func _process(delta: float) -> void:
+	# после Player._anim_arms (родитель раньше детей) — кинематика в ладони без лага physics
+	if not Net.is_host() or not is_inside_tree():
+		return
+	_follow_held(delta)
+
+
 func _physics_process(delta: float) -> void:
 	if not Net.is_host():
 		return
-	if not is_inside_tree():
-		return
 	_drop_timer -= delta
+	# пьяный роняет (§6.4)
+	if player.drunk > 0.4 and _drop_timer <= 0.0:
+		_drop_timer = randf_range(2.0, 6.0)
+		if randf() < player.drunk * 0.5:
+			var b := any_held()
+			if b:
+				host_release_body(b)
+				player.say(tr("HANDS_SLIPPED"))
+
+
+func _follow_held(delta: float) -> void:
 	var processed: Array = []
 	for i in 2:
 		var b: ItemBody = held[i]
@@ -262,14 +365,6 @@ func _physics_process(delta: float) -> void:
 			continue
 		processed.append(b)
 		_follow(b, i, delta)
-	# пьяный роняет (§6.4)
-	if player.drunk > 0.4 and _drop_timer <= 0.0:
-		_drop_timer = randf_range(2.0, 6.0)
-		if randf() < player.drunk * 0.5:
-			var b := any_held()
-			if b:
-				host_release_body(b)
-				player.say(tr("HANDS_SLIPPED"))
 
 
 func _follow(b: ItemBody, hand: int, delta: float) -> void:
@@ -278,75 +373,71 @@ func _follow(b: ItemBody, hand: int, delta: float) -> void:
 	var both := two_hands_same or team
 	var half_h := b.arch.dims.y * 0.5 * b.def.scale
 	if both:
-		# двумя руками — вещь между ладонями, обе едут за одной мышью (позиции рук уже сведены)
 		target = (hand_r.global_position + hand_l.global_position) * 0.5 + Vector3.UP * (half_h * PALM_LIFT)
 	else:
-		var anchor := hand_node(hand)
-		# В ладони: центр вещи чуть выше кулака, без выноса вперёд «в воздух»
-		target = anchor.global_position + Vector3.UP * (half_h * PALM_LIFT)
-	# пассажир в кабине держит вещь «на ремне» (§10): тело кинематическое, просто едет на коленях
-	if player.in_vehicle and b.freeze:
+		target = hand_node(hand).global_position + Vector3.UP * (half_h * PALM_LIFT)
+	if player.in_vehicle:
 		b.global_position = target + Vector3.DOWN * 0.05
-		b.global_basis = Basis.looking_at(-player.head.global_basis.z * Vector3(1, 0, 1) if (player.head.global_basis.z * Vector3(1, 0, 1)).length() > 0.01 else Vector3.FORWARD, Vector3.UP)
+		var vf := -player.head.global_basis.z
+		vf.y = 0.0
+		b.global_basis = Basis.looking_at(vf.normalized() if vf.length_squared() > 0.0001 else Vector3.FORWARD, Vector3.UP)
+		b.reset_physics_interpolation()
 		return
-	# TEAM: усредняем по всем держащим
 	if team and b.held_by.size() >= 2:
 		var sum := Vector3.ZERO
 		for h in b.held_by:
-			var hp: Player = h.player
 			sum += (h.hand_r.global_position + h.hand_l.global_position) * 0.5
 		target = sum / b.held_by.size() + Vector3.UP * (half_h * PALM_LIFT)
 		if b.held_by[0] != self:
-			return # считает первый держащий
-	var to := target - b.global_position
-	var k := FOLLOW_K
-	var max_speed := MAX_FOLLOW_SPEED
-	var heavy := b.mass > 12.0
-	if team:
-		if b.held_by.size() < 2:
-			k = 3.0
-			max_speed = TEAM_SOLO_SPEED
-		else:
-			k = 6.0
-			max_speed = 2.5
-	elif heavy:
-		k = 8.0
-		max_speed = 4.0
-	elif two_hands_same:
-		k = 26.0
+			return
+	var flat_fwd := -player.head.global_basis.z
+	flat_fwd.y = 0.0
+	if flat_fwd.length_squared() < 0.0001:
+		flat_fwd = Vector3.FORWARD
+	else:
+		flat_fwd = flat_fwd.normalized()
+	var bulk := maxf(b.arch.dims.x, b.arch.dims.z) * 0.5 * b.def.scale
+	target += flat_fwd * (0.06 + bulk * 0.45)
 	if player.drunk > 0.2:
-		k *= 1.0 - player.drunk * 0.5
-		to += Vector3(sin(Time.get_ticks_msec() * 0.004), 0, cos(Time.get_ticks_msec() * 0.0033)) * player.drunk * 0.15
-	# дальше REACH от плеча — рвётся хват (TEAM/heavy можно волочить дальше)
+		target += Vector3(sin(Time.get_ticks_msec() * 0.004), 0, cos(Time.get_ticks_msec() * 0.0033)) * player.drunk * 0.08
 	var shoulder := player.shoulder_world(hand if not both else active_hand)
 	var max_sep := REACH * 1.35
+	var heavy := b.mass > 12.0
 	if team:
 		max_sep = REACH * 2.8
 	elif heavy:
 		max_sep = REACH * 1.9
-	if b.global_position.distance_to(shoulder) > max_sep:
+	if target.distance_to(shoulder) > max_sep:
 		host_release_body(b)
 		return
-	var vel := to * k
-	if vel.length() > max_speed:
-		vel = vel.normalized() * max_speed
-	b.linear_velocity = vel + player.velocity * 0.55
-	# ориентация: лицом от игрока, стоймя
-	var want_basis := Basis.looking_at(-player.head.global_basis.z * Vector3(1, 0, 1) if (player.head.global_basis.z * Vector3(1, 0, 1)).length() > 0.01 else Vector3.FORWARD, Vector3.UP)
+	var want_basis := Basis.looking_at(flat_fwd, Vector3.UP)
 	if flip_held and (b.def.has_facet(Types.Facet.SHAKE_OUT) or b.arch.container or b.def.is_container() or b.def.liquid_id != Types.LiquidId.NONE):
 		want_basis = want_basis.rotated(want_basis.x, PI * 0.85)
-	var q_cur := b.global_basis.get_rotation_quaternion()
-	var q_want := want_basis.get_rotation_quaternion()
-	var q_delta := q_want * q_cur.inverse()
-	var angle := q_delta.get_angle()
-	if angle > PI:
-		angle -= TAU
-	var axis := q_delta.get_axis() if absf(angle) > 0.001 else Vector3.UP
-	b.angular_velocity = axis * angle * (8.0 if two_hands_same else 5.5)
-	# нёс в руках и оно горит — ты тоже
+	# обычный хват — жёсткий snap (lerp давал err 0.3–0.7 на бегу). TEAM соло — медленно.
+	var soft := team and b.held_by.size() < 2
+	if soft:
+		var blend := 1.0 - exp(-4.0 * delta)
+		b.global_position = b.global_position.lerp(target, blend)
+		var q_cur := b.global_basis.get_rotation_quaternion()
+		b.global_basis = Basis(q_cur.slerp(want_basis.get_rotation_quaternion(), blend))
+	else:
+		b.global_position = target
+		b.global_basis = want_basis
+	b.linear_velocity = player.velocity
+	b.angular_velocity = Vector3.ZERO
+	b.reset_physics_interpolation()
+	var err := b.global_position.distance_to(target)
+	_Feel.hold(
+		b.def.id if b.def else "?",
+		err,
+		0.0,
+		0.0,
+		b.global_position.distance_to(shoulder),
+		max_sep,
+		player.velocity.length()
+	)
 	if b.lit:
 		player.set_burning(true)
-	# грузчик замедляется
 	if team or heavy:
 		player.encumbrance = 0.45 if (team and b.held_by.size() < 2) else 0.7
 	else:

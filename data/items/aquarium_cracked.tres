@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/ItemDef.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "aquarium_cracked"
+name_ru = "Аквариум треснутый"
+name_en = "Cracked Aquarium"
+archetype_id = "aquarium"
+facets = Array[int]([0, 1, 6])
+value_base = 15
+mass_override = 0.0
+liquid_id = 6
+liquid_amount = 0.3
+flammable = false
+illegal = false
+dusty_default = 0.55
+vendor_affinity = Array[String](["vendor_tiny"])
+wearable_slot = "none"
+break_threshold = 2.8
+color = Color(0.2196, 0.251, 0.2824, 1.0)
+scale = 1.0
+tags = Array[String](["fragile", "pet"])
+lore_ru = "Течёт. Как и жизнь хозяина."
+lore_en = "Leaks. Like the owner."

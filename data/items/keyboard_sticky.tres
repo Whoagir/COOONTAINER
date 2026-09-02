@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/ItemDef.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "keyboard_sticky"
+name_ru = "Синтезатор липкий"
+name_en = "Sticky Synth"
+archetype_id = "keyboard_music"
+facets = Array[int]([1])
+value_base = 55
+mass_override = 0.0
+liquid_id = 0
+liquid_amount = 1.0
+flammable = false
+illegal = false
+dusty_default = 0.5
+vendor_affinity = Array[String](["vendor_tech"])
+wearable_slot = "none"
+break_threshold = 25.0
+color = Color(0.1333, 0.1333, 0.1569, 1.0)
+scale = 1.0
+tags = Array[String](["music", "electronics"])
+lore_ru = "Клавиши помнят газировку."
+lore_en = "Keys remember soda."

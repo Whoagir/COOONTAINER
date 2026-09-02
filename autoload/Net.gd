@@ -28,6 +28,7 @@ var active := false
 var using_steam := false
 var lobby_id: int = 0
 var local_peer_id: int = 1
+var listen_port: int = PORT
 
 
 func _ready() -> void:
@@ -56,6 +57,7 @@ func peer_count() -> int:
 func host() -> void:
 	shutdown_peer_only()
 	var made := false
+	listen_port = PORT
 	if SteamBoot.enabled and ClassDB.class_exists("SteamMultiplayerPeer"):
 		var sp = ClassDB.instantiate("SteamMultiplayerPeer")
 		if sp and sp.has_method("create_host"):
@@ -66,17 +68,37 @@ func host() -> void:
 				made = true
 				SteamBoot.create_lobby(MAX_PLAYERS)
 	if not made:
-		var enet := ENetMultiplayerPeer.new()
-		var err := enet.create_server(PORT, MAX_PLAYERS - 1)
-		if err != OK:
-			push_warning("[Net] ENet server failed (%d) — solo offline" % err)
+		# сначала проверяем UDP-порт — иначе create_server орёт красным ERROR в Output
+		var bind_port := _first_free_enet_port()
+		if bind_port < 0:
+			push_warning("[Net] no free UDP port near %d — solo offline" % PORT)
 			multiplayer.multiplayer_peer = OfflineMultiplayerPeer.new()
 		else:
-			multiplayer.multiplayer_peer = enet
-			lobby_ready.emit(_local_ip_hint())
+			var enet := ENetMultiplayerPeer.new()
+			var err := enet.create_server(bind_port, MAX_PLAYERS - 1)
+			if err != OK:
+				push_warning("[Net] ENet server failed (%d) on %d — solo offline" % [err, bind_port])
+				multiplayer.multiplayer_peer = OfflineMultiplayerPeer.new()
+			else:
+				multiplayer.multiplayer_peer = enet
+				listen_port = bind_port
+				if bind_port != PORT:
+					push_warning("[Net] LAN host on port %d (default %d busy)" % [bind_port, PORT])
+				lobby_ready.emit(_local_ip_hint())
 	active = true
 	local_peer_id = 1
 	_spawn_player_everywhere(1)
+
+
+func _first_free_enet_port() -> int:
+	## Не зовём create_server на занятый порт — Godot пишет красный ERROR в Output.
+	for p in range(PORT, PORT + 8):
+		var udp := PacketPeerUDP.new()
+		var err := udp.bind(p)
+		udp.close()
+		if err == OK:
+			return p
+	return -1
 
 
 func join(address: String) -> void:
@@ -126,10 +148,11 @@ func shutdown() -> void:
 
 
 func _local_ip_hint() -> String:
+	var port := listen_port if listen_port > 0 else PORT
 	for ip in IP.get_local_addresses():
 		if ip.begins_with("192.") or ip.begins_with("10.") or ip.begins_with("172."):
-			return "%s:%d" % [ip, PORT]
-	return "127.0.0.1:%d" % PORT
+			return "%s:%d" % [ip, port]
+	return "127.0.0.1:%d" % port
 
 
 # ------------------------------------------------------------------ peers

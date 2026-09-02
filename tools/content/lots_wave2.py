@@ -38,12 +38,12 @@ def build_more(S, stack_y, brick_stack, box_wall_front) -> list:
             S("folder_tax_2009", 0.08, 0, -0.08, 8),
             S("whiskey_cheap", -0.44, 0, 0.08, 4),
             S("book_dummies", 0.44, 0, 0.10, 70),
-            S("cup_okayest", -0.14, 0, 0.18, -6),
+            S("hourglass_desk", -0.14, 0, 0.18, -6),
             S("phone_flip", 0.20, 0, 0.20, 12),
             S("bill_coupon", -0.48, 0, 0.40, 0),
-            S("frame_photo_cat", 0.06, 0, 0.46, 22),
-            S("water_bottle", 0.46, 0, 0.42, 8),
-            S("perfume_cheap", -0.22, 0, 0.44, 14),
+            S("crystal_cracked", 0.06, 0, 0.46, 22),
+            S("duck_yellow", 0.46, 0, 0.42, 8),
+            S("perfume_ex", -0.22, 0, 0.44, 14),
         ],
     })
 
@@ -65,7 +65,7 @@ def build_more(S, stack_y, brick_stack, box_wall_front) -> list:
             S("cup_soviet_gold", 0.18, 0, -0.08, 8),
             S("letter_love", -0.12, 0, 0.48, 6),
             S("perfume_vintage", 0.44, 0, 0.42, 0),
-            S("frame_photo_cat", -0.44, 0, 0.44, 28),
+            S("crystal_cracked", -0.44, 0, 0.44, 28),
         ],
     })
 
@@ -83,7 +83,7 @@ def build_more(S, stack_y, brick_stack, box_wall_front) -> list:
             S("gold_bar_painted", 0.40, 0, 0.06, 4, dirt=0.6),
             S("sock_single", -0.44, 0, 0.04, -8, dirt=0.85),
             S("hat_tinfoil", 0.44, 0, -0.18, 35),
-            S("plant_pot_dead", -0.44, 0, -0.20, -12, dirt=0.8),
+            S("snowglobe_divorce", -0.44, 0, -0.20, -12, dirt=0.8),
             S("rag_dirty", -0.18, 0, 0.20, 20, dirt=0.9),
             S("bill_lottery", 0.18, 0, 0.22, 6),
             S("jar_unknown_stuff", 0.44, 0, 0.38, 8, dirt=0.7),
@@ -110,7 +110,7 @@ def build_more(S, stack_y, brick_stack, box_wall_front) -> list:
             S("letter_aunt", 0.16, 0, 0.28, 4),
             S("frame_photo_signed_actor", -0.12, 0, 0.46, 10),
             S("tablet_kids", 0.42, 0, 0.42, 16),
-            S("candle_scented", -0.44, 0, 0.42, 0),
+            S("snowglobe_vegas", -0.44, 0, 0.42, 0),
         ],
     })
 
@@ -130,8 +130,8 @@ def build_more(S, stack_y, brick_stack, box_wall_front) -> list:
             S("camera_polaroid", -0.44, 0, 0.02, 20),
             S("bag_tote", -0.44, 0, 0.36, 16, nested=["cash_50"]),
             S("letter_treasure", 0.14, 0, 0.22, 4),
-            S("cup_okayest", 0.44, 0, 0.38, -6),
-            S("perfume_cheap", 0.18, 0, 0.48, 8),
+            S("hourglass_desk", 0.44, 0, 0.38, -6),
+            S("perfume_ex", 0.18, 0, 0.48, 8),
             S("book_diary", 0.00, 0, 0.48, 70),
         ],
     })
@@ -149,12 +149,12 @@ def build_more(S, stack_y, brick_stack, box_wall_front) -> list:
             S("backpack_school", -0.36, 0, -0.34, 12, nested=["usb_cat_videos", "cash_5"]),
             S("plate_souvenir", 0.40, 0, -0.36, 14),
             S("cup_thermos", -0.42, 0, 0.06, -8),
-            S("water_bottle", 0.10, 0, 0.00, 0),
+            S("duck_yellow", 0.10, 0, 0.00, 0),
             S("book_cookbook", 0.44, 0, 0.08, 78),
             S("bag_tote", -0.44, 0, 0.34, 20, nested=["cash_10"]),
-            S("candle_scented", 0.16, 0, 0.22, 6),
+            S("snowglobe_vegas", 0.16, 0, 0.22, 6),
             S("hat_trucker", 0.46, 0, 0.36, 22),
-            S("perfume_cheap", 0.22, 0, 0.48, 10),
+            S("perfume_ex", 0.22, 0, 0.48, 10),
             S("toy_car_hotwheelz", 0.00, 0, 0.48, -14),
         ],
     })
@@ -177,16 +177,16 @@ def build_more(S, stack_y, brick_stack, box_wall_front) -> list:
         "spawns": box_wall_front(1.12) + [
             S("dresser_ikeya", -0.85, 0, -1.10, 6, nested=["tshirt_ironic", "cash_10"]),
             S("fridge_mini", 1.10, 0, -1.10, -8),
-            S("microwave_yellow", 0.15, 0, -1.12, 4),
-            S("kettle_electric", 0.70, 0, -0.55, 12),
+            S("coffee_drip", 0.15, 0, -1.12, 4),
+            S("juicer_citrus", 0.70, 0, -0.55, 12),
             S("paint_red", -1.15, 0, -0.40, 0),
             S("paint_blue", -0.85, 0, -0.40, 8),
             S("oil_jug_engine", 1.15, 0, -0.40, 14),
             S("chair_plastic", 0.20, 0, -0.35, 22),
-            S("plant_pot_cactus", 1.20, 0, 0.20, 0),
+            S("lava_pink", 1.20, 0, 0.20, 0),
             S("plate_stack_canteen", -0.90, 0, 0.25, 6),
             S("cup_thermos", -0.50, 0, 0.30, -10),
-            S("radio_alarm", 0.55, 0, 0.28, 8),
+            S("toaster_chrome", -0.55, 0, 0.55, 8),
         ] + cups(0.70, 0.35, 2, 2, "cup_okayest"),
     })
 
@@ -209,7 +209,7 @@ def build_more(S, stack_y, brick_stack, box_wall_front) -> list:
             S("lamp_table_banker", 0.55, 0, -0.50, -10),
             S("nightstand_deco", 0.20, 0, 0.20, 8, nested=["letter_love"]),
             S("book_first_edition", -0.55, 0, 0.25, 70),
-            S("plant_pot_bonsai", 1.20, 0, 0.25, 0),
+            S("blender_kitchen", 1.20, 0, 0.25, 0),
             S("vase_soviet_crystal", -1.15, 0, 0.30, 6),
         ],
     })
@@ -236,7 +236,7 @@ def build_more(S, stack_y, brick_stack, box_wall_front) -> list:
             S("brick_red", -0.10, 0, 0.32, -6, dirt=0.4),
             S("brick_red", 0.30, 0, 0.36, 12, dirt=0.4),
             S("brick_lego_giant", 1.15, 0, 0.25, 4),
-            S("plant_pot_dead", 1.22, 0, 0.85, 0, dirt=0.8),
+            S("aquarium_cracked", 1.22, 0, 0.85, 0, dirt=0.8),
             S("rag_dirty", -1.15, 0, 0.75, 18, dirt=0.9),
             S("mop_gross", 1.25, 0, 1.15, 6, dirt=0.85),
             S("tool_broom", 1.28, 0, -0.55, 8),
@@ -259,7 +259,7 @@ def build_more(S, stack_y, brick_stack, box_wall_front) -> list:
         "docs_ru": "ЛОКЕР 16. Сдал охрана клуба «Плазма»:\nБумбокс 90-х — 1\nКассеты / диски — стопка\nРюкзак + худи\nВиски недопитый\nПульт от неизвестно чего",
         "docs_en": "LOCKER 16. Intake: security at Club Plasma:\n'90s boombox — 1\nTapes / discs — a stack\nBackpack + hoodie\nHalf-drunk whiskey\nRemote to nothing",
         "spawns": [
-            S("boombox_90s", 0.00, 0.00, -0.16, 8),
+            S("turntable_dead", 0.00, 0.00, -0.16, 8),
             S("backpack_hiking", 0.00, 0.28, -0.08, 10, nested=["cassette_mixtape", "cash_10"]),
             S("hoodie_grey", 0.00, 1.02, 0.10, 6),
             S("hat_fedora", 0.00, 1.14, -0.22, 24),
@@ -292,7 +292,7 @@ def build_more(S, stack_y, brick_stack, box_wall_front) -> list:
             S("book_first_edition", 0.10, 0, 0.15, 70),
             S("teapot_silver", 1.15, 0, 0.20, -6),
             S("statue_david", -1.15, 0, 0.25, 14),
-            S("plant_pot_bonsai", 1.20, 0, 0.65, 0),
+            S("blender_kitchen", 1.20, 0, 0.65, 0),
         ],
     })
 
@@ -433,7 +433,7 @@ def build_more(S, stack_y, brick_stack, box_wall_front) -> list:
             S("lamp_table_lava", 1.10, 0, 0.20, 8),
             S("box_small_shoes", -1.10, 0, 0.25, 10, nested=["cassette_mixtape"]),
             S("chair_plastic", 0.40, 0, 0.25, 24),
-            S("plant_pot_plastic", 1.20, 0, 0.65, 0),
+            S("waffle_heart", 1.20, 0, 0.65, 0),
             S("box_moving", -0.90, 0, 1.10, 8, nested=["cup_okayest"]),
             S("box_amazoom", 0.05, 0, 1.12, -6, nested=["usb_novelty_sushi"]),
             S("crate_fruit", 0.95, 0, 1.08, 12, nested=["toy_car_hotwheelz"]),

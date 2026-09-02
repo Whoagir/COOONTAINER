@@ -1,0 +1,35 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://core/ItemDef.gd" id="1"]
+[ext_resource type="Script" path="res://core/LootRef.gd" id="2"]
+
+[sub_resource type="Resource" id="lr1"]
+script = ExtResource("2")
+item_id = "letter_treasure"
+chance = 0.7
+count_min = 1
+count_max = 1
+
+[resource]
+script = ExtResource("1")
+id = "bottle_message"
+name_ru = "Бутылка с запиской"
+name_en = "Message Bottle"
+archetype_id = "bottle"
+facets = Array[int]([0, 3, 6])
+value_base = 28
+mass_override = 0.0
+liquid_id = 6
+liquid_amount = 0.2
+flammable = false
+illegal = false
+dusty_default = 0.2
+nest_loot = Array[Resource]([SubResource("lr1")])
+vendor_affinity = Array[String](["vendor_antique", "vendor_tiny"])
+wearable_slot = "none"
+break_threshold = 4.0
+color = Color(0.1882, 0.3137, 0.3765, 1.0)
+scale = 1.0
+tags = Array[String](["fragile"])
+lore_ru = "Записка: «верните бутылку»."
+lore_en = "Note: return the bottle."

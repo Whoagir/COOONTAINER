@@ -13,6 +13,7 @@ const ACTIONS: PackedStringArray = [
 	"move_forward", "move_back", "move_left", "move_right",
 	"jump", "sprint", "crouch", "grab", "release", "second_hand", "swap_hand", "use",
 	"throw", "flashlight", "paddle", "pin", "voice", "pause", "alt_use",
+	"arm_out", "arm_in",
 ]
 const PROTECTED: PackedStringArray = [
 	"move_forward", "move_back", "move_left", "move_right", "grab", "use",

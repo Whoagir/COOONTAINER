@@ -147,6 +147,37 @@ func _ensure_cash_defs() -> void:
 		a.mass_default = 0.01
 		a.dims = Vector3(0.156, 0.002, 0.066)
 		archetypes["bill"] = a
+	_ensure_shard_def()
+
+
+func _ensure_shard_def() -> void:
+	if not archetypes.has("shard_piece"):
+		var a := Archetype.new()
+		a.id = "shard_piece"
+		a.builder = "box_small"
+		a.size_class = Types.SizeClass.ONE_HAND
+		a.mass_default = 0.25
+		a.dims = Vector3(0.12, 0.1, 0.12)
+		a.shard_count = 0
+		a.base_color = Color(0.65, 0.6, 0.55)
+		archetypes["shard_piece"] = a
+	if items.has("shard_piece"):
+		return
+	var d := ItemDef.new()
+	d.id = "shard_piece"
+	d.name_ru = "Осколок"
+	d.name_en = "Shard"
+	d.archetype_id = "shard_piece"
+	d.value_base = 1
+	d.break_threshold = 999.0
+	d.tags = ["shard", "scrap"]
+	d.vendor_affinity = ["vendor_household", "vendor_junk"]
+	d.lore_ru = "Кусок от разбитой вещи. Можно поднять и продать за копейки."
+	d.lore_en = "A piece of something broken. Pick it up and sell for pennies."
+	items["shard_piece"] = d
+	if not _items_by_tag.has("shard"):
+		_items_by_tag["shard"] = []
+	_items_by_tag["shard"].append(d)
 
 
 func _validate() -> void:

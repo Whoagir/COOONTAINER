@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://cworld0000001"]
+[gd_scene load_steps=32 format=3 uid="uid://cworld0000001"]
 
 [ext_resource type="Script" path="res://world/World.gd" id="1_world"]
 [ext_resource type="PackedScene" path="res://world/City.tscn" id="2_city"]
@@ -23,6 +23,11 @@
 [ext_resource type="Script" path="res://world/systems/StreetLoot.gd" id="20_streetloot"]
 [ext_resource type="Script" path="res://world/systems/Interactables.gd" id="22_interact"]
 [ext_resource type="Script" path="res://world/systems/HomeClutter.gd" id="23_homeclutter"]
+[ext_resource type="Script" path="res://world/systems/Sleep.gd" id="24_sleep"]
+[ext_resource type="Script" path="res://world/systems/YardZones.gd" id="25_yardzones"]
+[ext_resource type="Script" path="res://world/systems/Traffic.gd" id="26_traffic"]
+[ext_resource type="Script" path="res://world/systems/BuildingDoors.gd" id="27_bdoors"]
+[ext_resource type="Script" path="res://world/systems/Ladders.gd" id="28_ladders"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sky"]
 sky_top_color = Color(0.25, 0.45, 0.8, 1)
@@ -147,6 +152,21 @@ script = ExtResource("22_interact")
 
 [node name="HomeClutter" type="Node3D" parent="Systems"]
 script = ExtResource("23_homeclutter")
+
+[node name="YardZones" type="Node3D" parent="Systems"]
+script = ExtResource("25_yardzones")
+
+[node name="Sleep" type="Node3D" parent="Systems"]
+script = ExtResource("24_sleep")
+
+[node name="Traffic" type="Node3D" parent="Systems"]
+script = ExtResource("26_traffic")
+
+[node name="BuildingDoors" type="Node3D" parent="Systems"]
+script = ExtResource("27_bdoors")
+
+[node name="Ladders" type="Node3D" parent="Systems"]
+script = ExtResource("28_ladders")
 
 [node name="HUD" type="CanvasLayer" parent="."]
 script = ExtResource("14_hud")

@@ -1,0 +1,49 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://core/ItemDef.gd" id="1"]
+[ext_resource type="Script" path="res://core/LootRef.gd" id="2"]
+
+[sub_resource type="Resource" id="lr1"]
+script = ExtResource("2")
+item_id = "sock_single"
+chance = 0.7
+count_min = 1
+count_max = 2
+
+[sub_resource type="Resource" id="lr2"]
+script = ExtResource("2")
+item_id = "perfume_ex"
+chance = 0.3
+count_min = 1
+count_max = 1
+
+[sub_resource type="Resource" id="lr3"]
+script = ExtResource("2")
+item_id = "cash_20"
+chance = 0.2
+count_min = 1
+count_max = 1
+
+[resource]
+script = ExtResource("1")
+id = "suitcase_airport"
+name_ru = "Чемодан невостребованный"
+name_en = "Unclaimed Suitcase"
+archetype_id = "suitcase"
+facets = Array[int]([2, 1, 4])
+value_base = 65
+mass_override = 0.0
+liquid_id = 0
+liquid_amount = 1.0
+flammable = false
+illegal = false
+dusty_default = 0.35
+nest_loot = Array[Resource]([SubResource("lr1"), SubResource("lr2"), SubResource("lr3")])
+vendor_affinity = Array[String](["vendor_household", "vendor_dark"])
+wearable_slot = "none"
+break_threshold = 25.0
+color = Color(0.2902, 0.2902, 0.3765, 1.0)
+scale = 1.0
+tags = Array[String](["container"])
+lore_ru = "Бирка: рейс отменён навсегда."
+lore_en = "Tag: flight cancelled forever."

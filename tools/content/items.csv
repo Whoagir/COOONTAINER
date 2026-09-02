@@ -549,3 +549,137 @@ sink_clogged,Раковина забитая,Clogged Sink,sink,HEAVY_CHEAP|DIRTY
 umbrella_broken,Зонт вывернутый,Inside-Out Umbrella,umbrella,,1,,,,,,,,tiny,,,222222,,,,
 umbrella_golf,Зонт гольфиста,Golf Umbrella,umbrella,,8,,,,,,,,household,,,208040,1.3,,,
 umbrella_victorian,Зонтик викторианский,Victorian Parasol,umbrella,DIRTYABLE,45,,,,1,,0.4,,antique,,,f0e0d0,,,,
+shard_piece,Осколок,Shard,shard_piece,,1,,,,,,,,household,,999,ffffff,,shard|scrap,Кусок от разбитой вещи,A piece of something broken
+
+# ==== WAVE3 storage finds (~131 cards)
+toaster_chrome,Тостер хромированный,Chrome Toaster,toaster,DIRTYABLE,18,,,,,,0.2,,household,,,c8d0d8,,appliance,Жрёт вилки. Хлеб опционален.,Eats forks. Bread optional.
+toaster_burnt,Тостер подгоревший,Burnt Toaster,toaster,DIRTYABLE,4,,,,1,,0.6,,tiny,,,4a3030,,appliance,Пахнет как 1998-й.,Smells like 1998.
+toaster_jammed,Тостер с застрявшим,Jammed Toaster,toaster,DIRTYABLE|SHAKE_OUT,12,,,,1,,0.3,cash_5:0.35:1:1,household,,,a0a8b0,,appliance,Внутри что-то звенит. Надежда.,Something rattles. Hope.
+blender_kitchen,Блендер кухонный,Kitchen Blender,blender,FRAGILE|DIRTYABLE,28,,,,,,0.25,,household,,4.8,222228,,appliance,Крышка есть. Инструкция — нет.,Lid included. Manual not.
+blender_mold,Блендер с плесенью,Moldy Blender,blender,FRAGILE|DIRTYABLE,3,,,,1,,0.85,,tiny,,4.2,204028,,appliance,Научный эксперимент.,A science experiment.
+blender_smoothie,Блендер смузи-могила,Smoothie Grave Blender,blender,FRAGILE|LIQUID,8,,water,0.4,,,0.4,,household,,4.0,303840,,appliance,Содержимое не идентифицировано.,Contents not identified.
+coffee_drip,Кофеварка капельная,Drip Coffee Maker,coffee_maker,DIRTYABLE|LIQUID,22,,water,0.2,,,0.35,,household,,,1a1a22,,appliance,Варит обиду и кофе.,Brews resentment and coffee.
+coffee_espresso_toy,Эспрессо «как в баре»,Toy Espresso Machine,coffee_maker,DIRTYABLE,35,,,,,,0.15,,household|antique,,,e8e8f0,0.85,appliance,Пар есть. Давления нет.,Steam yes. Pressure no.
+coffee_army,Кофеварка армейская,Army Percolator,coffee_maker,DIRTYABLE,16,,,,,,0.45,,tiny|household,,,3a4a30,,appliance,Переживёт ядерную зиму.,Survives nuclear winter.
+snowglobe_vegas,Шар «Вегас»,Vegas Snowglobe,snowglobe,FRAGILE,40,,,,,,0.1,,antique|tiny,,3.2,8a6a40,,fragile|souvenir,Снег из микропластика.,Snow is microplastic.
+snowglobe_hamster,Шар с хомяком,Hamster Snowglobe,snowglobe,FRAGILE,55,,,,,,0.05,,antique,,3.0,a08050,,fragile|hamster|souvenir,Хомяк машет. Или тонет.,Hamster waves. Or drowns.
+snowglobe_divorce,Шар «наш дом»,Our House Snowglobe,snowglobe,FRAGILE,15,,,,,,0.2,,tiny,,3.0,6a4a28,,fragile|souvenir,Дом разломан пополам. Метафора.,House split in half. Metaphor.
+vinyl_bootleg,Пластинка пиратская,Bootleg Vinyl,vinyl,FRAGILE,45,,,,,,0.15,,antique|tech,,5.0,c02828,,music,Сторона Б — тишина и шипение.,Side B is hiss and silence.
+vinyl_wedding,Пластинка свадебная,Wedding Vinyl,vinyl,FRAGILE,25,,,,,,0.2,,antique,,5.0,e8e0d0,,music,Первый танец. Последний раз.,First dance. Last time.
+vinyl_blank,Пластинка пустая,Blank Vinyl,vinyl,FRAGILE,8,,,,,,0.1,,tiny,,5.5,101010,,music,Можно нацарапать судьбу.,Scratch your own destiny.
+turntable_dj,Вертушка диджея,DJ Turntable,turntable,DIRTYABLE|FRAGILE,180,,,,,,0.25,,tech|antique,,6.0,151515,,music|electronics,Игла гнутая. Душа — нет.,Bent needle. Soul intact.
+turntable_suitcase,Вертушка-чемодан,Suitcase Turntable,turntable,DIRTYABLE|FRAGILE|CONTAINER,95,,,,,,0.3,vinyl_bootleg:0.5:1:1,tech,,6.5,6a4a28,,music|electronics,Портативное разочарование.,Portable disappointment.
+turntable_dead,Вертушка мёртвая,Dead Turntable,turntable,DIRTYABLE,20,,,,,,0.5,,tiny|tech,,8.0,222222,,music|electronics,Крутится только от руки.,Hand-crank only now.
+accordion_soviet,Баян советский,Soviet Accordion,accordion,DIRTYABLE,120,,,,,,0.4,,antique,,,a01818,,music,Орёт «Калинку» сам.,Plays Kalinka unprompted.
+accordion_kids,Гармошка детская,Kids Accordion,accordion,,18,,,,,,0.2,,tiny,,,3080d0,0.7,music,Три кнопки. Все фальшивят.,Three buttons. All flat.
+accordion_wheezy,Баян с астмой,Wheezy Accordion,accordion,DIRTYABLE,35,,,,,,0.55,,antique,,,702020,,music,Вдох длиннее выдоха.,Inhale longer than exhale.
+harmonica_blues,Губная гармошка,Blues Harmonica,harmonica,,22,,,,,,0.15,,antique|tiny,,,c0c8d0,,music,Вкус чужих губ.,Tastes like other mouths.
+harmonica_rusty,Гармошка ржавая,Rusty Harmonica,harmonica,DIRTYABLE,4,,,,,,0.7,,tiny,,,8a6040,,music,Ноты со скрипом.,Notes with rust.
+harmonica_gold,Гармошка «золото»,Gold Harmonica,harmonica,,80,,,,,,0.05,,antique,,,e0c040,,music,Позолота слезает на язык.,Gold leaf on your tongue.
+microscope_school,Микроскоп школьный,School Microscope,microscope,FRAGILE|DIRTYABLE,55,,,,,,0.35,,tech|household,,5.5,303040,,science,Увеличение ×ложь.,Magnification ×lie.
+microscope_spy,Микроскоп шпиона,Spy Microscope,microscope,FRAGILE,140,,,,,,0.1,,tech|dark,,5.0,1a1a22,,science,Смотрит в душу и в пыль.,Sees soul and dust.
+microscope_toy,Микроскоп игрушечный,Toy Microscope,microscope,FRAGILE,12,,,,,,0.15,,tiny,,4.5,e03030,0.75,science,Линза — бутылочное стекло.,Lens is bottle glass.
+telescope_pirate,Подзорная труба,Pirate Spyglass,telescope,FRAGILE,90,,,,,,0.3,,antique,,5.5,2a2a30,,science|souvenir,Видит только долги.,Only sees debts.
+telescope_kids,Телескоп детский,Kids Telescope,telescope,FRAGILE,20,,,,,,0.2,,tiny,,5.0,d03030,0.8,science,Луна размером с горошину.,Moon is pea-sized.
+telescope_broken,Телескоп без линзы,Lensless Telescope,telescope,DIRTYABLE,8,,,,,,0.5,,tiny,,12.0,404048,,science,Отличная труба.,Excellent tube.
+hairdryer_salon,Фен салонный,Salon Hairdryer,hairdryer,DIRTYABLE,30,,,,,,0.2,,household,,,f0a0c0,,appliance,Сушит нервы быстрее волос.,Dries nerves first.
+hairdryer_pink,Фен розовый,Pink Hairdryer,hairdryer,,14,,,,,,0.15,,tiny,,,f060a0,,appliance,Шнур короче мечты.,Cord shorter than dreams.
+hairdryer_dead,Фен сгоревший,Dead Hairdryer,hairdryer,DIRTYABLE,2,,,,1,,0.6,,tiny,,,505050,,appliance,Пахнет озоном и поражением.,Smells of ozone and loss.
+iron_steam,Утюг паровой,Steam Iron,clothes_iron,DIRTYABLE|LIQUID,24,,water,0.3,,,0.25,,household,,,7090b0,,appliance,Пар есть. Подошва дырявая.,Steam yes. Soleplate holey.
+iron_soviet,Утюг советский,Soviet Iron,clothes_iron,HEAVY_CHEAP|DIRTYABLE,18,,,,,,0.4,,household,,,4a6080,,appliance,Весит как правда.,Weighs like truth.
+iron_burn,Утюг с клеймом,Branded Iron,clothes_iron,DIRTYABLE,10,,,,,,0.5,,tiny,,,606870,,appliance,Отпечаток «МАМА» на всём.,Leaves MOM on everything.
+waffle_heart,Вафельница сердца,Heart Waffle Maker,waffle_maker,DIRTYABLE,32,,,,,,0.3,,household,,,c02828,,appliance,Сердечки с пригаром.,Hearts with burn marks.
+waffle_greasy,Вафельница жирная,Greasy Waffle Iron,waffle_maker,DIRTYABLE,6,,,,1,,0.8,,tiny,,,5a3030,,appliance,Не моется с 2004-го.,Unwashed since 2004.
+waffle_broken,Вафельница клинит,Seized Waffle Maker,waffle_maker,DIRTYABLE,5,,,,,,0.45,,tiny,,,802020,,appliance,Открывается ломом.,Opens with a crowbar.
+juicer_citrus,Соковыжималка,Citrus Juicer,juicer,FRAGILE|DIRTYABLE,28,,,,,,0.3,,household,,4.8,f0f0f0,,appliance,Выжимает апельсины и бюджет.,Juices oranges and budgets.
+juicer_manual,Соковыжималка ручная,Manual Juicer,juicer,FRAGILE,16,,,,,,0.2,,household,,5.0,e8e0d0,,appliance,Рука устаёт раньше сока.,Arm dies before juice.
+juicer_bloody,Соковыжималка «томаты»,Tomato Juicer,juicer,FRAGILE|LIQUID|DIRTYABLE,9,,water,0.5,,,0.55,,tiny,,4.5,802020,,appliance,Надеемся что томаты.,Hoping it's tomatoes.
+gramophone_antique,Граммофон антик,Antique Gramophone,gramophone,FRAGILE|DIRTYABLE,420,,,,,,0.35,,antique,,5.5,6a4a28,,music|fragile,Играет тоску на 78 оборотах.,Plays longing at 78 rpm.
+gramophone_plastic,Граммофон пластик,Plastic Gramophone,gramophone,FRAGILE,40,,,,,,0.15,,tiny|antique,,4.5,c03030,0.85,music,Раструб клееный скотчем.,Horn held by tape.
+gramophone_horn,Раструб без тела,Horn Only,gramophone,FRAGILE|DIRTYABLE,25,,,,,,0.4,,antique,,4.0,c0a040,0.7,music,Музыка воображаемая.,Imaginary music.
+register_diner,Касса забегаловки,Diner Register,cash_register,CONTAINER|DIRTYABLE|HEAVY_EXPENSIVE,160,,,,,,0.4,cash_20:0.4:1:2|cash_5:0.6:1:3,household|antique,,,c01818,,appliance,Ящик заедает на «нет сдачи».,Drawer jams on no change.
+register_toy,Касса игрушечная,Toy Cash Register,cash_register,CONTAINER,22,,,,,,0.1,cash_1:0.5:1:5,tiny,,,e03030,0.65,appliance,Монеты деревянные.,Coins are wood.
+register_stuck,Касса заклинило,Stuck Register,cash_register,CONTAINER|DIRTYABLE|LOCKED,45,,,,,,0.5,cash_50:0.25:1:1,household|dark,,,801010,,appliance,Открывается только гневом.,Opens only with rage.
+abacus_school,Счёты школьные,School Abacus,abacus,,18,,,,,,0.25,,tiny|household,,,8a5a30,,science,Считает до вранья.,Counts until the lie.
+abacus_gold_bead,Счёты с «золотом»,Gold-Bead Abacus,abacus,,75,,,,,,0.1,,antique,,,c0a040,,science,Бусины крашеные.,Beads are paint.
+abacus_broken,Счёты без бусин,Beadless Abacus,abacus,DIRTYABLE,3,,,,,,0.4,,tiny,,,6a4a28,,science,Считает ноль идеально.,Counts zero perfectly.
+hourglass_desk,Песочные часы,Desk Hourglass,hourglass,FRAGILE,35,,,,,,0.15,,antique|household,,3.5,6a4a28,,fragile|souvenir,Песок кончился раньше срока.,Sand quit early.
+hourglass_giant,Часы гигантские,Giant Hourglass,hourglass,FRAGILE,90,,,,,,0.2,,antique,,3.2,5a3a20,1.6,fragile,Нести вдвоём или никак.,Carry together or not.
+hourglass_empty,Часы пустые,Empty Hourglass,hourglass,FRAGILE,12,,,,,,0.25,,tiny,,3.8,7a5a30,,fragile,Время украли.,Time was stolen.
+pin_lone,Кегля одинокая,Lone Bowling Pin,bowling_pin,FRAGILE,14,,,,,,0.2,,tiny,,5.0,f0f0ee,,sport,Пара из десяти потеряна.,Nine siblings missing.
+pin_signed,Кегля с автографом,Signed Bowling Pin,bowling_pin,FRAGILE,85,,,,,,0.1,,antique,,5.0,f8f8f0,,sport,Подпись нечитаемая. Ценнее.,Illegible sig. Worth more.
+pin_cracked,Кегля треснутая,Cracked Bowling Pin,bowling_pin,FRAGILE|DIRTYABLE,5,,,,,,0.45,,tiny,,3.5,e0e0d8,,sport|fragile,Уже почти осколки.,Already almost shards.
+helmet_bike,Шлем велосипедный,Bike Helmet,helmet,WEARABLE|DIRTYABLE,20,,,,,,0.3,,tiny,body,,2030a0,,wear,Трещины — это стиль.,Cracks are style.
+helmet_army_prop,Каска бутафорская,Prop Army Helmet,helmet,WEARABLE|DIRTYABLE,30,,,,,,0.35,,antique|tiny,body,,3a4a30,,wear,Не держит пулю. Держит пыль.,Stops dust not bullets.
+helmet_football,Шлем футбольный,Football Helmet,helmet,WEARABLE|DIRTYABLE,45,,,,,,0.4,,tiny,body,,802020,,wear,Запах раздевалки 1987.,Locker room 1987.
+megaphone_rally,Мегафон митинга,Rally Megaphone,megaphone,DIRTYABLE,40,,,,,,0.25,,tiny|household,,,f0a020,,appliance,Всё ещё орёт лозунги.,Still screaming slogans.
+megaphone_kids,Мегафон детский,Kids Megaphone,megaphone,,12,,,,,,0.1,,tiny,,,3080e0,0.75,appliance,Громкость — соседи ненавидят.,Volume: neighbors hate you.
+megaphone_broken,Мегафон без рупора,Broken Megaphone,megaphone,DIRTYABLE,4,,,,,,0.5,,tiny,,,a07020,,appliance,Шёпот усиленный.,Amplified whisper.
+aquarium_empty,Аквариум пустой,Empty Aquarium,aquarium,FRAGILE|DIRTYABLE,55,,,,,,0.4,,household,,3.8,404048,,fragile|pet,Гравий помнит рыбок.,Gravel remembers fish.
+aquarium_gravel,Аквариум с гравием,Gravel Aquarium,aquarium,FRAGILE|DIRTYABLE|SHAKE_OUT,40,,,,,,0.5,cash_1:0.3:1:3,household,,3.8,505058,,fragile|pet,В гравии сюрпризы.,Surprises in the gravel.
+aquarium_cracked,Аквариум треснутый,Cracked Aquarium,aquarium,FRAGILE|DIRTYABLE|LIQUID,15,,water,0.3,,,0.55,,tiny,,2.8,384048,,fragile|pet,Течёт. Как и жизнь хозяина.,Leaks. Like the owner.
+duck_yellow,Утка жёлтая,Yellow Rubber Duck,rubber_duck,,6,,,,,,0.05,,tiny,,,f0d020,,toy|gag,Пищит обвиняюще.,Squeaks accusingly.
+duck_army,Утка в каске,Army Duck,rubber_duck,,18,,,,,,0.1,,tiny,,,3a5a30,,toy|gag,Готова к ванной войне.,Ready for tub war.
+duck_cursed,Утка проклятая,Cursed Duck,rubber_duck,,33,,,,,,0.15,,dark|tiny,,,806020,,toy|gag,Глаза следят в темноте.,Eyes follow in the dark.
+lava_pink,Лавовая лампа,Pink Lava Lamp,lava_lamp,FRAGILE|DIRTYABLE,70,,,,,,0.2,,antique|tech,,4.0,303038,,fragile|light,Пузыри ленивые как хозяин.,Blobs lazy as the owner.
+lava_dead,Лавовая лампа мёртвая,Dead Lava Lamp,lava_lamp,FRAGILE|DIRTYABLE,12,,,,,,0.45,,tiny,,4.5,202028,,fragile|light,Лава застыла навсегда.,Lava froze forever.
+lava_party,Лавовая лампа диско,Disco Lava Lamp,lava_lamp,FRAGILE,95,,,,,,0.15,,tech|antique,,3.8,201828,,fragile|light,Мигает в такт долгам.,Pulses to your debt.
+crystal_fortune,Шар гадалки,Fortune Crystal Ball,crystal_ball,FRAGILE,110,,,,,,0.2,,antique|dark,,3.2,6a4a28,,fragile|gag,Показывает только прошлое.,Only shows the past.
+crystal_clear,Шар пустой,Clear Crystal Ball,crystal_ball,FRAGILE,45,,,,,,0.1,,antique,,3.5,d0e8f8,,fragile,Будущее не загрузилось.,Future failed to load.
+crystal_cracked,Шар треснутый,Cracked Crystal Ball,crystal_ball,FRAGILE|DIRTYABLE,20,,,,,,0.35,,tiny,,2.5,8a7a60,,fragile,Судьба дала трещину.,Fate got a crack.
+vase_motel_china,Ваза мотельная,Motel China Vase,vase,FRAGILE|DIRTYABLE,18,,,,,,0.55,,tiny,,3.5,e8d0c0,,vase|fragile,Из номера 12. Залог не вернули.,Room 12. Deposit kept.
+vase_ash_urn_fake,Урна «прах тёти»,Auntie Ash Urn,vase_tall,FRAGILE|SHAKE_OUT|DIRTYABLE,60,,,,,,0.3,cash_20:0.2:1:1|letter_aunt:0.4:1:1,antique,,3.8,c8c0b0,,vase|fragile,Прах оказался пеплом сигарет.,Ashes were cigarette ash.
+bottle_message,Бутылка с запиской,Message Bottle,bottle,FRAGILE|SHAKE_OUT|LIQUID,28,,water,0.2,,,0.2,letter_treasure:0.7:1:1,antique|tiny,,4.0,305060,,fragile,Записка: «верните бутылку».,Note: return the bottle.
+bottle_ship_glue,Бутылка «корабль»,Ship-in-Bottle Glue,bottle,FRAGILE|DIRTYABLE,85,,,,,,0.25,,antique,,4.2,e8e0d0,,fragile|souvenir,Корабль приклеен криво.,Ship glued crooked.
+jar_marbles,Банка шариков,Jar of Marbles,jar,FRAGILE|SHAKE_OUT|CONTAINER,22,,,,,,0.15,cash_1:0.4:1:4|ring_plastic:0.2:1:1,tiny,,4.0,c8d8e0,,fragile|toy,Потерянные шарики детства.,Lost childhood marbles.
+jar_teeth,Банка зубов,Jar of Teeth,jar,FRAGILE|SHAKE_OUT|DIRTYABLE,15,,,,,,0.4,,dark|tiny,,4.0,e0e8e8,,fragile|gag,Зубная фея обанкротилась.,Tooth fairy went bankrupt.
+jar_glitter,Банка блёсток,Glitter Jar,jar,FRAGILE|LIQUID|DIRTYABLE,8,,water,0.6,,,0.1,,tiny,,3.5,f0a0d0,,fragile|gag,Блёстки вечны. Как сожаления.,Glitter is forever.
+glass_shot_cursed,Стопка проклятая,Cursed Shot Glass,glass,FRAGILE,12,,,,,,0.2,,tiny|dark,,3.0,dce8f0,,fragile,После неё все говорят правду.,Makes everyone honest.
+plate_divorce,Тарелка «его/её»,Divorce Plate,plate,FRAGILE|DIRTYABLE,9,,,,,,0.45,,tiny,,4.0,f0f0ee,,fragile,Разбита пополам идеально.,Perfectly half-broken vibe.
+bowl_cereal_stale,Миска с хлопьями,Stale Cereal Bowl,bowl,FRAGILE|DIRTYABLE|LIQUID,3,,water,0.1,,,0.7,,tiny,,4.5,e8e0d0,,fragile,Хлопья окаменели.,Cereal fossilized.
+cup_office_steal,Кружка с работы,Stolen Office Mug,cup,FRAGILE|DIRTYABLE,4,,,,,,0.35,,tiny,,4.5,ffffff,,fragile,Логотип компании-банкрота.,Logo of a dead company.
+perfume_ex,Духи бывшей,Ex Perfume,perfume,FRAGILE|LIQUID,25,,,,,,0.1,,antique|tiny,,3.8,e0c0d0,,fragile,Пахнет судебным иском.,Smells like a lawsuit.
+candle_seance,Свеча спиритическая,Seance Candle,candle,FRAGILE,9,,,,1,,0.2,,dark|tiny,,6.0,101018,,gag,Фитиль уже кто-то жевал.,Wick pre-chewed.
+lamp_lava_table,Лампа «лава» стол,Table Lava Lamp,lamp_table,FRAGILE|DIRTYABLE,48,,,,,,0.25,,tech|household,,4.5,f040a0,,fragile|light,Путают с настоящей лавой.,Confused with real lava.
+frame_photo_ex,Рамка с бывшим,Ex Photo Frame,frame_photo,FRAGILE|DIRTYABLE,8,,,,,,0.3,,tiny,,4.0,e8e0d0,,fragile,Лицо выцарапано.,Face scratched out.
+mirror_compact,Зеркальце карманное,Pocket Mirror,mirror,FRAGILE,14,,,,,,0.15,,tiny|antique,,3.2,c0c0c8,0.45,fragile,Врёт о возрасте.,Lies about your age.
+statue_gnome_evil,Гном злой,Evil Garden Gnome,statue,FRAGILE|DIRTYABLE,38,,,,,,0.35,,antique|household,,5.0,306030,,fragile|gag,Улыбка судебная.,Lawsuit smile.
+statue_flamingo_pair,Фламинго садовый,Garden Flamingo,statue,FRAGILE|DIRTYABLE,22,,,,,,0.3,,household,,5.5,f060a0,,fragile,Пара потеряла вторую ногу.,Mate lost the other leg.
+bust_boss,Бюст начальника,Boss Bust,bust,FRAGILE|DIRTYABLE,55,,,,,,0.4,,antique,,5.0,d0d0d8,,fragile,Бросать приятно.,Satisfying to drop.
+skull_candle_hold,Череп-подсвечник,Skull Candle Holder,skull,FRAGILE|DIRTYABLE,48,,,,1,,0.25,,dark|antique,,4.5,e8e0d0,,fragile|gag,Романтика кладбища.,Cemetery romance.
+plant_pot_fake_fern,Горшок с папоротником,Fake Fern Pot,plant_pot,FRAGILE|DIRTYABLE,16,,,,,,0.4,,household,,4.8,8a6a40,,fragile,Пластик пыльный как живой.,Dusty plastic looks alive.
+fish_bowl_cracked,Круглый аквариум,Cracked Fish Bowl,fish_bowl,FRAGILE|LIQUID|DIRTYABLE,20,,water,0.4,,,0.5,,tiny,,3.0,a0d0f0,,fragile|pet,Рыбки съехали раньше.,Fish moved out first.
+globe_bar_empty,Глобус-бар пустой,Empty Bar Globe,globe,FRAGILE|CONTAINER|DIRTYABLE,70,,,,,,0.35,,antique,,5.0,2a5a8a,,fragile,Мир открыт. Выпивка нет.,World opens. Booze gone.
+trophy_spelling,Кубок за орфографию,Spelling Bee Trophy,trophy,FRAGILE|DIRTYABLE,40,,,,,,0.3,,antique|tiny,,5.5,e0c040,,fragile,Победитель написал верно.,Winner spelled trophy right.
+trophy_last_place,Кубок за последнее,Last Place Trophy,trophy,FRAGILE,12,,,,,,0.2,,tiny,,5.0,c0c0c0,,fragile|gag,Честнее золота.,More honest than gold.
+typewriter_ribbon_box,Коробка лент,Ribbon Box,box_small,CONTAINER|SHAKE_OUT|DIRTYABLE,10,,,,,,0.3,letter_debt:0.25:1:1,tiny,,,2a2a2a,,office,Ленты засохли. Слова тоже.,Ribbons dried. Words too.
+folder_divorce,Папка «развод»,Divorce Folder,folder,DOCUMENT|SHAKE_OUT,15,,,,,,0.2,letter_debt:0.5:1:1|bill_iou:0.4:1:1,tiny,,,404060,,document,Толще романа.,Thicker than a novel.
+usb_blackmail,Флешка «не открывать»,Do-Not-Open USB,usb,DIRTYABLE,35,,,,,,0.1,,dark|tech,,,222222,,electronics,Подпись маркером: НЕТ.,Sharpie label: NO.
+cassette_confession,Кассета «признание»,Confession Cassette,cassette,SHAKE_OUT|DIRTYABLE,18,,,,,,0.25,,tiny|dark,,,5a4030,,music,Лента перемотана до дыр.,Tape worn to holes.
+radio_shower,Радио в душ,Shower Radio,radio,DIRTYABLE|FRAGILE,16,,,,,,0.4,,household,,6.0,3080c0,,electronics,Всё ещё играет рекламу.,Still plays ads.
+phone_rotary,Телефон дисковый,Rotary Phone,phone,DIRTYABLE|HEAVY_CHEAP,55,,,,,,0.35,,antique|tech,,,222228,,electronics,Набрать 911 — квест.,Dialing 911 is a quest.
+camera_disposable,Одноразка просрочена,Expired Disposable,camera,FRAGILE|DIRTYABLE,8,,,,,,0.2,,tiny,,5.0,f0f0f0,0.7,electronics,Плёнка помнит 2003-й.,Film remembers 2003.
+watch_calculator,Часы-калькулятор,Calculator Watch,watch,DIRTYABLE,28,,,,,,0.15,,tech|tiny,,,303038,,electronics,Считает лучше хозяина.,Calculates better than you.
+necklace_garlic,Ожерелье из чеснока,Garlic Necklace,necklace,DIRTYABLE|WEARABLE,7,,,,1,,0.5,,tiny,body,,,,wear|gag,От вампиров и свиданий.,Repels vampires and dates.
+hat_propeller,Шапка с пропеллером,Propeller Hat,hat,WEARABLE|DIRTYABLE,14,,,,,,0.2,,tiny,body,,e03030,,wear|gag,Взлетает только достоинство.,Only dignity takes flight.
+shoe_flipflop_one,Шлёпанец один,Single Flip-Flop,shoe,DIRTYABLE,2,,,,,,0.6,,tiny,,,ff8020,,wear,Пара ушла к другой жизни.,Mate left for a better life.
+bag_evidence,Пакет «улики»,Evidence Bag,bag,CONTAINER|SHAKE_OUT|DIRTYABLE,20,,,,,,0.3,usb_blackmail:0.35:1:1|letter_ransom:0.3:1:1,dark,,,e8e8c0,,container,Печать сорвана. Конечно.,Seal broken. Of course.
+box_moving_labels,Коробка «кухня???»,Kitchen??? Box,box,CONTAINER|DIRTYABLE,12,,,,,,0.45,plate_ikeya:0.4:1:2|cup_okayest:0.5:1:2|jar_glitter:0.3:1:1,household,,,c9a97a,,container,Подпись с тремя вопросами.,Label has three question marks.
+chest_hope_empty,Сундук надежды,Empty Hope Chest,chest,CONTAINER|DIRTYABLE|LOCKED,80,,,,,,0.4,dress_prom:0.25:1:1|letter_love:0.4:1:1,antique,,,5a3a20,,container,Надежда выветрилась.,Hope aired out.
+suitcase_airport,Чемодан невостребованный,Unclaimed Suitcase,suitcase,CONTAINER|DIRTYABLE|LOCKED,65,,,,,,0.35,sock_single:0.7:1:2|perfume_ex:0.3:1:1|cash_20:0.2:1:1,household|dark,,,4a4a60,,container,Бирка: рейс отменён навсегда.,Tag: flight cancelled forever.
+jewelry_box_empty_fancy,Шкатулка пустая,Fancy Empty Box,jewelry_box,CONTAINER|FRAGILE|DIRTYABLE,30,,,,,,0.25,,antique,,4.5,7a2040,,container,Бархат помнит кольца.,Velvet remembers rings.
+safe_piggy_broke,Копилка-сейф,Broken Piggy Safe,coin_jar,CONTAINER|FRAGILE|SHAKE_OUT,25,,,,,,0.3,cash_10:0.5:1:2,tiny,,4.0,f0a0c0,1.2,container|fragile,Уже треснута для изъятия.,Pre-cracked for withdrawal.
+book_cursed_diary,Дневник проклятый,Cursed Diary,book,SHAKE_OUT|DIRTYABLE,40,,,,1,,0.3,letter_ransom:0.35:1:1|cash_5:0.2:1:1,dark|antique,,,2a1a2a,,document,Страницы сами перелистываются.,Pages turn themselves.
+book_cookbook_burnt,Книга рецептов горелая,Burnt Cookbook,book,DIRTYABLE,6,,,,1,,0.7,,tiny,,,3a2a20,,document,Рецепт огня на первой странице.,Fire recipe on page one.
+pillow_scream,Подушка для крика,Scream Pillow,pillow,DIRTYABLE,11,,,,,,0.4,,tiny,,,806080,,cloth,Уже накричана.,Pre-screamed.
+rug_prayer_fake,Коврик «молитва»,Fake Prayer Rug,rug,DIRTYABLE,28,,,,1,,0.35,,antique|household,,,4a6a40,,cloth,Нарисована Мекка фломастером.,Mecca drawn in marker.
+mannequin_hand,Рука манекена,Mannequin Hand,mannequin,DIRTYABLE|FRAGILE,18,,,,,,0.3,,tiny|antique,,6.0,f0e0d0,0.35,gag,Показывает куда нести хаул.,Points where to haul.
+doll_ventriloquist,Кукла чревовещателя,Ventriloquist Dummy,doll,DIRTYABLE|FRAGILE|ALIVE,95,,,,,,0.35,,dark|antique,,5.0,f0e0c0,,gag|fragile,Челюсть сама. Шутки сами.,Jaw moves itself. Jokes too.
+toy_bear_cursed,Мишка с глазами,Watching Teddy,toy_bear,DIRTYABLE|SHAKE_OUT,35,,,,,,0.25,usb_blackmail:0.15:1:1,dark|tiny,,,4a3020,,toy|gag,Пуговицы — камеры? Нет… да.,Buttons cameras? No… yes.
+ball_disco_mini,Диско-шар мини,Mini Disco Ball,ball,FRAGILE,30,,,,,,0.1,,tech|tiny,,3.5,e0e8f0,0.6,fragile|gag,Дискотека в кармане.,Pocket disco.
+trumpet_school,Труба школьная,School Trumpet,trumpet,DIRTYABLE|FRAGILE,45,,,,,,0.4,,antique,,5.5,c0a040,,music,Только «ту-ту» и слёзы.,Only toots and tears.
+drum_bongo_crack,Бонго треснутое,Cracked Bongo,drum,FRAGILE|DIRTYABLE,18,,,,,,0.45,,tiny,,4.0,8a5a30,,music|fragile,Ритм утекает.,Rhythm leaks out.
+keyboard_sticky,Синтезатор липкий,Sticky Synth,keyboard_music,DIRTYABLE,55,,,,,,0.5,,tech,,,222228,,music|electronics,Клавиши помнят газировку.,Keys remember soda.
+guitar_missing_string,Гитара без струны,Stringless Guitar,guitar,DIRTYABLE,40,,,,,,0.4,,antique,,,6a4a28,,music,Пять струн — пять сожалений.,Five strings five regrets.
+bike_helmet_cam,Шлем с «камерой»,Helmet Cam Fake,helmet,WEARABLE|DIRTYABLE,28,,,,,,0.25,,tiny,body,,101018,,wear|electronics,Камера — наклейка.,Camera is a sticker.
+oil_lamp_genie,Лампа «джинн»,Genie Oil Lamp,jug,FRAGILE|LIQUID|DIRTYABLE,120,,oil,0.4,1,,0.3,,antique|dark,,4.0,c0a040,,fragile|gag,Джинн не выходит. Пахнет маслом.,No genie. Just oil smell.

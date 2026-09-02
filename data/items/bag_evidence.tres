@@ -1,0 +1,42 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://core/ItemDef.gd" id="1"]
+[ext_resource type="Script" path="res://core/LootRef.gd" id="2"]
+
+[sub_resource type="Resource" id="lr1"]
+script = ExtResource("2")
+item_id = "usb_blackmail"
+chance = 0.35
+count_min = 1
+count_max = 1
+
+[sub_resource type="Resource" id="lr2"]
+script = ExtResource("2")
+item_id = "letter_ransom"
+chance = 0.3
+count_min = 1
+count_max = 1
+
+[resource]
+script = ExtResource("1")
+id = "bag_evidence"
+name_ru = "Пакет «улики»"
+name_en = "Evidence Bag"
+archetype_id = "bag"
+facets = Array[int]([2, 3, 1])
+value_base = 20
+mass_override = 0.0
+liquid_id = 0
+liquid_amount = 1.0
+flammable = false
+illegal = false
+dusty_default = 0.3
+nest_loot = Array[Resource]([SubResource("lr1"), SubResource("lr2")])
+vendor_affinity = Array[String](["vendor_dark"])
+wearable_slot = "none"
+break_threshold = 25.0
+color = Color(0.9098, 0.9098, 0.7529, 1.0)
+scale = 1.0
+tags = Array[String](["container"])
+lore_ru = "Печать сорвана. Конечно."
+lore_en = "Seal broken. Of course."

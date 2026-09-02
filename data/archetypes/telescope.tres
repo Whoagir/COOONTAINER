@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Archetype" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/Archetype.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "telescope"
+builder = "telescope"
+shard_count = 4
+size_class = 2
+mass_default = 3.5
+dims = Vector3(0.18, 0.25, 0.7)
+cloth = false
+container = false
+container_capacity = 3
+light_fixture = false
+base_color = Color(0.1647, 0.1647, 0.1882, 1.0)
+secondary_color = Color(0.5412, 0.4157, 0.251, 1.0)
+friction = 0.7
+bounce = 0.05

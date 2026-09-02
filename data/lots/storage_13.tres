@@ -69,7 +69,7 @@ dirt_override = -1.0
 
 [sub_resource type="Resource" id="s9"]
 script = ExtResource("2")
-item_id = "microwave_yellow"
+item_id = "coffee_drip"
 xform = Transform3D(0.9976, 0, -0.0698, 0, 1.0, 0, 0.0698, 0, 0.9976, 0.15, 0.0, -1.12)
 nested = Array[String]([])
 locked_override = -1
@@ -77,7 +77,7 @@ dirt_override = -1.0
 
 [sub_resource type="Resource" id="s10"]
 script = ExtResource("2")
-item_id = "kettle_electric"
+item_id = "juicer_citrus"
 xform = Transform3D(0.9781, 0, -0.2079, 0, 1.0, 0, 0.2079, 0, 0.9781, 0.7, 0.0, -0.55)
 nested = Array[String]([])
 locked_override = -1
@@ -117,7 +117,7 @@ dirt_override = -1.0
 
 [sub_resource type="Resource" id="s15"]
 script = ExtResource("2")
-item_id = "plant_pot_cactus"
+item_id = "lava_pink"
 xform = Transform3D(1.0, 0, 0.0, 0, 1.0, 0, 0.0, 0, 1.0, 1.2, 0.0, 0.2)
 nested = Array[String]([])
 locked_override = -1
@@ -141,8 +141,8 @@ dirt_override = -1.0
 
 [sub_resource type="Resource" id="s18"]
 script = ExtResource("2")
-item_id = "radio_alarm"
-xform = Transform3D(0.9903, 0, -0.1392, 0, 1.0, 0, 0.1392, 0, 0.9903, 0.55, 0.0, 0.28)
+item_id = "toaster_chrome"
+xform = Transform3D(0.9903, 0, -0.1392, 0, 1.0, 0, 0.1392, 0, 0.9903, -0.55, 0.0, 0.55)
 nested = Array[String]([])
 locked_override = -1
 dirt_override = -1.0

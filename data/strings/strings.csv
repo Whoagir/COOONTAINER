@@ -104,7 +104,20 @@ HOWTO_4,"4. Мышь ведёт активную руку (сначала пра
 HOWTO_5,"5. Хрупкое бьётся только от сильного удара о стену или падения с высоты — на куски самой 3D-модели, каждый можно поднять. Лёгкий стук — скол.","5. Fragile stuff only shatters from a hard wall smash or a high drop — into pieces of the 3D model you can pick up. A light bump just chips it."
 HOWTO_6,"6. Скупщики покупают всё, но торгуются полоской. Держи [E] с вещью — перевернёшь: вылить, вытряхнуть, полистать.","6. Vendors buy anything but haggle with a bar. Hold [E] with an item to flip it: pour, shake out, leaf through."
 HOWTO_7,"7. Жидкости текут, огонь распространяется, менты приезжают. Казино нечестное. Дом стоит $25 000.","7. Liquids flow, fire spreads, cops show up. The casino is rigged. The house costs $25,000."
-HOWTO_8,"8. Ничего из этого не обязательно. Развлекайтесь.","8. None of this is mandatory. Have fun."
+HOWTO_8,"8. Ночью ляг на кровать в трейлере [E] — проспишь до утра. Сутки ≈ 24 мин, фонарик нужен. Двери домов/трейлеров соседей [E] — зайти внутрь.","8. At night lie on a trailer bed [E] — sleep till morning. Day ≈ 24 min, bring a flashlight. Neighbor house/trailer doors [E] — step inside."
+HOWTO_9,"9. Ничего из этого не обязательно. Развлекайтесь.","9. None of this is mandatory. Have fun."
+SLEEP_HINT_NIGHT,"Лечь спать до утра","Sleep until morning"
+SLEEP_HINT_DAY,"Спать можно ночью","Sleep at night"
+SLEEP_DAY,Сейчас день. Приходи ночью.,It's daytime. Come back at night.
+SLEEP_BUSY,Уже спим…,Already sleeping…
+SLEEP_COOL,Только встал. Подожди.,Just woke up. Wait a bit.
+SLEEP_CARD_TITLE,Спокойной ночи,Good night
+SLEEP_CARD_SUB,…храп из соседнего матраса…,…snoring from the next mattress…
+SLEEP_WOKE,Доброе утро. Снова за работу.,Morning. Back to the grind.
+DOOR_ENTER,[E] войти,[E] enter
+DOOR_EXIT,[E] выйти,[E] leave
+DOOR_ENTERED,Зашёл.,Stepped inside.
+DOOR_LEFT,Вышел.,Stepped outside.
 HUD_RESPAWN_IN,Кровать через %d…,Bed in %d…
 BOARD_TITLE,ЗАПИСКА ПЕТРОВИЧА,PETROVICH'S NOTE
 BOARD_HOUSE,"Дом: $%d из $%d","House: $%d of $%d"

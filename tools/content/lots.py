@@ -103,10 +103,10 @@ LOTS.append({
         S("jewelry_box_kids", 0.44, 0, -0.40, -18, nested=["ring_mood"]),
         S("book_cookbook", 0.44, 0, 0.02, 82),
         S("candle_scented", -0.50, 0, 0.06, 14),
-        S("cup_thermos", -0.42, 0, 0.44, -10),
-        S("frame_photo_cat", -0.08, 0, 0.48, 28),
+        S("duck_yellow", -0.42, 0, 0.44, -10),
+        S("snowglobe_vegas", -0.08, 0, 0.48, 28),
         S("bag_tote", 0.42, 0, 0.42, -22, nested=["cash_10", "bill_coupon"]),
-        S("perfume_cheap", 0.18, 0, 0.18, 8),
+        S("hourglass_desk", 0.18, 0, 0.18, 8),
     ],
 })
 

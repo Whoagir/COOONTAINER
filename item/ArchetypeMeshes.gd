@@ -1292,3 +1292,196 @@ static func _b_sewing_machine(c: Ctx) -> void:
 	c.box(Vector3(c.d.x * 0.25, c.d.y * 0.85, c.d.z * 0.5), Vector3(c.d.x * 0.35, c.d.y * 0.575, 0), c.c1)
 	c.box(Vector3(c.d.x * 0.8, c.d.y * 0.2, c.d.z * 0.4), Vector3(0, c.d.y * 0.9, 0), c.c1)
 	c.cyl(0.004, 0.004, c.d.y * 0.5, Vector3(-c.d.x * 0.3, c.d.y * 0.55, 0), Color(0.7, 0.7, 0.72), Vector3.ZERO, 4, "", false)
+
+
+# ============================================================ wave3 appliances / gag finds
+
+static func _b_toaster(c: Ctx) -> void:
+	c.box(c.d, Vector3(0, c.d.y * 0.5, 0), c.c1)
+	c.box(Vector3(c.d.x * 0.7, 0.01, c.d.z * 0.22), Vector3(0, c.d.y + 0.005, -c.d.z * 0.18), Color(0.08, 0.08, 0.08), Vector3.ZERO, "", null, false)
+	c.box(Vector3(c.d.x * 0.7, 0.01, c.d.z * 0.22), Vector3(0, c.d.y + 0.005, c.d.z * 0.18), Color(0.08, 0.08, 0.08), Vector3.ZERO, "", null, false)
+	c.box(Vector3(0.03, 0.04, 0.06), Vector3(c.d.x * 0.45, c.d.y * 0.55, 0), c.c2, Vector3.ZERO, "", null, false)
+	c.cyl(0.012, 0.012, 0.05, Vector3(-c.d.x * 0.42, c.d.y * 0.7, 0), c.c2, Vector3(0, 0, PI / 2), 6, "", false)
+
+
+static func _b_blender(c: Ctx) -> void:
+	c.box(Vector3(c.d.x * 0.9, c.d.y * 0.35, c.d.z * 0.9), Vector3(0, c.d.y * 0.175, 0), c.c1)
+	c.cyl(c.d.x * 0.38, c.d.x * 0.42, c.d.y * 0.55, Vector3(0, c.d.y * 0.62, 0), c.c2.lerp(Color(0.75, 0.88, 0.95), 0.55), Vector3.ZERO, 8)
+	c.cyl(c.d.x * 0.42, c.d.x * 0.42, 0.03, Vector3(0, c.d.y * 0.92, 0), c.c1, Vector3.ZERO, 8, "", false)
+	c.box(Vector3(0.04, 0.06, 0.03), Vector3(c.d.x * 0.42, c.d.y * 0.2, 0), c.c2, Vector3.ZERO, "", null, false)
+
+
+static func _b_coffee_maker(c: Ctx) -> void:
+	c.box(Vector3(c.d.x, c.d.y * 0.2, c.d.z), Vector3(0, c.d.y * 0.1, 0), c.c1)
+	c.box(Vector3(c.d.x * 0.35, c.d.y * 0.75, c.d.z * 0.7), Vector3(-c.d.x * 0.25, c.d.y * 0.55, 0), c.c1)
+	c.cyl(c.d.x * 0.28, c.d.x * 0.22, c.d.y * 0.45, Vector3(c.d.x * 0.22, c.d.y * 0.42, 0), Color(0.15, 0.08, 0.05).lerp(c.c2, 0.25), Vector3.ZERO, 8)
+	c.box(Vector3(c.d.x * 0.7, 0.04, c.d.z * 0.5), Vector3(0, c.d.y * 0.95, 0), c.c2, Vector3.ZERO, "", null, false)
+
+
+static func _b_snowglobe(c: Ctx) -> void:
+	var r := minf(c.d.x, c.d.z) * 0.48
+	c.box(Vector3(c.d.x * 0.85, c.d.y * 0.22, c.d.z * 0.85), Vector3(0, c.d.y * 0.11, 0), c.c1)
+	c.sph(r, Vector3(0, c.d.y * 0.22 + r * 0.85, 0), c.c2.lerp(Color(0.8, 0.92, 1.0), 0.7))
+	c.box(Vector3(r * 0.35, r * 0.55, r * 0.35), Vector3(0, c.d.y * 0.22 + r * 0.35, 0), c.c1.darkened(0.15), Vector3.ZERO, "", null, false)
+	c.sph(r * 0.12, Vector3(0, c.d.y * 0.22 + r * 0.95, 0), Color(0.95, 0.2, 0.25), false)
+
+
+static func _b_vinyl(c: Ctx) -> void:
+	var r := c.d.x * 0.5
+	c.cyl(r, r, 0.004, Vector3(0, 0.01, 0), Color(0.06, 0.06, 0.07), Vector3.ZERO, 12, "", true, null, true)
+	c.cyl(r * 0.28, r * 0.28, 0.005, Vector3(0, 0.013, 0), c.c1, Vector3.ZERO, 10, "", false)
+	c.cyl(r * 0.06, r * 0.06, 0.006, Vector3(0, 0.015, 0), Color(0.9, 0.9, 0.92), Vector3.ZERO, 8, "", false)
+	c.only_box_shape(Vector3(c.d.x, 0.02, c.d.z), Vector3(0, 0.01, 0))
+
+
+static func _b_turntable(c: Ctx) -> void:
+	c.box(c.d, Vector3(0, c.d.y * 0.5, 0), c.c1)
+	var r := minf(c.d.x, c.d.z) * 0.38
+	c.cyl(r, r, 0.015, Vector3(-c.d.x * 0.08, c.d.y + 0.01, 0), Color(0.08, 0.08, 0.09), Vector3.ZERO, 12, "", false, null, true)
+	c.box(Vector3(0.03, 0.02, c.d.z * 0.45), Vector3(c.d.x * 0.35, c.d.y + 0.02, 0), c.c2, Vector3(0, 0, 0.35), "", null, false)
+	c.cyl(0.015, 0.015, 0.04, Vector3(c.d.x * 0.35, c.d.y + 0.04, -c.d.z * 0.15), c.c2, Vector3.ZERO, 6, "", false)
+
+
+static func _b_accordion(c: Ctx) -> void:
+	c.box(Vector3(c.d.x * 0.28, c.d.y, c.d.z), Vector3(-c.d.x * 0.36, c.d.y * 0.5, 0), c.c1)
+	c.box(Vector3(c.d.x * 0.28, c.d.y, c.d.z), Vector3(c.d.x * 0.36, c.d.y * 0.5, 0), c.c1)
+	for i in 5:
+		var t := float(i) / 4.0
+		var x := lerpf(-c.d.x * 0.18, c.d.x * 0.18, t)
+		c.box(Vector3(0.04, c.d.y * 0.85, c.d.z * 0.9), Vector3(x, c.d.y * 0.5, 0), c.c2.lerp(c.c1, 0.3), Vector3.ZERO, "", null, false)
+	c.only_box_shape(c.d, Vector3(0, c.d.y * 0.5, 0))
+
+
+static func _b_harmonica(c: Ctx) -> void:
+	c.box(c.d, Vector3(0, c.d.y * 0.5, 0), c.c1)
+	for i in 8:
+		c.box(Vector3(c.d.x * 0.08, c.d.y * 0.35, 0.008), Vector3(-c.d.x * 0.4 + i * c.d.x * 0.11, c.d.y * 0.55, c.d.z * 0.45), Color(0.1, 0.1, 0.12), Vector3.ZERO, "", null, false)
+
+
+static func _b_microscope(c: Ctx) -> void:
+	c.box(Vector3(c.d.x * 0.7, c.d.y * 0.12, c.d.z * 0.7), Vector3(0, c.d.y * 0.06, 0), c.c1)
+	c.cyl(0.025, 0.025, c.d.y * 0.55, Vector3(0, c.d.y * 0.4, -c.d.z * 0.1), c.c2, Vector3.ZERO, 8)
+	c.cyl(0.04, 0.02, c.d.y * 0.25, Vector3(0, c.d.y * 0.78, -c.d.z * 0.1), c.c1, Vector3(0.4, 0, 0), 8, "", false)
+	c.box(Vector3(c.d.x * 0.35, 0.02, c.d.z * 0.35), Vector3(0, c.d.y * 0.28, c.d.z * 0.15), c.c2, Vector3.ZERO, "", null, false)
+
+
+static func _b_telescope(c: Ctx) -> void:
+	c.cyl(c.d.x * 0.22, c.d.x * 0.35, c.d.z, Vector3(0, c.d.y * 0.55, 0), c.c1, Vector3(PI / 2, 0, 0), 10)
+	c.box(Vector3(0.06, c.d.y * 0.45, 0.06), Vector3(0, c.d.y * 0.25, 0), c.c2)
+	c.box(Vector3(c.d.x * 0.7, 0.04, c.d.z * 0.35), Vector3(0, 0.02, 0), c.c2, Vector3.ZERO, "", null, false)
+	c.cyl(c.d.x * 0.18, c.d.x * 0.18, 0.02, Vector3(0, c.d.y * 0.55, -c.d.z * 0.48), Color(0.05, 0.05, 0.08), Vector3(PI / 2, 0, 0), 8, "", false)
+
+
+static func _b_hairdryer(c: Ctx) -> void:
+	c.cyl(c.d.x * 0.45, c.d.x * 0.35, c.d.z * 0.55, Vector3(0, c.d.y * 0.55, c.d.z * 0.05), c.c1, Vector3(PI / 2, 0, 0), 10)
+	c.box(Vector3(0.05, c.d.y * 0.55, 0.05), Vector3(0, c.d.y * 0.28, c.d.z * 0.15), c.c2)
+	c.cyl(c.d.x * 0.4, c.d.x * 0.4, 0.02, Vector3(0, c.d.y * 0.55, -c.d.z * 0.28), Color(0.2, 0.2, 0.22), Vector3(PI / 2, 0, 0), 8, "", false)
+
+
+static func _b_clothes_iron(c: Ctx) -> void:
+	c.prism(Vector3(c.d.x, c.d.y * 0.35, c.d.z), Vector3(0, c.d.y * 0.2, 0), c.c1)
+	c.box(Vector3(c.d.x * 0.55, c.d.y * 0.35, c.d.z * 0.45), Vector3(0, c.d.y * 0.55, -c.d.z * 0.05), c.c2)
+	c.box(Vector3(0.04, 0.06, 0.08), Vector3(0, c.d.y * 0.75, -c.d.z * 0.05), c.c1.darkened(0.2), Vector3.ZERO, "", null, false)
+
+
+static func _b_waffle_maker(c: Ctx) -> void:
+	c.box(Vector3(c.d.x, c.d.y * 0.35, c.d.z), Vector3(0, c.d.y * 0.18, 0), c.c1)
+	c.box(Vector3(c.d.x * 0.95, c.d.y * 0.3, c.d.z * 0.95), Vector3(0, c.d.y * 0.55, 0), c.c1.darkened(0.08))
+	c.box(Vector3(0.05, 0.04, c.d.z * 0.25), Vector3(0, c.d.y * 0.72, c.d.z * 0.4), c.c2, Vector3.ZERO, "", null, false)
+	for ix in 3:
+		for iz in 3:
+			c.box(Vector3(0.04, 0.01, 0.04), Vector3(-c.d.x * 0.25 + ix * c.d.x * 0.25, c.d.y * 0.36, -c.d.z * 0.25 + iz * c.d.z * 0.25), Color(0.25, 0.18, 0.1), Vector3.ZERO, "", null, false)
+
+
+static func _b_juicer(c: Ctx) -> void:
+	c.cyl(c.d.x * 0.45, c.d.x * 0.4, c.d.y * 0.35, Vector3(0, c.d.y * 0.175, 0), c.c1, Vector3.ZERO, 10)
+	c.cyl(c.d.x * 0.2, 0.02, c.d.y * 0.45, Vector3(0, c.d.y * 0.55, 0), c.c2, Vector3.ZERO, 8)
+	c.box(Vector3(c.d.x * 0.15, 0.04, c.d.z * 0.2), Vector3(c.d.x * 0.35, c.d.y * 0.2, 0), c.c2, Vector3.ZERO, "", null, false)
+
+
+static func _b_gramophone(c: Ctx) -> void:
+	c.box(Vector3(c.d.x * 0.7, c.d.y * 0.25, c.d.z * 0.7), Vector3(0, c.d.y * 0.125, 0), c.c1)
+	c.cyl(c.d.x * 0.28, c.d.x * 0.28, 0.02, Vector3(0, c.d.y * 0.28, 0), Color(0.08, 0.08, 0.09), Vector3.ZERO, 10, "", false, null, true)
+	c.cyl(c.d.x * 0.55, 0.04, c.d.y * 0.55, Vector3(c.d.x * 0.15, c.d.y * 0.55, -c.d.z * 0.1), c.c2, Vector3(0.6, 0.2, 0), 10, "", false)
+	c.only_box_shape(c.d, Vector3(0, c.d.y * 0.5, 0))
+
+
+static func _b_cash_register(c: Ctx) -> void:
+	c.box(Vector3(c.d.x, c.d.y * 0.45, c.d.z), Vector3(0, c.d.y * 0.225, 0), c.c1)
+	c.box(Vector3(c.d.x * 0.9, c.d.y * 0.4, c.d.z * 0.55), Vector3(0, c.d.y * 0.65, -c.d.z * 0.1), c.c1.darkened(0.1))
+	c.box(Vector3(c.d.x * 0.5, 0.04, c.d.z * 0.15), Vector3(0, c.d.y * 0.88, c.d.z * 0.15), Color(0.1, 0.8, 0.2), Vector3.ZERO, "", null, false)
+	for i in 4:
+		c.box(Vector3(0.04, 0.02, 0.04), Vector3(-c.d.x * 0.3 + i * c.d.x * 0.2, c.d.y * 0.48, c.d.z * 0.35), c.c2, Vector3.ZERO, "", null, false)
+
+
+static func _b_abacus(c: Ctx) -> void:
+	c.box(Vector3(c.d.x, c.d.y * 0.12, c.d.z * 0.12), Vector3(0, c.d.y * 0.06, -c.d.z * 0.4), c.c1)
+	c.box(Vector3(c.d.x, c.d.y * 0.12, c.d.z * 0.12), Vector3(0, c.d.y * 0.06, c.d.z * 0.4), c.c1)
+	c.box(Vector3(c.d.x * 0.1, c.d.y, c.d.z * 0.1), Vector3(-c.d.x * 0.45, c.d.y * 0.5, 0), c.c1)
+	c.box(Vector3(c.d.x * 0.1, c.d.y, c.d.z * 0.1), Vector3(c.d.x * 0.45, c.d.y * 0.5, 0), c.c1)
+	for row in 4:
+		var y := c.d.y * (0.25 + row * 0.18)
+		c.cyl(0.008, 0.008, c.d.x * 0.85, Vector3(0, y, 0), c.c2, Vector3(0, 0, PI / 2), 6, "", false)
+		for b in 5:
+			c.sph(0.025, Vector3(-c.d.x * 0.32 + b * c.d.x * 0.16, y, 0), c.c2.lerp(Color(0.8, 0.2, 0.2), float(b % 2)), false)
+
+
+static func _b_hourglass(c: Ctx) -> void:
+	c.cyl(c.d.x * 0.45, c.d.x * 0.45, 0.04, Vector3(0, 0.02, 0), c.c1, Vector3.ZERO, 8)
+	c.cyl(c.d.x * 0.45, c.d.x * 0.45, 0.04, Vector3(0, c.d.y - 0.02, 0), c.c1, Vector3.ZERO, 8)
+	c.cyl(c.d.x * 0.32, 0.02, c.d.y * 0.42, Vector3(0, c.d.y * 0.28, 0), c.c2.lerp(Color(0.85, 0.75, 0.45), 0.4), Vector3.ZERO, 8)
+	c.cyl(0.02, c.d.x * 0.32, c.d.y * 0.42, Vector3(0, c.d.y * 0.72, 0), c.c2.lerp(Color(0.85, 0.75, 0.45), 0.4), Vector3.ZERO, 8)
+	c.box(Vector3(0.03, c.d.y * 0.9, 0.03), Vector3(-c.d.x * 0.4, c.d.y * 0.5, 0), c.c1, Vector3.ZERO, "", null, false)
+	c.box(Vector3(0.03, c.d.y * 0.9, 0.03), Vector3(c.d.x * 0.4, c.d.y * 0.5, 0), c.c1, Vector3.ZERO, "", null, false)
+
+
+static func _b_bowling_pin(c: Ctx) -> void:
+	c.cyl(c.d.x * 0.35, c.d.x * 0.42, c.d.y * 0.45, Vector3(0, c.d.y * 0.22, 0), c.c1, Vector3.ZERO, 10)
+	c.cyl(c.d.x * 0.22, c.d.x * 0.28, c.d.y * 0.25, Vector3(0, c.d.y * 0.55, 0), c.c1, Vector3.ZERO, 10, "", false)
+	c.sph(c.d.x * 0.32, Vector3(0, c.d.y * 0.82, 0), c.c1)
+	c.box(Vector3(c.d.x * 0.5, 0.04, c.d.x * 0.08), Vector3(0, c.d.y * 0.4, c.d.x * 0.2), c.c2, Vector3.ZERO, "", null, false)
+
+
+static func _b_helmet(c: Ctx) -> void:
+	c.sph(c.d.x * 0.48, Vector3(0, c.d.y * 0.45, 0), c.c1)
+	c.box(Vector3(c.d.x * 0.95, c.d.y * 0.2, c.d.z * 0.7), Vector3(0, c.d.y * 0.2, c.d.z * 0.05), c.c1.darkened(0.1), Vector3.ZERO, "", null, false)
+	c.box(Vector3(c.d.x * 0.55, 0.03, 0.08), Vector3(0, c.d.y * 0.55, c.d.z * 0.35), c.c2, Vector3.ZERO, "", null, false)
+	c.only_box_shape(c.d, Vector3(0, c.d.y * 0.5, 0))
+
+
+static func _b_megaphone(c: Ctx) -> void:
+	c.cyl(c.d.x * 0.15, c.d.x * 0.5, c.d.z, Vector3(0, c.d.y * 0.5, 0), c.c1, Vector3(PI / 2, 0, 0), 10)
+	c.box(Vector3(0.05, c.d.y * 0.45, 0.05), Vector3(0, c.d.y * 0.25, c.d.z * 0.15), c.c2)
+	c.cyl(c.d.x * 0.12, c.d.x * 0.12, 0.04, Vector3(0, c.d.y * 0.5, c.d.z * 0.48), Color(0.1, 0.1, 0.12), Vector3(PI / 2, 0, 0), 8, "", false)
+
+
+static func _b_aquarium(c: Ctx) -> void:
+	var glass := c.c2.lerp(Color(0.7, 0.88, 1.0), 0.65)
+	c.box(Vector3(c.d.x, c.d.y * 0.08, c.d.z), Vector3(0, c.d.y * 0.04, 0), c.c1)
+	c.box(Vector3(c.d.x * 0.08, c.d.y * 0.85, c.d.z), Vector3(-c.d.x * 0.46, c.d.y * 0.5, 0), glass, Vector3.ZERO, "", null, false)
+	c.box(Vector3(c.d.x * 0.08, c.d.y * 0.85, c.d.z), Vector3(c.d.x * 0.46, c.d.y * 0.5, 0), glass, Vector3.ZERO, "", null, false)
+	c.box(Vector3(c.d.x, c.d.y * 0.85, c.d.z * 0.08), Vector3(0, c.d.y * 0.5, -c.d.z * 0.46), glass, Vector3.ZERO, "", null, false)
+	c.box(Vector3(c.d.x, c.d.y * 0.85, c.d.z * 0.08), Vector3(0, c.d.y * 0.5, c.d.z * 0.46), glass, Vector3.ZERO, "", null, false)
+	c.box(Vector3(c.d.x * 0.7, 0.03, c.d.z * 0.5), Vector3(0, c.d.y * 0.12, 0), Color(0.55, 0.45, 0.25), Vector3.ZERO, "", null, false)
+	c.only_box_shape(c.d, Vector3(0, c.d.y * 0.5, 0))
+
+
+static func _b_rubber_duck(c: Ctx) -> void:
+	c.sph(c.d.x * 0.42, Vector3(0, c.d.y * 0.35, 0), c.c1)
+	c.sph(c.d.x * 0.28, Vector3(0, c.d.y * 0.7, c.d.z * 0.15), c.c1)
+	c.box(Vector3(c.d.x * 0.25, 0.04, 0.08), Vector3(0, c.d.y * 0.65, c.d.z * 0.42), c.c2, Vector3.ZERO, "", null, false)
+	c.sph(0.025, Vector3(-c.d.x * 0.12, c.d.y * 0.78, c.d.z * 0.28), Color(0.05, 0.05, 0.05), false)
+	c.sph(0.025, Vector3(c.d.x * 0.12, c.d.y * 0.78, c.d.z * 0.28), Color(0.05, 0.05, 0.05), false)
+
+
+static func _b_lava_lamp(c: Ctx) -> void:
+	c.cyl(c.d.x * 0.4, c.d.x * 0.45, c.d.y * 0.2, Vector3(0, c.d.y * 0.1, 0), c.c1, Vector3.ZERO, 8)
+	c.cyl(c.d.x * 0.28, c.d.x * 0.32, c.d.y * 0.65, Vector3(0, c.d.y * 0.52, 0), c.c2.lerp(Color(1.0, 0.4, 0.7), 0.5), Vector3.ZERO, 8)
+	c.sph(c.d.x * 0.12, Vector3(0, c.d.y * 0.45, 0), c.c2, false)
+	c.sph(c.d.x * 0.1, Vector3(0, c.d.y * 0.7, 0), c.c2.lightened(0.1), false)
+	c.cyl(c.d.x * 0.3, c.d.x * 0.3, 0.03, Vector3(0, c.d.y * 0.88, 0), c.c1, Vector3.ZERO, 8, "", false)
+
+
+static func _b_crystal_ball(c: Ctx) -> void:
+	c.cyl(c.d.x * 0.4, c.d.x * 0.45, c.d.y * 0.25, Vector3(0, c.d.y * 0.125, 0), c.c1, Vector3.ZERO, 8)
+	c.sph(c.d.x * 0.45, Vector3(0, c.d.y * 0.55, 0), c.c2.lerp(Color(0.85, 0.95, 1.0), 0.6))

@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/ItemDef.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "pin_signed"
+name_ru = "Кегля с автографом"
+name_en = "Signed Bowling Pin"
+archetype_id = "bowling_pin"
+facets = Array[int]([0])
+value_base = 85
+mass_override = 0.0
+liquid_id = 0
+liquid_amount = 1.0
+flammable = false
+illegal = false
+dusty_default = 0.1
+vendor_affinity = Array[String](["vendor_antique"])
+wearable_slot = "none"
+break_threshold = 5.0
+color = Color(0.9725, 0.9725, 0.9412, 1.0)
+scale = 1.0
+tags = Array[String](["sport"])
+lore_ru = "Подпись нечитаемая. Ценнее."
+lore_en = "Illegible sig. Worth more."

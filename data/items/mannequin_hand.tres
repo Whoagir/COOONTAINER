@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/ItemDef.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "mannequin_hand"
+name_ru = "Рука манекена"
+name_en = "Mannequin Hand"
+archetype_id = "mannequin"
+facets = Array[int]([1, 0])
+value_base = 18
+mass_override = 0.0
+liquid_id = 0
+liquid_amount = 1.0
+flammable = false
+illegal = false
+dusty_default = 0.3
+vendor_affinity = Array[String](["vendor_tiny", "vendor_antique"])
+wearable_slot = "none"
+break_threshold = 6.0
+color = Color(0.9412, 0.8784, 0.8157, 1.0)
+scale = 0.35
+tags = Array[String](["gag"])
+lore_ru = "Показывает куда нести хаул."
+lore_en = "Points where to haul."

@@ -2,6 +2,8 @@ class_name Player
 extends CharacterBody3D
 ## 1P тело (§6). Владелец двигает себя и шлёт трансформ хосту; хост считает хват/урон/смерть.
 
+const _Feel := preload("res://core/FeelLog.gd")
+
 signal died(reason: String)
 signal respawned()
 signal said(text: String)
@@ -23,6 +25,9 @@ const FLAG_PADDLE := 32
 const FLAG_SPRINT := 64
 const FLAG_PAINT := 128
 const FLAG_CROUCH := 256
+## Биты 16..23 flags: длина руки 0..255 (кооп-синк).
+const ARM_FLAG_SHIFT := 16
+const ARM_FLAG_MASK := 0xFF << 16
 
 @onready var head: Node3D = $Head
 @onready var camera: Camera3D = $Head/Camera3D
@@ -64,8 +69,10 @@ var respawn_point: Vector3 = Vector3(0, 1, 0)
 var wanted := 0.0 # уровень интереса ментов
 var in_vehicle: Node = null
 var in_custody := false
+var on_ladder: Node3D = null ## Ladders.LadderProp — лазаем W/S
 var cinematic := false ## катсцена/трейлер: ввод и взгляд отключены, камера не наша
 var cine_move := Vector3.ZERO ## трейлер: куда бежать, пока cinematic
+var _climb_step_t := 0.0
 var _death_reason := ""
 var _yaw := 0.0
 var _pitch := 0.0
@@ -87,6 +94,12 @@ var _paddle: Node3D = null
 var _body_mat: StandardMaterial3D
 var _skin_mat: StandardMaterial3D
 var _ragdoll: Node3D = null
+var _jumped_frame := false ## FeelLog / anti-launch: прыжок в этом physics frame
+var _jump_air_t := 0.0 ## сек после прыжка — не резать vy анти-ракетой
+var _floor_ny := 1.0
+var _floor_hit := ""
+const JUMP_AIR_GRACE := 0.55
+const MAX_UP_NO_JUMP := 2.8 ## потолок «случайного» взлёта (Jump=4.2)
 
 
 func is_local() -> bool:
@@ -115,6 +128,7 @@ func _ready() -> void:
 	for i in pockets_root.get_child_count():
 		pockets.append(null)
 	if is_local():
+		_Feel.ensure()
 		camera.current = true
 		head_mesh.visible = false
 		name_plate.visible = false
@@ -394,6 +408,13 @@ func _input(event: InputEvent) -> void:
 	if paddle_up and _paddle != null and _paddle.has_method("consume_input"):
 		if _paddle.consume_input(event):
 			return
+	# согнуть / разогнуть руку (колесо) — не на весле
+	if event.is_action_pressed("arm_out"):
+		hands.local_nudge_arm(1.0)
+		return
+	if event.is_action_pressed("arm_in"):
+		hands.local_nudge_arm(-1.0)
+		return
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		var m := event as InputEventMouseMotion
 		var wob := 1.0 + drunk * 0.6 * sin(Time.get_ticks_msec() * 0.003)
@@ -430,8 +451,108 @@ func _input(event: InputEvent) -> void:
 		toggle_paddle()
 	elif event.is_action_pressed("pin"):
 		Net.request_action("pin", {"pos": _look_point()})
-	elif event.is_action_pressed("jump") and is_on_floor() and stuck <= 0.0:
+	elif event.is_action_pressed("jump") and is_on_floor() and stuck <= 0.0 and on_ladder == null:
+		# с предметов под ногами не прыгаем — иначе ItemBody + impulse = ракета
+		if _floor_is_item():
+			return
+		var vy0 := velocity.y
+		var n := get_floor_normal()
+		var hit := _feel_floor_name()
 		velocity.y = JUMP
+		_jumped_frame = true
+		_jump_air_t = JUMP_AIR_GRACE
+		_Feel.jump(vy0, velocity.y, true, n.y, hit, global_position, "input")
+
+
+func mount_ladder(ladder: Node3D) -> void:
+	if ladder == null or not is_instance_valid(ladder) or dead or cuffed or in_vehicle or cinematic:
+		return
+	crouching = false
+	_crouch_blend = 0.0
+	_apply_crouch(0.0)
+	on_ladder = ladder
+	velocity = Vector3.ZERO
+	_fall_speed = 0.0
+	var y := clampf(global_position.y, ladder.y_min(), ladder.y_max())
+	global_position = ladder.rail_world(y)
+	if ladder.has_method("face_dir"):
+		look_toward(global_position - ladder.face_dir())
+	reset_physics_interpolation()
+
+
+func dismount_ladder(push: Vector3 = Vector3.ZERO) -> void:
+	if on_ladder == null:
+		return
+	on_ladder = null
+	_climb_step_t = 0.0
+	velocity = push
+	reset_physics_interpolation()
+
+
+func _climb_move(delta: float) -> void:
+	var lad := on_ladder
+	if lad == null or not is_instance_valid(lad) or not lad.has_method("rail_world"):
+		dismount_ladder()
+		return
+	if get_tree().paused or cinematic:
+		return
+	# прыжок / E — слезть (E ещё и через interact toggle)
+	if Input.is_action_just_pressed("jump"):
+		var back: Vector3 = lad.face_dir() if lad.has_method("face_dir") else -head.global_basis.z
+		if Net.is_host():
+			var sys: Node = Game.world.system("Ladders") if Game.world else null
+			if sys and sys.has_method("_host_dismount"):
+				sys._host_dismount(self, back * 2.2 + Vector3.UP * 2.8)
+			else:
+				dismount_ladder(back * 2.2 + Vector3.UP * 2.8)
+		else:
+			Net.request_action("ladder_dismount", {"px": back.x * 2.2, "py": 2.8, "pz": back.z * 2.2})
+		return
+	var vert := Input.get_axis("move_back", "move_forward")
+	var spd := Ladders.CLIMB_SPEED * encumbrance
+	if cuffed:
+		spd *= 0.45
+	var y := global_position.y + vert * spd * delta
+	var ymin: float = lad.y_min()
+	var ymax: float = lad.y_max()
+	# верх — шаг на площадку
+	if vert > 0.25 and global_position.y >= ymax - 0.08:
+		if lad.has_method("top_stand"):
+			global_position = lad.top_stand()
+		if Net.is_host():
+			var sys2: Node = Game.world.system("Ladders") if Game.world else null
+			if sys2 and sys2.has_method("_host_dismount"):
+				sys2._host_dismount(self, Vector3.ZERO)
+			else:
+				dismount_ladder()
+		else:
+			Net.request_action("ladder_dismount", {})
+		return
+	# низ — сойти
+	if vert < -0.25 and global_position.y <= ymin + 0.06:
+		var fwd: Vector3 = lad.face_dir() if lad.has_method("face_dir") else -head.global_basis.z
+		if Net.is_host():
+			var sys3: Node = Game.world.system("Ladders") if Game.world else null
+			if sys3 and sys3.has_method("_host_dismount"):
+				sys3._host_dismount(self, fwd * 1.25)
+			else:
+				dismount_ladder(fwd * 1.25)
+		else:
+			Net.request_action("ladder_dismount", {"px": fwd.x * 1.25, "pz": fwd.z * 1.25})
+		return
+	y = clampf(y, ymin, ymax)
+	global_position = lad.rail_world(y)
+	velocity = Vector3.ZERO
+	if absf(vert) > 0.15:
+		_climb_step_t -= delta
+		if _climb_step_t <= 0.0:
+			_climb_step_t = 0.28
+			AudioBus.play_at("thud", global_position, -16.0, 0.12)
+	# взгляд свободный; тело чуть к лестнице
+	head.rotation.y = _yaw
+	camera.rotation.x = _pitch
+	if Input.is_action_pressed("sprint"):
+		pass # не ускоряем — иначе проскакивают перекладины
 
 
 func _local_use() -> void:
@@ -507,7 +628,12 @@ func _physics_process(delta: float) -> void:
 			camera.global_position = camera.global_position.lerp(_ragdoll.global_position + Vector3(0, 1.2, 0), delta * 3.0)
 		return
 	if is_local():
-		_local_move(delta)
+		if on_ladder != null and is_instance_valid(on_ladder):
+			_climb_move(delta)
+		else:
+			if on_ladder != null:
+				on_ladder = null
+			_local_move(delta)
 		_local_send()
 	else:
 		_remote_move(delta)
@@ -530,7 +656,7 @@ func _local_move(delta: float) -> void:
 				_land_dip = clampf(-0.06 * (land_spd / 3.0), -0.12, 0.0)
 			if land_spd > 6.0:
 				AudioBus.play_at("thud", global_position, -10.0)
-				shake(clampf(land_spd / 10.0, 0.5, 1.0))
+				shake(clampf(land_spd / 10.0, 0.5, 1.0), "land")
 			if _fall_speed < -9.0:
 				take_damage((-_fall_speed - 9.0) * 6.0, "fall")
 		_fall_speed = 0.0
@@ -544,7 +670,7 @@ func _local_move(delta: float) -> void:
 		dir = cine_move.normalized()
 		look_toward(global_position + dir)
 	sprinting = Input.is_action_pressed("sprint") and dir.length() > 0.1 and stuck <= 0.0 and not crouching
-	crouching = Input.is_action_pressed("crouch") and not cinematic and stuck <= 0.0 and not dead and not in_vehicle
+	crouching = Input.is_action_pressed("crouch") and not cinematic and stuck <= 0.0 and not dead and not in_vehicle and on_ladder == null
 	if crouching:
 		sprinting = false
 	_crouch_blend = move_toward(_crouch_blend, 1.0 if crouching else 0.0, delta * 9.0)
@@ -563,19 +689,69 @@ func _local_move(delta: float) -> void:
 		accel = 0.8
 	velocity.x = move_toward(velocity.x, want.x, accel * delta * spd)
 	velocity.z = move_toward(velocity.z, want.z, accel * delta * spd)
+	var vy_pre := velocity.y
 	move_and_slide()
+	_feel_after_slide(vy_pre)
+	_anti_launch(delta)
+	_jumped_frame = false
 	# бег с хрупким — шатает (§6.1)
 	var held := hands.any_held()
 	if held and sprinting and held.def.is_fragile() and randf() < 0.004:
 		Net.request_release(0, 1.0)
 		say(tr("HANDS_SLIPPED"))
-	# толкаем вещи
+	# толкаем вещи (не ту, что несём — у неё exception, но slide всё равно ловит)
 	for i in get_slide_collision_count():
 		var col := get_slide_collision(i)
 		var b := col.get_collider()
 		if b is RigidBody3D and Net.is_host():
+			if b is ItemBody and hands.is_holding(b):
+				continue
+			# стоим сверху — не пинать вниз/вверх, иначе вещь вышибает игрока ракетой
+			if col.get_normal().y > 0.45:
+				continue
 			b.apply_central_impulse(-col.get_normal() * 0.6 * minf(velocity.length(), 4.0))
 	# бобинг камеры — в _camera_feel, чтобы не драться с dip/shake/drunk
+
+
+func _floor_is_item() -> bool:
+	if not is_on_floor():
+		return false
+	var n := get_last_slide_collision()
+	if n == null:
+		return false
+	return n.get_collider() is ItemBody
+
+
+func _anti_launch(delta: float) -> void:
+	if _jump_air_t > 0.0:
+		_jump_air_t = maxf(0.0, _jump_air_t - delta)
+		return
+	# случайный взлёт с кочек/вещами под ногами (логи: LAUNCH vy=9..15 без jump)
+	if velocity.y > MAX_UP_NO_JUMP:
+		_Feel.launch(velocity.y, is_on_floor(), _floor_ny, _floor_hit, global_position, false)
+		velocity.y = MAX_UP_NO_JUMP
+
+
+func _feel_floor_name() -> String:
+	if not is_on_floor():
+		return "-"
+	var n := get_last_slide_collision()
+	if n == null:
+		return "floor?"
+	var c := n.get_collider()
+	if c == null:
+		return "?"
+	return str(c.name)
+
+
+func _feel_after_slide(vy_pre: float) -> void:
+	_floor_ny = get_floor_normal().y if is_on_floor() else -1.0
+	_floor_hit = _feel_floor_name()
+	# только реальные аномалии на полу; после прыжка floor=false — не спамить steep_floor
+	if velocity.y > JUMP * 1.15 and _jump_air_t <= 0.0:
+		_Feel.launch(velocity.y, is_on_floor(), _floor_ny, _floor_hit, global_position, _jumped_frame)
+	elif _jumped_frame and is_on_floor() and _floor_ny < 0.75:
+		_Feel.jump(vy_pre, velocity.y, true, _floor_ny, _floor_hit, global_position, "steep_floor")
 
 
 func _local_send() -> void:
@@ -591,6 +767,7 @@ func _local_send() -> void:
 	if paddle_up: _flags |= FLAG_PADDLE
 	if sprinting: _flags |= FLAG_SPRINT
 	if crouching: _flags |= FLAG_CROUCH
+	_flags |= (int(round(hands.arm_len_norm() * 255.0)) & 0xFF) << ARM_FLAG_SHIFT
 	Net.send_player_state(global_position, _yaw, _pitch, _flags)
 
 
@@ -604,6 +781,8 @@ func apply_remote_state(pos: Vector3, yaw: float, pitch: float, flags: int) -> v
 	set_talking(flags & FLAG_TALK != 0)
 	paddle_up = flags & FLAG_PADDLE != 0
 	_update_paddle_visual()
+	if not is_local():
+		hands.set_arm_len_norm(float((flags >> ARM_FLAG_SHIFT) & 0xFF) / 255.0)
 	if Net.is_host():
 		# хост: применяет состояние ввода (гость двигает себя; хост считает урон/хват)
 		pass
@@ -698,7 +877,7 @@ func take_damage(v: float, reason: String) -> void:
 		return
 	hp -= v
 	if is_local() and reason != "fire" and v > 1.0:
-		shake(clampf(v / 20.0, 0.5, 1.0))
+		shake(clampf(v / 20.0, 0.5, 1.0), "dmg:%s" % reason)
 	if hp <= 0.0:
 		die(reason)
 
@@ -743,6 +922,8 @@ func on_puddle(liquid: int, slip_amount: float) -> void:
 func die(reason: String) -> void:
 	if dead or not Net.is_host():
 		return
+	if on_ladder:
+		dismount_ladder()
 	dead = true
 	hp = 0.0
 	set_burning(false)
@@ -962,9 +1143,15 @@ func _anim_arms(delta: float) -> void:
 		_arm_smooth_r = want_r
 		_arm_smooth_l = want_l
 		_arm_smooth_init = true
-	var follow := 18.0 if (held_r or held_l or both) else 14.0
-	_arm_smooth_r = _arm_smooth_r.lerp(want_r, clampf(delta * follow, 0.0, 1.0))
-	_arm_smooth_l = _arm_smooth_l.lerp(want_l, clampf(delta * follow, 0.0, 1.0))
+	# с вещью — без сглаживания ладони, иначе предмет/кулак пляшут друг относительно друга
+	if held_r or both:
+		_arm_smooth_r = want_r
+	else:
+		_arm_smooth_r = _arm_smooth_r.lerp(want_r, clampf(delta * 14.0, 0.0, 1.0))
+	if held_l or both:
+		_arm_smooth_l = want_l
+	else:
+		_arm_smooth_l = _arm_smooth_l.lerp(want_l, clampf(delta * 14.0, 0.0, 1.0))
 	hands.hand_r.position = _arm_smooth_r
 	hands.hand_l.position = _arm_smooth_l
 	_orient_fp_arm(hands.hand_r, 1.0)
@@ -1002,17 +1189,20 @@ func _anim_arms(delta: float) -> void:
 		_leg_r.rotation.x = lerpf(_leg_r.rotation.x, -swing * leg_amp, delta * 14.0)
 	if _rig_arm_l and _rig_arm_r:
 		var carrying := held_r or held_l
-		var target_l := deg_to_rad(-70.0) if carrying else -swing * 0.6
-		var target_r := deg_to_rad(-70.0) if carrying else swing * 0.6
+		var climb := on_ladder != null
+		var target_l := deg_to_rad(-110.0) if climb else (deg_to_rad(-70.0) if carrying else -swing * 0.6)
+		var target_r := deg_to_rad(-110.0) if climb else (deg_to_rad(-70.0) if carrying else swing * 0.6)
 		_rig_arm_l.rotation.x = lerpf(_rig_arm_l.rotation.x, target_l, delta * 10.0)
 		_rig_arm_r.rotation.x = lerpf(_rig_arm_r.rotation.x, target_r, delta * 10.0)
 	if dead:
 		return
 	if drunk > 0.1:
 		var wob := Vector3(sin(Time.get_ticks_msec() * 0.003), cos(Time.get_ticks_msec() * 0.0021), 0) * drunk * 0.035
-		hands.hand_r.position += wob
-		hands.hand_l.position += wob * 0.7
-	if burning:
+		if not held_r:
+			hands.hand_r.position += wob
+		if not held_l:
+			hands.hand_l.position += wob * 0.7
+	if burning and not held_r and not held_l:
 		hands.hand_r.position.y += sin(Time.get_ticks_msec() * 0.02) * 0.1
 		hands.hand_l.position.y += cos(Time.get_ticks_msec() * 0.02) * 0.1
 
@@ -1021,12 +1211,13 @@ func _anim_arms(delta: float) -> void:
 func _hand_want_local(hand: int, holding: bool, both: bool) -> Vector3:
 	var hang := _arm_hang_r if hand == 0 else _arm_hang_l
 	var side := 1.0 if hand == 0 else -1.0
+	var reach := hands.arm_len
 	if both:
-		# обе руки за одной мышью: общая точка чуть ближе груди, ладони слева/справа
+		# обе руки за одной мышью: общая точка, ладони слева/справа; длина — текущий сгиб
 		var look_w := _look_point()
 		var chest := head.global_position + head.global_basis * Vector3(0.0, -0.18, 0.0)
 		var to := look_w - chest
-		var len := clampf(to.length(), 0.35, Hands.ARM_LEN * 0.78)
+		var len := clampf(to.length(), Hands.ARM_LEN_MIN, reach * 0.95)
 		if to.length() < 0.001:
 			to = -head.global_basis.z
 		var mid_w := chest + to.normalized() * len
@@ -1034,11 +1225,11 @@ func _hand_want_local(hand: int, holding: bool, both: bool) -> Vector3:
 		var palm_w := mid_w + right * (0.14 * side)
 		return hands.to_local(palm_w)
 	if holding:
-		# несём: ладонь чуть впереди и ниже взгляда — вещь читается «в руке»
+		# несём: ладонь на текущей длине руки вдоль взгляда
 		var look_w2 := _look_point()
 		var sh := shoulder_world(hand)
 		var to2 := look_w2 - sh
-		var len2 := clampf(to2.length(), 0.28, Hands.ARM_LEN * 0.62)
+		var len2 := clampf(to2.length(), Hands.ARM_LEN_MIN, reach)
 		if to2.length() < 0.001:
 			to2 = -head.global_basis.z
 		return hands.to_local(sh + to2.normalized() * len2)
@@ -1048,7 +1239,7 @@ func _hand_want_local(hand: int, holding: bool, both: bool) -> Vector3:
 		var sh3 := shoulder_world(hand)
 		var to3 := look_w3 - sh3
 		var raw := to3.length()
-		var len3 := clampf(raw, 0.22, Hands.ARM_LEN)
+		var len3 := clampf(raw, Hands.ARM_LEN_MIN * 0.75, reach)
 		if raw < 0.001:
 			to3 = -head.global_basis.z
 		# не уводим ладонь за спину / в камеру
@@ -1114,9 +1305,10 @@ func _flip_tick(delta: float) -> void:
 
 
 ## Удар камеры: затухающий случайный поворот. Машины/взрывы зовут снаружи.
-func shake(strength: float) -> void:
+func shake(strength: float, src: String = "hit") -> void:
 	var amp := deg_to_rad(1.2) * maxf(strength, 0.0)
 	_shake_off = Vector3(randf_range(-amp, amp), randf_range(-amp, amp), randf_range(-amp, amp))
+	_Feel.cam_shake(strength, src)
 
 
 ## Один композит: bob + приземление + shake + drunk FOV/крен. Не перетирать по отдельности.
@@ -1301,6 +1493,8 @@ func set_cuffed(v: bool) -> void:
 
 
 func enter_vehicle(v: Node) -> void:
+	if on_ladder:
+		dismount_ladder()
 	in_vehicle = v
 	collision_layer = 0
 	body_mesh.visible = false

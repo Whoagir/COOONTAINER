@@ -37,7 +37,7 @@ dirt_override = -1.0
 
 [sub_resource type="Resource" id="s5"]
 script = ExtResource("2")
-item_id = "plant_pot_dead"
+item_id = "snowglobe_divorce"
 xform = Transform3D(0.9781, 0, 0.2079, 0, 1.0, 0, -0.2079, 0, 0.9781, -0.44, 0.0, -0.2)
 nested = Array[String]([])
 locked_override = -1

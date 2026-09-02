@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/ItemDef.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "frame_photo_ex"
+name_ru = "Рамка с бывшим"
+name_en = "Ex Photo Frame"
+archetype_id = "frame_photo"
+facets = Array[int]([0, 1])
+value_base = 8
+mass_override = 0.0
+liquid_id = 0
+liquid_amount = 1.0
+flammable = false
+illegal = false
+dusty_default = 0.3
+vendor_affinity = Array[String](["vendor_tiny"])
+wearable_slot = "none"
+break_threshold = 4.0
+color = Color(0.9098, 0.8784, 0.8157, 1.0)
+scale = 1.0
+tags = Array[String](["fragile"])
+lore_ru = "Лицо выцарапано."
+lore_en = "Face scratched out."

@@ -1,0 +1,4 @@
+keys,ru,en
+LADDER_HINT_ON,[E] Залезть,[E] Climb
+LADDER_HINT_OFF,[E] Слезть / Jump,[E] Get off / Jump
+LADDER_TOAST,Лестница — W/S вверх-вниз, наверху полки.,Ladder — W/S up-down; shelves up top.

@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/ItemDef.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "bust_boss"
+name_ru = "Бюст начальника"
+name_en = "Boss Bust"
+archetype_id = "bust"
+facets = Array[int]([0, 1])
+value_base = 55
+mass_override = 0.0
+liquid_id = 0
+liquid_amount = 1.0
+flammable = false
+illegal = false
+dusty_default = 0.4
+vendor_affinity = Array[String](["vendor_antique"])
+wearable_slot = "none"
+break_threshold = 5.0
+color = Color(0.8157, 0.8157, 0.8471, 1.0)
+scale = 1.0
+tags = Array[String](["fragile"])
+lore_ru = "Бросать приятно."
+lore_en = "Satisfying to drop."

@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/ItemDef.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "snowglobe_hamster"
+name_ru = "Шар с хомяком"
+name_en = "Hamster Snowglobe"
+archetype_id = "snowglobe"
+facets = Array[int]([0])
+value_base = 55
+mass_override = 0.0
+liquid_id = 0
+liquid_amount = 1.0
+flammable = false
+illegal = false
+dusty_default = 0.05
+vendor_affinity = Array[String](["vendor_antique"])
+wearable_slot = "none"
+break_threshold = 3.0
+color = Color(0.6275, 0.502, 0.3137, 1.0)
+scale = 1.0
+tags = Array[String](["fragile", "hamster", "souvenir"])
+lore_ru = "Хомяк машет. Или тонет."
+lore_en = "Hamster waves. Or drowns."

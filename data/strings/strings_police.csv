@@ -8,6 +8,7 @@ POLICE_TRIGGER_CAR_THEFT,Менты: угон,Cops: car theft
 POLICE_TRIGGER_OVERTIME,Менты: овертайм в ячейке,Cops: overtime in the unit
 POLICE_TRIGGER_BLACKLIST_ENTRY,Менты: ты в ЧС этой площадки,Cops: you're blacklisted here
 POLICE_TRIGGER_ARSON,Менты: поджог,Cops: arson
+POLICE_TRIGGER_PROPERTY_THEFT,Менты: кража с участка,Cops: property theft
 POLICE_TOAST_DISPATCH,Менты выехали за %s,Cops dispatched after %s
 POLICE_TOAST_CAUGHT,%s повязали!,%s got busted!
 POLICE_TOAST_FINE,%s оштрафован на $%d,%s fined $%d

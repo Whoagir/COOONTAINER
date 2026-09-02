@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/ItemDef.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "hairdryer_dead"
+name_ru = "Фен сгоревший"
+name_en = "Dead Hairdryer"
+archetype_id = "hairdryer"
+facets = Array[int]([1])
+value_base = 2
+mass_override = 0.0
+liquid_id = 0
+liquid_amount = 1.0
+flammable = true
+illegal = false
+dusty_default = 0.6
+vendor_affinity = Array[String](["vendor_tiny"])
+wearable_slot = "none"
+break_threshold = 25.0
+color = Color(0.3137, 0.3137, 0.3137, 1.0)
+scale = 1.0
+tags = Array[String](["appliance"])
+lore_ru = "Пахнет озоном и поражением."
+lore_en = "Smells of ozone and loss."

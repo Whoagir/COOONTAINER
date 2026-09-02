@@ -85,6 +85,8 @@ SET_ACT_PIN,Пин,Pin
 SET_ACT_VOICE,Голос,Voice
 SET_ACT_PAUSE,Пауза,Pause
 SET_ACT_ALT_USE,Карман / альт,Pocket / alt use
+SET_ACT_ARM_OUT,Рука дальше,Arm out
+SET_ACT_ARM_IN,Рука ближе,Arm in
 SET_LOADING,грузим барахло…,hauling junk…
 SET_LOAD_01,"Ищем вазу, которая ещё не в осколках…","Looking for a vase that isn't shards yet…"
 SET_LOAD_02,Клеим скотч на скотч на скотч…,Taping tape onto tape onto tape…
