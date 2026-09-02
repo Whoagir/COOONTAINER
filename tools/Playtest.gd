@@ -109,7 +109,7 @@ func _timeout(name: String, limit: float = STAGE_TIMEOUT) -> bool:
 func _s_boot() -> void:
 	if _stage_t < 1.5:
 		return
-	var systems := ["Liquids", "Fire", "Auction", "ClearOut", "Vendors", "Casino", "Police", "Janitor", "Vehicles", "Locksmith", "TrailerHub", "Gags", "DayNight", "Jobs", "Interactables"]
+	var systems := ["Liquids", "Fire", "Auction", "ClearOut", "Vendors", "Casino", "Police", "Janitor", "Vehicles", "Locksmith", "TrailerHub", "Gags", "DayNight", "Jobs", "Interactables", "HomeClutter"]
 	var missing: Array = []
 	for s in systems:
 		if w.system(s) == null:
@@ -119,6 +119,12 @@ func _s_boot() -> void:
 	_ok("districts", districts.size() >= 8, "%d districts" % districts.size())
 	var anchors := get_tree().get_nodes_in_group("lot_anchors")
 	_ok("lot_anchors", anchors.size() >= 10, "%d anchors" % anchors.size())
+	var home_n := 0
+	for nid in Net.items:
+		var hb: ItemBody = Net.items[nid] as ItemBody
+		if hb != null and is_instance_valid(hb) and bool(hb.get_meta("home", false)):
+			home_n += 1
+	_ok("home_clutter", home_n >= 30, "%d home items" % home_n)
 	_ok("player_spawn", p != null and p.global_position.length() < 500.0, str(p.global_position.round()))
 	var inter = w.system("Interactables")
 	var vm: Node = inter.get_node_or_null("Vending_0") if inter else null
@@ -200,6 +206,16 @@ func _s_grab() -> void:
 				burning += 1
 		_ok("fire", burning > 0, "%d burning" % burning)
 		Net.despawn_item(b4.net_id)
+	# костёр у трейлера — настоящий очаг: бочка с маслом в нём вспыхивает
+	var fire_sys = w.system("Fire")
+	var camp: Node3D = w.find_marker(Types.District.TRAILER_PARK, "Campfire")
+	if fire_sys and camp and Registry.item("oil_barrel"):
+		var oil: ItemBody = Net.spawn_item("oil_barrel", Transform3D(Basis(), camp.global_position + Vector3(0, 0.6, 0)))
+		oil.freeze = true
+		await get_tree().create_timer(2.0).timeout
+		_ok("campfire_ignites", is_instance_valid(oil) and (oil.lit or oil.burnt), "hearths=%d lit=%s" % [fire_sys.hearths.size(), str(oil.lit if is_instance_valid(oil) else "?")])
+		if is_instance_valid(oil):
+			Net.despawn_item(oil.net_id)
 	_next()
 
 
@@ -373,6 +389,20 @@ func _s_vendor() -> void:
 	_sold = gained
 	_ok("vendor_sale", gained > 0, "%s base=$%d fair=$%d gained=+$%d" % [pick.id, pick.value_base, fair, gained])
 	_ok("vendor_despawn", not Net.items.has(nid), "item removed from world")
+	# крупную вещь на прилавок не поставишь — жёлтая зона на земле перед ним тоже продаёт
+	var st: Vendors.Stand = ven.stands.get("vendor_tiny")
+	if st:
+		var zone_c: Vector3 = st.root.get_meta("sell_zone_center", st.counter_pos() + st.front() * 1.6)
+		var floor_item: ItemBody = Net.spawn_item(pick.id, Transform3D(Basis(), zone_c + Vector3(0, 0.6, 0)))
+		await get_tree().create_timer(1.5).timeout
+		var listed := st.sellable().has(floor_item)
+		var pot2 := Economy.pot
+		if listed:
+			w.handle_action(p.peer_id, "vendor_offer", {"stand": "vendor_tiny", "nid": floor_item.net_id, "amount": floor_item.current_value(Registry.vendor("vendor_tiny"))})
+			await get_tree().create_timer(1.0).timeout
+		_ok("vendor_floor_zone", listed and Economy.pot > pot2, "listed=%s +$%d" % [str(listed), Economy.pot - pot2])
+		if is_instance_valid(floor_item):
+			Net.despawn_item(floor_item.net_id)
 	# фобия: мышь на прилавок к vendor_tiny (§11)
 	var mice: Array = Registry.items_with_tag("mouse")
 	if not mice.is_empty():
@@ -445,6 +475,24 @@ func _s_police() -> void:
 	p.wanted = 0.0
 	p.set_cuffed(false)
 	p.in_custody = false
+	# решётка камеры: на старте поднята (проём свободен), при посадке опускается, после срока снова поднимается
+	var door: Node3D = w.find_marker(Types.District.POLICE, "JailDoor")
+	if door:
+		var base: float = door.get_meta("base_y", door.position.y)
+		var open_y := base + Police.DOOR_SLIDE
+		_ok("jail_open_start", absf(door.position.y - open_y) < 0.05, "y=%.2f open=%.2f" % [door.position.y, open_y])
+		# гасим дело/арест из предыдущих проверок, чтобы машина с ментами не закрыла дверь посреди теста
+		for c in pol._cases.values().duplicate():
+			pol._end_case(c, "playtest")
+		for peer in pol._custody.keys().duplicate():
+			pol._release(peer, "playtest")
+		await get_tree().create_timer(1.5).timeout
+		pol._set_jail_door(true)
+		await get_tree().create_timer(1.5).timeout
+		_ok("jail_closes", absf(door.position.y - base) < 0.05, "y=%.2f base=%.2f" % [door.position.y, base])
+		pol._set_jail_door(false)
+		await get_tree().create_timer(1.5).timeout
+		_ok("jail_reopens", absf(door.position.y - open_y) < 0.05, "y=%.2f open=%.2f" % [door.position.y, open_y])
 	_next()
 
 

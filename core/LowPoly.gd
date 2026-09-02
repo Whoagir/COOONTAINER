@@ -108,9 +108,11 @@ static func chamfer_box(size: Vector3, bevel: float) -> ArrayMesh:
 
 
 static func _tri(st: SurfaceTool, a: Vector3, b: Vector3, c: Vector3) -> void:
-	# выпуклое тело вокруг начала координат: нормаль должна смотреть от центра
+	# выпуклое тело вокруг начала координат. Лицевая грань в Godot — обход ПО ЧАСОВОЙ снаружи,
+	# т.е. правовинтовая нормаль (b-a)×(c-a) должна смотреть К центру; иначе коробка «вывернута»
+	# (видны только дальние внутренние стенки).
 	var n := (b - a).cross(c - a)
-	if n.dot(a + b + c) < 0.0:
+	if n.dot(a + b + c) > 0.0:
 		var t := b
 		b = c
 		c = t

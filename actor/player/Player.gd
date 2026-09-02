@@ -110,6 +110,9 @@ func _ready() -> void:
 		head_mesh.visible = false
 		name_plate.visible = false
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+		Game.world_mode_changed.connect(func(m: int, _prev: int):
+			if m != Types.WorldMode.AUCTION:
+				lower_paddle())
 	else:
 		camera.current = false
 	set_process_input(is_local())
@@ -511,7 +514,8 @@ func _local_move(delta: float) -> void:
 		_fall_speed = 0.0
 	_was_on_floor = on_floor
 	var dir := Vector3.ZERO
-	if not get_tree().paused and not cuffed and not in_custody and not cinematic:
+	# в камере ходить можно (решётка держит), в наручниках — вполсилы
+	if not get_tree().paused and not cinematic:
 		var input := Input.get_vector("move_left", "move_right", "move_forward", "move_back")
 		dir = (head.global_basis * Vector3(input.x, 0, input.y)).normalized() if input.length() > 0.01 else Vector3.ZERO
 	elif cinematic and cine_move.length() > 0.01:
@@ -855,10 +859,16 @@ func _process(delta: float) -> void:
 
 # ------------------------------------------------------------------ процедурная анимация рук
 
-var _arm_base_r := Vector3(0.32, -0.3, -0.45)
-var _arm_base_l := Vector3(-0.32, -0.3, -0.45)
+# покой: руки опущены к нижним углам экрана, не торчат перед лицом
+var _arm_base_r := Vector3(0.36, -0.42, -0.42)
+var _arm_base_l := Vector3(-0.36, -0.42, -0.42)
+# с вещью / у цели рука поднимается к центру, куда смотрит мышь
+const _ARM_UP_R := Vector3(-0.06, 0.13, -0.04)
+const _ARM_UP_L := Vector3(0.06, 0.13, -0.04)
 var _arm_reach := 0.0
 var _arm_swing := 0.0
+var _arm_aim := 0.0
+var _arm_aim_t := 0.0
 
 
 func _anim_arms(delta: float) -> void:
@@ -885,11 +895,23 @@ func _anim_arms(delta: float) -> void:
 	if heavy:
 		drop -= 0.04
 	var reach := Vector3(0, 0.05, -0.18) * _arm_reach
-	var hold_r := Vector3(-0.08, 0.05, -0.05) if held_r else Vector3.ZERO
-	var hold_l := Vector3(0.08, 0.05, -0.05) if held_l else Vector3.ZERO
+	# правая рука тянется к тому, на что смотрим (вещь в радиусе хвата) — «рука за мышкой»
+	if is_local() and not held_r:
+		_arm_aim_t -= delta
+		if _arm_aim_t <= 0.0:
+			_arm_aim_t = 0.1
+			var t := look_target()
+			var want_aim := (t is ItemBody) or (t != null and t.has_method("interact"))
+			_arm_aim = lerpf(_arm_aim, 1.0 if want_aim else 0.0, 0.5)
+	else:
+		_arm_aim = 0.0
+	var hold_r := _ARM_UP_R + Vector3(-0.02, 0.04, -0.01) if held_r else (_ARM_UP_R + Vector3(-0.04, 0.0, -0.12)) * _arm_aim
+	var hold_l := _ARM_UP_L + Vector3(0.02, 0.04, -0.01) if held_l else Vector3.ZERO
+	if paddle_up:
+		hold_r = _ARM_UP_R + Vector3(-0.04, 0.08, -0.03)
 	if hands.two_hands_same:
-		hold_r = Vector3(-0.14, 0.02, -0.08)
-		hold_l = Vector3(0.14, 0.02, -0.08)
+		hold_r = _ARM_UP_R + Vector3(-0.08, 0.01, -0.04)
+		hold_l = _ARM_UP_L + Vector3(0.08, 0.01, -0.04)
 	hands.hand_r.position = _arm_base_r + Vector3(0, bob + drop, sway if not held_r else 0.0) + reach + hold_r
 	hands.hand_l.position = _arm_base_l + Vector3(0, bob + drop, -sway if not held_l else 0.0) + reach * 0.5 + hold_l
 	_life_t += delta
@@ -1076,15 +1098,32 @@ func read_document(b: ItemBody) -> void:
 
 
 func toggle_paddle() -> void:
-	if Game.world_mode != Types.WorldMode.AUCTION:
+	if paddle_up:
+		lower_paddle()
+		return
+	if Game.world_mode != Types.WorldMode.AUCTION or in_custody or in_vehicle:
 		say(tr("PADDLE_NOT_HERE"))
 		return
-	paddle_up = not paddle_up
+	# весло — только у ангара с торгами, а не где угодно по городу
+	var hud = Game.world.hud if Game.world else null
+	if hud and "bid_panel" in hud and hud.bid_panel and not hud.bid_panel.visible:
+		say(tr("PADDLE_NOT_HERE"))
+		return
+	paddle_up = true
+	_update_paddle_visual()
+	if hud and hud.has_method("set_bid_paddle_up"):
+		hud.set_bid_paddle_up(true)
+	Net.request_action("paddle_show", {})
+
+
+## Убрать весло (B повторно, Esc/R с веслом, конец торгов, арест, смерть).
+func lower_paddle() -> void:
+	if not paddle_up:
+		return
+	paddle_up = false
 	_update_paddle_visual()
 	if Game.world and Game.world.hud and Game.world.hud.has_method("set_bid_paddle_up"):
-		Game.world.hud.set_bid_paddle_up(paddle_up)
-	if paddle_up:
-		Net.request_action("paddle_show", {})
+		Game.world.hud.set_bid_paddle_up(false)
 
 
 func _update_paddle_visual() -> void:

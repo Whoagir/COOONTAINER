@@ -70,9 +70,9 @@ func send_full_state_to(peer: int) -> void:
 		if t == null:
 			continue
 		if t.kind == "vending":
-			Net._rpc_event.rpc_id(peer, "interactable", {"id": t.id, "kind": "vending", "act": "sync", "stuck": t.stuck})
+			Net.send_event(peer, "interactable", {"id": t.id, "kind": "vending", "act": "sync", "stuck": t.stuck})
 		elif t.kind == "jukebox":
-			Net._rpc_event.rpc_id(peer, "interactable", {"id": t.id, "kind": "jukebox", "act": "sync", "track": t.track})
+			Net.send_event(peer, "interactable", {"id": t.id, "kind": "jukebox", "act": "sync", "track": t.track})
 
 
 func on_net_event(kind: String, data: Dictionary) -> void:

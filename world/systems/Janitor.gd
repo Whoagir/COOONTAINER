@@ -539,7 +539,7 @@ func on_net_event(kind: String, data: Dictionary) -> void:
 
 func send_full_state_to(peer: int) -> void:
 	if boss and is_instance_valid(boss):
-		Net._rpc_event.rpc_id(peer, "janitor_boss", {"pos": boss.global_position})
+		Net.send_event(peer, "janitor_boss", {"pos": boss.global_position})
 	if active:
-		Net._rpc_event.rpc_id(peer, "janitor_begin", _begin_dict())
-		Net._rpc_event.rpc_id(peer, "janitor_state", _state_dict())
+		Net.send_event(peer, "janitor_begin", _begin_dict())
+		Net.send_event(peer, "janitor_state", _state_dict())

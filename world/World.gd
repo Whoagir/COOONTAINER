@@ -460,7 +460,7 @@ func on_net_event(kind: String, data: Dictionary) -> void:
 
 func send_full_state_to(peer: int) -> void:
 	for d in Game.save.get("unlocked_districts", []):
-		Net._rpc_event.rpc_id(peer, "district_unlocked", {"d": int(d), "quiet": true})
+		Net.send_event(peer, "district_unlocked", {"d": int(d), "quiet": true})
 	for s in systems_root.get_children():
 		if s.has_method("send_full_state_to"):
 			s.send_full_state_to(peer)
@@ -468,9 +468,9 @@ func send_full_state_to(peer: int) -> void:
 		var p: Player = Net.players[pid]
 		if p and is_instance_valid(p):
 			var ids: Array = [p.hands.held[0].net_id if p.hands.held[0] else 0, p.hands.held[1].net_id if p.hands.held[1] else 0]
-			Net._rpc_event.rpc_id(peer, "hands", {"peer": pid, "h": ids, "same": p.hands.two_hands_same})
+			Net.send_event(peer, "hands", {"peer": pid, "h": ids, "same": p.hands.two_hands_same})
 			if p.worn:
-				Net._rpc_event.rpc_id(peer, "wear", {"peer": pid, "nid": p.worn.net_id, "on": true})
+				Net.send_event(peer, "wear", {"peer": pid, "nid": p.worn.net_id, "on": true})
 
 
 # ------------------------------------------------------------------ режимы

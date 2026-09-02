@@ -128,6 +128,23 @@ func _run() -> void:
 	if w.hud:
 		w.hud.visible = false
 
+	# --probe=NodeName[,dist] — один кадр на любой узел мира с двух сторон (отладка пропсов)
+	for a in OS.get_cmdline_user_args():
+		if str(a).begins_with("--probe="):
+			var parts := str(a).substr(8).split(",")
+			var target := get_tree().root.find_child(parts[0], true, false) as Node3D
+			var dist := float(parts[1]) if parts.size() > 1 else 4.0
+			if target:
+				var c := target.global_position + Vector3(0, 0.8, 0)
+				await _snap("probe_%s_a" % parts[0], c + Vector3(dist * 0.7, dist * 0.45, dist * 0.7), c, 50.0)
+				await _snap("probe_%s_b" % parts[0], c + Vector3(-dist * 0.7, dist * 0.45, -dist * 0.7), c, 50.0)
+			else:
+				print("[artshot] probe: node '%s' not found" % parts[0])
+			print("[artshot] done: %d shots in %s" % [_n, _dir])
+			load("res://tools/Smoke.gd").cleanup_test_slot()
+			get_tree().quit()
+			return
+
 	# 1. трейлер-парк, ракурс кей-арта: низкая камера, пикап + трейлер + закат
 	# пикап игрока у трейлера, как на арте (свой, чтобы не снимать витрину под крышей)
 	var veh_pos := trailer + Vector3(7.5, 0.6, 6.0)
@@ -140,7 +157,10 @@ func _run() -> void:
 			await _wait(0.8)
 			print("[artshot] pickup at %s (wanted %s)" % [v.global_position, veh_pos])
 			veh_pos = v.global_position
+			# лут падает в кузов с высоты — заодно проверяем, что пикап не проседает в грунт (_sink_check)
 			_spawn_pile(v.global_position + Vector3(0, 1.2, 0.9), _hero_ids().slice(0, 5), 0.35)
+			await _wait(2.0)
+			print("[artshot] pickup after load y=%.2f" % v.global_position.y)
 	_spawn_pile(trailer + Vector3(3, 0, 6), _hero_ids().slice(0, 8), 1.4)
 	await _wait(1.5)
 	await _snap("trailer_park", trailer + Vector3(-9, 2.2, 13), trailer + Vector3(2, 1.2, 2), 58.0)
@@ -148,7 +168,14 @@ func _run() -> void:
 
 	# 2. пикап крупно, солнце за камерой
 	if v:
-		await _snap("pickup", veh_pos + Vector3(5.2, 1.7, 4.6), veh_pos + Vector3(0, 0.7, 0), 48.0)
+		# три четверти сзади-справа, низко — как на кей-арте (кузов с лутом, кабина впереди)
+		var vb: Basis = v.global_basis
+		var cam_rel: Vector3 = vb * Vector3(3.4, 1.35, 4.6)
+		await _snap("pickup", v.global_position + cam_rel, v.global_position + vb * Vector3(0, 0.9, -0.6), 50.0)
+		var cam_f: Vector3 = vb * Vector3(-3.6, 1.2, -4.4)
+		await _snap("pickup_front", v.global_position + cam_f, v.global_position + vb * Vector3(0, 0.8, 0.3), 50.0)
+		await _snap("pickup_side_low", v.global_position + vb * Vector3(6.0, 0.6, 0.5), v.global_position + vb * Vector3(0, 0.6, 0), 45.0)
+		print("[artshot] pickup y=%.2f wheels=%s" % [v.global_position.y, str(v._wheels.map(func(wn): return "%.2f" % wn.global_position.y))])
 
 	# 3. хантеры: стартуем сессию, ждём пока встанут, снимаем лица
 	var ha := _anchor_in(Types.District.HANGAR)
@@ -196,6 +223,8 @@ func _run() -> void:
 	var stand: Node3D = w.find_marker(Types.District.VENDORS, "VendorStand_vendor_tiny")
 	if stand:
 		await _snap("vendor", stand.global_position + Vector3(0, 1.6, 3.0), stand.global_position + Vector3(0, 1.2, 0), 50.0)
+		# жёлтая зона «сюда хлам» перед прилавком — глазами игрока, который подходит с вещью
+		await _snap("vendor_zone", stand.global_position + Vector3(1.2, 1.7, 4.2), stand.global_position + Vector3(0, 0.3, 1.6), 62.0)
 
 	# 7. доска объявлений + меню вакансий (то, что видит игрок без денег)
 	var jobs = w.system("Jobs")

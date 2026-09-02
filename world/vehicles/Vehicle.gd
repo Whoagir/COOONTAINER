@@ -14,6 +14,7 @@ const TYPES := {
 }
 const CHASSIS_BOTTOM := 0.375
 const WALL_T := 0.22
+const BEVEL := 0.06
 const INPUT_SEND_SEC := 0.1
 const FLIP_SEC := 4.0
 const WATER_Y := -1.0
@@ -172,11 +173,43 @@ func _mat(c: Color) -> StandardMaterial3D:
 	return _mats[key]
 
 
-func _box(size: Vector3, pos: Vector3, color: Color, collide := true, parent: Node3D = null) -> MeshInstance3D:
+func _bevel(size: Vector3) -> float:
+	var smallest := minf(minf(size.x, size.y), size.z)
+	return clampf(smallest * 0.18, 0.04, 0.08)
+
+
+func _mat_glass() -> StandardMaterial3D:
+	if not _mats.has(-1):
+		var m := StandardMaterial3D.new()
+		m.albedo_color = Color(0.55, 0.72, 0.88, 0.42)
+		m.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+		m.roughness = 0.08
+		m.metallic = 0.15
+		m.cull_mode = BaseMaterial3D.CULL_DISABLED
+		m.emission_enabled = true
+		m.emission = Color(0.35, 0.5, 0.65)
+		m.emission_energy_multiplier = 0.35
+		_mats[-1] = m
+	return _mats[-1]
+
+
+func _mat_emissive(c: Color, energy: float = 2.0) -> StandardMaterial3D:
+	var key := -2 - c.to_rgba32()
+	if not _mats.has(key):
+		var m := StandardMaterial3D.new()
+		m.albedo_color = c
+		m.emission_enabled = true
+		m.emission = c
+		m.emission_energy_multiplier = energy
+		_mats[key] = m
+	return _mats[key]
+
+
+func _vis(size: Vector3, pos: Vector3, color: Color, parent: Node3D = null) -> MeshInstance3D:
 	var mi := MeshInstance3D.new()
 	var smallest := minf(minf(size.x, size.y), size.z)
-	if smallest >= 0.1:
-		mi.mesh = LowPoly.chamfer_box(size, clampf(smallest * 0.18, 0.015, 0.05)) # рубленые панели, как на арте
+	if smallest >= 0.06:
+		mi.mesh = LowPoly.chamfer_box(size, _bevel(size))
 	else:
 		var bm := BoxMesh.new()
 		bm.size = size
@@ -184,6 +217,29 @@ func _box(size: Vector3, pos: Vector3, color: Color, collide := true, parent: No
 	mi.material_override = _mat(color)
 	mi.position = pos
 	(parent if parent else _visual).add_child(mi)
+	return mi
+
+
+func _glass(size: Vector3, pos: Vector3, parent: Node3D = null) -> MeshInstance3D:
+	var mi := MeshInstance3D.new()
+	mi.mesh = LowPoly.chamfer_box(size, _bevel(size) * 0.5)
+	mi.material_override = _mat_glass()
+	mi.position = pos
+	(parent if parent else _visual).add_child(mi)
+	return mi
+
+
+func _emis(size: Vector3, pos: Vector3, color: Color, energy: float = 2.0, parent: Node3D = null) -> MeshInstance3D:
+	var mi := MeshInstance3D.new()
+	mi.mesh = LowPoly.chamfer_box(size, _bevel(size) * 0.6)
+	mi.material_override = _mat_emissive(color, energy)
+	mi.position = pos
+	(parent if parent else _visual).add_child(mi)
+	return mi
+
+
+func _box(size: Vector3, pos: Vector3, color: Color, collide := true, parent: Node3D = null) -> MeshInstance3D:
+	var mi := _vis(size, pos, color, parent)
 	if collide:
 		var cs := CollisionShape3D.new()
 		var bs := BoxShape3D.new()
@@ -198,15 +254,44 @@ func _build() -> void:
 	_visual = Node3D.new()
 	_visual.name = "Visual"
 	add_child(_visual)
-	# шасси = пол кузова и кабины: толстый (≈0.4 м), чтобы вещи не проскакивали сквозь него на 30 Гц
 	var top := CHASSIS_BOTTOM + body_size.y
 	var chassis_y := CHASSIS_BOTTOM + body_size.y * 0.5
+	_build_chassis(top, chassis_y)
+	match vtype:
+		"pickup_rusty":
+			_build_pickup(top)
+		"van_leaky":
+			_build_van(top)
+		"truck_fat":
+			_build_truck(top)
+		_:
+			_build_pickup(top)
+	_build_seats_doors(top)
+	_build_bed_zone(top)
+	for sx in [-1.0, 1.0]:
+		var wf := _make_wheel(Vector3(sx * track * 0.5, wheel_y, -axle_front), true)
+		var wr := _make_wheel(Vector3(sx * track * 0.5, wheel_y, axle_rear), false)
+		_front_wheels.append(wf)
+		_rear_wheels.append(wr)
+		_wheels.append(wf)
+		_wheels.append(wr)
+	_build_dust()
+	_price_label = Label3D.new()
+	_price_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	_price_label.font_size = 72
+	_price_label.outline_size = 12
+	_price_label.pixel_size = 0.006
+	_price_label.modulate = Color(1, 0.9, 0.3)
+	_price_label.position = Vector3(0, top + cab_size.y + 0.9, cab_z)
+	add_child(_price_label)
+	_refresh_label()
+
+
+func _build_chassis(top: float, chassis_y: float) -> void:
 	var dark := body_color.darkened(0.3)
-	var grey := Color(0.3, 0.3, 0.32)
 	if bed_hole.x <= 0.0 or bed_hole.y <= 0.0:
 		_box(body_size, Vector3(0, chassis_y, 0), dark)
 	else:
-		# дыра в полу насквозь: шасси из 4 кусков вокруг неё — вещь меньше дыры падает на дорогу
 		var z0 := -body_size.z * 0.5
 		var z1 := body_size.z * 0.5
 		var hz0 := bed_z + bed_hole_z - bed_hole.y * 0.5
@@ -219,59 +304,228 @@ func _build() -> void:
 		for sx in [-1.0, 1.0]:
 			_box(Vector3(side_w, body_size.y, bed_hole.y), Vector3(sx * (bed_hole.x * 0.5 + side_w * 0.5), chassis_y, (hz0 + hz1) * 0.5), dark)
 		var rust := Color(0.45, 0.2, 0.08)
-		_box(Vector3(bed_hole.x + 0.1, 0.02, 0.05), Vector3(0, top + 0.01, hz0 - 0.025), rust, false)
-		_box(Vector3(bed_hole.x + 0.1, 0.02, 0.05), Vector3(0, top + 0.01, hz1 + 0.025), rust, false)
-	# --- кабина
+		_vis(Vector3(bed_hole.x + 0.1, 0.02, 0.05), Vector3(0, top + 0.01, hz0 - 0.025), rust)
+		_vis(Vector3(bed_hole.x + 0.1, 0.02, 0.05), Vector3(0, top + 0.01, hz1 + 0.025), rust)
+
+
+func _build_pickup(top: float) -> void:
 	var cab_front := cab_z - cab_size.z * 0.5
 	var cab_back := cab_z + cab_size.z * 0.5
 	var front_end := cab_front - hood_length
-	_box(Vector3(cab_size.x * 0.96, 0.4, hood_length), Vector3(0, top + 0.2, cab_front - hood_length * 0.5), body_color)
-	_box(Vector3(cab_size.x, 0.36, 0.4), Vector3(0, top + 0.18, cab_front + 0.2), dark)
+	var rust := Color(0.45, 0.22, 0.1)
+	var grey := Color(0.32, 0.32, 0.34)
+	var chrome := Color(0.72, 0.72, 0.75)
+	var bw := cab_size.x
+	# капот — высокий блок, как на кей-арте
+	_vis(Vector3(bw * 0.94, 0.62, hood_length), Vector3(0, top + 0.31, cab_front - hood_length * 0.5), body_color)
+	_vis(Vector3(bw * 0.88, 0.1, hood_length * 0.92), Vector3(0, top + 0.6, cab_front - hood_length * 0.5), body_color.darkened(0.08))
+	_vis(Vector3(0.06, 0.04, hood_length * 0.7), Vector3(0, top + 0.58, cab_front - hood_length * 0.45), body_color.darkened(0.12))
+	# решётка + бампер
+	_vis(Vector3(bw * 0.58, 0.32, 0.07), Vector3(0, top + 0.2, front_end + 0.035), grey)
+	for i in 5:
+		_vis(Vector3(0.035, 0.24, 0.035), Vector3(-0.22 + i * 0.11, top + 0.2, front_end + 0.025), Color(0.12, 0.12, 0.13))
+	_vis(Vector3(bw * 0.94, 0.16, 0.14), Vector3(0, top + 0.05, front_end - 0.05), rust)
+	# круглые фары
 	for sx in [-1.0, 1.0]:
-		for z in [cab_front + 0.04, cab_back - 0.04]:
-			_box(Vector3(0.08, cab_size.y, 0.08), Vector3(sx * (cab_size.x * 0.5 - 0.04), top + cab_size.y * 0.5, z), body_color)
-		_box(Vector3(0.05, 0.6, cab_size.z - 0.16), Vector3(sx * (cab_size.x * 0.5 - 0.025), top + 0.3, cab_z), body_color)
-		_box(Vector3(0.5, 0.3, 0.5), Vector3(sx * 0.42, top + 0.15, cab_z + 0.15), Color(0.3, 0.25, 0.2), false)
-		# зеркало
-		_box(Vector3(0.12, 0.1, 0.04), Vector3(sx * (cab_size.x * 0.5 + 0.1), top + 0.8, cab_front + 0.1), grey, false)
-	_box(Vector3(cab_size.x, 0.06, cab_size.z), Vector3(0, top + cab_size.y - 0.03, cab_z), body_color)
-	_box(Vector3(cab_size.x, 0.6, 0.05), Vector3(0, top + 0.3, cab_back - 0.025), body_color)
-	# руль
-	var wheel := MeshInstance3D.new()
-	var cm := CylinderMesh.new()
-	cm.top_radius = 0.18
-	cm.bottom_radius = 0.18
-	cm.height = 0.03
-	cm.radial_segments = 10
-	wheel.mesh = cm
-	wheel.material_override = _mat(Color(0.1, 0.1, 0.1))
-	wheel.position = Vector3(-0.42, top + 0.62, cab_front + 0.5)
-	wheel.rotation.x = 1.1
-	_visual.add_child(wheel)
-	# бамперы
-	_box(Vector3(cab_size.x, 0.12, 0.1), Vector3(0, top - 0.1, front_end - 0.05), grey)
-	_box(Vector3(body_size.x, 0.12, 0.1), Vector3(0, top - 0.1, body_size.z * 0.5 + 0.05), grey)
-	# фары: всегда горят, слабо
-	for sx in [-1.0, 1.0]:
-		var hx: float = sx * (cab_size.x * 0.5 - 0.3)
-		var lamp := _box(Vector3(0.25, 0.12, 0.05), Vector3(hx, top + 0.25, front_end - 0.02), Color(1, 0.95, 0.75), false)
-		var lm := StandardMaterial3D.new()
-		lm.albedo_color = Color(1, 0.95, 0.75)
-		lm.emission_enabled = true
-		lm.emission = Color(1, 0.9, 0.6)
-		lm.emission_energy_multiplier = 1.5
-		lamp.material_override = lm
+		var hx: float = sx * (bw * 0.5 - 0.2)
+		var lamp := MeshInstance3D.new()
+		lamp.mesh = LowPoly.sphere(0.13, 8, 4)
+		lamp.material_override = _mat_emissive(Color(1, 0.95, 0.78), 1.8)
+		lamp.position = Vector3(hx, top + 0.24, front_end + 0.025)
+		_visual.add_child(lamp)
+		_vis(Vector3(0.18, 0.18, 0.04), Vector3(hx, top + 0.24, front_end + 0.01), grey)
 		var sl := SpotLight3D.new()
 		sl.shadow_enabled = false
 		sl.light_energy = 1.2
 		sl.spot_range = 16.0
 		sl.spot_angle = 32.0
 		sl.light_color = Color(1, 0.95, 0.8)
-		sl.position = Vector3(hx, top + 0.25, front_end - 0.06)
+		sl.position = Vector3(hx, top + 0.24, front_end - 0.06)
 		sl.visible = false
 		_visual.add_child(sl)
 		_headlights.append(sl)
-	# сиденья (позиция игрока: голова на +1.6)
+	# кабина — сплошные боковины
+	_vis(Vector3(bw, 0.14, cab_size.z), Vector3(0, top + 0.07, cab_z), body_color)
+	for sx in [-1.0, 1.0]:
+		_vis(Vector3(0.08, cab_size.y * 0.9, cab_size.z * 0.94), Vector3(sx * (bw * 0.5 - 0.04), top + cab_size.y * 0.5, cab_z), body_color)
+		# дверь: панель + шов + ручка
+		_vis(Vector3(0.04, cab_size.y * 0.72, cab_size.z * 0.82), Vector3(sx * (bw * 0.5 + 0.01), top + cab_size.y * 0.48, cab_z), body_color.darkened(0.06))
+		_vis(Vector3(0.02, 0.02, cab_size.z * 0.7), Vector3(sx * (bw * 0.5 + 0.025), top + cab_size.y * 0.55, cab_z), grey)
+		_vis(Vector3(0.08, 0.04, 0.14), Vector3(sx * (bw * 0.5 + 0.04), top + 0.42, cab_front + 0.55), chrome)
+		# зеркало
+		_vis(Vector3(0.14, 0.1, 0.06), Vector3(sx * (bw * 0.5 + 0.12), top + 0.82, cab_front + 0.12), grey)
+		_vis(Vector3(0.04, 0.06, 0.02), Vector3(sx * (bw * 0.5 + 0.2), top + 0.82, cab_front + 0.12), chrome)
+	# стёкла
+	_glass(Vector3(bw * 0.86, cab_size.y * 0.42, 0.05), Vector3(0, top + cab_size.y * 0.62, cab_front + 0.04))
+	_glass(Vector3(0.04, cab_size.y * 0.38, cab_size.z * 0.72), Vector3(-bw * 0.5 + 0.02, top + cab_size.y * 0.6, cab_z))
+	_glass(Vector3(0.04, cab_size.y * 0.38, cab_size.z * 0.72), Vector3(bw * 0.5 - 0.02, top + cab_size.y * 0.6, cab_z))
+	_glass(Vector3(bw * 0.78, cab_size.y * 0.32, 0.04), Vector3(0, top + cab_size.y * 0.58, cab_back - 0.02))
+	# крыша + стойки
+	_vis(Vector3(bw * 0.96, 0.08, cab_size.z * 0.96), Vector3(0, top + cab_size.y - 0.04, cab_z), body_color)
+	for sx in [-1.0, 1.0]:
+		for z in [cab_front + 0.06, cab_back - 0.06]:
+			_vis(Vector3(0.1, cab_size.y * 0.92, 0.1), Vector3(sx * (bw * 0.5 - 0.05), top + cab_size.y * 0.5, z), body_color.darkened(0.1))
+	# крылья
+	for sx in [-1.0, 1.0]:
+		_vis(Vector3(0.22, 0.14, 0.5), Vector3(sx * (bw * 0.5 + 0.06), top + 0.07, -axle_front), body_color)
+		_vis(Vector3(0.2, 0.12, 0.42), Vector3(sx * (bw * 0.5 + 0.05), top + 0.06, axle_rear), body_color)
+	# салон
+	_vis(Vector3(bw * 0.9, 0.36, 0.06), Vector3(0, top + 0.18, cab_back - 0.03), body_color)
+	for sx in [-1.0, 1.0]:
+		_vis(Vector3(0.48, 0.28, 0.48), Vector3(sx * 0.42, top + 0.14, cab_z + 0.15), Color(0.3, 0.25, 0.2))
+	var wheel_mi := MeshInstance3D.new()
+	wheel_mi.mesh = LowPoly.cylinder(0.18, 0.18, 0.03, 8)
+	wheel_mi.material_override = _mat(Color(0.1, 0.1, 0.1))
+	wheel_mi.position = Vector3(-0.42, top + 0.62, cab_front + 0.5)
+	wheel_mi.rotation.x = 1.1
+	_visual.add_child(wheel_mi)
+	_build_bed_walls(top)
+	# пол кузова
+	_vis(Vector3(bed_size.x * 0.92, 0.03, bed_size.z * 0.92), Vector3(0, top + 0.015, bed_z), Color(0.22, 0.2, 0.18))
+	# задний бампер + фонари + фаркоп
+	var rear_z := body_size.z * 0.5
+	_vis(Vector3(body_size.x * 0.96, 0.14, 0.14), Vector3(0, top + 0.02, rear_z + 0.07), rust)
+	for sx in [-1.0, 1.0]:
+		_emis(Vector3(0.12, 0.1, 0.05), Vector3(sx * (body_size.x * 0.5 - 0.18), top + 0.16, rear_z + 0.04), Color(0.95, 0.08, 0.05), 2.2)
+	_vis(Vector3(0.06, 0.06, 0.18), Vector3(0, top - 0.02, rear_z + 0.14), grey)
+	_vis(Vector3(0.05, 0.05, 0.06), Vector3(0, top - 0.02, rear_z + 0.24), chrome)
+	# выхлоп
+	_vis(Vector3(0.08, 0.08, 0.22), Vector3(-body_size.x * 0.5 - 0.02, top - 0.04, axle_rear + 0.15), Color(0.2, 0.2, 0.22))
+
+
+func _build_van(top: float) -> void:
+	var cab_front := cab_z - cab_size.z * 0.5
+	var front_end := cab_front - hood_length
+	var rust := Color(0.45, 0.22, 0.1)
+	var grey := Color(0.32, 0.32, 0.34)
+	var chrome := Color(0.72, 0.72, 0.75)
+	var bw := cab_size.x
+	# короткий капот
+	_vis(Vector3(bw * 0.94, 0.38, hood_length), Vector3(0, top + 0.19, cab_front - hood_length * 0.5), body_color)
+	_vis(Vector3(bw * 0.55, 0.22, 0.06), Vector3(0, top + 0.14, front_end + 0.03), grey)
+	_vis(Vector3(bw * 0.9, 0.12, 0.1), Vector3(0, top + 0.04, front_end - 0.04), rust)
+	for sx in [-1.0, 1.0]:
+		var hx: float = sx * (bw * 0.5 - 0.28)
+		var lamp := MeshInstance3D.new()
+		lamp.mesh = LowPoly.sphere(0.09, 8, 4)
+		lamp.material_override = _mat_emissive(Color(1, 0.95, 0.78), 1.4)
+		lamp.position = Vector3(hx, top + 0.16, front_end + 0.02)
+		_visual.add_child(lamp)
+		var sl := SpotLight3D.new()
+		sl.shadow_enabled = false
+		sl.light_energy = 1.2
+		sl.spot_range = 16.0
+		sl.spot_angle = 32.0
+		sl.light_color = Color(1, 0.95, 0.8)
+		sl.position = Vector3(hx, top + 0.16, front_end - 0.06)
+		sl.visible = false
+		_visual.add_child(sl)
+		_headlights.append(sl)
+	# кабина + кузов-фургон одним блоком
+	var body_len := bed_z - cab_front + bed_size.z * 0.5 + 0.3
+	var body_z := (cab_front + bed_z + bed_size.z * 0.5) * 0.5 - 0.15
+	var body_h := cab_size.y + bed_size.y * 0.5
+	_vis(Vector3(bw, 0.1, body_len), Vector3(0, top + 0.05, body_z), body_color)
+	_vis(Vector3(bw * 0.96, body_h, body_len * 0.96), Vector3(0, top + body_h * 0.5 + 0.05, body_z), body_color)
+	_glass(Vector3(bw * 0.86, cab_size.y * 0.4, 0.05), Vector3(0, top + cab_size.y * 0.62, cab_front + 0.04))
+	for sx in [-1.0, 1.0]:
+		_glass(Vector3(0.04, body_h * 0.55, body_len * 0.7), Vector3(sx * (bw * 0.5 - 0.02), top + body_h * 0.55, body_z + 0.1))
+		_vis(Vector3(0.14, 0.1, 0.06), Vector3(sx * (bw * 0.5 + 0.12), top + 0.78, cab_front + 0.1), grey)
+		_vis(Vector3(0.2, 0.12, 0.4), Vector3(sx * (bw * 0.5 + 0.05), top + 0.06, -axle_front), body_color)
+		_vis(Vector3(0.18, 0.1, 0.36), Vector3(sx * (bw * 0.5 + 0.05), top + 0.06, axle_rear), body_color)
+	_vis(Vector3(bw * 0.96, 0.08, body_len * 0.96), Vector3(0, top + body_h + 0.09, body_z), body_color)
+	# задние распашные двери
+	var rear_z := bed_z + bed_size.z * 0.5
+	_vis(Vector3(bw * 0.94, bed_size.y * 0.85, 0.06), Vector3(0, top + bed_size.y * 0.48, rear_z + 0.03), body_color.darkened(0.08))
+	for sx in [-1.0, 1.0]:
+		_vis(Vector3(bw * 0.46, bed_size.y * 0.8, 0.04), Vector3(sx * bw * 0.24, top + bed_size.y * 0.48, rear_z + 0.05), body_color.darkened(0.12))
+		_vis(Vector3(0.04, 0.04, 0.08), Vector3(sx * 0.08, top + bed_size.y * 0.48, rear_z + 0.07), chrome)
+	_vis(Vector3(bw * 0.9, 0.12, 0.1), Vector3(0, top + 0.04, rear_z + 0.08), rust)
+	for sx in [-1.0, 1.0]:
+		_emis(Vector3(0.1, 0.08, 0.04), Vector3(sx * (bw * 0.5 - 0.2), top + 0.14, rear_z + 0.05), Color(0.95, 0.08, 0.05), 1.8)
+	_build_bed_walls(top)
+	if bed_roof:
+		for sx in [-1.0, 1.0]:
+			for sz in [-1.0, 1.0]:
+				_vis(Vector3(0.08, bed_roof_height, 0.08), Vector3(sx * (bed_size.x * 0.5 - 0.04), _bed_floor_y + bed_roof_height * 0.5, bed_z + sz * (bed_size.z * 0.5 - 0.04)), Color(0.3, 0.3, 0.32))
+		_vis(Vector3(bed_size.x + 0.12, 0.06, bed_size.z + 0.12), Vector3(0, _bed_floor_y + bed_roof_height + 0.03, bed_z), body_color)
+
+
+func _build_truck(top: float) -> void:
+	var cab_front := cab_z - cab_size.z * 0.5
+	var front_end := cab_front - hood_length
+	var rust := Color(0.45, 0.22, 0.1)
+	var grey := Color(0.32, 0.32, 0.34)
+	var chrome := Color(0.72, 0.72, 0.75)
+	var bw := cab_size.x
+	# массивный капот
+	_vis(Vector3(bw * 0.96, 0.58, hood_length + 0.15), Vector3(0, top + 0.29, cab_front - hood_length * 0.5 - 0.05), body_color)
+	_vis(Vector3(bw * 0.7, 0.32, 0.08), Vector3(0, top + 0.22, front_end + 0.04), grey)
+	_vis(Vector3(bw * 0.94, 0.16, 0.14), Vector3(0, top + 0.04, front_end - 0.05), rust)
+	for sx in [-1.0, 1.0]:
+		var hx: float = sx * (bw * 0.5 - 0.32)
+		var lamp := MeshInstance3D.new()
+		lamp.mesh = LowPoly.sphere(0.13, 8, 4)
+		lamp.material_override = _mat_emissive(Color(1, 0.95, 0.78), 1.8)
+		lamp.position = Vector3(hx, top + 0.24, front_end + 0.02)
+		_visual.add_child(lamp)
+		var sl := SpotLight3D.new()
+		sl.shadow_enabled = false
+		sl.light_energy = 1.4
+		sl.spot_range = 18.0
+		sl.spot_angle = 34.0
+		sl.light_color = Color(1, 0.95, 0.8)
+		sl.position = Vector3(hx, top + 0.24, front_end - 0.06)
+		sl.visible = false
+		_visual.add_child(sl)
+		_headlights.append(sl)
+	# высокая кабина
+	_vis(Vector3(bw, 0.14, cab_size.z), Vector3(0, top + 0.07, cab_z), body_color)
+	_vis(Vector3(bw * 0.96, cab_size.y, cab_size.z * 0.94), Vector3(0, top + cab_size.y * 0.5 + 0.07, cab_z), body_color)
+	_glass(Vector3(bw * 0.88, cab_size.y * 0.45, 0.06), Vector3(0, top + cab_size.y * 0.62, cab_front + 0.04))
+	for sx in [-1.0, 1.0]:
+		_glass(Vector3(0.05, cab_size.y * 0.42, cab_size.z * 0.75), Vector3(sx * (bw * 0.5 - 0.025), top + cab_size.y * 0.6, cab_z))
+		_vis(Vector3(0.05, cab_size.y * 0.75, cab_size.z * 0.82), Vector3(sx * (bw * 0.5 + 0.01), top + cab_size.y * 0.5, cab_z), body_color.darkened(0.06))
+		_vis(Vector3(0.1, 0.05, 0.16), Vector3(sx * (bw * 0.5 + 0.05), top + 0.44, cab_front + 0.55), chrome)
+		_vis(Vector3(0.16, 0.12, 0.08), Vector3(sx * (bw * 0.5 + 0.14), top + 0.88, cab_front + 0.1), grey)
+		_vis(Vector3(0.26, 0.16, 0.55), Vector3(sx * (bw * 0.5 + 0.08), top + 0.08, -axle_front), body_color)
+		_vis(Vector3(0.24, 0.14, 0.48), Vector3(sx * (bw * 0.5 + 0.07), top + 0.07, axle_rear), body_color)
+	_vis(Vector3(bw * 0.96, 0.1, cab_size.z * 0.96), Vector3(0, top + cab_size.y + 0.02, cab_z), body_color)
+	for sx in [-1.0, 1.0]:
+		_vis(Vector3(0.52, 0.32, 0.52), Vector3(sx * 0.48, top + 0.16, cab_z + 0.15), Color(0.25, 0.22, 0.2))
+	var wheel_mi := MeshInstance3D.new()
+	wheel_mi.mesh = LowPoly.cylinder(0.2, 0.2, 0.035, 8)
+	wheel_mi.material_override = _mat(Color(0.1, 0.1, 0.1))
+	wheel_mi.position = Vector3(-0.48, top + 0.68, cab_front + 0.55)
+	wheel_mi.rotation.x = 1.1
+	_visual.add_child(wheel_mi)
+	_build_bed_walls(top)
+	var rear_z := body_size.z * 0.5
+	_vis(Vector3(body_size.x * 0.96, 0.18, 0.16), Vector3(0, top + 0.04, rear_z + 0.08), rust)
+	for sx in [-1.0, 1.0]:
+		_emis(Vector3(0.14, 0.12, 0.06), Vector3(sx * (body_size.x * 0.5 - 0.22), top + 0.18, rear_z + 0.05), Color(0.95, 0.08, 0.05), 2.0)
+	_vis(Vector3(0.08, 0.08, 0.22), Vector3(-body_size.x * 0.5 - 0.02, top - 0.02, axle_rear + 0.2), Color(0.2, 0.2, 0.22))
+
+
+func _build_bed_walls(top: float) -> void:
+	_bed_floor_y = top
+	var wall_c := body_color.darkened(0.15)
+	var sink := 0.2
+	var hw := bed_size.x * 0.5
+	var hl := bed_size.z * 0.5
+	for side in 2:
+		var sx := -1.0 if side == 0 else 1.0
+		if bed_missing_wall == side:
+			_box(Vector3(WALL_T, bed_size.y * 0.7 + sink, 0.3), Vector3(sx * (hw + WALL_T * 0.5), top + (bed_size.y * 0.7 - sink) * 0.5, bed_z - hl + 0.15), Color(0.5, 0.25, 0.1))
+		else:
+			_box(Vector3(WALL_T, bed_size.y + sink, bed_size.z + WALL_T * 2.0), Vector3(sx * (hw + WALL_T * 0.5), top + (bed_size.y - sink) * 0.5, bed_z), wall_c)
+	_box(Vector3(bed_size.x + WALL_T * 2.0, bed_size.y + sink, WALL_T), Vector3(0, top + (bed_size.y - sink) * 0.5, bed_z - hl - WALL_T * 0.5), wall_c)
+	var th := tailgate_height if tailgate_height > 0.0 else bed_size.y
+	if bed_missing_wall != 2:
+		_box(Vector3(bed_size.x + WALL_T * 2.0, th + sink, WALL_T), Vector3(0, top + (th - sink) * 0.5, bed_z + hl + WALL_T * 0.5), wall_c)
+
+
+func _build_seats_doors(top: float) -> void:
 	for seat in 2:
 		var s := Node3D.new()
 		s.name = "SeatDriver" if seat == 0 else "SeatPassenger"
@@ -293,29 +547,9 @@ func _build() -> void:
 		door.add_child(dcs)
 		door.position = Vector3((-1.0 if seat == 0 else 1.0) * (cab_size.x * 0.5 + 0.06), top + 0.6, cab_z)
 		add_child(door)
-	# --- кузов: борта толстые (WALL_T) и уходят вниз в шасси — без щелей-ловушек и туннелирования
-	_bed_floor_y = top
-	var wall_c := body_color.darkened(0.15)
-	var sink := 0.2
-	var hw := bed_size.x * 0.5
-	var hl := bed_size.z * 0.5
-	for side in 2:
-		var sx := -1.0 if side == 0 else 1.0
-		if bed_missing_wall == side:
-			# обломок борта спереди — «оторвало»
-			_box(Vector3(WALL_T, bed_size.y * 0.7 + sink, 0.3), Vector3(sx * (hw + WALL_T * 0.5), top + (bed_size.y * 0.7 - sink) * 0.5, bed_z - hl + 0.15), Color(0.5, 0.25, 0.1))
-		else:
-			_box(Vector3(WALL_T, bed_size.y + sink, bed_size.z + WALL_T * 2.0), Vector3(sx * (hw + WALL_T * 0.5), top + (bed_size.y - sink) * 0.5, bed_z), wall_c)
-	_box(Vector3(bed_size.x + WALL_T * 2.0, bed_size.y + sink, WALL_T), Vector3(0, top + (bed_size.y - sink) * 0.5, bed_z - hl - WALL_T * 0.5), wall_c)
-	var th := tailgate_height if tailgate_height > 0.0 else bed_size.y
-	if bed_missing_wall != 2:
-		_box(Vector3(bed_size.x + WALL_T * 2.0, th + sink, WALL_T), Vector3(0, top + (th - sink) * 0.5, bed_z + hl + WALL_T * 0.5), wall_c)
-	if bed_roof:
-		for sx in [-1.0, 1.0]:
-			for sz in [-1.0, 1.0]:
-				_box(Vector3(0.06, bed_roof_height, 0.06), Vector3(sx * (bed_size.x * 0.5 - 0.03), _bed_floor_y + bed_roof_height * 0.5, bed_z + sz * (bed_size.z * 0.5 - 0.03)), grey)
-		_box(Vector3(bed_size.x + 0.1, 0.05, bed_size.z + 0.1), Vector3(0, _bed_floor_y + bed_roof_height + 0.025, bed_z), body_color)
-	# зона кузова: кто внутри — едет (ItemBody.in_vehicle_bed, ачивка bump_launch)
+
+
+func _build_bed_zone(top: float) -> void:
 	_bed_zone = Area3D.new()
 	_bed_zone.name = "BedZone"
 	_bed_zone.collision_layer = 0
@@ -331,25 +565,6 @@ func _build() -> void:
 	_bed_zone.body_entered.connect(_on_bed_entered)
 	_bed_zone.body_exited.connect(_on_bed_exited)
 	add_child(_bed_zone)
-	# --- колёса
-	for sx in [-1.0, 1.0]:
-		var wf := _make_wheel(Vector3(sx * track * 0.5, wheel_y, -axle_front), true)
-		var wr := _make_wheel(Vector3(sx * track * 0.5, wheel_y, axle_rear), false)
-		_front_wheels.append(wf)
-		_rear_wheels.append(wr)
-		_wheels.append(wf)
-		_wheels.append(wr)
-	_build_dust()
-	# --- ценник витрины
-	_price_label = Label3D.new()
-	_price_label.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	_price_label.font_size = 72
-	_price_label.outline_size = 12
-	_price_label.pixel_size = 0.006
-	_price_label.modulate = Color(1, 0.9, 0.3)
-	_price_label.position = Vector3(0, top + cab_size.y + 0.9, cab_z)
-	add_child(_price_label)
-	_refresh_label()
 
 
 ## Пыль из-под задних колёс: город стоит на глине, без шлейфа езда выглядит стерильно.
@@ -428,14 +643,14 @@ func _make_wheel(pos: Vector3, front: bool) -> Node3D:
 	w.name = ("WheelF" if front else "WheelR") + ("L" if pos.x < 0 else "R")
 	add_child(w)
 	var tire := MeshInstance3D.new()
-	tire.mesh = LowPoly.cylinder(wheel_radius, wheel_radius, wheel_width, 10)
+	tire.mesh = LowPoly.cylinder(wheel_radius, wheel_radius, wheel_width, 8)
 	tire.rotation.z = PI * 0.5
-	tire.material_override = _mat(Color(0.08, 0.08, 0.08))
+	tire.material_override = _mat(Color(0.06, 0.06, 0.06))
 	w.add_child(tire)
 	var hub := MeshInstance3D.new()
-	hub.mesh = LowPoly.cylinder(wheel_radius * 0.55, wheel_radius * 0.55, wheel_width + 0.02, 6)
+	hub.mesh = LowPoly.cylinder(wheel_radius * 0.52, wheel_radius * 0.52, wheel_width + 0.03, 8)
 	hub.rotation.z = PI * 0.5
-	hub.material_override = _mat(Color(0.82, 0.8, 0.72)) # грязно-белый колпак, читается на любом кузове
+	hub.material_override = _mat(Color(0.78, 0.76, 0.68))
 	w.add_child(hub)
 	return w
 
@@ -787,12 +1002,51 @@ func _sim_tick(delta: float) -> void:
 			right_up(tr("VEH_FLIPPED"))
 	else:
 		_flip_t = 0.0
+	# просела в землю: тяжёлый лут прыгнул в кузов → подвеска пробита, лучи колёс стартуют под полом
+	# и теряют опору; кузов застревает в грунте (Jolt не выталкивает). Лечим: колёса без контакта +
+	# стоим + под нами есть земля выше днища → приподнимаем на неё.
+	_sink_check(delta)
 	# утонула / провалилась → на дорогу
 	if global_position.y < WATER_Y or global_position.y < -40.0:
 		var s := _system()
 		var pos: Vector3 = s.road_point_near(global_position) if s and s.has_method("road_point_near") else Vector3(0, 0.5, 6)
 		global_position = pos + Vector3(0, 1.0, 0)
 		right_up(tr("VEH_SOAKED"))
+
+
+var _sink_t := 0.0
+
+func _sink_check(delta: float) -> void:
+	if proxy or freeze:
+		return
+	var any_contact := false
+	for w in _wheels:
+		if w is VehicleWheel3D and (w as VehicleWheel3D).is_in_contact():
+			any_contact = true
+			break
+	if any_contact or linear_velocity.length() > 1.5:
+		_sink_t = 0.0
+		return
+	_sink_t += delta
+	if _sink_t < 0.4:
+		return
+	_sink_t = 0.0
+	var space := get_world_3d().direct_space_state
+	var from := global_position + global_basis.y * (CHASSIS_BOTTOM + body_size.y + cab_size.y + 0.5)
+	var q := PhysicsRayQueryParameters3D.create(from, from + Vector3.DOWN * 6.0, Types.L_WORLD)
+	q.exclude = [get_rid()]
+	var hit := space.intersect_ray(q)
+	if hit.is_empty():
+		return
+	var ground_y: float = (hit["position"] as Vector3).y
+	var wheel_bottom := global_position.y + wheel_y - suspension_rest - wheel_radius
+	if wheel_bottom < ground_y - 0.08:
+		global_position.y += (ground_y - wheel_bottom) + 0.05
+		linear_velocity = Vector3.ZERO
+		reset_physics_interpolation()
+		for b in bed_items:
+			if is_instance_valid(b):
+				b.global_position.y += (ground_y - wheel_bottom) + 0.05
 
 
 func _on_bump() -> void:

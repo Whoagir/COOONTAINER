@@ -393,11 +393,11 @@ func send_full_state_to(peer: int) -> void:
 	for v in vehicles.values():
 		if not is_instance_valid(v):
 			continue
-		Net._rpc_event.rpc_id(peer, "veh_spawn", _spawn_data(v))
+		Net.send_event(peer, "veh_spawn", _spawn_data(v))
 		for seat in 2:
 			var sp: int = v.seat_peer(seat)
 			if sp != 0:
-				Net._rpc_event.rpc_id(peer, "veh_seat", {"vid": v.vid, "peer": sp, "seat": seat, "on": true})
+				Net.send_event(peer, "veh_seat", {"vid": v.vid, "peer": sp, "seat": seat, "on": true})
 
 
 func _on_peer_left(id: int) -> void:

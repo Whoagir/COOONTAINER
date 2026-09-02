@@ -627,7 +627,7 @@ func on_net_event(kind: String, data: Dictionary) -> void:
 func send_full_state_to(peer: int) -> void:
 	if not is_active():
 		return
-	Net._rpc_event.rpc_id(peer, "clearout_begin", _begin_dict())
-	Net._rpc_event.rpc_id(peer, "clearout_state", _state_dict())
+	Net.send_event(peer, "clearout_begin", _begin_dict())
+	Net.send_event(peer, "clearout_state", _state_dict())
 	if _temp_caretaker and _caretaker and is_instance_valid(_caretaker):
-		Net._rpc_event.rpc_id(peer, "clearout_caretaker", {"pos": _caretaker.global_position, "path": str(_caretaker.get_path())})
+		Net.send_event(peer, "clearout_caretaker", {"pos": _caretaker.global_position, "path": str(_caretaker.get_path())})

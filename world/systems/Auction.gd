@@ -13,7 +13,9 @@ signal session_state(anchor_key: String, state: int)
 
 enum State { IDLE, PREVIEW, BIDDING, HAMMER, COOLDOWN }
 
-const GOING_SECONDS := 4.0 # «идёт… идёт…» после последней ставки
+const GOING_SECONDS := 5.0 # «идёт… идёт…» после последней ставки
+const SETTLE_SECONDS := 0.7 # минимум между ставками хантеров
+const SETTLE_AFTER_PLAYER := 1.4 # …и после ставки игрока
 const NO_BID_SECONDS := 9.0 # никто не дал стартовую → лот снят
 const HAMMER_SECONDS := 2.2
 const COOLDOWN_SECONDS := 20.0
@@ -41,6 +43,7 @@ class Session extends RefCounted:
 	var leader_name := ""
 	var going := 0.0
 	var going_said := 0
+	var settle := 0.0 # пауза после ставки: хантеры не перебивают мгновенно, цену успеваешь прочитать
 	var items: Array = []
 	var hunters: Array = []
 	var auctioneer: Auctioneer
@@ -489,14 +492,18 @@ func _tick_preview(s: Session, delta: float) -> void:
 func _tick_bidding(s: Session, delta: float) -> void:
 	_check_trespass(s)
 	var req := required_bid(s)
+	s.settle -= delta
 	for h in s.hunters:
 		if not is_instance_valid(h):
 			continue
 		var amt: int = h.think(delta, req, s.leader_kind == 2 and s.leader_id == h.index, s.leader_kind == 1)
-		if amt > 0:
+		if amt > 0 and s.settle <= 0.0:
 			var bluff: bool = h.last_bid_was_bluff
 			h.last_bid_was_bluff = false
+			var outbid_player := s.leader_kind == 1
 			_place_bid(s, amt, 2, h.index, h.display_name, bluff)
+			# перебили игрока — пауза дольше: пусть увидит и ответит
+			s.settle = SETTLE_AFTER_PLAYER if outbid_player else SETTLE_SECONDS
 			break
 	s.going -= delta
 	if s.has_bids:
@@ -619,6 +626,7 @@ func _place_bid(s: Session, amount: int, kind: int, id: int, bidder_name: String
 	s.leader_name = bidder_name
 	if kind == 1:
 		s.players_bid = true
+		s.settle = SETTLE_AFTER_PLAYER
 	s.going = GOING_SECONDS
 	s.going_said = 0
 	if is_bluff:
@@ -1314,11 +1322,7 @@ func _player_bid(peer: int, amount: int) -> void:
 func _notify_bid_too_low(peer: int, req: int) -> void:
 	if not Net.is_host():
 		return
-	var data := {"req": req}
-	if Net.peer_count() > 1:
-		Net._rpc_event.rpc_id(peer, "auction_bid_reject", data)
-	else:
-		Net.net_event.emit("auction_bid_reject", data)
+	Net.send_event(peer, "auction_bid_reject", {"req": req})
 
 
 func _nearest_session(pos: Vector3, want_state: int) -> Session:
@@ -1398,13 +1402,13 @@ func send_full_state_to(peer: int) -> void:
 	for s in sessions:
 		if not is_instance_valid(s.anchor):
 			continue
-		Net._rpc_event.rpc_id(peer, "auction_npcs", _npcs_payload(s))
-		Net._rpc_event.rpc_id(peer, "lot_door", {"path": s.key, "closed": s.anchor.door_closed})
+		Net.send_event(peer, "auction_npcs", _npcs_payload(s))
+		Net.send_event(peer, "lot_door", {"path": s.key, "closed": s.anchor.door_closed})
 		if s.state == State.PREVIEW or s.state == State.BIDDING:
-			Net._rpc_event.rpc_id(peer, "auction_preview", _preview_payload(s))
-		Net._rpc_event.rpc_id(peer, "auction_state", _state_payload(s))
+			Net.send_event(peer, "auction_preview", _preview_payload(s))
+		Net.send_event(peer, "auction_state", _state_payload(s))
 		if s.haul_hunter and is_instance_valid(s.haul_hunter) and s.haul_hunter.carried:
-			Net._rpc_event.rpc_id(peer, "hunter_carry", _carry_payload(s, true, false))
+			Net.send_event(peer, "hunter_carry", _carry_payload(s, true, false))
 
 
 # ------------------------------------------------------------------ сеть: приём (хост и клиент)

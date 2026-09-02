@@ -258,10 +258,10 @@ NEMESIS_WIN_1,"Вот так это делается, дети.","That's how it'
 NEMESIS_WIN_2,"Второй раз. Лысина блестит — ты нет.","Second time. My head shines — you don't."
 NEMESIS_WIN_3,"Три-ноль. Иди мыть склады.","Three-nil. Go mop storage units."
 NEMESIS_WIN_4,"Я уже сбился со счёта. Ты — тоже, судя по котлу.","Lost count already. So did you, judging by your pot."
-AUC_COACH,"Ставка: B — весло, набери сумму цифрами (или R = минимум), ЛКМ — поднять","Bid: B — paddle, type amount (or R = minimum), LMB — raise"
+AUC_COACH,"Ставка: B - весло, набери сумму цифрами (или R = минимум), ЛКМ - поднять. B ещё раз - убрать","Bid: B - paddle, type amount (or R = minimum), LMB - raise. B again - put away"
 AUC_BID_TOO_LOW_FMT,"Мало: минимум $%d","Too low: minimum $%d"
 HUD_BID_REQUIRED,"Требуется: $%d","Required: $%d"
 HUD_BID_MINE,"Твоя: $%d","Yours: $%d"
 HUD_BID_HELP_DOWN,"— поднять весло","— raise paddle"
-HUD_BID_HELP_UP,"весло,сумма,колесо ±шаг,ставка","paddle,amount,wheel ±step,bid"
+HUD_BID_HELP_UP,"убрать весло,сумма,колесо ±шаг,ставка","put away,amount,wheel ±step,bid"
 HUD_BID_HELP_MIN,минимум,min bid

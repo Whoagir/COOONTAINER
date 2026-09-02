@@ -13,6 +13,10 @@ var firefighter: Npc = null
 var _ff_timer := 0.0
 var _ff_spray_timer := 0.0
 var _burned_lot_checked := {}
+## Постоянные очаги (костёр у трейлера): [{pos, r}]. Жгут игроков и поджигают горючее, что в них суют.
+var hearths: Array[Dictionary] = []
+var _hearth_t := 0.0
+const HEARTH_IGNITE_CHANCE := 0.35 # за 0.25 с на горючую вещь в очаге
 
 
 func system_name() -> String:
@@ -21,6 +25,51 @@ func system_name() -> String:
 
 func _ready() -> void:
 	Net.item_spawned.connect(_on_item_spawned)
+	_find_hearths.call_deferred()
+
+
+func _find_hearths() -> void:
+	await get_tree().process_frame
+	await get_tree().process_frame
+	var w = Game.world
+	if w == null or not w.has_method("find_marker"):
+		return
+	var camp: Node3D = w.find_marker(Types.District.TRAILER_PARK, "Campfire")
+	if camp:
+		add_hearth(camp.global_position + Vector3(0, 0.3, 0), 0.9)
+
+
+func add_hearth(pos: Vector3, r: float) -> void:
+	hearths.append({"pos": pos, "r": r})
+
+
+## Очаги: тик 4 Гц. Прыгнул в костёр — горишь; бочка с маслом / бумага / тряпки в костре — вспыхивают.
+func _hearth_tick(dt: float) -> void:
+	if hearths.is_empty():
+		return
+	_hearth_t -= dt
+	if _hearth_t > 0.0:
+		return
+	_hearth_t = 0.25
+	for h in hearths:
+		var pos: Vector3 = h["pos"]
+		var r: float = h["r"]
+		for pid in Net.players:
+			var p = Net.players[pid]
+			if is_instance_valid(p) and not p.dead and not p.burning:
+				var d := Vector3(p.global_position.x - pos.x, 0, p.global_position.z - pos.z).length()
+				if d < r and absf(p.global_position.y - pos.y) < 1.6:
+					p.set_burning(true)
+					Game.stat_add("campfire_jumps")
+		for nid in Net.items:
+			var b = Net.items[nid]
+			if not is_instance_valid(b) or b.lit or b.burnt or b.proxy:
+				continue
+			if b.global_position.distance_to(pos) < r + 0.3 and b.is_flammable() and randf() < HEARTH_IGNITE_CHANCE:
+				b.ignite()
+		var liq := _liquids()
+		if liq:
+			liq.ignite_at(pos)
 
 
 func _on_item_spawned(b: Node) -> void:
@@ -82,6 +131,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		fire_time = 0.0
 		_ff_timer = 0.0
+	_hearth_tick(delta)
 	_firefighter_tick(delta)
 
 

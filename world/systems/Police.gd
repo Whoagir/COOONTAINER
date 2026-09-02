@@ -156,6 +156,8 @@ func _setup_deferred() -> void:
 	if not is_inside_tree():
 		return
 	_setup_station()
+	# в редакторе решётка стоит в проёме — на старте камера пустая, поднимаем сразу
+	_apply_door("jail", false, true)
 	if Net.is_host():
 		_spawn_desk_cop()
 		spawn_evidence_from_save()
@@ -473,12 +475,16 @@ func _arrest(c: PoliceCase, p: Player) -> void:
 
 
 func _on_arrived_station(c: PoliceCase) -> void:
+	if _cases.get(c.peer) != c:
+		return # дело закрыли по дороге (смерть/респавн) — не сажаем нового человека
 	var p := _player(c.peer)
 	if p and not p.dead:
 		var cell := _cell_pos()
 		p.exit_vehicle(cell)
 		p.reset_physics_interpolation()
 		p.in_custody = true
+		if p.has_method("lower_paddle"):
+			p.lower_paddle()
 		var sec := CUSTODY_BASE + c.wanted_at_catch * CUSTODY_PER_WANTED
 		var cu := Custody.new()
 		cu.peer = c.peer
@@ -846,18 +852,22 @@ func _set_evidence_door(open: bool, seconds: float = 0.0) -> void:
 	Net.broadcast_event("police_door", {"which": "evidence", "active": open})
 
 
-## Дверь камеры: с позиции редактора вниз на 2.5 м = закрыта (как storage). Дверь улик: вверх = открыта.
-func _apply_door(which: String, active: bool) -> void:
+## Обе двери в редакторе стоят в проёме (= закрыты) и уезжают ВВЕРХ на DOOR_SLIDE, когда открыты.
+## Камера: active = закрыта → на месте; отпустили → решётка поднимается и выпускает.
+## Улики: active = открыта → вверх.
+func _apply_door(which: String, active: bool, instant := false) -> void:
 	var door := _marker("JailDoor" if which == "jail" else "EvidenceDoor")
 	if door == null:
 		return
 	var base: float = door.get_meta("base_y", door.position.y)
 	door.set_meta("base_y", base)
-	var dy := 0.0
-	if active:
-		dy = -DOOR_SLIDE if which == "jail" else DOOR_SLIDE
+	var open := (not active) if which == "jail" else active
+	var target := base + (DOOR_SLIDE if open else 0.0)
+	if instant:
+		door.position.y = target
+		return
 	var tw := door.create_tween()
-	tw.tween_property(door, "position:y", base + dy, 1.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	tw.tween_property(door, "position:y", target, 1.2).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	var sfx := "door_slam" if (which == "jail" and active) else "door_roll"
 	AudioBus.play_at(sfx, door.global_position, 2.0, 0.05)
 
@@ -917,7 +927,7 @@ func _send_custody_state(peer: int, left: float) -> void:
 	if peer == Net.my_id():
 		_hud_timer(left)
 	elif Net.players.size() > 1:
-		Net._rpc_event.rpc_id(peer, "custody_state", {"peer": peer, "left": left})
+		Net.send_event(peer, "custody_state", {"peer": peer, "left": left})
 
 
 ## Режим мира глобален для пати: POLICE_CUSTODY только когда все живые сидят.
@@ -1118,6 +1128,8 @@ func on_net_event(kind: String, data: Dictionary) -> void:
 				if on:
 					p.exit_vehicle(data["pos"])
 					p.reset_physics_interpolation()
+					if p.has_method("lower_paddle"):
+						p.lower_paddle()
 				p.in_custody = on
 			if peer == Net.my_id():
 				if on:
@@ -1142,18 +1154,18 @@ func send_full_state_to(peer: int) -> void:
 	for id in _cops:
 		var cop: Node3D = _cops[id]
 		if is_instance_valid(cop):
-			Net._rpc_event.rpc_id(peer, "cop_spawn", {"id": id, "pos": cop.global_position, "name": cop.name})
+			Net.send_event(peer, "cop_spawn", {"id": id, "pos": cop.global_position, "name": cop.name})
 	for id in _cars:
 		var car: Node3D = _cars[id]
 		if is_instance_valid(car):
-			Net._rpc_event.rpc_id(peer, "police_car", {"id": id, "from": car.global_position, "to": car.global_position, "dur": 0.0})
+			Net.send_event(peer, "police_car", {"id": id, "from": car.global_position, "to": car.global_position, "dur": 0.0})
 	if _jail_closed:
-		Net._rpc_event.rpc_id(peer, "police_door", {"which": "jail", "active": true})
+		Net.send_event(peer, "police_door", {"which": "jail", "active": true})
 	if _evidence_open:
-		Net._rpc_event.rpc_id(peer, "police_door", {"which": "evidence", "active": true})
+		Net.send_event(peer, "police_door", {"which": "evidence", "active": true})
 	for jailed in _custody:
 		var cu: Custody = _custody[jailed]
-		Net._rpc_event.rpc_id(peer, "police_custody", {"peer": jailed, "on": true, "pos": _cell_pos(), "sec": cu.left})
+		Net.send_event(peer, "police_custody", {"peer": jailed, "on": true, "pos": _cell_pos(), "sec": cu.left})
 
 
 # ------------------------------------------------------------------ helpers

@@ -21,7 +21,8 @@ Friendslop-пародия шоу про аукционы складов: вдв�
 - Оштрафовали / арестовали / котёл пуст — худ покажет **задачу** со стрелкой к **доске объявлений** у трейлера: 3 вакансии (швабра, мусорный рейс, доставка, листовки, мойка машин, ночной сторож).
 - По городу валяется **уличный хлам** — подбирайте и сдавайте; **мусорные баки** (E) — до 3 раз в день: хлам, находка или крыса.
 - Выиграли лот — **ClearOut**: таймер, разбор руками, погрузка; в овертайме дверь запирается.
-- Тащите хлам к скупщикам: оффер → мини-игра торга → оценка по фото с телефона; у скупщиков есть **фобии**.
+- Тащите хлам к скупщикам: положите вещь на прилавок или в **жёлтую зону «СЮДА ХЛАМ»** перед ним, **E** на прилавке → оффер → мини-игра торга → оценка по фото с телефона; у скупщиков есть **фобии**.
+- Костёр у трейлера — настоящий: прыгнете — загоритесь, бочка масла / бумага в нём вспыхивают.
 - Инструменты (фонарик, тряпка, скотч, отмычка, зажигалка, доска…) открываются по мере денег на полке хаба.
 - Казино, полиция, авторынок, вскрывальщик сейфов — побочные дыры в кармане пати.
 - Купили дом за **$25 000** → титры → свободный город.
@@ -196,7 +197,8 @@ A friendslop parody of storage-auction shows: buy mystery lots with a shared par
 - Fined / arrested / pot empty → the HUD shows an **objective** with an arrow to the **job board** by the trailer: 3 rotating gigs (mop, trash run, delivery, flyers, car wash, night watch).
 - **Street junk** lies around town — grab and sell it; **dumpsters** (E) give up to 3 rummages per day: junk, a find, or a rat.
 - Won lot → **ClearOut** timer; overtime **locks the door**.
-- Sell to vendors (offer → haggle bar → phone photo estimate; vendors have **phobias**).
+- Sell to vendors: drop the item on the counter or in the **yellow "DROP JUNK HERE" zone** in front of it, press **E** at the counter → offer → haggle bar → phone photo estimate; vendors have **phobias**.
+- The campfire is real: jump in and you burn; an oil barrel or paper tossed in catches fire.
 - Tools unlock on the hub shelf as you make money.
 - Casino, police, car market, locksmith — optional ways to lose (or gain) cash.
 - Buy the house for **$25,000** → credits → free roam.

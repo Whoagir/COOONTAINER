@@ -563,6 +563,10 @@ func has_objective() -> bool:
 	return objective_panel.visible
 
 
+func objective_text() -> String:
+	return objective_label.text if objective_panel.visible else ""
+
+
 func _tick_objective() -> void:
 	if not objective_panel.visible or _objective_target == Vector3.INF:
 		return

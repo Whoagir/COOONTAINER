@@ -392,14 +392,14 @@ func send_full_state_to(peer: int) -> void:
 	if not _last_result.is_empty():
 		var last := _last_result.duplicate(true)
 		last["sync"] = true
-		Net._rpc_event.rpc_id(peer, "casino_result", last)
+		Net.send_event(peer, "casino_result", last)
 	if spinning:
-		Net._rpc_event.rpc_id(peer, "casino_spin", {
+		Net.send_event(peer, "casino_spin", {
 			"outcome": _pending_outcome,
 			"dur": maxf(_spin_left, 0.35),
 		})
 	elif has_bets():
-		Net._rpc_event.rpc_id(peer, "casino_result", _bets_sync_payload())
+		Net.send_event(peer, "casino_result", _bets_sync_payload())
 
 
 func _bets_sync_payload() -> Dictionary:

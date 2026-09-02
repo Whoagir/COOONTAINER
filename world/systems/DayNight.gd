@@ -86,7 +86,7 @@ func on_net_event(kind: String, data: Dictionary) -> void:
 
 
 func send_full_state_to(peer: int) -> void:
-	Net._rpc_event.rpc_id(peer, "time_of_day", {"t": time_of_day})
+	Net.send_event(peer, "time_of_day", {"t": time_of_day})
 
 
 ## Фаза дня 0..1 (0 = восход, 0.5 = полдень, 1 = закат) или -1 ночью.

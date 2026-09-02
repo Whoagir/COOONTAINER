@@ -175,19 +175,28 @@ func register_stand(def: VendorDef, root: Node3D) -> Stand:
 		s.drop_zone.add_child(cs)
 		add_child(s.drop_zone)
 		s.drop_zone.global_position = s.counter_pos() + Vector3(0, 1.45, 0)
-	s.drop_zone.collision_layer = s.drop_zone.collision_layer | Types.L_TRIGGER
+	# зона — не только столешница: шкаф на прилавок не поставишь, поэтому считается и земля перед ним
+	s.drop_zone.collision_layer = 0 # area не должна ловить луч взгляда — E должно попадать в прилавок
 	s.drop_zone.collision_mask = s.drop_zone.collision_mask | Types.L_ITEM
 	s.drop_zone.monitoring = true
 	s.drop_zone.body_entered.connect(_on_zone_enter.bind(s))
 	s.drop_zone.body_exited.connect(_on_zone_exit.bind(s))
 	s.unlocked = def.unlock_cost <= 0 or _unlocked_ids.has(def.id) or (Net.is_host() and Game.is_vendor_unlocked(def.id))
-	# интерактив у передней кромки прилавка
 	var front := s.front()
 	var extent := _extent_along(s.counter, front) if s.counter else 0.5
-	s.interact = Interactable.new(Vector3(1.6, 0.7, 0.18))
+	var floor_cs := CollisionShape3D.new()
+	var floor_bs := BoxShape3D.new()
+	floor_bs.size = Vector3(3.6, 2.4, 3.0)
+	floor_cs.shape = floor_bs
+	s.drop_zone.add_child(floor_cs)
+	floor_cs.global_position = s.counter_pos() + front * (extent + 1.4) + Vector3(0, 1.2, 0)
+	floor_cs.global_basis = Basis.looking_at(front, Vector3.UP)
+	_paint_sell_zone(s, front, extent)
+	# интерактив — весь фасад прилавка и кромка столешницы, чтобы E попадало с любого взгляда на стол
+	s.interact = Interactable.new(Vector3(maxf(1.6, extent * 2.0 + 0.4), 1.25, 0.5))
 	s.interact.name = "StandInteract_%s" % def.id
 	add_child(s.interact)
-	s.interact.global_position = s.counter_pos() + front * (extent + 0.1) + Vector3(0, 0.85, 0)
+	s.interact.global_position = s.counter_pos() + front * (extent + 0.12) + Vector3(0, 0.7, 0)
 	s.interact.global_basis = Basis.looking_at(front, Vector3.UP)
 	s.interact.on_interact = _on_stand_interact.bind(s)
 	s.interact.on_hint = _stand_hint.bind(s)
@@ -254,7 +263,51 @@ func _spawn_vendor(s: Stand) -> void:
 	s.vendor = v
 
 
-func _stand_hint(_player: Player, s: Stand) -> String:
+## Жёлтая разметка «СЮДА ХЛАМ» на земле перед прилавком — чтобы было видно, куда нести.
+func _paint_sell_zone(s: Stand, front: Vector3, extent: float) -> void:
+	var c := s.counter_pos() + front * (extent + 1.4)
+	# перед прилавком может лежать помост/половик из сцены — краску кладём на его верх
+	var space := get_world_3d().direct_space_state if is_inside_tree() else null
+	if space:
+		var q := PhysicsRayQueryParameters3D.create(c + Vector3(0, 1.5, 0), c + Vector3(0, -1.0, 0), Types.L_WORLD)
+		var hit := space.intersect_ray(q)
+		if not hit.is_empty():
+			c.y = (hit["position"] as Vector3).y
+	var basis := Basis.looking_at(front, Vector3.UP)
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = Color(1.0, 0.82, 0.2, 0.55)
+	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+	# рамка из четырёх полос
+	for i in 4:
+		var bar := MeshInstance3D.new()
+		var q := QuadMesh.new()
+		var along := i < 2
+		q.size = Vector2(3.0, 0.12) if along else Vector2(0.12, 2.4)
+		bar.mesh = q
+		bar.material_override = mat
+		add_child(bar)
+		var off := Vector3(0, 0, (-1.15 if i == 0 else 1.15)) if along else Vector3((-1.45 if i == 2 else 1.45), 0, 0)
+		bar.global_position = c + basis * off + Vector3(0, 0.12, 0) # выше половиков/настилов без коллизии
+		bar.global_basis = basis * Basis(Vector3.RIGHT, -PI / 2)
+	var lbl := Label3D.new()
+	lbl.text = tr("VEND_ZONE_PAINT")
+	lbl.font_size = 64
+	lbl.outline_size = 8
+	lbl.pixel_size = 0.0028
+	lbl.width = 900
+	lbl.autowrap_mode = TextServer.AUTOWRAP_WORD
+	lbl.modulate = Color(1.0, 0.85, 0.25, 0.9)
+	lbl.outline_modulate = Color(0.2, 0.12, 0.05, 0.9)
+	add_child(lbl)
+	lbl.global_position = c + Vector3(0, 0.125, 0)
+	# лежит плашмя, «верх» текста — к прилавку: читается тем, кто подходит с вещью
+	lbl.global_basis = basis * Basis(Vector3.UP, PI) * Basis(Vector3.RIGHT, -PI / 2)
+	s.root.set_meta("sell_zone_center", c)
+
+
+func _stand_hint(player: Player, s: Stand) -> String:
 	if not s.unlocked:
 		var req := s.def.unlock_requires_vendor
 		if req != "" and not _is_unlocked_id(req):
@@ -264,9 +317,67 @@ func _stand_hint(_player: Player, s: Stand) -> String:
 	if s.vendor and s.vendor.is_refusing():
 		return tr("VEND_HINT_REFUSING")
 	var n := s.sellable().size()
+	if player and player.hands and player.hands.any_held():
+		return tr("VEND_HINT_HOLDING")
 	if n == 0:
 		return tr("VEND_HINT_EMPTY")
 	return tr("VEND_HINT_SELL") % n
+
+
+## Локально: первый раз взял вещь в руки вне лота — худ ведёт к ближайшему открытому скупщику.
+## Скупщик, увидев игрока с вещью, зовёт к прилавку (раз в 20 с).
+var _sell_objective_done := false
+var _greet_t := 0.0
+
+func _sell_guidance_tick(delta: float) -> void:
+	var w := _world()
+	var p: Player = w.local_player() if w else null
+	if p == null or p.dead or p.hands == null:
+		return
+	var held: ItemBody = p.hands.any_held()
+	if held == null or not is_instance_valid(held) or held.def.is_cash():
+		return
+	_greet_t -= delta
+	var near: Stand = null
+	var best := 6.0
+	for id in stands:
+		var s: Stand = stands[id]
+		if not s.unlocked or s.vendor == null:
+			continue
+		var d := p.global_position.distance_to(s.counter_pos())
+		if d < best:
+			best = d
+			near = s
+	if near and _greet_t <= 0.0:
+		_greet_t = 20.0
+		near.vendor.say(tr("VEND_COME_HERE"), 3.0, "greet")
+	if _sell_objective_done or Game.world_mode == Types.WorldMode.CLEAR_OUT or Game.world_mode == Types.WorldMode.AUCTION:
+		return
+	if held.current_value() < 5 or held.def.tags.has("tool"):
+		return
+	var hud: Node = w.hud
+	if hud == null or not hud.has_method("set_objective") or (hud.has_method("has_objective") and hud.has_objective()):
+		return
+	var target: Stand = null
+	var bd := INF
+	for id in stands:
+		var s: Stand = stands[id]
+		if not s.unlocked:
+			continue
+		var d := p.global_position.distance_to(s.counter_pos())
+		if d < bd:
+			bd = d
+			target = s
+	if target == null:
+		return
+	_sell_objective_done = true
+	var c: Vector3 = target.root.get_meta("sell_zone_center", target.counter_pos())
+	hud.set_objective(tr("VEND_OBJECTIVE") % target.def.display_name(), c)
+	var wr: WeakRef = weakref(hud)
+	get_tree().create_timer(60.0).timeout.connect(func():
+		var h: Node = wr.get_ref()
+		if h and h.has_method("clear_objective") and h.has_method("objective_text") and h.objective_text().begins_with(tr("VEND_OBJECTIVE").left(8)):
+			h.clear_objective())
 
 
 func _is_unlocked_id(id: String) -> bool:
@@ -612,7 +723,7 @@ func send_full_state_to(peer: int) -> void:
 	for id in stands:
 		var s: Stand = stands[id]
 		if s.unlocked and s.def.unlock_cost > 0:
-			Net._rpc_event.rpc_id(peer, "vendor_unlocked", {"stand": id, "silent": true})
+			Net.send_event(peer, "vendor_unlocked", {"stand": id, "silent": true})
 
 
 # ------------------------------------------------------------------ тик
@@ -625,6 +736,7 @@ func _process(_delta: float) -> void:
 			if now - float(pd["t"]) > HAGGLE_TIMEOUT:
 				_host_haggle_result(peer, {"nid": pd["nid"], "hit": false, "precision": 0.0})
 	_phone_tick()
+	_sell_guidance_tick(_delta)
 
 
 ## Телефон (§11): держишь вещь с тегом phone, E — открыть видоискатель, E — снять.

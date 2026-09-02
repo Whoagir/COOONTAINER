@@ -386,9 +386,7 @@ func _send_menu_to(peer: int) -> void:
 	var payload: Array = []
 	for id in _offers:
 		payload.append(_offer_payload(id))
-	Net._rpc_event.rpc_id(peer, "jobs_menu", {"offers": payload})
-	if peer == Net.my_id():
-		_show_menu(payload)
+	Net.send_event(peer, "jobs_menu", {"offers": payload})
 
 
 func _show_menu(offers: Array) -> void:
@@ -854,6 +852,4 @@ func send_full_state_to(peer: int) -> void:
 		"target": obj["target"],
 		"progress": obj["progress"],
 	}
-	Net._rpc_event.rpc_id(peer, "jobs_state", payload)
-	if peer == Net.my_id():
-		_apply_jobs_state(payload)
+	Net.send_event(peer, "jobs_state", payload)

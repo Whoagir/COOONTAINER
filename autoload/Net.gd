@@ -449,6 +449,17 @@ func broadcast_event(kind: String, data: Dictionary = {}) -> void:
 		_rpc_event.rpc(kind, data)
 
 
+## Событие одному пиру. Себе (хост в одиночке или хост-игрок) — напрямую:
+## rpc_id на собственный id при call_remote — ошибка ERR_INVALID_PARAMETER.
+func send_event(peer: int, kind: String, data: Dictionary = {}) -> void:
+	if not is_host():
+		return
+	if peer == my_id() or players.size() <= 1:
+		_rpc_event(kind, data)
+	else:
+		_rpc_event.rpc_id(peer, kind, data)
+
+
 @rpc("authority", "call_remote", "reliable")
 func _rpc_event(kind: String, data: Dictionary) -> void:
 	net_event.emit(kind, data)
