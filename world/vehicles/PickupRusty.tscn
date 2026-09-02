@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=3 uid="uid://cvehpickup0001"]
+
+[ext_resource type="PackedScene" path="res://world/vehicles/Vehicle.tscn" id="1_base"]
+
+[node name="PickupRusty" instance=ExtResource("1_base")]
+mass = 1000.0
+vtype = "pickup_rusty"
+body_color = Color(0.28, 0.6, 0.55, 1)
+accel = 5.5
+brake_decel = 9.0
+top_speed = 15.0
+max_steer = 0.62
+wheel_radius = 0.36
+wheel_y = 0.5
+track = 1.55
+axle_front = 1.5
+axle_rear = 1.2
+suspension_stiffness = 40.0
+damping_compression = 1.8
+damping_relaxation = 2.6
+friction_slip = 4.0
+body_size = Vector3(1.7, 0.41, 4.0)
+cab_size = Vector3(1.7, 1.2, 1.4)
+cab_z = -0.9
+hood_length = 0.9
+bed_size = Vector3(1.4, 0.4, 1.8)
+bed_z = 0.9
+bed_missing_wall = 1
+bed_roof = false

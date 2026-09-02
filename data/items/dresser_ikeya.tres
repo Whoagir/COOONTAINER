@@ -1,0 +1,42 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://core/ItemDef.gd" id="1"]
+[ext_resource type="Script" path="res://core/LootRef.gd" id="2"]
+
+[sub_resource type="Resource" id="lr1"]
+script = ExtResource("2")
+item_id = "tshirt_ironic"
+chance = 0.5
+count_min = 1
+count_max = 1
+
+[sub_resource type="Resource" id="lr2"]
+script = ExtResource("2")
+item_id = "remote_mystery"
+chance = 0.3
+count_min = 1
+count_max = 1
+
+[resource]
+script = ExtResource("1")
+id = "dresser_ikeya"
+name_ru = "Комод «ИКЕЙЯ» (шатается)"
+name_en = "Wobbly IKEYA Dresser"
+archetype_id = "dresser"
+facets = Array[int]([2])
+value_base = 35
+mass_override = 0.0
+liquid_id = 0
+liquid_amount = 1.0
+flammable = false
+illegal = false
+dusty_default = 0.0
+nest_loot = Array[Resource]([SubResource("lr1"), SubResource("lr2")])
+vendor_affinity = Array[String](["vendor_household"])
+wearable_slot = "none"
+break_threshold = 25.0
+color = Color(0.9412, 0.9412, 0.9412, 1.0)
+scale = 1.0
+tags = Array[String]([])
+lore_ru = ""
+lore_en = ""

@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cvehicle000001"]
+
+[ext_resource type="Script" path="res://world/vehicles/Vehicle.gd" id="1_vehicle"]
+
+[node name="Vehicle" type="VehicleBody3D"]
+collision_layer = 16
+collision_mask = 63
+mass = 1000.0
+script = ExtResource("1_vehicle")

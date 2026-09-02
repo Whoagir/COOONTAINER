@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://chagglebar001"]
+
+[ext_resource type="Script" path="res://ui/haggle_bar/HaggleBar.gd" id="1_haggle"]
+
+[node name="HaggleBar" type="CanvasLayer"]
+layer = 6
+script = ExtResource("1_haggle")

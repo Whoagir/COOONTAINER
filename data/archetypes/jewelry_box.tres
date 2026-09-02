@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Archetype" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/Archetype.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "jewelry_box"
+builder = "jewelry_box"
+shard_count = 4
+size_class = 1
+mass_default = 0.5
+dims = Vector3(0.2, 0.1, 0.14)
+cloth = false
+container = true
+container_capacity = 2
+light_fixture = false
+base_color = Color(0.4784, 0.1255, 0.251, 1.0)
+secondary_color = Color(0.8157, 0.6902, 0.3765, 1.0)
+friction = 0.8
+bounce = 0.05

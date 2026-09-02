@@ -1,0 +1,56 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://core/ItemDef.gd" id="1"]
+[ext_resource type="Script" path="res://core/LootRef.gd" id="2"]
+
+[sub_resource type="Resource" id="lr1"]
+script = ExtResource("2")
+item_id = "usb_unmarked"
+chance = 0.5
+count_min = 1
+count_max = 1
+
+[sub_resource type="Resource" id="lr2"]
+script = ExtResource("2")
+item_id = "counterfeit_100"
+chance = 0.4
+count_min = 1
+count_max = 3
+
+[sub_resource type="Resource" id="lr3"]
+script = ExtResource("2")
+item_id = "document_passport_fake"
+chance = 0.3
+count_min = 1
+count_max = 1
+
+[sub_resource type="Resource" id="lr4"]
+script = ExtResource("2")
+item_id = "phone_burner"
+chance = 0.3
+count_min = 1
+count_max = 1
+
+[resource]
+script = ExtResource("1")
+id = "suitcase_spy"
+name_ru = "Чемодан «шпионский»"
+name_en = "Spy Briefcase"
+archetype_id = "suitcase"
+facets = Array[int]([2, 4, 11])
+value_base = 90
+mass_override = 0.0
+liquid_id = 0
+liquid_amount = 1.0
+flammable = false
+illegal = true
+dusty_default = 0.0
+nest_loot = Array[Resource]([SubResource("lr1"), SubResource("lr2"), SubResource("lr3"), SubResource("lr4")])
+vendor_affinity = Array[String](["vendor_dark"])
+wearable_slot = "none"
+break_threshold = 25.0
+color = Color(0.1333, 0.1333, 0.1333, 1.0)
+scale = 0.8
+tags = Array[String]([])
+lore_ru = ""
+lore_en = ""

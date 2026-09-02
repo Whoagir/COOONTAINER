@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/ItemDef.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "paint_pink"
+name_ru = "Краска розовая"
+name_en = "Pink Paint"
+archetype_id = "can_paint"
+facets = Array[int]([6])
+value_base = 5
+mass_override = 0.0
+liquid_id = 2
+liquid_amount = 1.0
+flammable = false
+illegal = false
+dusty_default = 0.0
+vendor_affinity = Array[String](["vendor_tiny", "vendor_household"])
+wearable_slot = "none"
+break_threshold = 25.0
+color = Color(0.9412, 0.251, 0.6275, 1.0)
+scale = 1.0
+tags = Array[String]([])
+lore_ru = ""
+lore_en = ""

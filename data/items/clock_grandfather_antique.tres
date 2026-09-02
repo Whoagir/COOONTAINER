@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/ItemDef.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "clock_grandfather_antique"
+name_ru = "Часы напольные антик"
+name_en = "Antique Grandfather Clock"
+archetype_id = "clock_grandfather"
+facets = Array[int]([0, 1, 13])
+value_base = 600
+mass_override = 0.0
+liquid_id = 0
+liquid_amount = 1.0
+flammable = false
+illegal = false
+dusty_default = 0.6
+vendor_affinity = Array[String](["vendor_antique"])
+wearable_slot = "none"
+break_threshold = 5.5
+color = Color(0.3529, 0.2275, 0.1255, 1.0)
+scale = 1.0
+tags = Array[String]([])
+lore_ru = ""
+lore_en = ""

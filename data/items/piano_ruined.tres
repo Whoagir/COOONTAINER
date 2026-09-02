@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/ItemDef.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "piano_ruined"
+name_ru = "Пианино убитое"
+name_en = "Ruined Piano"
+archetype_id = "piano"
+facets = Array[int]([12, 1])
+value_base = 60
+mass_override = 120.0
+liquid_id = 0
+liquid_amount = 1.0
+flammable = false
+illegal = false
+dusty_default = 0.9
+vendor_affinity = Array[String](["vendor_tiny"])
+wearable_slot = "none"
+break_threshold = 60.0
+color = Color(0.2902, 0.2275, 0.1647, 1.0)
+scale = 0.8
+tags = Array[String]([])
+lore_ru = "Играет только «Собачий вальс». Само."
+lore_en = "Only plays Chopsticks. By itself."

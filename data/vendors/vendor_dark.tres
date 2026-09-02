@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="VendorDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/VendorDef.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "vendor_dark"
+name_ru = "Гараж «Без Вопросов»"
+name_en = "No Questions Garage"
+vendor_type = 3
+phobias = Array[int]([6])
+favorite_facets = Array[int]([11, 10])
+hated_facets = Array[int]([])
+base_multiplier = 0.8
+buys_illegal = true
+calls_police_on_illegal = false
+green_zone_base = 0.22
+greed = 0.8
+unlock_cost = 2500
+unlock_requires_vendor = "vendor_tiny"
+body_color = Color(0.1255, 0.1255, 0.1569, 1.0)
+voice_pitch = 0.7
+lines_greet_ru = Array[String](["Тихо. Клади. Не смотри мне в глаза.", "Вопросов не задаю. Ты тоже не задавай.", "Опять ты. Хвоста нет? Проверь.", "Что принёс? Хорошее — это то, что не ищут.", "Заходи. Дверь закрой. Обе.", "Ну? Показывай, что «нашёл»."])
+lines_greet_en = Array[String](["Quiet. Put it down. Don't look me in the eye.", "I ask no questions. You ask none either.", "You again. Anyone tail you? Check.", "Whatcha got? Good stuff is stuff nobody's looking for.", "Come in. Close the door. Both of them.", "Well? Show me what you «found»."])
+lines_scream_ru = Array[String](["Это с серийником?! Спили!", "Тихо-тихо-тихо! Это ж... ага.", "Ты это где взял? Не отвечай.", "О-о. Это ж Сержа. Был Сержа.", "Убери со света! Со света убери!", "Хех. Хе-хе. Мне нравится."])
+lines_scream_en = Array[String](["That has a serial number?! File it off!", "Quiet-quiet-quiet! That's... yeah.", "Where'd you get that? Don't answer.", "Oh-ho. That's Serge's. WAS Serge's.", "Get it out of the light! Out of the light!", "Heh. Heh-heh. I like it."])
+lines_deal_ru = Array[String](["Договорились. Мы не встречались.", "Беру. Деньги в конверте. Конверта нет.", "Ладно. Но ты меня не знаешь.", "По рукам. Руки мыть после.", "Сделка. Тебя здесь не было.", "Куплю. Скажи, что это подарок."])
+lines_deal_en = Array[String](["Deal. We never met.", "I'll take it. Cash in an envelope. No envelope.", "Fine. But you don't know me.", "Deal. Wash your hands after.", "Done. You were never here.", "Buying. Say it was a gift."])
+lines_reject_ru = Array[String](["Много хочешь. Мало живёшь.", "За такое я ещё и риск беру. Скидывай.", "Не. Слишком чистое. Подозрительно.", "Половину. Иначе дверь — там.", "Ты на кого работаешь? Шучу. Не шучу. Скидывай.", "Не смешно. Меньше."])
+lines_reject_en = Array[String](["You want a lot. You'll live a little.", "I'm taking the risk here. Lower it.", "Nah. Too clean. Suspicious.", "Half. Or the door is that way.", "Who do you work for? Kidding. Not kidding. Lower it.", "Not funny. Less."])
+lines_phobia_ru = Array[String](["ХОМЯК! Убери хомяка! Я серьёзно!", "Оно смотрит! Оно ЗНАЕТ!", "У меня было детство. Там был хомяк. Не спрашивай.", "Нет-нет-нет. Не этот. Не эти щёки.", "Всё, сделки нет. Хомяк — вон."])
+lines_phobia_en = Array[String](["HAMSTER! Get the hamster away! I mean it!", "It's looking at me! It KNOWS!", "I had a childhood. There was a hamster. Don't ask.", "No-no-no. Not that one. Not those cheeks.", "That's it, no deal. Hamster out."])

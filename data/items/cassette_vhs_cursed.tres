@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/ItemDef.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "cassette_vhs_cursed"
+name_ru = "VHS без подписи"
+name_en = "Unlabeled VHS"
+archetype_id = "cassette"
+facets = Array[int]([])
+value_base = 25
+mass_override = 0.0
+liquid_id = 0
+liquid_amount = 1.0
+flammable = false
+illegal = false
+dusty_default = 0.0
+vendor_affinity = Array[String](["vendor_dark", "vendor_antique"])
+wearable_slot = "none"
+break_threshold = 25.0
+color = Color(0.0667, 0.0667, 0.0667, 1.0)
+scale = 2.0
+tags = Array[String]([])
+lore_ru = "Смотревшие говорят: «нормально». Через 7 дней."
+lore_en = "Viewers say «it's fine». Seven days later."

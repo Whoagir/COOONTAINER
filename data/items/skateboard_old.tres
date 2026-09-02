@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/ItemDef.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "skateboard_old"
+name_ru = "Скейт из 90-х"
+name_en = "'90s Skateboard"
+archetype_id = "skateboard"
+facets = Array[int]([])
+value_base = 8
+mass_override = 0.0
+liquid_id = 0
+liquid_amount = 1.0
+flammable = false
+illegal = false
+dusty_default = 0.0
+vendor_affinity = Array[String](["vendor_tiny"])
+wearable_slot = "none"
+break_threshold = 25.0
+color = Color(0.251, 0.6275, 0.7529, 1.0)
+scale = 1.0
+tags = Array[String]([])
+lore_ru = ""
+lore_en = ""

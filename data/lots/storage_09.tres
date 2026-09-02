@@ -1,0 +1,155 @@
+[gd_resource type="Resource" script_class="LotPreset" load_steps=18 format=3]
+
+[ext_resource type="Script" path="res://core/LotPreset.gd" id="1"]
+[ext_resource type="Script" path="res://core/LotSpawn.gd" id="2"]
+
+[sub_resource type="Resource" id="s1"]
+script = ExtResource("2")
+item_id = "mattress_memory"
+xform = Transform3D(1.0, 0, 0.0, 0, 1.0, 0, 0.0, 0, 1.0, 0.0, 0.0, -1.0)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s2"]
+script = ExtResource("2")
+item_id = "dresser_grandma"
+xform = Transform3D(0.9945, 0, -0.1045, 0, 1.0, 0, 0.1045, 0, 0.9945, -0.85, 0.0, 0.2)
+nested = Array[String](["frame_photo_wedding", "necklace_pearl_fake"])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s3"]
+script = ExtResource("2")
+item_id = "suitcase_leather"
+xform = Transform3D(0.9903, 0, 0.1392, 0, 1.0, 0, -0.1392, 0, 0.9903, -0.85, 0.92, 0.2)
+nested = Array[String](["rag_silk", "letter_love"])
+locked_override = 0
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s4"]
+script = ExtResource("2")
+item_id = "kettle_samovar"
+xform = Transform3D(0.9848, 0, -0.1736, 0, 1.0, 0, 0.1736, 0, 0.9848, 0.7, 0.0, 0.15)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s5"]
+script = ExtResource("2")
+item_id = "teapot_silver"
+xform = Transform3D(0.9945, 0, 0.1045, 0, 1.0, 0, -0.1045, 0, 0.9945, 1.15, 0.0, 0.2)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s6"]
+script = ExtResource("2")
+item_id = "nightstand_deco"
+xform = Transform3D(0.9781, 0, -0.2079, 0, 1.0, 0, 0.2079, 0, 0.9781, 1.1, 0.0, 0.85)
+nested = Array[String](["letter_to_santa"])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s7"]
+script = ExtResource("2")
+item_id = "lamp_table_banker"
+xform = Transform3D(0.9903, 0, -0.1392, 0, 1.0, 0, 0.1392, 0, 0.9903, 1.1, 0.58, 0.85)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s8"]
+script = ExtResource("2")
+item_id = "fur_coat"
+xform = Transform3D(0.9511, 0, -0.309, 0, 1.0, 0, 0.309, 0, 0.9511, -1.15, 0.0, 0.85)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s9"]
+script = ExtResource("2")
+item_id = "painting_stern_portrait"
+xform = Transform3D(0.0, 0, -1.0, 0, 1.0, 0, 1.0, 0, 0.0, 1.28, 0.0, -0.5)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s10"]
+script = ExtResource("2")
+item_id = "globe_bar"
+xform = Transform3D(0.9703, 0, 0.2419, 0, 1.0, 0, -0.2419, 0, 0.9703, 0.15, 0.0, 0.7)
+nested = Array[String](["glass_shot_set", "cash_20"])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s11"]
+script = ExtResource("2")
+item_id = "book_cookbook"
+xform = Transform3D(0.2588, 0, -0.9659, 0, 1.0, 0, 0.9659, 0, 0.2588, -0.4, 0.0, 1.15)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s12"]
+script = ExtResource("2")
+item_id = "teapot_grandma"
+xform = Transform3D(0.9903, 0, -0.1392, 0, 1.0, 0, 0.1392, 0, 0.9903, 0.2, 0.0, 1.18)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s13"]
+script = ExtResource("2")
+item_id = "cup_soviet_gold"
+xform = Transform3D(1.0, 0, 0.0, 0, 1.0, 0, 0.0, 0, 1.0, 0.45, 0.0, 1.18)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s14"]
+script = ExtResource("2")
+item_id = "cup_soviet_gold"
+xform = Transform3D(0.9903, 0, -0.1392, 0, 1.0, 0, 0.1392, 0, 0.9903, 0.6, 0.0, 1.12)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s15"]
+script = ExtResource("2")
+item_id = "frame_photo_family"
+xform = Transform3D(0.9781, 0, -0.2079, 0, 1.0, 0, 0.2079, 0, 0.9781, -0.85, 0.0, 1.2)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s16"]
+script = ExtResource("2")
+item_id = "plant_pot_bonsai"
+xform = Transform3D(1.0, 0, 0.0, 0, 1.0, 0, 0.0, 0, 1.0, 0.9, 0.0, 1.2)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[resource]
+script = ExtResource("1")
+id = "storage_09"
+district_id = 2
+lot_kind = 2
+min_bid = 100
+info_mode = 0
+preview_seconds = 15.0
+clearout_seconds = 165.0
+lock_chance = 0.24
+spawn_list = Array[Resource]([SubResource("s1"), SubResource("s2"), SubResource("s3"), SubResource("s4"), SubResource("s5"), SubResource("s6"), SubResource("s7"), SubResource("s8"), SubResource("s9"), SubResource("s10"), SubResource("s11"), SubResource("s12"), SubResource("s13"), SubResource("s14"), SubResource("s15"), SubResource("s16")])
+pacing_tag = 0
+broom_required = false
+hunters_count = 7
+order = 9
+tale_ru = "Бабушкин сервант. Самовар, шуба, письмо Деду Морозу от сорокатрёхлетнего. Глобус-бар не врёт: внутри стопки."
+tale_en = "Grandma's sideboard. Samovar, fur coat, a letter to Santa from a forty-three-year-old. The globe bar does not lie: there are shot glasses inside."
+docs_ru = "ЯЧЕЙКА 09 — БАБУШКА:\nКомод + чемодан кожа\nСамовар + чайник серебро\nШуба\nПисьмо Деду Морозу — 1"
+docs_en = "UNIT 09 — GRANDMA:\nDresser + leather suitcase\nSamovar + silver teapot\nFur coat\nLetter to Santa — 1"
+photo_item_ids = Array[String]([])
+cell_size = Vector3(3.0, 2.5, 3.0)
+dark = false

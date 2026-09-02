@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="VendorDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/VendorDef.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "vendor_tech"
+name_ru = "Сервис «Байт и Молоток»"
+name_en = "Byte & Hammer Repairs"
+vendor_type = 2
+phobias = Array[int]([4])
+favorite_facets = Array[int]([])
+hated_facets = Array[int]([6])
+base_multiplier = 0.7
+buys_illegal = false
+calls_police_on_illegal = true
+green_zone_base = 0.3
+greed = 0.6
+unlock_cost = 1200
+unlock_requires_vendor = "vendor_tiny"
+body_color = Color(0.1882, 0.6275, 0.7529, 1.0)
+voice_pitch = 1.2
+lines_greet_ru = Array[String](["Включается? Нет? Всё равно интересно.", "Плазма? Ноут? Или снова тостер?", "Клади на антистатик. Вот сюда.", "О! Железо! Дай посмотреть!", "Гарантия закончилась в 2009-м? Отлично, беру.", "Не трогай провода. Провода — мои."])
+lines_greet_en = Array[String](["Does it turn on? No? Still interested.", "Plasma? Laptop? Or a toaster again?", "Put it on the anti-static mat. Right there.", "Ooh! Hardware! Let me see!", "Warranty expired in 2009? Perfect, I'll take it.", "Don't touch the cables. The cables are mine."])
+lines_scream_ru = Array[String](["Экран! Экран паутинкой!", "Тут батарея вздулась! Она БЕРЕМЕННА!", "Кто-то это ронял. Много раз. С любовью.", "Пахнет горелым! Обожаю!", "Это же ЭЛТ! Спину береги!", "Ой. Оно пикнуло. Оно живое."])
+lines_scream_en = Array[String](["The screen! Spiderweb screen!", "The battery's swollen! It's PREGNANT!", "Someone dropped this. Repeatedly. With love.", "Smells burnt! I love it!", "That's a CRT! Mind your back!", "Oh. It beeped. It's alive."])
+lines_deal_ru = Array[String](["Беру. На запчасти. Или на алтарь.", "Окей. Перепрошью и продам втридорога.", "Договорились. Кабель в подарок. Не тот.", "Годно. Ставь к серверу. Это не сервер, но ставь.", "Сделка. Пароль не спрашиваю.", "Куплено. Данные твои? Уже нет."])
+lines_deal_en = Array[String](["Taking it. For parts. Or the shrine.", "Okay. I'll reflash it and sell it for triple.", "Deal. Free cable. Not the right one.", "Good. Put it by the server. It's not a server, but still.", "Deal. I won't ask for the password.", "Bought. Your data? Not anymore."])
+lines_reject_ru = Array[String](["За «АйФон 4S»? Это не 2011-й.", "Оно даже не включается. Скидывай.", "Не. Там конденсаторы плачут.", "Столько стоит новый. И он работает.", "Ты ноль лишний нажал. Как на клавиатуре.", "Не-а. Это же «Самсонг», не «Самсунг»."])
+lines_reject_en = Array[String](["For an iPhon 4S? It's not 2011.", "It doesn't even power on. Lower it.", "Nope. The capacitors are crying.", "That's the price of a new one. That works.", "You hit an extra zero. Like on a keyboard.", "Nah. It's a Samsong, not the real one."])
+lines_phobia_ru = Array[String](["МОКРОЕ! Не неси мокрое к железу!", "Вода! Короткое! Всё, я пропал!", "Вытирай! ВЫТИРАЙ, пока не дымит!", "Оно капает! На МАТЕРИНКУ капает!", "Убери! Я и так на рисе живу!"])
+lines_phobia_en = Array[String](["WET! Don't bring wet stuff near hardware!", "Water! Short circuit! I'm doomed!", "Wipe it! WIPE IT before it smokes!", "It's dripping! On the MOTHERBOARD!", "Get it away! I already live on rice!"])

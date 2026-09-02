@@ -1,0 +1,91 @@
+[gd_resource type="Resource" script_class="LotPreset" load_steps=10 format=3]
+
+[ext_resource type="Script" path="res://core/LotPreset.gd" id="1"]
+[ext_resource type="Script" path="res://core/LotSpawn.gd" id="2"]
+
+[sub_resource type="Resource" id="s1"]
+script = ExtResource("2")
+item_id = "suitcase_plastic"
+xform = Transform3D(0.9903, 0, -0.1392, 0, 1.0, 0, 0.1392, 0, 0.9903, 0.0, 0.0, -0.36)
+nested = Array[String](["book_hollow", "usb_crypto"])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s2"]
+script = ExtResource("2")
+item_id = "jewelry_box_music"
+xform = Transform3D(0.9848, 0, 0.1736, 0, 1.0, 0, -0.1736, 0, 0.9848, 0.44, 0.0, 0.02)
+nested = Array[String](["ring_diamond"])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s3"]
+script = ExtResource("2")
+item_id = "camera_polaroid"
+xform = Transform3D(0.9397, 0, -0.342, 0, 1.0, 0, 0.342, 0, 0.9397, -0.44, 0.0, 0.02)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s4"]
+script = ExtResource("2")
+item_id = "bag_tote"
+xform = Transform3D(0.9613, 0, -0.2756, 0, 1.0, 0, 0.2756, 0, 0.9613, -0.44, 0.0, 0.36)
+nested = Array[String](["cash_50"])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s5"]
+script = ExtResource("2")
+item_id = "letter_treasure"
+xform = Transform3D(0.9976, 0, -0.0698, 0, 1.0, 0, 0.0698, 0, 0.9976, 0.14, 0.0, 0.22)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s6"]
+script = ExtResource("2")
+item_id = "cup_okayest"
+xform = Transform3D(0.9945, 0, 0.1045, 0, 1.0, 0, -0.1045, 0, 0.9945, 0.44, 0.0, 0.38)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s7"]
+script = ExtResource("2")
+item_id = "perfume_cheap"
+xform = Transform3D(0.9903, 0, -0.1392, 0, 1.0, 0, 0.1392, 0, 0.9903, 0.18, 0.0, 0.48)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s8"]
+script = ExtResource("2")
+item_id = "book_diary"
+xform = Transform3D(0.342, 0, -0.9397, 0, 1.0, 0, 0.9397, 0, 0.342, 0.0, 0.0, 0.48)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[resource]
+script = ExtResource("1")
+id = "hangar_13"
+district_id = 1
+lot_kind = 0
+min_bid = 12
+info_mode = 2
+preview_seconds = 17.0
+clearout_seconds = 82.0
+lock_chance = 0.1
+spawn_list = Array[Resource]([SubResource("s1"), SubResource("s2"), SubResource("s3"), SubResource("s4"), SubResource("s5"), SubResource("s6"), SubResource("s7"), SubResource("s8")])
+pacing_tag = 1
+broom_required = false
+hunters_count = 6
+order = 13
+tale_ru = "Чемодан «с секретом». Хозяин кричал про вазу Мин и слиток. Секрет — книга-тайник. Пароль от кошелька был на стикере. Стикер отклеился."
+tale_en = "A suitcase «with a secret». Owner yelled about a Ming vase and a gold bar. The secret is a hollow book. The wallet password was on a sticker. The sticker fell off."
+docs_ru = "ОПИСЬ (таможня, печать смазана):\n— чемодан пластик\n— ваза Мин — НЕТ\n— слиток — НЕТ\n— флешка «Кошелёк НЕ ТРОГАТЬ»\n— кольцо в музыкальной шкатулке"
+docs_en = "MANIFEST (customs, smudged stamp):\n— plastic suitcase\n— Ming vase — NO\n— gold bar — NO\n— USB: Wallet DO NOT TOUCH\n— a ring in a music box"
+photo_item_ids = Array[String](["suitcase_plastic", "vase_ming", "gold_bar", "camera_polaroid"])
+cell_size = Vector3(1.5, 1.2, 1.5)
+dark = false

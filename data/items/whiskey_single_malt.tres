@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/ItemDef.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "whiskey_single_malt"
+name_ru = "Виски односолодовый"
+name_en = "Single Malt Whiskey"
+archetype_id = "bottle"
+facets = Array[int]([0, 6])
+value_base = 60
+mass_override = 0.0
+liquid_id = 1
+liquid_amount = 1.0
+flammable = true
+illegal = false
+dusty_default = 0.0
+vendor_affinity = Array[String](["vendor_antique", "vendor_household"])
+wearable_slot = "none"
+break_threshold = 4.5
+color = Color(0.2902, 0.1647, 0.0627, 1.0)
+scale = 1.0
+tags = Array[String]([])
+lore_ru = ""
+lore_en = ""

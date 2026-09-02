@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/ItemDef.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "hat_tinfoil"
+name_ru = "Шапочка из фольги"
+name_en = "Tinfoil Hat"
+archetype_id = "hat"
+facets = Array[int]([])
+value_base = 1
+mass_override = 0.0
+liquid_id = 0
+liquid_amount = 1.0
+flammable = false
+illegal = false
+dusty_default = 0.0
+vendor_affinity = Array[String](["vendor_tiny", "vendor_tech"])
+wearable_slot = "none"
+break_threshold = 25.0
+color = Color(0.8157, 0.8157, 0.8471, 1.0)
+scale = 0.8
+tags = Array[String]([])
+lore_ru = "Защищает от 5G, 4G и здравого смысла."
+lore_en = "Blocks 5G, 4G, and common sense."

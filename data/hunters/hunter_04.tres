@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="AuctionBrain" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/AuctionBrain.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "hunter_04"
+name_ru = "Тимофей"
+name_en = "Timothy"
+nickname_ru = "Хипстер"
+nickname_en = "Hipster"
+estimate_error = 0.3
+greed = 0.7
+bluff_chance = 0.2
+setup_chance = 0.1
+patience = 0.5
+aggression = 0.6
+brawl_temper = 0.1
+info_sensitivity = 1.5
+body_color = Color(0.2275, 0.3529, 0.2902, 1.0)
+hat = true
+bald = false
+voice_pitch = 1.05
+catchphrases_ru = Array[String](["Это же винтаж. Винтаж, понимаешь?", "У меня подкаст про это.", "Там ЭЛТ. Ретро. Беру.", "Ставлю крафтово. Триста.", "Ты не понимаешь эстетику плесени.", "Кассеты снова в моде. Мама сказала.", "Ноут 2005-го — это же артефакт!"])
+catchphrases_en = Array[String](["That's vintage. VINTAGE, you understand?", "I have a podcast about this.", "There's a CRT in there. Retro. Mine.", "Artisanal bid. Three hundred.", "You don't get the aesthetics of mold.", "Cassettes are back. My mom said so.", "A 2005 laptop? That's an artifact!"])
+height = 1.85
+fatness = 0.8

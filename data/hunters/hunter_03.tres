@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="AuctionBrain" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/AuctionBrain.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "hunter_03"
+name_ru = "Дед Пасс"
+name_en = "Grandpa Pass"
+nickname_ru = "Дед-пас"
+nickname_en = "Pass Gramps"
+estimate_error = 0.15
+greed = 0.3
+bluff_chance = 0.02
+setup_chance = 0.0
+patience = 0.2
+aggression = 0.15
+brawl_temper = 0.05
+info_sensitivity = 0.6
+body_color = Color(0.5412, 0.5412, 0.4784, 1.0)
+hat = true
+bald = false
+voice_pitch = 0.8
+catchphrases_ru = Array[String](["Пас.", "Дорого. Пас.", "В моё время сумка стоила рубль.", "Пас. Хотя... нет, пас.", "Я не за этим пришёл. Я погреться.", "Молодёжь. Переплачивают.", "Двадцать. Ладно, пас."])
+catchphrases_en = Array[String](["Pass.", "Too much. Pass.", "In my day a bag cost a nickel.", "Pass. Although... no. Pass.", "I'm not here to buy. I'm here for the heating.", "Kids these days. Overpaying.", "Twenty. Fine, pass."])
+height = 1.68
+fatness = 0.85

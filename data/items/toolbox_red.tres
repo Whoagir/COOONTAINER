@@ -1,0 +1,49 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://core/ItemDef.gd" id="1"]
+[ext_resource type="Script" path="res://core/LootRef.gd" id="2"]
+
+[sub_resource type="Resource" id="lr1"]
+script = ExtResource("2")
+item_id = "hammer_rusty"
+chance = 0.6
+count_min = 1
+count_max = 1
+
+[sub_resource type="Resource" id="lr2"]
+script = ExtResource("2")
+item_id = "wrench_adjustable"
+chance = 0.6
+count_min = 1
+count_max = 1
+
+[sub_resource type="Resource" id="lr3"]
+script = ExtResource("2")
+item_id = "tool_nails"
+chance = 0.5
+count_min = 1
+count_max = 1
+
+[resource]
+script = ExtResource("1")
+id = "toolbox_red"
+name_ru = "Ящик с инструментами"
+name_en = "Red Toolbox"
+archetype_id = "toolbox"
+facets = Array[int]([2])
+value_base = 25
+mass_override = 0.0
+liquid_id = 0
+liquid_amount = 1.0
+flammable = false
+illegal = false
+dusty_default = 0.0
+nest_loot = Array[Resource]([SubResource("lr1"), SubResource("lr2"), SubResource("lr3")])
+vendor_affinity = Array[String](["vendor_household", "vendor_tiny"])
+wearable_slot = "none"
+break_threshold = 25.0
+color = Color(0.7529, 0.1882, 0.1255, 1.0)
+scale = 1.0
+tags = Array[String]([])
+lore_ru = ""
+lore_en = ""

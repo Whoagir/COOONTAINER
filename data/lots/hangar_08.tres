@@ -1,0 +1,83 @@
+[gd_resource type="Resource" script_class="LotPreset" load_steps=9 format=3]
+
+[ext_resource type="Script" path="res://core/LotPreset.gd" id="1"]
+[ext_resource type="Script" path="res://core/LotSpawn.gd" id="2"]
+
+[sub_resource type="Resource" id="s1"]
+script = ExtResource("2")
+item_id = "backpack_hiking"
+xform = Transform3D(0.9848, 0, -0.1736, 0, 1.0, 0, 0.1736, 0, 0.9848, 0.0, 0.0, -0.36)
+nested = Array[String](["flashlight_big", "cash_20"])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s2"]
+script = ExtResource("2")
+item_id = "camera_polaroid"
+xform = Transform3D(0.9659, 0, 0.2588, 0, 1.0, 0, -0.2588, 0, 0.9659, 0.46, 0.0, 0.08)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s3"]
+script = ExtResource("2")
+item_id = "canister_army_water"
+xform = Transform3D(0.9903, 0, -0.1392, 0, 1.0, 0, 0.1392, 0, 0.9903, -0.46, 0.0, 0.04)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s4"]
+script = ExtResource("2")
+item_id = "letter_treasure"
+xform = Transform3D(0.9976, 0, -0.0698, 0, 1.0, 0, 0.0698, 0, 0.9976, 0.22, 0.0, 0.42)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s5"]
+script = ExtResource("2")
+item_id = "water_bottle"
+xform = Transform3D(1.0, 0, 0.0, 0, 1.0, 0, 0.0, 0, 1.0, -0.2, 0.0, 0.44)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s6"]
+script = ExtResource("2")
+item_id = "hat_trucker"
+xform = Transform3D(0.9511, 0, -0.309, 0, 1.0, 0, 0.309, 0, 0.9511, 0.5, 0.0, 0.4)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s7"]
+script = ExtResource("2")
+item_id = "book_dummies"
+xform = Transform3D(0.4226, 0, -0.9063, 0, 1.0, 0, 0.9063, 0, 0.4226, -0.46, 0.0, 0.4)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[resource]
+script = ExtResource("1")
+id = "hangar_08"
+district_id = 1
+lot_kind = 0
+min_bid = 18
+info_mode = 2
+preview_seconds = 18.0
+clearout_seconds = 85.0
+lock_chance = 0.1
+spawn_list = Array[Resource]([SubResource("s1"), SubResource("s2"), SubResource("s3"), SubResource("s4"), SubResource("s5"), SubResource("s6"), SubResource("s7")])
+pacing_tag = 0
+broom_required = false
+hunters_count = 6
+order = 8
+tale_ru = "Походный рюкзак. На фото — сейф и карта сокровищ. В рюкзаке — фонарь и двадцатка. Сокровище — письмо, которое указывает на чужой гараж."
+tale_en = "A hiking pack. Photos show a safe and a treasure map. The pack has a flashlight and a twenty. The treasure is a letter that points at someone else's garage."
+docs_ru = "ОПИСЬ (турклуб «Горизонт»):\n— рюкзак туристический\n— фонарь, канистра воды\n— карта сокровищ\n— сейф на фото — нет"
+docs_en = "MANIFEST (Horizon hiking club):\n— hiking backpack\n— flashlight, water can\n— treasure map\n— safe in the photo — no"
+photo_item_ids = Array[String](["backpack_hiking", "camera_polaroid", "letter_treasure", "safe_old"])
+cell_size = Vector3(1.5, 1.2, 1.5)
+dark = false

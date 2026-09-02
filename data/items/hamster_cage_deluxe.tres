@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/ItemDef.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "hamster_cage_deluxe"
+name_ru = "Хомяк Валера (люкс)"
+name_en = "Valera the Hamster (Deluxe)"
+archetype_id = "hamster_cage"
+facets = Array[int]([7])
+value_base = 35
+mass_override = 0.0
+liquid_id = 0
+liquid_amount = 1.0
+flammable = false
+illegal = false
+dusty_default = 0.0
+vendor_affinity = Array[String](["vendor_household", "vendor_tiny"])
+wearable_slot = "none"
+break_threshold = 25.0
+color = Color(0.9412, 0.7529, 0.251, 1.0)
+scale = 1.2
+tags = Array[String](["hamster"])
+lore_ru = ""
+lore_en = ""

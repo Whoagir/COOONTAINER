@@ -1,0 +1,99 @@
+[gd_resource type="Resource" script_class="LotPreset" load_steps=11 format=3]
+
+[ext_resource type="Script" path="res://core/LotPreset.gd" id="1"]
+[ext_resource type="Script" path="res://core/LotSpawn.gd" id="2"]
+
+[sub_resource type="Resource" id="s1"]
+script = ExtResource("2")
+item_id = "bag_tote"
+xform = Transform3D(0.9511, 0, -0.309, 0, 1.0, 0, 0.309, 0, 0.9511, -0.42, 0.0, -0.38)
+nested = Array[String](["cash_50"])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s2"]
+script = ExtResource("2")
+item_id = "jewelry_box_velvet"
+xform = Transform3D(0.9781, 0, 0.2079, 0, 1.0, 0, -0.2079, 0, 0.9781, 0.44, 0.0, -0.38)
+nested = Array[String](["ring_wedding"])
+locked_override = 1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s3"]
+script = ExtResource("2")
+item_id = "hamster_boris"
+xform = Transform3D(0.9397, 0, -0.342, 0, 1.0, 0, 0.342, 0, 0.9397, 0.0, 0.0, 0.28)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s4"]
+script = ExtResource("2")
+item_id = "camera_polaroid"
+xform = Transform3D(0.9613, 0, 0.2756, 0, 1.0, 0, -0.2756, 0, 0.9613, 0.44, 0.0, 0.08)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s5"]
+script = ExtResource("2")
+item_id = "book_diary"
+xform = Transform3D(0.3746, 0, -0.9272, 0, 1.0, 0, 0.9272, 0, 0.3746, -0.44, 0.0, 0.12)
+nested = Array[String](["cash_20"])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s6"]
+script = ExtResource("2")
+item_id = "cup_soviet_gold"
+xform = Transform3D(0.9903, 0, -0.1392, 0, 1.0, 0, 0.1392, 0, 0.9903, 0.18, 0.0, -0.08)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s7"]
+script = ExtResource("2")
+item_id = "letter_love"
+xform = Transform3D(0.9945, 0, -0.1045, 0, 1.0, 0, 0.1045, 0, 0.9945, -0.12, 0.0, 0.48)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s8"]
+script = ExtResource("2")
+item_id = "perfume_vintage"
+xform = Transform3D(1.0, 0, 0.0, 0, 1.0, 0, 0.0, 0, 1.0, 0.44, 0.0, 0.42)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s9"]
+script = ExtResource("2")
+item_id = "frame_photo_cat"
+xform = Transform3D(0.8829, 0, -0.4695, 0, 1.0, 0, 0.4695, 0, 0.8829, -0.44, 0.0, 0.44)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[resource]
+script = ExtResource("1")
+id = "hangar_10"
+district_id = 1
+lot_kind = 0
+min_bid = 10
+info_mode = 1
+preview_seconds = 16.0
+clearout_seconds = 80.0
+lock_chance = 0.08
+spawn_list = Array[Resource]([SubResource("s1"), SubResource("s2"), SubResource("s3"), SubResource("s4"), SubResource("s5"), SubResource("s6"), SubResource("s7"), SubResource("s8"), SubResource("s9")])
+pacing_tag = 1
+broom_required = false
+hunters_count = 6
+order = 10
+tale_ru = "Щель врёт: видна авоська. Хозяин шептал, что возит «питомца для души». Борис видел вещи. Борис молчит. Шкатулка играет одну ноту — ту самую."
+tale_en = "The slit lies: you see a tote. Owner whispered he traveled with a «soul pet». Boris has seen things. Boris says nothing. The music box plays one note — THE note."
+docs_ru = "ОПИСЬ (сдал сосед снизу, орёт):\n— хомяк «Борис», живой\n— шкатулка бархат + кольцо\n— авоська «Спасём планету»\n— купюры закладкой в дневнике\nПримечание: не кормить с молотка."
+docs_en = "MANIFEST (downstairs neighbor, yelling):\n— hamster «Boris», alive\n— velvet box + a ring\n— Save the Planet tote\n— bills bookmarking a diary\nNote: do not feed from the gavel."
+photo_item_ids = Array[String]([])
+cell_size = Vector3(1.5, 1.2, 1.5)
+dark = false

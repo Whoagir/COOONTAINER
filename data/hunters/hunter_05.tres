@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="AuctionBrain" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/AuctionBrain.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "hunter_05"
+name_ru = "Гарик Тихий"
+name_en = "Garik the Quiet"
+nickname_ru = "Гарик"
+nickname_en = "Garik"
+estimate_error = 0.18
+greed = 0.65
+bluff_chance = 0.3
+setup_chance = 0.55
+patience = 0.7
+aggression = 0.45
+brawl_temper = 0.8
+info_sensitivity = 1.0
+body_color = Color(0.102, 0.102, 0.1333, 1.0)
+hat = true
+bald = false
+voice_pitch = 0.75
+catchphrases_ru = Array[String](["Поднимай, поднимай. Я подожду.", "Хороший гараж. Жалко будет.", "Ты ставишь против меня? Смело.", "Я не злой. Я просто рядом стою.", "Бери, бери. Потом поговорим.", "У меня к этому лоту личное.", "Скинул. Твоё. Поздравляю... наверное."])
+catchphrases_en = Array[String](["Raise. Raise. I'll wait.", "Nice garage. Shame, really.", "You're bidding against me? Bold.", "I'm not angry. I'm just standing near you.", "Take it. Take it. We'll talk later.", "This lot is personal for me.", "Dropped out. It's yours. Congrats... I guess."])
+height = 1.8
+fatness = 1.3

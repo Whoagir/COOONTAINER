@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/ItemDef.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "moonshine_jar"
+name_ru = "Самогон в банке"
+name_en = "Moonshine Jar"
+archetype_id = "jar"
+facets = Array[int]([0, 6])
+value_base = 6
+mass_override = 0.0
+liquid_id = 1
+liquid_amount = 1.0
+flammable = true
+illegal = false
+dusty_default = 0.0
+vendor_affinity = Array[String](["vendor_dark", "vendor_tiny"])
+wearable_slot = "none"
+break_threshold = 4.5
+color = Color(0.8784, 0.9098, 0.9412, 1.0)
+scale = 1.5
+tags = Array[String]([])
+lore_ru = ""
+lore_en = ""

@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Archetype" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/Archetype.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "kettle"
+builder = "kettle"
+shard_count = 4
+size_class = 1
+mass_default = 1.0
+dims = Vector3(0.22, 0.25, 0.22)
+cloth = false
+container = false
+container_capacity = 3
+light_fixture = false
+base_color = Color(0.8157, 0.8157, 0.8471, 1.0)
+secondary_color = Color(0.1255, 0.1255, 0.1255, 1.0)
+friction = 0.7
+bounce = 0.05

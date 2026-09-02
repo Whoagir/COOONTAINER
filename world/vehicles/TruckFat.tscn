@@ -1,0 +1,34 @@
+[gd_scene load_steps=2 format=3 uid="uid://cvehtruck00001"]
+
+[ext_resource type="PackedScene" path="res://world/vehicles/Vehicle.tscn" id="1_base"]
+
+[node name="TruckFat" instance=ExtResource("1_base")]
+mass = 1400.0
+vtype = "truck_fat"
+body_color = Color(0.2, 0.35, 0.6, 1)
+accel = 3.6
+brake_decel = 8.0
+top_speed = 12.0
+reverse_speed = 4.0
+max_steer = 0.5
+min_steer = 0.14
+wheel_radius = 0.44
+wheel_width = 0.34
+wheel_y = 0.42
+track = 1.95
+axle_front = 1.9
+axle_rear = 1.7
+suspension_rest = 0.22
+suspension_stiffness = 55.0
+damping_compression = 3.0
+damping_relaxation = 4.0
+friction_slip = 6.0
+roll_influence = 0.05
+body_size = Vector3(2.2, 0.5, 5.4)
+cab_size = Vector3(2.2, 1.35, 1.5)
+cab_z = -1.3
+hood_length = 0.6
+bed_size = Vector3(2.2, 0.8, 3.2)
+bed_z = 1.1
+bed_missing_wall = -1
+bed_roof = false

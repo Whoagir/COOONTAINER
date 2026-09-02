@@ -1,0 +1,77 @@
+keys,ru,en
+LOT_NAME_hangar_01,Сумка из качалки,Gym Bag Leftovers
+LOT_NAME_hangar_02,Чемодан с носком,The Sock Suitcase
+LOT_NAME_hangar_03,Рабочая с секретом,Work Bag With a Secret
+LOT_NAME_hangar_04,Школьный рюкзак,School Backpack
+LOT_NAME_hangar_05,Турист не прилетел,Tourist Who Missed the Flight
+LOT_NAME_hangar_06,Сумка изобретателя,Inventor's Bag
+LOT_NAME_hangar_07,Опись инспектора,Inspector's Inventory
+LOT_NAME_hangar_08,Походный рюкзак,Hiking Pack
+LOT_NAME_storage_01,Ячейка «ИКЕЙЯ»,IKEA Unit
+LOT_NAME_storage_02,Тёмная бабушкина,Dark Grandma Unit
+LOT_NAME_storage_03,Стена из коробок,Wall of Boxes
+LOT_NAME_storage_04,Локер охранника,Night Guard's Locker
+LOT_NAME_storage_05,Фокусник съехал,The Magician Moved Out
+LOT_NAME_storage_06,Сорок чашек,Forty Teacups
+LOT_NAME_storage_07,Картина к стене,Painting Face to the Wall
+LOT_NAME_storage_08,Мастерская,The Workshop
+LOT_NAME_storage_09,Бабушкин сервант,Grandma's Sideboard
+LOT_NAME_storage_10,Антиквариат (нет),Antiques (Not)
+LOT_NAME_storage_11,Дубовый комод,The Oak Dresser
+LOT_NAME_storage_12,Репетиция в ячейке,Rehearsal Unit
+LOT_NAME_garages_01,Диван у задней стены,Sofa Against the Back Wall
+LOT_NAME_garages_02,Гаражный парламент,Garage Parliament
+LOT_NAME_garages_03,Рояль в пыли,Grand Piano in the Dust
+LOT_NAME_garages_04,Мастерская с Нарнией,Workshop With Narnia
+LOT_NAME_garages_05,Золото Форта Нокс,Fort Knox Gold
+LOT_NAME_garages_06,Семейный гараж,Family Garage
+LOT_NAME_garages_07,Кирпичи и гитара,Bricks and a Guitar
+LOT_NAME_garages_08,Почти дом,Almost a House
+LOT_NAME_port_01,Обычный рейс,Ordinary Shipment
+LOT_NAME_port_02,Легенда доков,The Dock Legend
+LOT_NAME_port_03,Коносамент 7741,Bill of Lading 7741
+LOT_NAME_port_04,Шлёпанец султана,The Sultan's Flip-Flop
+LOT_NAME_port_05,Клоун у двери,Clown at the Door
+LOT_NAME_port_06,Последний контейнер,Last Container
+LOT_NAME_hangar_09,Обед бухгалтера,The Accountant's Lunch
+LOT_NAME_hangar_10,Борис в авоське,Boris in a Tote
+LOT_NAME_hangar_11,Коробка «не открывать»,Do-Not-Open Box
+LOT_NAME_hangar_12,Сумка фотографа,The Photographer's Bag
+LOT_NAME_hangar_13,Чемодан с секретом,Suitcase With a Secret
+LOT_NAME_hangar_14,Сумка с вокзала,Station Bag
+LOT_NAME_storage_13,Кухня и ремонт,Kitchen and Reno
+LOT_NAME_storage_14,Неизвестный мастер,Unknown Master
+LOT_NAME_storage_15,Антиквариат в темноте,Antiques in the Dark
+LOT_NAME_storage_16,Локер диджея,DJ Locker
+LOT_NAME_storage_17,Мин за коробками,Ming Behind Boxes
+LOT_NAME_storage_18,Ячейка СТО,The Shop Unit
+LOT_NAME_storage_19,Матрас-сберкасса,Mattress Bank
+LOT_NAME_storage_20,Шпионский локер,Spy Locker
+LOT_NAME_storage_21,Плазма в темноте,Plasma in the Dark
+LOT_NAME_storage_22,Детская на сорок,Kids Unit at Forty
+LOT_NAME_garages_09,Переезд не доехал,The Move That Didn't
+LOT_NAME_garages_10,Дворец в гараже,Palace in a Garage
+LOT_NAME_garages_11,Форт Нокс ещё раз,Fort Knox Again
+LOT_NAME_garages_12,СТО без Феррари,Shop Without a Ferrari
+LOT_NAME_garages_13,Гитара за кирпичами,Guitar Behind Bricks
+LOT_NAME_garages_14,Гараж-закусочная,Diner Garage
+LOT_NAME_garages_15,Цирк уехал,The Circus Left
+LOT_NAME_garages_16,Библиотека в гараже,Library Garage
+LOT_NAME_garages_17,Мин у задней стены,Ming at the Back Wall
+LOT_NAME_garages_18,Почти квартира,Almost an Apartment
+LOT_NAME_port_07,Обычный рейс два,Ordinary Shipment Two
+LOT_NAME_port_08,Занавес из кирпичей,Brick Curtain
+LOT_NAME_port_09,Вертолёт (нет),Helicopter (No)
+LOT_NAME_port_10,Контейнер СТО,Shop Container
+LOT_NAME_port_11,Медиа-контейнер,Media Container
+LOT_NAME_port_12,Антик вторым классом,Antiques Second Class
+LOT_NAME_port_13,Конфискат,The Seizure
+LOT_NAME_port_14,Стулья (нет),Chairs (No)
+LOT_KIND_BAG,Сумка,Bag
+LOT_KIND_LOCKER,Локер,Locker
+LOT_KIND_STORAGE,Ячейка,Storage unit
+LOT_KIND_GARAGE,Гараж,Garage
+LOT_KIND_PORT,Контейнер,Container
+PACING_LEAN,ровный,lean
+PACING_JACKPOT,джекпот,jackpot
+PACING_BUST,пустышка,bust

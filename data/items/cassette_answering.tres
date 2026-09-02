@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/ItemDef.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "cassette_answering"
+name_ru = "Кассета автоответчика"
+name_en = "Answering Machine Tape"
+archetype_id = "cassette"
+facets = Array[int]([])
+value_base = 6
+mass_override = 0.0
+liquid_id = 0
+liquid_amount = 1.0
+flammable = false
+illegal = false
+dusty_default = 0.0
+vendor_affinity = Array[String](["vendor_tiny", "vendor_dark"])
+wearable_slot = "none"
+break_threshold = 25.0
+color = Color(0.1333, 0.1333, 0.1333, 1.0)
+scale = 1.0
+tags = Array[String]([])
+lore_ru = "37 сообщений от «мама»."
+lore_en = "37 messages from «Mom»."

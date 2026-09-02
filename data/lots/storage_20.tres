@@ -1,0 +1,99 @@
+[gd_resource type="Resource" script_class="LotPreset" load_steps=11 format=3]
+
+[ext_resource type="Script" path="res://core/LotPreset.gd" id="1"]
+[ext_resource type="Script" path="res://core/LotSpawn.gd" id="2"]
+
+[sub_resource type="Resource" id="s1"]
+script = ExtResource("2")
+item_id = "suitcase_spy"
+xform = Transform3D(0.9903, 0, -0.1392, 0, 1.0, 0, 0.1392, 0, 0.9903, 0.0, 0.0, -0.16)
+nested = Array[String](["usb_unmarked", "document_passport_fake"])
+locked_override = 1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s2"]
+script = ExtResource("2")
+item_id = "folder_top_secret"
+xform = Transform3D(0.9945, 0, -0.1045, 0, 1.0, 0, 0.1045, 0, 0.9945, 0.0, 0.26, 0.06)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s3"]
+script = ExtResource("2")
+item_id = "folder_blueprints"
+xform = Transform3D(0.9976, 0, 0.0698, 0, 1.0, 0, -0.0698, 0, 0.9976, 0.0, 0.32, -0.1)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s4"]
+script = ExtResource("2")
+item_id = "phone_burner"
+xform = Transform3D(0.9781, 0, -0.2079, 0, 1.0, 0, 0.2079, 0, 0.9781, 0.28, 0.0, 0.28)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s5"]
+script = ExtResource("2")
+item_id = "jacket_leather"
+xform = Transform3D(0.9903, 0, -0.1392, 0, 1.0, 0, 0.1392, 0, 0.9903, 0.0, 0.7, 0.08)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s6"]
+script = ExtResource("2")
+item_id = "hat_fedora"
+xform = Transform3D(0.9272, 0, -0.3746, 0, 1.0, 0, 0.3746, 0, 0.9272, 0.0, 0.82, -0.22)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s7"]
+script = ExtResource("2")
+item_id = "lockpick_hairpin"
+xform = Transform3D(1.0, 0, 0.0, 0, 1.0, 0, 0.0, 0, 1.0, -0.28, 0.0, 0.28)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s8"]
+script = ExtResource("2")
+item_id = "watch_kasio"
+xform = Transform3D(0.809, 0, -0.5878, 0, 1.0, 0, 0.5878, 0, 0.809, 0.0, 1.05, 0.22)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s9"]
+script = ExtResource("2")
+item_id = "lighter_zipppo"
+xform = Transform3D(0.9903, 0, -0.1392, 0, 1.0, 0, 0.1392, 0, 0.9903, 0.28, 0.26, 0.22)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[resource]
+script = ExtResource("1")
+id = "storage_20"
+district_id = 2
+lot_kind = 1
+min_bid = 100
+info_mode = 3
+preview_seconds = 15.0
+clearout_seconds = 130.0
+lock_chance = 0.28
+spawn_list = Array[Resource]([SubResource("s1"), SubResource("s2"), SubResource("s3"), SubResource("s4"), SubResource("s5"), SubResource("s6"), SubResource("s7"), SubResource("s8"), SubResource("s9")])
+pacing_tag = 0
+broom_required = false
+hunters_count = 6
+order = 20
+tale_ru = "Шпионский локер. Папка «совершенно секретно» — меню столовой. Чемодан не открывается без отмычки. Катана снова не влезла."
+tale_en = "A spy locker. The TOP SECRET folder is a cafeteria menu. The suitcase will not open without a pick. The katana, once again, did not fit."
+docs_ru = "ЛОКЕР 20. Сдал человек в плаще (плащ унёс):\nЧемодан шпионский — 1\nПапка секретно — меню\nТелефон одноразовый\nФлешка без подписи\nКатана — нет, ушла в порт"
+docs_en = "LOCKER 20. Intake: man in a trench (trench left):\nSpy briefcase — 1\nSecret folder — a menu\nBurner phone\nUnmarked USB\nKatana — no, walked to the port"
+photo_item_ids = Array[String]([])
+cell_size = Vector3(1.0, 2.0, 1.0)
+dark = false

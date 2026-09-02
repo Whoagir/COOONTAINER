@@ -1,0 +1,171 @@
+[gd_resource type="Resource" script_class="LotPreset" load_steps=20 format=3]
+
+[ext_resource type="Script" path="res://core/LotPreset.gd" id="1"]
+[ext_resource type="Script" path="res://core/LotSpawn.gd" id="2"]
+
+[sub_resource type="Resource" id="s1"]
+script = ExtResource("2")
+item_id = "wardrobe_antique"
+xform = Transform3D(1.0, 0, 0.0, 0, 1.0, 0, 0.0, 0, 1.0, -1.9, 0.0, -2.2)
+nested = Array[String](["suit_pinstripe", "hat_top"])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s2"]
+script = ExtResource("2")
+item_id = "sofa_velvet"
+xform = Transform3D(0.9976, 0, 0.0698, 0, 1.0, 0, -0.0698, 0, 0.9976, 0.4, 0.0, -2.4)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s3"]
+script = ExtResource("2")
+item_id = "fridge_retro"
+xform = Transform3D(0.9945, 0, -0.1045, 0, 1.0, 0, 0.1045, 0, 0.9945, 2.0, 0.0, -2.2)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s4"]
+script = ExtResource("2")
+item_id = "dresser_oak"
+xform = Transform3D(0.0, 0, -1.0, 0, 1.0, 0, 1.0, 0, 0.0, 2.0, 0.0, -0.4)
+nested = Array[String](["cash_50", "frame_photo_wedding"])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s5"]
+script = ExtResource("2")
+item_id = "clock_grandfather_fake"
+xform = Transform3D(0.9976, 0, -0.0698, 0, 1.0, 0, 0.0698, 0, 0.9976, -2.15, 0.0, 0.2)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s6"]
+script = ExtResource("2")
+item_id = "chandelier_crystal"
+xform = Transform3D(0.9613, 0, -0.2756, 0, 1.0, 0, 0.2756, 0, 0.9613, 0.1, 0.0, -1.1)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s7"]
+script = ExtResource("2")
+item_id = "painting_black_square"
+xform = Transform3D(0.0349, 0, -0.9994, 0, 1.0, 0, 0.9994, 0, 0.0349, -2.2, 0.0, -0.7)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s8"]
+script = ExtResource("2")
+item_id = "plate_stack_china"
+xform = Transform3D(1.0, 0, 0.0, 0, 1.0, 0, 0.0, 0, 1.0, 1.7, 0.0, 0.5)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s9"]
+script = ExtResource("2")
+item_id = "teapot_silver"
+xform = Transform3D(0.9903, 0, 0.1392, 0, 1.0, 0, -0.1392, 0, 0.9903, 1.2, 0.0, 0.9)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s10"]
+script = ExtResource("2")
+item_id = "rug_persian"
+xform = Transform3D(0.9903, 0, -0.1392, 0, 1.0, 0, 0.1392, 0, 0.9903, 0.1, 0.0, 0.3)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s11"]
+script = ExtResource("2")
+item_id = "sewing_singher"
+xform = Transform3D(0.9781, 0, -0.2079, 0, 1.0, 0, 0.2079, 0, 0.9781, -1.7, 0.0, 0.8)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s12"]
+script = ExtResource("2")
+item_id = "typewriter_old"
+xform = Transform3D(0.9848, 0, -0.1736, 0, 1.0, 0, 0.1736, 0, 0.9848, -1.65, 0.0, 1.3)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s13"]
+script = ExtResource("2")
+item_id = "globe_bar"
+xform = Transform3D(0.9703, 0, 0.2419, 0, 1.0, 0, -0.2419, 0, 0.9703, 2.0, 0.0, 1.2)
+nested = Array[String](["cash_20"])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s14"]
+script = ExtResource("2")
+item_id = "bicycle_kids"
+xform = Transform3D(0.0, 0, -1.0, 0, 1.0, 0, 1.0, 0, 0.0, 0.1, 0.0, 1.7)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s15"]
+script = ExtResource("2")
+item_id = "box_moving"
+xform = Transform3D(0.9903, 0, -0.1392, 0, 1.0, 0, 0.1392, 0, 0.9903, -0.7, 0.0, 2.25)
+nested = Array[String](["toy_car_hotwheelz"])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s16"]
+script = ExtResource("2")
+item_id = "chest_grandma"
+xform = Transform3D(0.9945, 0, 0.1045, 0, 1.0, 0, -0.1045, 0, 0.9945, 0.5, 0.0, 2.15)
+nested = Array[String](["letter_love", "rag_silk"])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s17"]
+script = ExtResource("2")
+item_id = "plant_pot_bonsai"
+xform = Transform3D(1.0, 0, 0.0, 0, 1.0, 0, 0.0, 0, 1.0, 2.1, 0.0, 2.15)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s18"]
+script = ExtResource("2")
+item_id = "lamp_floor_deco"
+xform = Transform3D(0.9903, 0, -0.1392, 0, 1.0, 0, 0.1392, 0, 0.9903, -2.15, 0.0, 2.1)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[resource]
+script = ExtResource("1")
+id = "garages_06"
+district_id = 3
+lot_kind = 3
+min_bid = 550
+info_mode = 1
+preview_seconds = 26.0
+clearout_seconds = 280.0
+lock_chance = 0.16
+spawn_list = Array[Resource]([SubResource("s1"), SubResource("s2"), SubResource("s3"), SubResource("s4"), SubResource("s5"), SubResource("s6"), SubResource("s7"), SubResource("s8"), SubResource("s9"), SubResource("s10"), SubResource("s11"), SubResource("s12"), SubResource("s13"), SubResource("s14"), SubResource("s15"), SubResource("s16"), SubResource("s17"), SubResource("s18")])
+pacing_tag = 0
+broom_required = false
+hunters_count = 8
+order = 6
+tale_ru = "Семейный гараж. Шкаф антик, диван бархат, самовар нет — он в ячейке. Детский велик лежит как обвинение. Письма в сундуке бабушки не ваши."
+tale_en = "A family garage. Antique wardrobe, velvet sofa, no samovar — that's in a storage unit. A kids' bike lies there like an accusation. The letters in grandma's chest are not yours."
+docs_ru = "ГАРАЖ 06 — СЕМЬЯ:\nШкаф антик — 1\nДиван бархат — 1\nЛюстра хрусталь — 1\nСундук бабушкин — письма"
+docs_en = "GARAGE 06 — FAMILY:\nAntique wardrobe — 1\nVelvet sofa — 1\nCrystal chandelier — 1\nGrandma's chest — letters"
+photo_item_ids = Array[String]([])
+cell_size = Vector3(5.0, 3.0, 6.0)
+dark = false

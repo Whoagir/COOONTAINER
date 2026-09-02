@@ -1,0 +1,354 @@
+{
+  "hunter": {
+    "bid": {
+      "ru": ["Сто!", "Двести пятьдесят!", "Поднимаю!", "Моё!", "Триста! Триста, я сказал!", "Ещё полтинник!"],
+      "en": ["One hundred!", "Two fifty!", "I raise!", "Mine!", "Three hundred! I said three hundred!", "Fifty more!"]
+    },
+    "pass": {
+      "ru": ["Пас.", "Да забирай.", "Дорого.", "Не, это хлам."],
+      "en": ["Pass.", "Take it, whatever.", "Too pricey.", "Nah, that's junk."]
+    },
+    "bluff": {
+      "ru": ["Пятьсот! ...Шучу.", "Тысяча! Ха! Купился?", "Всё моё! Ладно, нет."],
+      "en": ["Five hundred! ...Kidding.", "A thousand! Ha! Gotcha!", "It's all mine! Okay, no."]
+    },
+    "win": {
+      "ru": ["Моё, отойди!", "Вот так надо!", "Учись, пока я живой!"],
+      "en": ["Mine, step back!", "That's how it's done!", "Learn while I'm still alive!"]
+    },
+    "lose": {
+      "ru": ["Да ну вас...", "Переплатил, дурак.", "Ладно, ладно, в следующий раз."],
+      "en": ["Oh, come on...", "Overpaid, you fool.", "Fine, fine. Next time."]
+    },
+    "angry": {
+      "ru": ["Ты чего толкаешься?!", "Эй! Руки убрал!", "Я тебя запомнил!"],
+      "en": ["Why are you shoving?!", "Hey! Hands off!", "I'll remember you!"]
+    },
+    "taunt": {
+      "ru": ["Лысый опять переплатил!", "Ха! В коробке носки!", "Да там одни кирпичи!"],
+      "en": ["Baldy overpaid again!", "Ha! It's just socks in there!", "That's a box of bricks!"]
+    }
+  },
+  "auctioneer": {
+    "start": {
+      "ru": ["Открываем лот!", "Следующий лот! Смотрим!", "Внимание! Лот открыт!"],
+      "en": ["Opening the lot!", "Next lot! Take a look!", "Attention! Lot is open!"]
+    },
+    "step": {
+      "ru": ["Кто больше? Кто больше?!", "Больше! Больше!", "Кто даст ещё?!", "Не слышу! Кто?!"],
+      "en": ["Who's got more? Who's got more?!", "Higher! Higher!", "Who gives more?!", "Can't hear you! Who?!"]
+    },
+    "going": {
+      "ru": ["Раз... два...", "Раз! Два!", "Последний шанс! Раз..."],
+      "en": ["Going once... going twice...", "Once! Twice!", "Last chance! Once..."]
+    },
+    "sold": {
+      "ru": ["ПРОДАНО!", "Продано! Забирай!", "Всё! Продано!"],
+      "en": ["SOLD!", "Sold! Take it!", "Done! Sold!"]
+    },
+    "warn": {
+      "ru": ["Руки от лота!", "Эй! Не трогать!", "Смотреть можно, трогать нельзя!"],
+      "en": ["Hands off the lot!", "Hey! Don't touch!", "Look, don't touch!"]
+    },
+    "threatened": {
+      "ru": ["Ладно-ладно, скидка... только не бей.", "Хорошо, хорошо, дешевле! Убери это!", "Всё, всё, договорились!"],
+      "en": ["Okay, okay, a discount... just don't hit me.", "Fine, fine, cheaper! Put that away!", "Alright, alright, deal!"]
+    },
+    "police": {
+      "ru": ["Охрана! Полиция!", "Полиция! Сюда!", "Вызываю копов!"],
+      "en": ["Security! Police!", "Police! Over here!", "I'm calling the cops!"]
+    }
+  },
+  "caretaker": {
+    "hurry": {
+      "ru": ["Давайте-давайте-давайте!", "Быстрее! Быстрее!", "Шевелитесь!"],
+      "en": ["Come on, come on, come on!", "Faster! Faster!", "Move it!"]
+    },
+    "overtime": {
+      "ru": ["Время вышло! Дверь!", "Всё! Закрываю!", "Вон! Время!"],
+      "en": ["Time's up! Door!", "That's it! Closing!", "Out! Time!"]
+    },
+    "broom": {
+      "ru": ["Метлой! Метлой пройдись!", "Подмети за собой!", "Тут метла! Работай!"],
+      "en": ["The broom! Sweep it up!", "Clean up after yourself!", "Here's a broom! Work!"]
+    },
+    "locked": {
+      "ru": ["Ну сидите там.", "Заперто. До утра.", "Ой. Ну ладно."],
+      "en": ["Well, sit in there then.", "Locked. Till morning.", "Oops. Oh well."]
+    },
+    "blacklist": {
+      "ru": ["Вон отсюда, ты в списке!", "Ты в чёрном списке! Вон!", "Больше сюда не суйся!"],
+      "en": ["Get out, you're on the list!", "You're blacklisted! Out!", "Don't show your face here again!"]
+    }
+  },
+  "vendor_tiny": {
+    "greet": {
+      "ru": ["Ой, здрасьте, здрасьте.", "Чего принёс, малой?", "Заходи, только тихонько."],
+      "en": ["Oh, hello, hello.", "What'd you bring, kid?", "Come in, but quietly."]
+    },
+    "scream": {
+      "ru": ["Ай! Что это?!", "Ой-ой-ой!", "Убери! Убери это!"],
+      "en": ["Eek! What is that?!", "Oh-oh-oh!", "Take it away! Away!"]
+    },
+    "deal": {
+      "ru": ["Беру. Тихонько беру.", "Хорошо, договорились.", "Ладно, ладно, дам денежку."],
+      "en": ["I'll take it. Quietly.", "Alright, it's a deal.", "Fine, fine, here's some money."]
+    },
+    "reject": {
+      "ru": ["Нет-нет-нет.", "Не надо мне такого.", "Уноси, уноси."],
+      "en": ["No, no, no.", "I don't need that.", "Take it away, away."]
+    },
+    "phobia": {
+      "ru": ["МЫШЬ! УБЕРИ МЫШЬ!", "АЙ! Она шевелится!", "Я на стол залезу! МЫШЬ!"],
+      "en": ["A MOUSE! GET THE MOUSE AWAY!", "EEK! It's moving!", "I'm climbing on the table! MOUSE!"]
+    },
+    "haggle_win": {
+      "ru": ["Ну ты жулик!", "Ох, уговорил.", "Ладно, твоя цена."],
+      "en": ["You little crook!", "Oh, you talked me into it.", "Fine, your price."]
+    },
+    "haggle_lose": {
+      "ru": ["Нет уж! Моя цена!", "Ха! Не вышло!", "Не-не, дешевле не будет."],
+      "en": ["No way! My price!", "Ha! Didn't work!", "Nope, no cheaper."]
+    }
+  },
+  "vendor_antique": {
+    "greet": {
+      "ru": ["Добрый день. Надеюсь, у вас что-то стоящее.", "Прошу. Только не трогайте витрину.", "Хм. Ну, показывайте."],
+      "en": ["Good day. I do hope you brought something worthwhile.", "Please. Don't touch the display case.", "Hm. Well, show me."]
+    },
+    "scream": {
+      "ru": ["Боже! Что это за ужас?!", "Уберите это с прилавка!", "Это... это подделка! Кричу!"],
+      "en": ["Good heavens! What is this horror?!", "Remove that from my counter!", "It's... it's a fake! I'm screaming!"]
+    },
+    "deal": {
+      "ru": ["Хм. Приемлемо.", "Беру. Не благодарите.", "Редкий случай. Согласен."],
+      "en": ["Hm. Acceptable.", "I'll take it. Don't thank me.", "A rare occasion. Agreed."]
+    },
+    "reject": {
+      "ru": ["Это мусор, сударь.", "Нет. Просто нет.", "Несите это на помойку."],
+      "en": ["That is rubbish, sir.", "No. Simply no.", "Take that to the dump."]
+    },
+    "phobia": {
+      "ru": ["Скотч?! На антиквариате?! ВАНДАЛ!", "Пластик! Уберите пластик!", "Вы это КЛЕИЛИ?! Вон!"],
+      "en": ["Duct tape?! On an antique?! VANDAL!", "Plastic! Remove the plastic!", "You GLUED this?! Out!"]
+    },
+    "haggle_win": {
+      "ru": ["Ну что ж... ваша взяла.", "Хм. Пожалуй, да.", "Уговорили. Ужасно."],
+      "en": ["Well... you win.", "Hm. Perhaps, yes.", "Fine. Dreadful."]
+    },
+    "haggle_lose": {
+      "ru": ["Не смешите меня.", "Нет. Цена — цена.", "Торговаться? Со мной? Ха."],
+      "en": ["Don't make me laugh.", "No. The price is the price.", "Haggle? With me? Ha."]
+    }
+  },
+  "vendor_household": {
+    "greet": {
+      "ru": ["Ну чего припёр?", "Давай быстро, у меня борщ.", "Ноги вытер? Заходи."],
+      "en": ["Well, what'd you drag in?", "Make it quick, my soup's on.", "Wiped your feet? Come in."]
+    },
+    "scream": {
+      "ru": ["ЭТО ЧТО ТАКОЕ?!", "Убери с прилавка, я только протёрла!", "Ай! Грязное!"],
+      "en": ["WHAT IS THAT?!", "Off the counter, I just wiped it!", "Ew! It's dirty!"]
+    },
+    "deal": {
+      "ru": ["Ладно, беру. Пригодится.", "Хорошо. Денег мало, не ной.", "Пойдёт. Держи."],
+      "en": ["Fine, I'll take it. It'll come in handy.", "Okay. Not much money, don't whine.", "It'll do. Here."]
+    },
+    "reject": {
+      "ru": ["Не надо мне этого.", "Куда я это дену?!", "Забирай своё барахло."],
+      "en": ["I don't need that.", "Where would I even put that?!", "Take your junk back."]
+    },
+    "phobia": {
+      "ru": ["ТАРАКАН! ТАПОК! ГДЕ ТАПОК?!", "Оно ползёт! УБЕРИ!", "Дезинфекцию! Всё выкинуть!"],
+      "en": ["A ROACH! SLIPPER! WHERE'S MY SLIPPER?!", "It's crawling! GET IT OFF!", "Disinfect everything! Throw it all out!"]
+    },
+    "haggle_win": {
+      "ru": ["Ох, ладно, языкатый.", "Ну хорошо, хорошо!", "Держи, разоритель."],
+      "en": ["Ugh, fine, smart mouth.", "Alright, alright!", "Here, you're ruining me."]
+    },
+    "haggle_lose": {
+      "ru": ["Ещё чего!", "Не торгуйся с матерью!", "Сказала — столько!"],
+      "en": ["As if!", "Don't haggle with your mother!", "I said — that much!"]
+    }
+  },
+  "vendor_tech": {
+    "greet": {
+      "ru": ["О, привет. Что там по спецификациям?", "Заходи. Не трогай сервер.", "Хм, посетитель. Интересно."],
+      "en": ["Oh, hi. What are the specs?", "Come in. Don't touch the server.", "Hm, a visitor. Interesting."]
+    },
+    "scream": {
+      "ru": ["Это же... ЛАМПОВОЕ?!", "Ух ты! Ух ты! Ух ты!", "Осторожно! Там конденсаторы!"],
+      "en": ["Is that... VACUUM TUBES?!", "Whoa! Whoa! Whoa!", "Careful! There are capacitors in there!"]
+    },
+    "deal": {
+      "ru": ["Беру. Для коллекции.", "Окей, купил. Не спрашивай зачем.", "Да! Да! Оно моё!"],
+      "en": ["I'll take it. For the collection.", "Okay, bought. Don't ask why.", "Yes! Yes! It's mine!"]
+    },
+    "reject": {
+      "ru": ["Это не техника. Это дрова.", "Не совместимо.", "Ошибка. Товар не найден."],
+      "en": ["That's not tech. That's firewood.", "Not compatible.", "Error. Item not found."]
+    },
+    "phobia": {
+      "ru": ["ВОДА! РЯДОМ С ПЛАТАМИ! УБЕРИ!", "Оно мокрое?! ОНО МОКРОЕ!", "Короткое замыкание! ВЫКЛЮЧИ ВСЁ!"],
+      "en": ["WATER! NEAR THE BOARDS! GET IT AWAY!", "Is it wet?! IT'S WET!", "Short circuit! SHUT EVERYTHING DOWN!"]
+    },
+    "haggle_win": {
+      "ru": ["Логично. Согласен.", "Окей, аргумент принят.", "Ладно, ты прав. Статистически."],
+      "en": ["Logical. Agreed.", "Okay, argument accepted.", "Fine, you're right. Statistically."]
+    },
+    "haggle_lose": {
+      "ru": ["Не. Рыночная цена.", "Отказано.", "Хм. Нет. Я посчитал."],
+      "en": ["Nope. Market price.", "Denied.", "Hm. No. I did the math."]
+    }
+  },
+  "vendor_dark": {
+    "greet": {
+      "ru": ["Тише... заходи.", "Тебя никто не видел? Хорошо.", "Говори тихо. Что принёс?"],
+      "en": ["Quiet... come in.", "Nobody saw you? Good.", "Speak softly. What did you bring?"]
+    },
+    "scream": {
+      "ru": ["Тише! Тише, говорю!", "Убери это со света!", "Ты с ума сошёл?! Спрячь!"],
+      "en": ["Quiet! Quiet, I said!", "Get that out of the light!", "Are you insane?! Hide it!"]
+    },
+    "deal": {
+      "ru": ["Хорошо. Мы не знакомы.", "Беру. Ты меня не видел.", "Деньги в конверте. Уходи."],
+      "en": ["Good. We've never met.", "I'll take it. You never saw me.", "Money's in the envelope. Go."]
+    },
+    "reject": {
+      "ru": ["Нет. Слишком чисто.", "Мне это неинтересно.", "Уходи. Просто уходи."],
+      "en": ["No. Too clean.", "Not interested.", "Leave. Just leave."]
+    },
+    "phobia": {
+      "ru": ["ФОНАРЬ! ВЫКЛЮЧИ ФОНАРЬ!", "Свет! Не надо света!", "Ты что, с камерой?! УБЕРИ!"],
+      "en": ["A FLASHLIGHT! TURN IT OFF!", "Light! No light!", "Is that a camera?! PUT IT AWAY!"]
+    },
+    "haggle_win": {
+      "ru": ["...Ладно. Но тихо.", "Хм. Ты умеешь говорить.", "Согласен. Никому ни слова."],
+      "en": ["...Fine. But quietly.", "Hm. You know how to talk.", "Agreed. Not a word to anyone."]
+    },
+    "haggle_lose": {
+      "ru": ["Нет. И не спорь.", "Ты меня не слышал.", "Цена одна. Тише."],
+      "en": ["No. Don't argue.", "You didn't hear me.", "One price. Quiet."]
+    }
+  },
+  "cop": {
+    "stop": {
+      "ru": ["Стоять! Полиция!", "Стой! Ни с места!", "Полиция! Замри!"],
+      "en": ["Freeze! Police!", "Stop! Don't move!", "Police! Hold it!"]
+    },
+    "arrest": {
+      "ru": ["Руки!", "Руки за спину!", "На землю! Быстро!"],
+      "en": ["Hands!", "Hands behind your back!", "On the ground! Now!"]
+    },
+    "fine": {
+      "ru": ["Штраф. Плати.", "Нарушение. Плати штраф.", "Квитанция. Касса там."],
+      "en": ["Fine. Pay up.", "Violation. Pay the fine.", "Ticket. Cashier's over there."]
+    },
+    "bribe_ok": {
+      "ru": ["...Ничего не видел.", "Хм. Проходи.", "Понял. Не было тебя тут."],
+      "en": ["...Didn't see a thing.", "Hm. Move along.", "Got it. You were never here."]
+    },
+    "bribe_no": {
+      "ru": ["Это что, взятка?!", "Ты мне ЧТО предлагаешь?!", "Это ещё одна статья!"],
+      "en": ["Is that a BRIBE?!", "What are you OFFERING me?!", "That's another charge!"]
+    },
+    "release": {
+      "ru": ["Свободен. Пока.", "Иди. Я слежу.", "Выпускаем. Не возвращайся."],
+      "en": ["You're free. For now.", "Go. I'm watching.", "Releasing you. Don't come back."]
+    },
+    "chase": {
+      "ru": ["Догоню!", "Стой, кому говорю!", "Далеко не убежишь!"],
+      "en": ["I'll catch you!", "Stop, I said!", "You won't get far!"]
+    }
+  },
+  "dealer": {
+    "bet": {
+      "ru": ["Делайте ставки!", "Ставки, господа!", "Ставки сделаны? Ставки!"],
+      "en": ["Place your bets!", "Bets, gentlemen!", "Bets placed? Bets!"]
+    },
+    "spin": {
+      "ru": ["Крутим!", "Ставок больше нет!", "Поехали!"],
+      "en": ["Spinning!", "No more bets!", "Here we go!"]
+    },
+    "red": {
+      "ru": ["Красное!", "Красное! Красное!"],
+      "en": ["Red!", "Red! Red!"]
+    },
+    "black": {
+      "ru": ["Чёрное!", "Чёрное! Чёрное!"],
+      "en": ["Black!", "Black! Black!"]
+    },
+    "lose": {
+      "ru": ["Дом всегда выигрывает.", "Увы. Ещё разок?", "Не повезло. Бывает."],
+      "en": ["The house always wins.", "Alas. One more?", "Bad luck. Happens."]
+    },
+    "win": {
+      "ru": ["...Повезло. Пока.", "Хм. Забирайте.", "Выигрыш. Не привыкайте."],
+      "en": ["...Lucky. For now.", "Hm. Take it.", "A win. Don't get used to it."]
+    }
+  },
+  "locksmith": {
+    "greet": {
+      "ru": ["Замок? Давай сюда.", "О, клиент. Что заперто?", "Тихо, тихо. Показывай."],
+      "en": ["A lock? Hand it over.", "Oh, a customer. What's locked?", "Easy, easy. Show me."]
+    },
+    "work": {
+      "ru": ["Тихо, я слушаю замок...", "Тсс. Он мне говорит...", "Ещё чуть-чуть..."],
+      "en": ["Quiet, I'm listening to the lock...", "Shh. It's talking to me...", "Just a little more..."]
+    },
+    "success": {
+      "ru": ["Готово!", "Щёлк! Открыто!", "Вот и всё. Красота."],
+      "en": ["Done!", "Click! Open!", "That's it. Beautiful."]
+    },
+    "fail": {
+      "ru": ["Ой. Сломалось.", "Хм. Это не должно было отвалиться.", "Упс. Ну, бывает."],
+      "en": ["Oops. It broke.", "Hm. That wasn't supposed to fall off.", "Whoops. Well, it happens."]
+    },
+    "pay": {
+      "ru": ["Сначала деньги.", "Деньги вперёд.", "Плати, потом ключи."],
+      "en": ["Money first.", "Cash up front.", "Pay, then keys."]
+    }
+  },
+  "car_dealer": {
+    "greet": {
+      "ru": ["Э, друг! Тачку хочешь?", "Заходи! Лучшие тачки района!", "О, покупатель! Не проходи мимо!"],
+      "en": ["Hey, friend! Want a car?", "Come in! Best cars in the district!", "Oh, a buyer! Don't walk past!"]
+    },
+    "sell": {
+      "ru": ["Не бита, не крашена! Почти.", "Один хозяин! Ну, два. Ну, пять.", "Заводится! Иногда!"],
+      "en": ["Never crashed, never repainted! Almost.", "One owner! Well, two. Well, five.", "It starts! Sometimes!"]
+    },
+    "poor": {
+      "ru": ["Денег нет — иди пешком.", "Нищим не продаём!", "Ты хоть на колесо накопил?"],
+      "en": ["No money? Walk.", "We don't sell to broke folks!", "Did you even save up for a wheel?"]
+    }
+  },
+  "firefighter": {
+    "arrive": {
+      "ru": ["ГДЕ ГОРИТ?!", "Пожарные! Расступись!", "Все назад! Где огонь?!"],
+      "en": ["WHERE'S THE FIRE?!", "Fire department! Make way!", "Everyone back! Where's the fire?!"]
+    },
+    "spray": {
+      "ru": ["Держи водичку!", "Тушим! Тушим!", "Отойди, обрызгаю!"],
+      "en": ["Here comes the water!", "Putting it out! Putting it out!", "Step back, you'll get wet!"]
+    },
+    "leave": {
+      "ru": ["Не жгите больше.", "Всё. Больше не поджигать!", "Уезжаем. Ведите себя нормально."],
+      "en": ["Don't burn anything else.", "Done. No more fires!", "We're leaving. Behave yourselves."]
+    }
+  },
+  "janitor_boss": {
+    "start": {
+      "ru": ["Метла там. Ведро там. Работай.", "Пол грязный. Ты чистый. Исправь.", "Смена началась. Мети."],
+      "en": ["Broom's there. Bucket's there. Work.", "Floor's dirty. You're clean. Fix that.", "Shift started. Sweep."]
+    },
+    "done": {
+      "ru": ["Копейки твои.", "Держи. Не трать всё сразу.", "Сойдёт. Вот зарплата."],
+      "en": ["Here's your pennies.", "Take it. Don't spend it all at once.", "Good enough. Here's your pay."]
+    },
+    "shout": {
+      "ru": ["Ты уволен! Шучу. Работай.", "Быстрее! Это не отпуск!", "Я всё вижу! Мети!"],
+      "en": ["You're fired! Kidding. Work.", "Faster! This isn't a vacation!", "I see everything! Sweep!"]
+    }
+  }
+}

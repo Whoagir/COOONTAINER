@@ -1,0 +1,347 @@
+[gd_scene load_steps=41 format=3 uid="uid://clocksmith0001"]
+
+[ext_resource type="Script" path="res://world/districts/District.gd" id="1_district"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1"]
+albedo_color = Color(0.66, 0.64, 0.6, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_2"]
+size = Vector3(9, 0.04, 9)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3"]
+albedo_color = Color(0.5, 0.45, 0.4, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_4"]
+size = Vector3(3.6, 0.06, 3.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5"]
+size = Vector3(3.6, 0.06, 3.2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6"]
+albedo_color = Color(0.35, 0.55, 0.35, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_7"]
+size = Vector3(3.6, 2.8, 0.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8"]
+size = Vector3(3.6, 2.8, 0.2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_9"]
+size = Vector3(0.2, 2.8, 3.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_10"]
+size = Vector3(0.2, 2.8, 3.2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_11"]
+size = Vector3(0.7, 2.8, 0.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_12"]
+size = Vector3(0.7, 2.8, 0.2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_13"]
+size = Vector3(2.2, 0.6, 0.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_14"]
+size = Vector3(2.2, 0.6, 0.2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_15"]
+albedo_color = Color(0.75, 0.3, 0.2, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_16"]
+size = Vector3(4.2, 0.3, 3.8)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_17"]
+size = Vector3(4.2, 0.3, 3.8)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_18"]
+albedo_color = Color(0.97, 0.82, 0.12, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_19"]
+size = Vector3(3.2, 0.06, 1.4)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_20"]
+albedo_color = Color(0.3, 0.18, 0.1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_21"]
+size = Vector3(2, 1, 0.04)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_22"]
+albedo_color = Color(0.52, 0.54, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_23"]
+size = Vector3(0.05, 0.35, 0.03)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_24"]
+albedo_color = Color(0.95, 0.78, 0.25, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_25"]
+top_radius = 0.22
+bottom_radius = 0.22
+height = 0.6
+radial_segments = 8
+rings = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_26"]
+albedo_color = Color(0.58, 0.4, 0.22, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_27"]
+size = Vector3(2.2, 1, 0.8)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_28"]
+size = Vector3(2.2, 1, 0.8)
+
+[sub_resource type="BoxMesh" id="BoxMesh_29"]
+size = Vector3(2.2, 0.04, 0.8)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_30"]
+albedo_color = Color(0.3, 0.32, 0.36, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_31"]
+size = Vector3(0.15, 4.8, 0.15)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_32"]
+size = Vector3(0.15, 4.8, 0.15)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_33"]
+albedo_color = Color(0.95, 0.78, 0.25, 1)
+emission_enabled = true
+emission = Color(0.95, 0.78, 0.25, 1)
+emission_energy_multiplier = 0.8
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_34"]
+top_radius = 0.7
+bottom_radius = 0.7
+height = 0.16
+radial_segments = 14
+rings = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_35"]
+albedo_color = Color(0.45, 0.6, 0.55, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_36"]
+top_radius = 0.35
+bottom_radius = 0.35
+height = 0.2
+radial_segments = 12
+rings = 1
+
+[sub_resource type="BoxMesh" id="BoxMesh_37"]
+size = Vector3(2.2, 0.36, 0.16)
+
+[sub_resource type="BoxMesh" id="BoxMesh_38"]
+size = Vector3(0.3, 0.4, 0.16)
+
+[sub_resource type="BoxMesh" id="BoxMesh_39"]
+size = Vector3(0.3, 0.3, 0.16)
+
+[node name="Locksmith" type="Node3D"]
+script = ExtResource("1_district")
+district_id = 7
+name_key = "DISTRICT_LOCKSMITH"
+radius = 18
+sign_height = 7
+
+[node name="Pad" type="Node3D" parent="."]
+
+[node name="M0" type="MeshInstance3D" parent="Pad"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.02, 0.5)
+mesh = SubResource("BoxMesh_2")
+material_override = SubResource("StandardMaterial3D_1")
+
+[node name="Kiosk" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+collision_layer = 1
+
+[node name="M0" type="MeshInstance3D" parent="Kiosk"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.03, 0)
+mesh = SubResource("BoxMesh_4")
+material_override = SubResource("StandardMaterial3D_3")
+
+[node name="S0" type="CollisionShape3D" parent="Kiosk"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.03, 0)
+shape = SubResource("BoxShape3D_5")
+
+[node name="M1" type="MeshInstance3D" parent="Kiosk"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, -1.6)
+mesh = SubResource("BoxMesh_7")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="S1" type="CollisionShape3D" parent="Kiosk"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, -1.6)
+shape = SubResource("BoxShape3D_8")
+
+[node name="M2" type="MeshInstance3D" parent="Kiosk"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7, 1.4, 0)
+mesh = SubResource("BoxMesh_9")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="S2" type="CollisionShape3D" parent="Kiosk"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7, 1.4, 0)
+shape = SubResource("BoxShape3D_10")
+
+[node name="M3" type="MeshInstance3D" parent="Kiosk"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7, 1.4, 0)
+mesh = SubResource("BoxMesh_9")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="S3" type="CollisionShape3D" parent="Kiosk"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7, 1.4, 0)
+shape = SubResource("BoxShape3D_10")
+
+[node name="M4" type="MeshInstance3D" parent="Kiosk"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.45, 1.4, 1.6)
+mesh = SubResource("BoxMesh_11")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="S4" type="CollisionShape3D" parent="Kiosk"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.45, 1.4, 1.6)
+shape = SubResource("BoxShape3D_12")
+
+[node name="M5" type="MeshInstance3D" parent="Kiosk"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.45, 1.4, 1.6)
+mesh = SubResource("BoxMesh_11")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="S5" type="CollisionShape3D" parent="Kiosk"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.45, 1.4, 1.6)
+shape = SubResource("BoxShape3D_12")
+
+[node name="M6" type="MeshInstance3D" parent="Kiosk"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 1.6)
+mesh = SubResource("BoxMesh_13")
+material_override = SubResource("StandardMaterial3D_6")
+
+[node name="S6" type="CollisionShape3D" parent="Kiosk"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 1.6)
+shape = SubResource("BoxShape3D_14")
+
+[node name="M7" type="MeshInstance3D" parent="Kiosk"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.95, 0)
+mesh = SubResource("BoxMesh_16")
+material_override = SubResource("StandardMaterial3D_15")
+
+[node name="S7" type="CollisionShape3D" parent="Kiosk"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.95, 0)
+shape = SubResource("BoxShape3D_17")
+
+[node name="M8" type="MeshInstance3D" parent="Kiosk"]
+transform = Transform3D(1, 0, 0, 0, 0.9703, -0.24192, 0, 0.24192, 0.9703, 0, 2.5, 2.4)
+mesh = SubResource("BoxMesh_19")
+material_override = SubResource("StandardMaterial3D_18")
+
+[node name="M9" type="MeshInstance3D" parent="Kiosk"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, -1.48)
+mesh = SubResource("BoxMesh_21")
+material_override = SubResource("StandardMaterial3D_20")
+
+[node name="M10" type="MeshInstance3D" parent="Kiosk"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.75, 1.7, -1.45)
+mesh = SubResource("BoxMesh_23")
+material_override = SubResource("StandardMaterial3D_22")
+
+[node name="M11" type="MeshInstance3D" parent="Kiosk"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.45, 1.85, -1.45)
+mesh = SubResource("BoxMesh_23")
+material_override = SubResource("StandardMaterial3D_24")
+
+[node name="M12" type="MeshInstance3D" parent="Kiosk"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.15, 1.7, -1.45)
+mesh = SubResource("BoxMesh_23")
+material_override = SubResource("StandardMaterial3D_22")
+
+[node name="M13" type="MeshInstance3D" parent="Kiosk"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.15, 1.85, -1.45)
+mesh = SubResource("BoxMesh_23")
+material_override = SubResource("StandardMaterial3D_24")
+
+[node name="M14" type="MeshInstance3D" parent="Kiosk"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.45, 1.7, -1.45)
+mesh = SubResource("BoxMesh_23")
+material_override = SubResource("StandardMaterial3D_22")
+
+[node name="M15" type="MeshInstance3D" parent="Kiosk"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.75, 1.85, -1.45)
+mesh = SubResource("BoxMesh_23")
+material_override = SubResource("StandardMaterial3D_24")
+
+[node name="M16" type="MeshInstance3D" parent="Kiosk"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.3, 0.3)
+mesh = SubResource("CylinderMesh_25")
+material_override = SubResource("StandardMaterial3D_20")
+
+[node name="Sign" type="Label3D" parent="Kiosk"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.55, 1.85)
+text = "КЛЮЧИ • ЗАМКИ • ВСКРОЕМ ВСЁ\nKEYS • LOCKS • WE OPEN STUFF"
+font_size = 34
+outline_size = 6
+pixel_size = 0.01
+modulate = Color(0.93, 0.93, 0.9, 1)
+outline_modulate = Color(0.07, 0.07, 0.08, 1)
+
+[node name="LocksmithBench" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.6)
+collision_layer = 1
+
+[node name="M0" type="MeshInstance3D" parent="LocksmithBench"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("BoxMesh_27")
+material_override = SubResource("StandardMaterial3D_26")
+
+[node name="S0" type="CollisionShape3D" parent="LocksmithBench"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("BoxShape3D_28")
+
+[node name="M1" type="MeshInstance3D" parent="LocksmithBench"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02, 0)
+mesh = SubResource("BoxMesh_29")
+material_override = SubResource("StandardMaterial3D_22")
+
+[node name="LocksmithSpot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.6)
+
+[node name="LocksmithDropZone" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 1.6)
+collision_layer = 128
+collision_mask = 4
+
+[node name="Shape" type="CollisionShape3D" parent="LocksmithDropZone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_28")
+
+[node name="KeySign" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6, 0, 1)
+collision_layer = 1
+
+[node name="M0" type="MeshInstance3D" parent="KeySign"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4, 0)
+mesh = SubResource("BoxMesh_31")
+material_override = SubResource("StandardMaterial3D_30")
+
+[node name="S0" type="CollisionShape3D" parent="KeySign"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4, 0)
+shape = SubResource("BoxShape3D_32")
+
+[node name="M1" type="MeshInstance3D" parent="KeySign"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, -0.9, 5.2, 0)
+mesh = SubResource("CylinderMesh_34")
+material_override = SubResource("StandardMaterial3D_33")
+
+[node name="M2" type="MeshInstance3D" parent="KeySign"]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, -0.9, 5.2, 0)
+mesh = SubResource("CylinderMesh_36")
+material_override = SubResource("StandardMaterial3D_35")
+
+[node name="M3" type="MeshInstance3D" parent="KeySign"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.9, 5.2, 0)
+mesh = SubResource("BoxMesh_37")
+material_override = SubResource("StandardMaterial3D_33")
+
+[node name="M4" type="MeshInstance3D" parent="KeySign"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.75, 4.85, 0)
+mesh = SubResource("BoxMesh_38")
+material_override = SubResource("StandardMaterial3D_33")
+
+[node name="M5" type="MeshInstance3D" parent="KeySign"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.25, 4.85, 0)
+mesh = SubResource("BoxMesh_39")
+material_override = SubResource("StandardMaterial3D_33")

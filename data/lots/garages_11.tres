@@ -1,0 +1,267 @@
+[gd_resource type="Resource" script_class="LotPreset" load_steps=32 format=3]
+
+[ext_resource type="Script" path="res://core/LotPreset.gd" id="1"]
+[ext_resource type="Script" path="res://core/LotSpawn.gd" id="2"]
+
+[sub_resource type="Resource" id="s1"]
+script = ExtResource("2")
+item_id = "brick_red"
+xform = Transform3D(0.9986, 0, -0.0523, 0, 1.0, 0, 0.0523, 0, 0.9986, -2.05, 0.0, 2.12)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s2"]
+script = ExtResource("2")
+item_id = "brick_red"
+xform = Transform3D(1.0, 0, 0.0, 0, 1.0, 0, 0.0, 0, 1.0, -2.05, 0.0, 2.44)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s3"]
+script = ExtResource("2")
+item_id = "brick_red"
+xform = Transform3D(0.9945, 0, -0.1045, 0, 1.0, 0, 0.1045, 0, 0.9945, -1.61, 0.0, 2.12)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s4"]
+script = ExtResource("2")
+item_id = "brick_red"
+xform = Transform3D(0.9986, 0, -0.0523, 0, 1.0, 0, 0.0523, 0, 0.9986, -1.61, 0.0, 2.44)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s5"]
+script = ExtResource("2")
+item_id = "brick_red"
+xform = Transform3D(0.9877, 0, -0.1564, 0, 1.0, 0, 0.1564, 0, 0.9877, -1.17, 0.0, 2.12)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s6"]
+script = ExtResource("2")
+item_id = "brick_red"
+xform = Transform3D(0.9945, 0, -0.1045, 0, 1.0, 0, 0.1045, 0, 0.9945, -1.17, 0.0, 2.44)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s7"]
+script = ExtResource("2")
+item_id = "brick_red"
+xform = Transform3D(0.9986, 0, -0.0523, 0, 1.0, 0, 0.0523, 0, 0.9986, -1.97, 0.065, 2.12)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s8"]
+script = ExtResource("2")
+item_id = "brick_red"
+xform = Transform3D(1.0, 0, 0.0, 0, 1.0, 0, 0.0, 0, 1.0, -1.97, 0.065, 2.44)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s9"]
+script = ExtResource("2")
+item_id = "brick_red"
+xform = Transform3D(0.9945, 0, -0.1045, 0, 1.0, 0, 0.1045, 0, 0.9945, -1.53, 0.065, 2.12)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s10"]
+script = ExtResource("2")
+item_id = "brick_red"
+xform = Transform3D(0.9986, 0, -0.0523, 0, 1.0, 0, 0.0523, 0, 0.9986, -1.53, 0.065, 2.44)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s11"]
+script = ExtResource("2")
+item_id = "brick_red"
+xform = Transform3D(0.9877, 0, -0.1564, 0, 1.0, 0, 0.1564, 0, 0.9877, -1.09, 0.065, 2.12)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s12"]
+script = ExtResource("2")
+item_id = "brick_red"
+xform = Transform3D(0.9945, 0, -0.1045, 0, 1.0, 0, 0.1045, 0, 0.9945, -1.09, 0.065, 2.44)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s13"]
+script = ExtResource("2")
+item_id = "sofa_sagging"
+xform = Transform3D(0.9976, 0, -0.0698, 0, 1.0, 0, 0.0698, 0, 0.9976, 0.1, 0.0, -2.4)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = 0.7
+
+[sub_resource type="Resource" id="s14"]
+script = ExtResource("2")
+item_id = "fridge_smelly"
+xform = Transform3D(0.9903, 0, 0.1392, 0, 1.0, 0, -0.1392, 0, 0.9903, 2.0, 0.0, -2.1)
+nested = Array[String](["jar_pickles", "jar_unknown_stuff"])
+locked_override = -1
+dirt_override = 0.85
+
+[sub_resource type="Resource" id="s15"]
+script = ExtResource("2")
+item_id = "wardrobe_ikeya"
+xform = Transform3D(0.0, 0, -1.0, 0, 1.0, 0, 1.0, 0, 0.0, 2.0, 0.0, -0.3)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = 0.4
+
+[sub_resource type="Resource" id="s16"]
+script = ExtResource("2")
+item_id = "clock_grandfather_broken"
+xform = Transform3D(0.9976, 0, -0.0698, 0, 1.0, 0, 0.0698, 0, 0.9976, -2.15, 0.0, -1.9)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = 0.6
+
+[sub_resource type="Resource" id="s17"]
+script = ExtResource("2")
+item_id = "mattress_stained"
+xform = Transform3D(1.0, 0, 0.0, 0, 1.0, 0, 0.0, 0, 1.0, -1.5, 0.0, 0.4)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = 0.85
+
+[sub_resource type="Resource" id="s18"]
+script = ExtResource("2")
+item_id = "gold_bar_painted"
+xform = Transform3D(0.9976, 0, -0.0698, 0, 1.0, 0, 0.0698, 0, 0.9976, -0.4, 0.0, 1.5)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = 0.5
+
+[sub_resource type="Resource" id="s19"]
+script = ExtResource("2")
+item_id = "gold_bar_painted"
+xform = Transform3D(0.9903, 0, 0.1392, 0, 1.0, 0, -0.1392, 0, 0.9903, 0.05, 0.0, 1.54)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = 0.5
+
+[sub_resource type="Resource" id="s20"]
+script = ExtResource("2")
+item_id = "gold_bar_painted"
+xform = Transform3D(0.9781, 0, -0.2079, 0, 1.0, 0, 0.2079, 0, 0.9781, 0.5, 0.0, 1.48)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = 0.5
+
+[sub_resource type="Resource" id="s21"]
+script = ExtResource("2")
+item_id = "box_mystery"
+xform = Transform3D(0.9903, 0, -0.1392, 0, 1.0, 0, 0.1392, 0, 0.9903, 1.4, 0.0, 1.55)
+nested = Array[String](["mouse_live"])
+locked_override = -1
+dirt_override = 0.7
+
+[sub_resource type="Resource" id="s22"]
+script = ExtResource("2")
+item_id = "mouse_white"
+xform = Transform3D(0.9848, 0, 0.1736, 0, 1.0, 0, -0.1736, 0, 0.9848, 2.1, 0.0, 1.2)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s23"]
+script = ExtResource("2")
+item_id = "barrel_rusty"
+xform = Transform3D(0.9848, 0, -0.1736, 0, 1.0, 0, 0.1736, 0, 0.9848, 1.7, 0.0, 0.5)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = 0.8
+
+[sub_resource type="Resource" id="s24"]
+script = ExtResource("2")
+item_id = "barrel_rusty"
+xform = Transform3D(0.9945, 0, 0.1045, 0, 1.0, 0, -0.1045, 0, 0.9945, 0.7, 0.0, 0.5)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = 0.8
+
+[sub_resource type="Resource" id="s25"]
+script = ExtResource("2")
+item_id = "anvil_cartoon"
+xform = Transform3D(0.9781, 0, -0.2079, 0, 1.0, 0, 0.2079, 0, 0.9781, 0.0, 0.0, -0.4)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s26"]
+script = ExtResource("2")
+item_id = "plant_pot_dead"
+xform = Transform3D(1.0, 0, 0.0, 0, 1.0, 0, 0.0, 0, 1.0, -2.15, 0.0, 1.4)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = 0.85
+
+[sub_resource type="Resource" id="s27"]
+script = ExtResource("2")
+item_id = "mop_gross"
+xform = Transform3D(0.9945, 0, -0.1045, 0, 1.0, 0, 0.1045, 0, 0.9945, 2.15, 0.0, 0.9)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = 0.9
+
+[sub_resource type="Resource" id="s28"]
+script = ExtResource("2")
+item_id = "tool_broom"
+xform = Transform3D(0.9903, 0, -0.1392, 0, 1.0, 0, 0.1392, 0, 0.9903, 2.2, 0.0, 1.5)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s29"]
+script = ExtResource("2")
+item_id = "rag_dirty"
+xform = Transform3D(0.9511, 0, -0.309, 0, 1.0, 0, 0.309, 0, 0.9511, -0.9, 0.0, 1.5)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = 0.9
+
+[sub_resource type="Resource" id="s30"]
+script = ExtResource("2")
+item_id = "tv_plasma_cracked"
+xform = Transform3D(0.9903, 0, -0.1392, 0, 1.0, 0, 0.1392, 0, 0.9903, 0.15, 0.0, -1.2)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = 0.4
+
+[resource]
+script = ExtResource("1")
+id = "garages_11"
+district_id = 3
+lot_kind = 3
+min_bid = 2200
+info_mode = 3
+preview_seconds = 22.0
+clearout_seconds = 250.0
+lock_chance = 0.2
+spawn_list = Array[Resource]([SubResource("s1"), SubResource("s2"), SubResource("s3"), SubResource("s4"), SubResource("s5"), SubResource("s6"), SubResource("s7"), SubResource("s8"), SubResource("s9"), SubResource("s10"), SubResource("s11"), SubResource("s12"), SubResource("s13"), SubResource("s14"), SubResource("s15"), SubResource("s16"), SubResource("s17"), SubResource("s18"), SubResource("s19"), SubResource("s20"), SubResource("s21"), SubResource("s22"), SubResource("s23"), SubResource("s24"), SubResource("s25"), SubResource("s26"), SubResource("s27"), SubResource("s28"), SubResource("s29"), SubResource("s30")])
+pacing_tag = 2
+broom_required = true
+hunters_count = 7
+order = 11
+tale_ru = "Опись на масляной бумаге обещает V8 и плазму. Бумага врёт лучше аукциониста. Холодильник помнит рыбу. Мыши помнят вас. Метла обязательна и бесполезна."
+tale_en = "The oily-paper manifest promises a V8 and a plasma. Paper lies better than the auctioneer. The fridge remembers a fish. The mice remember you. Broom required and useless."
+docs_ru = "ГАРАЖ 11 — МАСТЕРСКАЯ (печать «проверено»):\nМотор V8 — 1\nПлазма 55 — 1\nСлитки — 4\nПримечание: запах «нормальный». Мышей «нет»."
+docs_en = "GARAGE 11 — WORKSHOP («verified» stamp):\nV8 engine — 1\n55-inch plasma — 1\nGold bars — 4\nNote: smell is «normal». Mice are «none»."
+photo_item_ids = Array[String]([])
+cell_size = Vector3(5.0, 3.0, 6.0)
+dark = false

@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/ItemDef.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "bicycle_tandem"
+name_ru = "Тандем"
+name_en = "Tandem Bike"
+archetype_id = "bicycle"
+facets = Array[int]([])
+value_base = 80
+mass_override = 0.0
+liquid_id = 0
+liquid_amount = 1.0
+flammable = false
+illegal = false
+dusty_default = 0.0
+vendor_affinity = Array[String](["vendor_household"])
+wearable_slot = "none"
+break_threshold = 25.0
+color = Color(0.251, 0.6275, 0.251, 1.0)
+scale = 1.3
+tags = Array[String]([])
+lore_ru = ""
+lore_en = ""

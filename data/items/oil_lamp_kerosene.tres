@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/ItemDef.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "oil_lamp_kerosene"
+name_ru = "Керосин для лампы"
+name_en = "Lamp Kerosene"
+archetype_id = "jug"
+facets = Array[int]([6])
+value_base = 4
+mass_override = 0.0
+liquid_id = 4
+liquid_amount = 0.7
+flammable = true
+illegal = false
+dusty_default = 0.0
+vendor_affinity = Array[String](["vendor_antique", "vendor_tiny"])
+wearable_slot = "none"
+break_threshold = 25.0
+color = Color(0.7529, 0.6275, 0.251, 1.0)
+scale = 0.7
+tags = Array[String]([])
+lore_ru = ""
+lore_en = ""

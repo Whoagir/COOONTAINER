@@ -1,0 +1,42 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://core/ItemDef.gd" id="1"]
+[ext_resource type="Script" path="res://core/LootRef.gd" id="2"]
+
+[sub_resource type="Resource" id="lr1"]
+script = ExtResource("2")
+item_id = "jar_pickles"
+chance = 0.5
+count_min = 1
+count_max = 1
+
+[sub_resource type="Resource" id="lr2"]
+script = ExtResource("2")
+item_id = "whiskey_cheap"
+chance = 0.3
+count_min = 1
+count_max = 1
+
+[resource]
+script = ExtResource("1")
+id = "fridge_retro"
+name_ru = "Холодильник ретро"
+name_en = "Retro Fridge"
+archetype_id = "fridge"
+facets = Array[int]([2, 13])
+value_base = 250
+mass_override = 0.0
+liquid_id = 0
+liquid_amount = 1.0
+flammable = false
+illegal = false
+dusty_default = 0.0
+nest_loot = Array[Resource]([SubResource("lr1"), SubResource("lr2")])
+vendor_affinity = Array[String](["vendor_household", "vendor_antique"])
+wearable_slot = "none"
+break_threshold = 60.0
+color = Color(0.502, 0.7529, 0.7529, 1.0)
+scale = 1.0
+tags = Array[String]([])
+lore_ru = ""
+lore_en = ""

@@ -1,0 +1,171 @@
+[gd_resource type="Resource" script_class="LotPreset" load_steps=20 format=3]
+
+[ext_resource type="Script" path="res://core/LotPreset.gd" id="1"]
+[ext_resource type="Script" path="res://core/LotSpawn.gd" id="2"]
+
+[sub_resource type="Resource" id="s1"]
+script = ExtResource("2")
+item_id = "safe_old"
+xform = Transform3D(1.0, 0, 0.0, 0, 1.0, 0, 0.0, 0, 1.0, 0.0, 0.0, -2.5)
+nested = Array[String](["cash_500", "cash_500"])
+locked_override = 1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s2"]
+script = ExtResource("2")
+item_id = "vase_ming"
+xform = Transform3D(0.9703, 0, -0.2419, 0, 1.0, 0, 0.2419, 0, 0.9703, 0.0, 0.72, -2.5)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s3"]
+script = ExtResource("2")
+item_id = "cash_500"
+xform = Transform3D(0.9903, 0, -0.1392, 0, 1.0, 0, 0.1392, 0, 0.9903, -0.35, 0.72, -2.35)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s4"]
+script = ExtResource("2")
+item_id = "cash_500"
+xform = Transform3D(0.9903, 0, 0.1392, 0, 1.0, 0, -0.1392, 0, 0.9903, 0.35, 0.72, -2.35)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s5"]
+script = ExtResource("2")
+item_id = "gold_bar"
+xform = Transform3D(0.9976, 0, -0.0698, 0, 1.0, 0, 0.0698, 0, 0.9976, -0.75, 0.0, -2.5)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s6"]
+script = ExtResource("2")
+item_id = "watch_rolecks_real"
+xform = Transform3D(0.9511, 0, -0.309, 0, 1.0, 0, 0.309, 0, 0.9511, 0.75, 0.0, -2.5)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s7"]
+script = ExtResource("2")
+item_id = "painting_maybe_master"
+xform = Transform3D(0.9976, 0, -0.0698, 0, 1.0, 0, 0.0698, 0, 0.9976, 0.0, 0.0, -1.7)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s8"]
+script = ExtResource("2")
+item_id = "whiskey_50yo"
+xform = Transform3D(0.9903, 0, -0.1392, 0, 1.0, 0, 0.1392, 0, 0.9903, -0.7, 0.0, -1.7)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s9"]
+script = ExtResource("2")
+item_id = "coin_jar_gold"
+xform = Transform3D(0.9945, 0, -0.1045, 0, 1.0, 0, 0.1045, 0, 0.9945, 0.7, 0.0, -1.7)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s10"]
+script = ExtResource("2")
+item_id = "usb_crypto"
+xform = Transform3D(1.0, 0, 0.0, 0, 1.0, 0, 0.0, 0, 1.0, -0.7, 0.0, -0.95)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s11"]
+script = ExtResource("2")
+item_id = "ring_diamond"
+xform = Transform3D(0.766, 0, -0.6428, 0, 1.0, 0, 0.6428, 0, 0.766, 0.7, 0.0, -0.95)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s12"]
+script = ExtResource("2")
+item_id = "necklace_pearl"
+xform = Transform3D(0.9397, 0, -0.342, 0, 1.0, 0, 0.342, 0, 0.9397, 0.0, 0.0, -0.95)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s13"]
+script = ExtResource("2")
+item_id = "bust_marble"
+xform = Transform3D(0.9848, 0, -0.1736, 0, 1.0, 0, 0.1736, 0, 0.9848, -0.7, 0.0, -0.2)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s14"]
+script = ExtResource("2")
+item_id = "book_first_edition"
+xform = Transform3D(0.342, 0, -0.9397, 0, 1.0, 0, 0.9397, 0, 0.342, 0.7, 0.0, -0.2)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s15"]
+script = ExtResource("2")
+item_id = "chandelier_grand"
+xform = Transform3D(0.9903, 0, -0.1392, 0, 1.0, 0, 0.1392, 0, 0.9903, 0.0, 0.0, 0.8)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s16"]
+script = ExtResource("2")
+item_id = "wardrobe_antique"
+xform = Transform3D(0.0, 0, -1.0, 0, 1.0, 0, 1.0, 0, 0.0, 0.5, 0.0, 2.1)
+nested = Array[String](["fur_coat", "hat_top"])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s17"]
+script = ExtResource("2")
+item_id = "box_moving"
+xform = Transform3D(0.9903, 0, -0.1392, 0, 1.0, 0, 0.1392, 0, 0.9903, -0.75, 0.0, 2.55)
+nested = Array[String](["cup_okayest"])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s18"]
+script = ExtResource("2")
+item_id = "box_moving"
+xform = Transform3D(0.9945, 0, 0.1045, 0, 1.0, 0, -0.1045, 0, 0.9945, -0.75, 0.35, 2.55)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[resource]
+script = ExtResource("1")
+id = "port_02"
+district_id = 4
+lot_kind = 4
+min_bid = 1200
+info_mode = 2
+preview_seconds = 36.0
+clearout_seconds = 400.0
+lock_chance = 0.25
+spawn_list = Array[Resource]([SubResource("s1"), SubResource("s2"), SubResource("s3"), SubResource("s4"), SubResource("s5"), SubResource("s6"), SubResource("s7"), SubResource("s8"), SubResource("s9"), SubResource("s10"), SubResource("s11"), SubResource("s12"), SubResource("s13"), SubResource("s14"), SubResource("s15"), SubResource("s16"), SubResource("s17"), SubResource("s18")])
+pacing_tag = 1
+broom_required = false
+hunters_count = 8
+order = 2
+tale_ru = "Легенда доков. Сейф с двумя пятисотками, настоящая Мин, слиток, Ролексы. На фото — фальшивая ваза и Борис. Хантеры смотрят фото."
+tale_en = "The dock legend. A safe with two five-hundreds, a real Ming, a gold bar, a Rolecks. Photos show a fake vase and Boris. The hunters look at the photos."
+docs_ru = "КОНОСАМЕНТ 0202-ЛЕГЕНДА\nСейф + 1000 наличными\nВаза Мин — 1\nСлиток + Ролекс\nФото врёт"
+docs_en = "BILL OF LADING 0202-LEGEND\nSafe + $1000 cash\nMing vase — 1\nGold bar + Rolecks\nPhotos lie"
+photo_item_ids = Array[String](["box_moving", "vase_ming_fake", "plasma_55", "hamster_boris"])
+cell_size = Vector3(2.3, 2.4, 6.0)
+dark = false

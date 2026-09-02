@@ -1,0 +1,28 @@
+keys,ru,en
+VEH_PICKUP_RUSTY,Ржавый пикап,Rusty pickup
+VEH_VAN_LEAKY,Дырявый фургон,Leaky van
+VEH_TRUCK_FAT,Жирный грузовик,Fat truck
+VEH_BUY_HINT,[E] Купить %s за $%d,[E] Buy %s for $%d
+VEH_ENTER_HINT,[E] За руль — %s,[E] Drive — %s
+VEH_PASSENGER_HINT,[E] Сесть пассажиром,[E] Ride shotgun
+VEH_EXIT_HINT,[E] Выйти,[E] Get out
+VEH_FULL,Мест нет. Лезь в кузов.,No seats. Climb in the bed.
+VEH_STOLEN_NOTIFY,Это не твоя тачка… Валим!,Not your car… Floor it!
+VEH_BOUGHT,Тачка твоя! Кузов — физика.,Car's yours! The bed is physics.
+VEH_TOO_POOR,Не хватает $%d,Need $%d more
+VEH_FLIPPED,Перевернуло. Ставим на колёса.,Flipped. Righting it.
+VEH_SOAKED,Тачка утонула — вытащили на дорогу,Car sank — dragged back to the road
+VEH_DEALER_HINT,[E] Поговорить с барыгой,[E] Talk to the dealer
+VEH_BUMP_LAUNCH,Кузов взлетел!,Bed launch!
+NPC_CAR_DEALER,Барыга Толик,Tolik the Dealer
+DEALER_PITCH_0,"Пикап за 400 — течёт, но едет!","Pickup for 400 — leaks, but drives!"
+DEALER_PITCH_1,"Фургон — крыша есть, пол не гарантирую.","Van — has a roof, floor not guaranteed."
+DEALER_PITCH_2,"Грузовик — медленный, зато ничего не выпадает. Почти.","Truck — slow, but nothing falls out. Almost."
+DEALER_SELL_0,Продано! Без возврата.,Sold! No refunds.
+DEALER_SELL_1,Отличный выбор. Тормоза — опционально.,Great choice. Brakes are optional.
+DEALER_SELL_2,Ключи под сиденьем. Наверное.,Keys are under the seat. Probably.
+DEALER_POOR_0,С такими деньгами — только пешком.,With that money — walk.
+DEALER_POOR_1,Иди продай вазу сначала.,Go sell a vase first.
+DEALER_GREET_0,Тачки! Дёшево! Почти на ходу!,Cars! Cheap! Almost running!
+DEALER_GREET_1,"Эй, перекуп! Купи колёса!","Hey, flipper! Buy some wheels!"
+DEALER_THEFT,Э! Это не продажа!,Hey! That's not a sale!

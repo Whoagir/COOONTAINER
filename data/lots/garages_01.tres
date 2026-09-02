@@ -1,0 +1,179 @@
+[gd_resource type="Resource" script_class="LotPreset" load_steps=21 format=3]
+
+[ext_resource type="Script" path="res://core/LotPreset.gd" id="1"]
+[ext_resource type="Script" path="res://core/LotSpawn.gd" id="2"]
+
+[sub_resource type="Resource" id="s1"]
+script = ExtResource("2")
+item_id = "sofa_leather"
+xform = Transform3D(0.9976, 0, -0.0698, 0, 1.0, 0, 0.0698, 0, 0.9976, 0.0, 0.0, -2.4)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s2"]
+script = ExtResource("2")
+item_id = "dresser_oak"
+xform = Transform3D(0.0, 0, -1.0, 0, 1.0, 0, 1.0, 0, 0.0, -2.05, 0.0, -1.1)
+nested = Array[String](["letter_love", "cash_20"])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s3"]
+script = ExtResource("2")
+item_id = "fridge_retro"
+xform = Transform3D(0.9945, 0, 0.1045, 0, 1.0, 0, -0.1045, 0, 0.9945, 2.0, 0.0, -1.9)
+nested = Array[String](["jar_pickles", "whiskey_cheap"])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s4"]
+script = ExtResource("2")
+item_id = "wardrobe_ikeya"
+xform = Transform3D(0.0, 0, -1.0, 0, 1.0, 0, 1.0, 0, 0.0, 2.0, 0.0, 0.15)
+nested = Array[String](["hoodie_grey", "shirt_hawaiian"])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s5"]
+script = ExtResource("2")
+item_id = "chandelier_crystal"
+xform = Transform3D(0.9781, 0, -0.2079, 0, 1.0, 0, 0.2079, 0, 0.9781, 0.1, 0.0, -0.9)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s6"]
+script = ExtResource("2")
+item_id = "plate_stack_china"
+xform = Transform3D(0.9903, 0, -0.1392, 0, 1.0, 0, 0.1392, 0, 0.9903, -1.7, 0.0, -0.2)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s7"]
+script = ExtResource("2")
+item_id = "teapot_silver"
+xform = Transform3D(0.9848, 0, 0.1736, 0, 1.0, 0, -0.1736, 0, 0.9848, -1.15, 0.0, -0.2)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s8"]
+script = ExtResource("2")
+item_id = "bicycle_racing"
+xform = Transform3D(1.0, 0, 0.0, 0, 1.0, 0, 0.0, 0, 1.0, -1.9, 0.0, 1.7)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s9"]
+script = ExtResource("2")
+item_id = "sewing_singher"
+xform = Transform3D(0.9703, 0, -0.2419, 0, 1.0, 0, 0.2419, 0, 0.9703, 1.7, 0.0, 1.0)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s10"]
+script = ExtResource("2")
+item_id = "typewriter_old"
+xform = Transform3D(0.9903, 0, 0.1392, 0, 1.0, 0, -0.1392, 0, 0.9903, 1.65, 0.0, 1.65)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s11"]
+script = ExtResource("2")
+item_id = "camera_dslr"
+xform = Transform3D(0.9272, 0, -0.3746, 0, 1.0, 0, 0.3746, 0, 0.9272, 1.2, 0.0, 1.7)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s12"]
+script = ExtResource("2")
+item_id = "lamp_floor_deco"
+xform = Transform3D(0.9903, 0, -0.1392, 0, 1.0, 0, 0.1392, 0, 0.9903, 2.1, 0.0, -0.7)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s13"]
+script = ExtResource("2")
+item_id = "mirror_baroque"
+xform = Transform3D(0.0, 0, -1.0, 0, 1.0, 0, 1.0, 0, 0.0, 2.25, 0.0, 1.6)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s14"]
+script = ExtResource("2")
+item_id = "microwave_new"
+xform = Transform3D(0.9781, 0, 0.2079, 0, 1.0, 0, -0.2079, 0, 0.9781, 0.4, 0.0, 0.2)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s15"]
+script = ExtResource("2")
+item_id = "toolbox_red"
+xform = Transform3D(0.9848, 0, -0.1736, 0, 1.0, 0, 0.1736, 0, 0.9848, -0.4, 0.0, 0.25)
+nested = Array[String](["hammer_rusty", "wrench_adjustable"])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s16"]
+script = ExtResource("2")
+item_id = "box_moving"
+xform = Transform3D(0.9903, 0, -0.1392, 0, 1.0, 0, 0.1392, 0, 0.9903, -1.0, 0.0, 2.2)
+nested = Array[String](["cup_okayest", "vase_ikeya"])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s17"]
+script = ExtResource("2")
+item_id = "box_amazoom"
+xform = Transform3D(0.9945, 0, 0.1045, 0, 1.0, 0, -0.1045, 0, 0.9945, 0.1, 0.0, 2.25)
+nested = Array[String](["remote_tv"])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s18"]
+script = ExtResource("2")
+item_id = "crate_fruit"
+xform = Transform3D(0.9781, 0, -0.2079, 0, 1.0, 0, 0.2079, 0, 0.9781, 1.1, 0.0, 2.2)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s19"]
+script = ExtResource("2")
+item_id = "tire_bald"
+xform = Transform3D(0.9945, 0, -0.1045, 0, 1.0, 0, 0.1045, 0, 0.9945, 1.9, 0.0, 2.25)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[resource]
+script = ExtResource("1")
+id = "garages_01"
+district_id = 3
+lot_kind = 3
+min_bid = 400
+info_mode = 1
+preview_seconds = 22.0
+clearout_seconds = 250.0
+lock_chance = 0.15
+spawn_list = Array[Resource]([SubResource("s1"), SubResource("s2"), SubResource("s3"), SubResource("s4"), SubResource("s5"), SubResource("s6"), SubResource("s7"), SubResource("s8"), SubResource("s9"), SubResource("s10"), SubResource("s11"), SubResource("s12"), SubResource("s13"), SubResource("s14"), SubResource("s15"), SubResource("s16"), SubResource("s17"), SubResource("s18"), SubResource("s19")])
+pacing_tag = 0
+broom_required = false
+hunters_count = 7
+order = 1
+tale_ru = "Хлам у ворот. Диван и фарфор — у задней стены. Классика района: хантеры ставят на то, что видят в щель."
+tale_en = "Junk at the door. The sofa and the china are at the back wall. A district classic: hunters bid on what the slit shows."
+docs_ru = "ГАРАЖ 01 — ПЕРЕЕЗД:\nДиван кожа — 1\nФарфор — 1\nВелик гоночный — 1\nКоробки у ворот — да"
+docs_en = "GARAGE 01 — MOVE:\nLeather sofa — 1\nChina — 1\nRacing bike — 1\nDoor boxes — yes"
+photo_item_ids = Array[String]([])
+cell_size = Vector3(5.0, 3.0, 6.0)
+dark = false

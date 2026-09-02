@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="VendorDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/VendorDef.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "vendor_household"
+name_ru = "База «Всё для дома»"
+name_en = "Everything Home Depot"
+vendor_type = 1
+phobias = Array[int]([3])
+favorite_facets = Array[int]([2, 1])
+hated_facets = Array[int]([])
+base_multiplier = 0.65
+buys_illegal = false
+calls_police_on_illegal = true
+green_zone_base = 0.4
+greed = 0.5
+unlock_cost = 600
+unlock_requires_vendor = "vendor_tiny"
+body_color = Color(0.7529, 0.4392, 0.1882, 1.0)
+voice_pitch = 1.1
+lines_greet_ru = Array[String](["Привет! Комоды есть? Комоды всегда надо.", "Заезжай! Чистое беру дороже, грязное — тоже беру.", "О, руки в масле! Мой человек.", "Тащи сюда. Если пролезет в дверь — куплю.", "Мебель? Посуда? Ведро? Всё моё.", "Здорово! Бабушка чистила? Нет? Жаль."])
+lines_greet_en = Array[String](["Hey there! Got dressers? Always need dressers.", "Roll on in! Clean stuff pays more, dirty stuff still pays.", "Oh, oily hands! My kind of person.", "Drag it in. If it fits through the door, I buy it.", "Furniture? Dishes? A bucket? All mine.", "Howdy! Did grandma clean it? No? Pity."])
+lines_scream_ru = Array[String](["Ящик не выдвигается! ЯЩИК!", "Это ж пылью на палец! На палец!", "Ого. Ого-го. Куда его?", "Это диван или зверь?!", "Ой, ножка отвалилась. Твоя ножка. То есть его.", "Ты это на чём вёз? На себе?!"])
+lines_scream_en = Array[String](["The drawer won't open! THE DRAWER!", "That's a finger of dust! A FINGER!", "Whoa. Whoa-ho. Where do I put that?", "Is that a sofa or an animal?!", "Oops, a leg fell off. Your leg. I mean its leg.", "What did you haul that on? Your back?!"])
+lines_deal_ru = Array[String](["По рукам! Помоги занести.", "Беру. В подсобку. Там ещё сорок таких.", "Годится. Чистое — люблю.", "Ладно, договорились. Только без царапин.", "Куплю. Ставь к тем комодам. Да, к тем.", "Сделка! Скидку на швабру хочешь?"])
+lines_deal_en = Array[String](["Deal! Help me carry it.", "I'll take it. Back room. There's forty more like it.", "Works for me. I love a clean one.", "Alright, deal. No more scratches though.", "Buying. Put it by those dressers. Yes, those.", "Deal! Want a discount on a mop?"])
+lines_reject_ru = Array[String](["Э, столько стоит новый. С доставкой.", "Помой сначала, потом торгуйся.", "Дорого. У меня таких три и все не продаются.", "Не-не. Это ж ДСП. ДСП, понимаешь?", "За такое я тебе сам дам… в долг.", "Ты цену где взял? На потолке?"])
+lines_reject_en = Array[String](["Hey, that's what a NEW one costs. With delivery.", "Wash it first, then haggle.", "Too much. I've got three and none of them sell.", "Nah-nah. That's particleboard. PARTICLEBOARD.", "For that I'd rather lend you money.", "Where'd you get that price? The ceiling?"])
+lines_phobia_ru = Array[String](["КРАСКА! Она везде будет! ВЕЗДЕ!", "Убери банку! У меня новый пол!", "Не-не-не, не открывай! НЕ ОТКРЫВАЙ!", "Я это отмывал три недели в прошлый раз!", "Краска — это навсегда! Как тёща!"])
+lines_phobia_en = Array[String](["PAINT! It gets EVERYWHERE!", "Take the can away! I just did the floors!", "No-no-no, don't open it! DON'T OPEN IT!", "Last time I scrubbed for three weeks!", "Paint is forever! Like a mother-in-law!"])

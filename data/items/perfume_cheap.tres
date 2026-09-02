@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/ItemDef.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "perfume_cheap"
+name_ru = "Одеколон «Тройной»"
+name_en = "Triple Cologne"
+archetype_id = "perfume"
+facets = Array[int]([0])
+value_base = 3
+mass_override = 0.0
+liquid_id = 0
+liquid_amount = 1.0
+flammable = true
+illegal = false
+dusty_default = 0.0
+vendor_affinity = Array[String](["vendor_tiny"])
+wearable_slot = "none"
+break_threshold = 4.5
+color = Color(0.502, 0.7529, 0.8784, 1.0)
+scale = 1.0
+tags = Array[String]([])
+lore_ru = ""
+lore_en = ""

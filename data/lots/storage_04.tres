@@ -1,0 +1,91 @@
+[gd_resource type="Resource" script_class="LotPreset" load_steps=10 format=3]
+
+[ext_resource type="Script" path="res://core/LotPreset.gd" id="1"]
+[ext_resource type="Script" path="res://core/LotSpawn.gd" id="2"]
+
+[sub_resource type="Resource" id="s1"]
+script = ExtResource("2")
+item_id = "toolbox_red"
+xform = Transform3D(0.9903, 0, -0.1392, 0, 1.0, 0, 0.1392, 0, 0.9903, 0.0, 0.0, -0.18)
+nested = Array[String](["hammer_rusty", "wrench_adjustable"])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s2"]
+script = ExtResource("2")
+item_id = "boombox_gold"
+xform = Transform3D(0.9945, 0, 0.1045, 0, 1.0, 0, -0.1045, 0, 0.9945, 0.0, 0.23, 0.0)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s3"]
+script = ExtResource("2")
+item_id = "backpack_hiking"
+xform = Transform3D(0.9781, 0, -0.2079, 0, 1.0, 0, 0.2079, 0, 0.9781, 0.0, 0.5, -0.06)
+nested = Array[String](["cash_20", "camera_dslr"])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s4"]
+script = ExtResource("2")
+item_id = "jacket_leather"
+xform = Transform3D(0.9945, 0, -0.1045, 0, 1.0, 0, 0.1045, 0, 0.9945, 0.0, 1.06, 0.08)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s5"]
+script = ExtResource("2")
+item_id = "hat_fedora"
+xform = Transform3D(0.9063, 0, -0.4226, 0, 1.0, 0, 0.4226, 0, 0.9063, 0.0, 1.16, -0.22)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s6"]
+script = ExtResource("2")
+item_id = "shoe_boots_cowboy"
+xform = Transform3D(0.9659, 0, 0.2588, 0, 1.0, 0, -0.2588, 0, 0.9659, 0.0, 1.16, 0.22)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s7"]
+script = ExtResource("2")
+item_id = "whiskey_single_malt"
+xform = Transform3D(1.0, 0, 0.0, 0, 1.0, 0, 0.0, 0, 1.0, 0.3, 0.0, 0.3)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s8"]
+script = ExtResource("2")
+item_id = "watch_kasio"
+xform = Transform3D(0.766, 0, -0.6428, 0, 1.0, 0, 0.6428, 0, 0.766, -0.3, 0.0, 0.3)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[resource]
+script = ExtResource("1")
+id = "storage_04"
+district_id = 2
+lot_kind = 1
+min_bid = 110
+info_mode = 3
+preview_seconds = 15.0
+clearout_seconds = 130.0
+lock_chance = 0.32
+spawn_list = Array[Resource]([SubResource("s1"), SubResource("s2"), SubResource("s3"), SubResource("s4"), SubResource("s5"), SubResource("s6"), SubResource("s7"), SubResource("s8")])
+pacing_tag = 0
+broom_required = false
+hunters_count = 6
+order = 4
+tale_ru = "Локер охранника ночной смены. Он думал, бумбокс золотой — это краска. Зеркалка «Кэнун» под худи. Катана не влезла и ушла гулять."
+tale_en = "Night-shift guard's locker. He thought the gold boombox was paint. A Canun DSLR under a hoodie. The katana didn't fit and went for a walk."
+docs_ru = "ЛОКЕР 04. Сдал охранник ночной смены.\nЯщик красный. Бумбокс золотой (он думал — краска).\nЗеркалка «Кэнун» на дне, под худи.\nВ описи ещё «катана» — в локер не влезла, ушла в другой район."
+docs_en = "LOCKER 04. Night-shift guard intake.\nRed toolbox. Gold boombox (he thought it was paint).\nCanun DSLR at the bottom, under a hoodie.\nManifest also lists a katana — didn't fit, walked to another district."
+photo_item_ids = Array[String]([])
+cell_size = Vector3(1.0, 2.0, 1.0)
+dark = false

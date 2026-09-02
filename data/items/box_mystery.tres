@@ -1,0 +1,49 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://core/ItemDef.gd" id="1"]
+[ext_resource type="Script" path="res://core/LootRef.gd" id="2"]
+
+[sub_resource type="Resource" id="lr1"]
+script = ExtResource("2")
+item_id = "mouse_live"
+chance = 0.4
+count_min = 1
+count_max = 1
+
+[sub_resource type="Resource" id="lr2"]
+script = ExtResource("2")
+item_id = "jar_unknown_stuff"
+chance = 0.3
+count_min = 1
+count_max = 1
+
+[sub_resource type="Resource" id="lr3"]
+script = ExtResource("2")
+item_id = "cash_20"
+chance = 0.3
+count_min = 1
+count_max = 1
+
+[resource]
+script = ExtResource("1")
+id = "box_mystery"
+name_ru = "Коробка «НЕ ОТКРЫВАТЬ»"
+name_en = "«DO NOT OPEN» Box"
+archetype_id = "box"
+facets = Array[int]([2])
+value_base = 6
+mass_override = 0.0
+liquid_id = 0
+liquid_amount = 1.0
+flammable = true
+illegal = false
+dusty_default = 0.0
+nest_loot = Array[Resource]([SubResource("lr1"), SubResource("lr2"), SubResource("lr3")])
+vendor_affinity = Array[String](["vendor_tiny", "vendor_dark"])
+wearable_slot = "none"
+break_threshold = 25.0
+color = Color(0.5412, 0.4157, 0.251, 1.0)
+scale = 1.0
+tags = Array[String]([])
+lore_ru = ""
+lore_en = ""

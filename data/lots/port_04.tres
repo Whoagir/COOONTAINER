@@ -1,0 +1,467 @@
+[gd_resource type="Resource" script_class="LotPreset" load_steps=57 format=3]
+
+[ext_resource type="Script" path="res://core/LotPreset.gd" id="1"]
+[ext_resource type="Script" path="res://core/LotSpawn.gd" id="2"]
+
+[sub_resource type="Resource" id="s1"]
+script = ExtResource("2")
+item_id = "brick_red"
+xform = Transform3D(0.9994, 0, -0.0349, 0, 1.0, 0, 0.0349, 0, 0.9994, -0.5, 0.0, -2.4)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s2"]
+script = ExtResource("2")
+item_id = "brick_red"
+xform = Transform3D(0.9998, 0, 0.0175, 0, 1.0, 0, -0.0175, 0, 0.9998, -0.5, 0.0, -1.68)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s3"]
+script = ExtResource("2")
+item_id = "brick_red"
+xform = Transform3D(0.9976, 0, 0.0698, 0, 1.0, 0, -0.0698, 0, 0.9976, -0.5, 0.0, -0.96)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s4"]
+script = ExtResource("2")
+item_id = "brick_red"
+xform = Transform3D(0.9925, 0, 0.1219, 0, 1.0, 0, -0.1219, 0, 0.9925, -0.5, 0.0, -0.24)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s5"]
+script = ExtResource("2")
+item_id = "brick_red"
+xform = Transform3D(0.9848, 0, 0.1736, 0, 1.0, 0, -0.1736, 0, 0.9848, -0.5, 0.0, 0.48)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s6"]
+script = ExtResource("2")
+item_id = "brick_red"
+xform = Transform3D(0.9744, 0, 0.225, 0, 1.0, 0, -0.225, 0, 0.9744, -0.5, 0.0, 1.2)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s7"]
+script = ExtResource("2")
+item_id = "brick_red"
+xform = Transform3D(0.9962, 0, -0.0872, 0, 1.0, 0, 0.0872, 0, 0.9962, -0.06, 0.0, -2.4)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s8"]
+script = ExtResource("2")
+item_id = "brick_red"
+xform = Transform3D(0.9994, 0, -0.0349, 0, 1.0, 0, 0.0349, 0, 0.9994, -0.06, 0.0, -1.68)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s9"]
+script = ExtResource("2")
+item_id = "brick_red"
+xform = Transform3D(0.9998, 0, 0.0175, 0, 1.0, 0, -0.0175, 0, 0.9998, -0.06, 0.0, -0.96)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s10"]
+script = ExtResource("2")
+item_id = "brick_red"
+xform = Transform3D(0.9976, 0, 0.0698, 0, 1.0, 0, -0.0698, 0, 0.9976, -0.06, 0.0, -0.24)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s11"]
+script = ExtResource("2")
+item_id = "brick_red"
+xform = Transform3D(0.9925, 0, 0.1219, 0, 1.0, 0, -0.1219, 0, 0.9925, -0.06, 0.0, 0.48)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s12"]
+script = ExtResource("2")
+item_id = "brick_red"
+xform = Transform3D(0.9848, 0, 0.1736, 0, 1.0, 0, -0.1736, 0, 0.9848, -0.06, 0.0, 1.2)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s13"]
+script = ExtResource("2")
+item_id = "brick_red"
+xform = Transform3D(0.9903, 0, -0.1392, 0, 1.0, 0, 0.1392, 0, 0.9903, 0.38, 0.0, -2.4)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s14"]
+script = ExtResource("2")
+item_id = "brick_red"
+xform = Transform3D(0.9962, 0, -0.0872, 0, 1.0, 0, 0.0872, 0, 0.9962, 0.38, 0.0, -1.68)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s15"]
+script = ExtResource("2")
+item_id = "brick_red"
+xform = Transform3D(0.9994, 0, -0.0349, 0, 1.0, 0, 0.0349, 0, 0.9994, 0.38, 0.0, -0.96)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s16"]
+script = ExtResource("2")
+item_id = "brick_red"
+xform = Transform3D(0.9998, 0, 0.0175, 0, 1.0, 0, -0.0175, 0, 0.9998, 0.38, 0.0, -0.24)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s17"]
+script = ExtResource("2")
+item_id = "brick_red"
+xform = Transform3D(0.9976, 0, 0.0698, 0, 1.0, 0, -0.0698, 0, 0.9976, 0.38, 0.0, 0.48)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s18"]
+script = ExtResource("2")
+item_id = "brick_red"
+xform = Transform3D(0.9925, 0, 0.1219, 0, 1.0, 0, -0.1219, 0, 0.9925, 0.38, 0.0, 1.2)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s19"]
+script = ExtResource("2")
+item_id = "brick_red"
+xform = Transform3D(0.9994, 0, -0.0349, 0, 1.0, 0, 0.0349, 0, 0.9994, -0.42, 0.065, -2.4)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s20"]
+script = ExtResource("2")
+item_id = "brick_red"
+xform = Transform3D(0.9998, 0, 0.0175, 0, 1.0, 0, -0.0175, 0, 0.9998, -0.42, 0.065, -1.68)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s21"]
+script = ExtResource("2")
+item_id = "brick_red"
+xform = Transform3D(0.9976, 0, 0.0698, 0, 1.0, 0, -0.0698, 0, 0.9976, -0.42, 0.065, -0.96)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s22"]
+script = ExtResource("2")
+item_id = "brick_red"
+xform = Transform3D(0.9925, 0, 0.1219, 0, 1.0, 0, -0.1219, 0, 0.9925, -0.42, 0.065, -0.24)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s23"]
+script = ExtResource("2")
+item_id = "brick_red"
+xform = Transform3D(0.9848, 0, 0.1736, 0, 1.0, 0, -0.1736, 0, 0.9848, -0.42, 0.065, 0.48)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s24"]
+script = ExtResource("2")
+item_id = "brick_red"
+xform = Transform3D(0.9744, 0, 0.225, 0, 1.0, 0, -0.225, 0, 0.9744, -0.42, 0.065, 1.2)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s25"]
+script = ExtResource("2")
+item_id = "brick_red"
+xform = Transform3D(0.9962, 0, -0.0872, 0, 1.0, 0, 0.0872, 0, 0.9962, 0.02, 0.065, -2.4)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s26"]
+script = ExtResource("2")
+item_id = "brick_red"
+xform = Transform3D(0.9994, 0, -0.0349, 0, 1.0, 0, 0.0349, 0, 0.9994, 0.02, 0.065, -1.68)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s27"]
+script = ExtResource("2")
+item_id = "brick_red"
+xform = Transform3D(0.9998, 0, 0.0175, 0, 1.0, 0, -0.0175, 0, 0.9998, 0.02, 0.065, -0.96)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s28"]
+script = ExtResource("2")
+item_id = "brick_red"
+xform = Transform3D(0.9976, 0, 0.0698, 0, 1.0, 0, -0.0698, 0, 0.9976, 0.02, 0.065, -0.24)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s29"]
+script = ExtResource("2")
+item_id = "brick_red"
+xform = Transform3D(0.9925, 0, 0.1219, 0, 1.0, 0, -0.1219, 0, 0.9925, 0.02, 0.065, 0.48)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s30"]
+script = ExtResource("2")
+item_id = "brick_red"
+xform = Transform3D(0.9848, 0, 0.1736, 0, 1.0, 0, -0.1736, 0, 0.9848, 0.02, 0.065, 1.2)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s31"]
+script = ExtResource("2")
+item_id = "brick_red"
+xform = Transform3D(0.9903, 0, -0.1392, 0, 1.0, 0, 0.1392, 0, 0.9903, 0.46, 0.065, -2.4)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s32"]
+script = ExtResource("2")
+item_id = "brick_red"
+xform = Transform3D(0.9962, 0, -0.0872, 0, 1.0, 0, 0.0872, 0, 0.9962, 0.46, 0.065, -1.68)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s33"]
+script = ExtResource("2")
+item_id = "brick_red"
+xform = Transform3D(0.9994, 0, -0.0349, 0, 1.0, 0, 0.0349, 0, 0.9994, 0.46, 0.065, -0.96)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s34"]
+script = ExtResource("2")
+item_id = "brick_red"
+xform = Transform3D(0.9998, 0, 0.0175, 0, 1.0, 0, -0.0175, 0, 0.9998, 0.46, 0.065, -0.24)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s35"]
+script = ExtResource("2")
+item_id = "brick_red"
+xform = Transform3D(0.9976, 0, 0.0698, 0, 1.0, 0, -0.0698, 0, 0.9976, 0.46, 0.065, 0.48)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s36"]
+script = ExtResource("2")
+item_id = "brick_red"
+xform = Transform3D(0.9925, 0, 0.1219, 0, 1.0, 0, -0.1219, 0, 0.9925, 0.46, 0.065, 1.2)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s37"]
+script = ExtResource("2")
+item_id = "brick_red"
+xform = Transform3D(0.9994, 0, -0.0349, 0, 1.0, 0, 0.0349, 0, 0.9994, -0.5, 0.13, -2.4)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s38"]
+script = ExtResource("2")
+item_id = "brick_red"
+xform = Transform3D(0.9998, 0, 0.0175, 0, 1.0, 0, -0.0175, 0, 0.9998, -0.5, 0.13, -1.68)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s39"]
+script = ExtResource("2")
+item_id = "brick_red"
+xform = Transform3D(0.9976, 0, 0.0698, 0, 1.0, 0, -0.0698, 0, 0.9976, -0.5, 0.13, -0.96)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s40"]
+script = ExtResource("2")
+item_id = "brick_red"
+xform = Transform3D(0.9925, 0, 0.1219, 0, 1.0, 0, -0.1219, 0, 0.9925, -0.5, 0.13, -0.24)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s41"]
+script = ExtResource("2")
+item_id = "brick_red"
+xform = Transform3D(0.9848, 0, 0.1736, 0, 1.0, 0, -0.1736, 0, 0.9848, -0.5, 0.13, 0.48)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s42"]
+script = ExtResource("2")
+item_id = "brick_red"
+xform = Transform3D(0.9744, 0, 0.225, 0, 1.0, 0, -0.225, 0, 0.9744, -0.5, 0.13, 1.2)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s43"]
+script = ExtResource("2")
+item_id = "brick_red"
+xform = Transform3D(0.9962, 0, -0.0872, 0, 1.0, 0, 0.0872, 0, 0.9962, -0.06, 0.13, -2.4)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s44"]
+script = ExtResource("2")
+item_id = "brick_red"
+xform = Transform3D(0.9994, 0, -0.0349, 0, 1.0, 0, 0.0349, 0, 0.9994, -0.06, 0.13, -1.68)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s45"]
+script = ExtResource("2")
+item_id = "brick_red"
+xform = Transform3D(0.9998, 0, 0.0175, 0, 1.0, 0, -0.0175, 0, 0.9998, -0.06, 0.13, -0.96)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s46"]
+script = ExtResource("2")
+item_id = "brick_red"
+xform = Transform3D(0.9976, 0, 0.0698, 0, 1.0, 0, -0.0698, 0, 0.9976, -0.06, 0.13, -0.24)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s47"]
+script = ExtResource("2")
+item_id = "brick_red"
+xform = Transform3D(0.9925, 0, 0.1219, 0, 1.0, 0, -0.1219, 0, 0.9925, -0.06, 0.13, 0.48)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s48"]
+script = ExtResource("2")
+item_id = "brick_red"
+xform = Transform3D(0.9848, 0, 0.1736, 0, 1.0, 0, -0.1736, 0, 0.9848, -0.06, 0.13, 1.2)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s49"]
+script = ExtResource("2")
+item_id = "brick_red"
+xform = Transform3D(0.9903, 0, -0.1392, 0, 1.0, 0, 0.1392, 0, 0.9903, 0.38, 0.13, -2.4)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s50"]
+script = ExtResource("2")
+item_id = "brick_red"
+xform = Transform3D(0.9962, 0, -0.0872, 0, 1.0, 0, 0.0872, 0, 0.9962, 0.38, 0.13, -1.68)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s51"]
+script = ExtResource("2")
+item_id = "brick_red"
+xform = Transform3D(0.9994, 0, -0.0349, 0, 1.0, 0, 0.0349, 0, 0.9994, 0.38, 0.13, -0.96)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s52"]
+script = ExtResource("2")
+item_id = "brick_red"
+xform = Transform3D(0.9998, 0, 0.0175, 0, 1.0, 0, -0.0175, 0, 0.9998, 0.38, 0.13, -0.24)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s53"]
+script = ExtResource("2")
+item_id = "brick_red"
+xform = Transform3D(0.9976, 0, 0.0698, 0, 1.0, 0, -0.0698, 0, 0.9976, 0.38, 0.13, 0.48)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s54"]
+script = ExtResource("2")
+item_id = "brick_red"
+xform = Transform3D(0.9925, 0, 0.1219, 0, 1.0, 0, -0.1219, 0, 0.9925, 0.38, 0.13, 1.2)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s55"]
+script = ExtResource("2")
+item_id = "shoe_sneaker_single"
+xform = Transform3D(0.8192, 0, -0.5736, 0, 1.0, 0, 0.5736, 0, 0.8192, 0.15, 0.0, 2.5)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[resource]
+script = ExtResource("1")
+id = "port_04"
+district_id = 4
+lot_kind = 4
+min_bid = 3200
+info_mode = 4
+preview_seconds = 25.0
+clearout_seconds = 300.0
+lock_chance = 0.05
+spawn_list = Array[Resource]([SubResource("s1"), SubResource("s2"), SubResource("s3"), SubResource("s4"), SubResource("s5"), SubResource("s6"), SubResource("s7"), SubResource("s8"), SubResource("s9"), SubResource("s10"), SubResource("s11"), SubResource("s12"), SubResource("s13"), SubResource("s14"), SubResource("s15"), SubResource("s16"), SubResource("s17"), SubResource("s18"), SubResource("s19"), SubResource("s20"), SubResource("s21"), SubResource("s22"), SubResource("s23"), SubResource("s24"), SubResource("s25"), SubResource("s26"), SubResource("s27"), SubResource("s28"), SubResource("s29"), SubResource("s30"), SubResource("s31"), SubResource("s32"), SubResource("s33"), SubResource("s34"), SubResource("s35"), SubResource("s36"), SubResource("s37"), SubResource("s38"), SubResource("s39"), SubResource("s40"), SubResource("s41"), SubResource("s42"), SubResource("s43"), SubResource("s44"), SubResource("s45"), SubResource("s46"), SubResource("s47"), SubResource("s48"), SubResource("s49"), SubResource("s50"), SubResource("s51"), SubResource("s52"), SubResource("s53"), SubResource("s54"), SubResource("s55")])
+pacing_tag = 2
+broom_required = false
+hunters_count = 8
+order = 4
+tale_ru = "Контейнер упал с грузовика в Дубае. Грузовик вёз шлёпанцы султана. До нас доехал один. Остальное — кирпичи. Таможня поставила печать «стройматериалы» и рассмеялась."
+tale_en = "This container fell off a truck in Dubai. The truck was carrying the Sultan's flip-flops. One sneaker made it. The rest is bricks. Customs stamped «building materials» and laughed."
+docs_ru = "КОНОСАМЕНТ 0404-ДУБАЙ\nШлёпанец султана — 1 (кроссовок)\nКирпичи — остальные\nПечать: стройматериалы\nТаможня смеялась"
+docs_en = "BILL OF LADING 0404-DUBAI\nSultan's flip-flop — 1 (a sneaker)\nBricks — the rest\nStamp: building materials\nCustoms laughed"
+photo_item_ids = Array[String]([])
+cell_size = Vector3(2.3, 2.4, 6.0)
+dark = false

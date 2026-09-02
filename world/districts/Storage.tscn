@@ -1,0 +1,1468 @@
+[gd_scene load_steps=87 format=3 uid="uid://cstorage000001"]
+
+[ext_resource type="Script" path="res://world/districts/District.gd" id="1_district"]
+[ext_resource type="Script" path="res://world/districts/LotAnchor.gd" id="2_lot"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1"]
+albedo_color = Color(0.3, 0.3, 0.33, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_2"]
+size = Vector3(40, 0.04, 40)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3"]
+albedo_color = Color(0.17, 0.17, 0.19, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_4"]
+size = Vector3(26, 0.08, 12.6)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5"]
+albedo_color = Color(0.66, 0.64, 0.6, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_6"]
+size = Vector3(14, 0.06, 3.6)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7"]
+size = Vector3(14, 0.06, 3.6)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8"]
+albedo_color = Color(0.85, 0.5, 0.15, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_9"]
+size = Vector3(14, 2.6, 0.3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_10"]
+size = Vector3(14, 2.6, 0.3)
+
+[sub_resource type="BoxMesh" id="BoxMesh_11"]
+size = Vector3(14, 2.74, 3.8)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_12"]
+size = Vector3(14, 2.74, 3.8)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_13"]
+albedo_color = Color(0.3, 0.32, 0.36, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_14"]
+size = Vector3(14.4, 0.2, 4.2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_15"]
+size = Vector3(0.4, 2.5, 3.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_16"]
+size = Vector3(0.4, 2.5, 3.4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_17"]
+size = Vector3(11, 0.06, 3.6)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_18"]
+size = Vector3(11, 0.06, 3.6)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_19"]
+albedo_color = Color(0.25, 0.55, 0.75, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_20"]
+size = Vector3(11, 2.6, 0.3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_21"]
+size = Vector3(11, 2.6, 0.3)
+
+[sub_resource type="BoxMesh" id="BoxMesh_22"]
+size = Vector3(11, 2.74, 3.8)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_23"]
+size = Vector3(11, 2.74, 3.8)
+
+[sub_resource type="BoxMesh" id="BoxMesh_24"]
+size = Vector3(11.4, 0.2, 4.2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_25"]
+size = Vector3(1.5, 2.5, 1.9)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_26"]
+size = Vector3(1.5, 2.5, 1.9)
+
+[sub_resource type="BoxMesh" id="BoxMesh_27"]
+size = Vector3(1.5, 0.5, 1.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_28"]
+size = Vector3(1.5, 0.5, 1.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_29"]
+albedo_color = Color(0.12, 0.6, 0.6, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_30"]
+size = Vector3(3, 2.5, 0.12)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_31"]
+size = Vector3(3, 2.5, 0.12)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_32"]
+albedo_color = Color(0.07, 0.07, 0.08, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_33"]
+size = Vector3(2.7, 0.08, 0.03)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_34"]
+albedo_color = Color(0.93, 0.93, 0.9, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_35"]
+top_radius = 0.25
+bottom_radius = 0.25
+height = 0.1
+radial_segments = 8
+rings = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_36"]
+albedo_color = Color(0.96, 0.4, 0.7, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_37"]
+albedo_color = Color(0.97, 0.82, 0.12, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_38"]
+albedo_color = Color(0.2, 0.62, 0.32, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_39"]
+albedo_color = Color(0.5, 0.2, 0.7, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_40"]
+albedo_color = Color(0.96, 0.52, 0.12, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_41"]
+albedo_color = Color(0.16, 0.38, 0.82, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_42"]
+size = Vector3(1.5, 2, 0.12)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_43"]
+size = Vector3(1.5, 2, 0.12)
+
+[sub_resource type="BoxMesh" id="BoxMesh_44"]
+size = Vector3(1.35, 0.08, 0.03)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_45"]
+albedo_color = Color(0.86, 0.16, 0.13, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_46"]
+albedo_color = Color(0.52, 0.54, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_47"]
+size = Vector3(0.2, 4.5, 0.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_48"]
+size = Vector3(0.2, 4.5, 0.2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_49"]
+size = Vector3(24.4, 0.2, 0.2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_50"]
+albedo_color = Color(0.93, 0.93, 0.9, 1)
+emission_enabled = true
+emission = Color(1, 1, 0.9, 1)
+emission_energy_multiplier = 2
+
+[sub_resource type="BoxMesh" id="BoxMesh_51"]
+size = Vector3(1.8, 0.14, 0.14)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_52"]
+albedo_color = Color(0.86, 0.16, 0.13, 1)
+emission_enabled = true
+emission = Color(0.86, 0.16, 0.13, 1)
+emission_energy_multiplier = 2
+
+[sub_resource type="BoxMesh" id="BoxMesh_53"]
+size = Vector3(1.4, 0.7, 0.05)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_54"]
+albedo_color = Color(0.9, 0.9, 0.85, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_55"]
+size = Vector3(3.2, 2.8, 3.2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_56"]
+size = Vector3(3.2, 2.8, 3.2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_57"]
+size = Vector3(3.6, 0.3, 3.6)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_58"]
+albedo_color = Color(0.55, 0.75, 0.9, 1)
+emission_enabled = true
+emission = Color(0.4, 0.55, 0.7, 1)
+emission_energy_multiplier = 0.8
+
+[sub_resource type="BoxMesh" id="BoxMesh_59"]
+size = Vector3(0.06, 1, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_60"]
+albedo_color = Color(0.3, 0.18, 0.1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_61"]
+size = Vector3(0.9, 2.1, 0.06)
+
+[sub_resource type="BoxMesh" id="BoxMesh_62"]
+size = Vector3(0.9, 1.9, 0.8)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_63"]
+size = Vector3(0.9, 1.9, 0.8)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_64"]
+albedo_color = Color(0.3, 0.8, 1, 1)
+emission_enabled = true
+emission = Color(0.3, 0.7, 1, 1)
+emission_energy_multiplier = 1.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_65"]
+size = Vector3(0.7, 1.2, 0.04)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_66"]
+albedo_color = Color(0.55, 0.55, 0.58, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_67"]
+size = Vector3(40, 1.2, 0.3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_68"]
+size = Vector3(40, 1.2, 0.3)
+
+[sub_resource type="BoxMesh" id="BoxMesh_69"]
+size = Vector3(0.3, 1.2, 40)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_70"]
+size = Vector3(0.3, 1.2, 40)
+
+[sub_resource type="BoxMesh" id="BoxMesh_71"]
+size = Vector3(26, 1.2, 0.3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_72"]
+size = Vector3(26, 1.2, 0.3)
+
+[sub_resource type="BoxMesh" id="BoxMesh_73"]
+size = Vector3(6, 1.2, 0.3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_74"]
+size = Vector3(6, 1.2, 0.3)
+
+[sub_resource type="BoxMesh" id="BoxMesh_75"]
+size = Vector3(0.4, 4, 0.4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_76"]
+size = Vector3(0.4, 4, 0.4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_77"]
+size = Vector3(8.8, 0.5, 0.4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_78"]
+size = Vector3(0.3, 0.2, 0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_79"]
+size = Vector3(0.1, 3.6, 0.1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_80"]
+top_radius = 0.42
+bottom_radius = 0.42
+height = 0.26
+radial_segments = 12
+rings = 1
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_81"]
+radius = 0.45
+height = 0.78
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_82"]
+top_radius = 0.32
+bottom_radius = 0.32
+height = 0.9
+radial_segments = 12
+rings = 1
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_83"]
+radius = 0.32
+height = 0.9
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_84"]
+albedo_color = Color(0.56, 0.3, 0.15, 1)
+
+[node name="Storage" type="Node3D"]
+script = ExtResource("1_district")
+district_id = 2
+name_key = "DISTRICT_STORAGE"
+radius = 46
+sign_height = 9
+
+[node name="Yard" type="Node3D" parent="."]
+
+[node name="M0" type="MeshInstance3D" parent="Yard"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.02, 0)
+mesh = SubResource("BoxMesh_2")
+material_override = SubResource("StandardMaterial3D_1")
+
+[node name="M1" type="MeshInstance3D" parent="Yard"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.04, 0)
+mesh = SubResource("BoxMesh_4")
+material_override = SubResource("StandardMaterial3D_3")
+
+[node name="RowA" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8)
+collision_layer = 1
+
+[node name="M0" type="MeshInstance3D" parent="RowA"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.03, 0)
+mesh = SubResource("BoxMesh_6")
+material_override = SubResource("StandardMaterial3D_5")
+
+[node name="S0" type="CollisionShape3D" parent="RowA"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.03, 0)
+shape = SubResource("BoxShape3D_7")
+
+[node name="M1" type="MeshInstance3D" parent="RowA"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, -1.65)
+mesh = SubResource("BoxMesh_9")
+material_override = SubResource("StandardMaterial3D_8")
+
+[node name="S1" type="CollisionShape3D" parent="RowA"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, -1.65)
+shape = SubResource("BoxShape3D_10")
+
+[node name="M2" type="MeshInstance3D" parent="RowA"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.93, 0.05)
+mesh = SubResource("BoxMesh_11")
+material_override = SubResource("StandardMaterial3D_8")
+
+[node name="S2" type="CollisionShape3D" parent="RowA"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.93, 0.05)
+shape = SubResource("BoxShape3D_12")
+
+[node name="M3" type="MeshInstance3D" parent="RowA"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.4, 0.05)
+mesh = SubResource("BoxMesh_14")
+material_override = SubResource("StandardMaterial3D_13")
+
+[node name="M4" type="MeshInstance3D" parent="RowA"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.8, 1.31, 0)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_8")
+
+[node name="S3" type="CollisionShape3D" parent="RowA"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.8, 1.31, 0)
+shape = SubResource("BoxShape3D_16")
+
+[node name="M5" type="MeshInstance3D" parent="RowA"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.4, 1.31, 0)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_8")
+
+[node name="S4" type="CollisionShape3D" parent="RowA"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.4, 1.31, 0)
+shape = SubResource("BoxShape3D_16")
+
+[node name="M6" type="MeshInstance3D" parent="RowA"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.31, 0)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_8")
+
+[node name="S5" type="CollisionShape3D" parent="RowA"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.31, 0)
+shape = SubResource("BoxShape3D_16")
+
+[node name="M7" type="MeshInstance3D" parent="RowA"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.4, 1.31, 0)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_8")
+
+[node name="S6" type="CollisionShape3D" parent="RowA"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.4, 1.31, 0)
+shape = SubResource("BoxShape3D_16")
+
+[node name="M8" type="MeshInstance3D" parent="RowA"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.8, 1.31, 0)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_8")
+
+[node name="S7" type="CollisionShape3D" parent="RowA"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.8, 1.31, 0)
+shape = SubResource("BoxShape3D_16")
+
+[node name="RowB" type="StaticBody3D" parent="."]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 8)
+collision_layer = 1
+
+[node name="M0" type="MeshInstance3D" parent="RowB"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.03, 0)
+mesh = SubResource("BoxMesh_17")
+material_override = SubResource("StandardMaterial3D_5")
+
+[node name="S0" type="CollisionShape3D" parent="RowB"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.03, 0)
+shape = SubResource("BoxShape3D_18")
+
+[node name="M1" type="MeshInstance3D" parent="RowB"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, -1.65)
+mesh = SubResource("BoxMesh_20")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="S1" type="CollisionShape3D" parent="RowB"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, -1.65)
+shape = SubResource("BoxShape3D_21")
+
+[node name="M2" type="MeshInstance3D" parent="RowB"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.93, 0.05)
+mesh = SubResource("BoxMesh_22")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="S2" type="CollisionShape3D" parent="RowB"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.93, 0.05)
+shape = SubResource("BoxShape3D_23")
+
+[node name="M3" type="MeshInstance3D" parent="RowB"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.4, 0.05)
+mesh = SubResource("BoxMesh_24")
+material_override = SubResource("StandardMaterial3D_13")
+
+[node name="M4" type="MeshInstance3D" parent="RowB"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.3, 1.31, 0)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="S3" type="CollisionShape3D" parent="RowB"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.3, 1.31, 0)
+shape = SubResource("BoxShape3D_16")
+
+[node name="M5" type="MeshInstance3D" parent="RowB"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9, 1.31, 0)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="S4" type="CollisionShape3D" parent="RowB"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9, 1.31, 0)
+shape = SubResource("BoxShape3D_16")
+
+[node name="M6" type="MeshInstance3D" parent="RowB"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 1.31, 0)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="S5" type="CollisionShape3D" parent="RowB"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 1.31, 0)
+shape = SubResource("BoxShape3D_16")
+
+[node name="M7" type="MeshInstance3D" parent="RowB"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.45, 1.3, -0.75)
+mesh = SubResource("BoxMesh_25")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="S6" type="CollisionShape3D" parent="RowB"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.45, 1.3, -0.75)
+shape = SubResource("BoxShape3D_26")
+
+[node name="M8" type="MeshInstance3D" parent="RowB"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.45, 2.31, 0.95)
+mesh = SubResource("BoxMesh_27")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="S7" type="CollisionShape3D" parent="RowB"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.45, 2.31, 0.95)
+shape = SubResource("BoxShape3D_28")
+
+[node name="M9" type="MeshInstance3D" parent="RowB"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.4, 1.31, 0)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="S8" type="CollisionShape3D" parent="RowB"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.4, 1.31, 0)
+shape = SubResource("BoxShape3D_16")
+
+[node name="M10" type="MeshInstance3D" parent="RowB"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.35, 1.3, -0.75)
+mesh = SubResource("BoxMesh_25")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="S9" type="CollisionShape3D" parent="RowB"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.35, 1.3, -0.75)
+shape = SubResource("BoxShape3D_26")
+
+[node name="M11" type="MeshInstance3D" parent="RowB"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.35, 2.31, 0.95)
+mesh = SubResource("BoxMesh_27")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="S10" type="CollisionShape3D" parent="RowB"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.35, 2.31, 0.95)
+shape = SubResource("BoxShape3D_28")
+
+[node name="M12" type="MeshInstance3D" parent="RowB"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.3, 1.31, 0)
+mesh = SubResource("BoxMesh_15")
+material_override = SubResource("StandardMaterial3D_19")
+
+[node name="S11" type="CollisionShape3D" parent="RowB"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.3, 1.31, 0)
+shape = SubResource("BoxShape3D_16")
+
+[node name="Lot0" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.1, 0, -8)
+script = ExtResource("2_lot")
+lot_kind = 2
+cell_size = Vector3(3, 2.5, 3)
+has_door = true
+
+[node name="Cell" type="Node3D" parent="Lot0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.06, 0)
+
+[node name="Door" type="AnimatableBody3D" parent="Lot0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.81, 1.42)
+collision_layer = 1
+sync_to_physics = true
+
+[node name="M0" type="MeshInstance3D" parent="Lot0/Door"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("BoxMesh_30")
+material_override = SubResource("StandardMaterial3D_29")
+
+[node name="S0" type="CollisionShape3D" parent="Lot0/Door"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_31")
+
+[node name="M1" type="MeshInstance3D" parent="Lot0/Door"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.875, 0.072)
+mesh = SubResource("BoxMesh_33")
+material_override = SubResource("StandardMaterial3D_32")
+
+[node name="Hunter0" type="Node3D" parent="Lot0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.96817, 0, 1.85472)
+
+[node name="Hunter1" type="Node3D" parent="Lot0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.19707, 0, 3.28892)
+
+[node name="Hunter2" type="Node3D" parent="Lot0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.19707, 0, 3.28892)
+
+[node name="Hunter3" type="Node3D" parent="Lot0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.96817, 0, 1.85472)
+
+[node name="Hunter4" type="Node3D" parent="Lot0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.23081, 0, 1.69959)
+
+[node name="Hunter5" type="Node3D" parent="Lot0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3244, 0, 4.98469)
+
+[node name="Hunter6" type="Node3D" parent="Lot0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3244, 0, 4.98469)
+
+[node name="Hunter7" type="Node3D" parent="Lot0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.23081, 0, 1.69959)
+
+[node name="Auctioneer" type="Node3D" parent="Lot0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2.4)
+
+[node name="Caretaker" type="Node3D" parent="Lot0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3, 0, 2.7)
+
+[node name="PlayerStand" type="Node3D" parent="Lot0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3, 0, 3.9)
+
+[node name="PreviewSpot" type="Node3D" parent="Lot0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.95)
+
+[node name="Lamp" type="SpotLight3D" parent="Lot0"]
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 2.45, 0)
+light_color = Color(1, 0.93, 0.8, 1)
+light_energy = 2.5
+shadow_enabled = false
+spot_range = 5.5
+spot_angle = 60
+
+[node name="M0" type="MeshInstance3D" parent="Lot0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+mesh = SubResource("CylinderMesh_35")
+material_override = SubResource("StandardMaterial3D_34")
+
+[node name="No" type="Label3D" parent="Lot0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.9, 1.9)
+text = "№ 100"
+font_size = 48
+outline_size = 6
+pixel_size = 0.008
+modulate = Color(0.93, 0.93, 0.9, 1)
+outline_modulate = Color(0.07, 0.07, 0.08, 1)
+
+[node name="Lot1" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7, 0, -8)
+script = ExtResource("2_lot")
+lot_kind = 2
+cell_size = Vector3(3, 2.5, 3)
+has_door = true
+
+[node name="Cell" type="Node3D" parent="Lot1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.06, 0)
+
+[node name="Door" type="AnimatableBody3D" parent="Lot1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.81, 1.42)
+collision_layer = 1
+sync_to_physics = true
+
+[node name="M0" type="MeshInstance3D" parent="Lot1/Door"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("BoxMesh_30")
+material_override = SubResource("StandardMaterial3D_36")
+
+[node name="S0" type="CollisionShape3D" parent="Lot1/Door"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_31")
+
+[node name="M1" type="MeshInstance3D" parent="Lot1/Door"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.875, 0.072)
+mesh = SubResource("BoxMesh_33")
+material_override = SubResource("StandardMaterial3D_32")
+
+[node name="Hunter0" type="Node3D" parent="Lot1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.96817, 0, 1.85472)
+
+[node name="Hunter1" type="Node3D" parent="Lot1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.19707, 0, 3.28892)
+
+[node name="Hunter2" type="Node3D" parent="Lot1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.19707, 0, 3.28892)
+
+[node name="Hunter3" type="Node3D" parent="Lot1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.96817, 0, 1.85472)
+
+[node name="Hunter4" type="Node3D" parent="Lot1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.23081, 0, 1.69959)
+
+[node name="Hunter5" type="Node3D" parent="Lot1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3244, 0, 4.98469)
+
+[node name="Hunter6" type="Node3D" parent="Lot1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3244, 0, 4.98469)
+
+[node name="Hunter7" type="Node3D" parent="Lot1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.23081, 0, 1.69959)
+
+[node name="Auctioneer" type="Node3D" parent="Lot1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2.4)
+
+[node name="Caretaker" type="Node3D" parent="Lot1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3, 0, 2.7)
+
+[node name="PlayerStand" type="Node3D" parent="Lot1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3, 0, 3.9)
+
+[node name="PreviewSpot" type="Node3D" parent="Lot1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.95)
+
+[node name="Lamp" type="SpotLight3D" parent="Lot1"]
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 2.45, 0)
+light_color = Color(1, 0.93, 0.8, 1)
+light_energy = 2.5
+shadow_enabled = false
+spot_range = 5.5
+spot_angle = 60
+
+[node name="M0" type="MeshInstance3D" parent="Lot1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+mesh = SubResource("CylinderMesh_35")
+material_override = SubResource("StandardMaterial3D_34")
+
+[node name="No" type="Label3D" parent="Lot1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.9, 1.9)
+text = "№ 101"
+font_size = 48
+outline_size = 6
+pixel_size = 0.008
+modulate = Color(0.93, 0.93, 0.9, 1)
+outline_modulate = Color(0.07, 0.07, 0.08, 1)
+
+[node name="Lot2" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7, 0, -8)
+script = ExtResource("2_lot")
+lot_kind = 2
+cell_size = Vector3(3, 2.5, 3)
+has_door = true
+dark = true
+
+[node name="Cell" type="Node3D" parent="Lot2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.06, 0)
+
+[node name="Door" type="AnimatableBody3D" parent="Lot2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.81, 1.42)
+collision_layer = 1
+sync_to_physics = true
+
+[node name="M0" type="MeshInstance3D" parent="Lot2/Door"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("BoxMesh_30")
+material_override = SubResource("StandardMaterial3D_37")
+
+[node name="S0" type="CollisionShape3D" parent="Lot2/Door"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_31")
+
+[node name="M1" type="MeshInstance3D" parent="Lot2/Door"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.875, 0.072)
+mesh = SubResource("BoxMesh_33")
+material_override = SubResource("StandardMaterial3D_32")
+
+[node name="Hunter0" type="Node3D" parent="Lot2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.96817, 0, 1.85472)
+
+[node name="Hunter1" type="Node3D" parent="Lot2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.19707, 0, 3.28892)
+
+[node name="Hunter2" type="Node3D" parent="Lot2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.19707, 0, 3.28892)
+
+[node name="Hunter3" type="Node3D" parent="Lot2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.96817, 0, 1.85472)
+
+[node name="Hunter4" type="Node3D" parent="Lot2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.23081, 0, 1.69959)
+
+[node name="Hunter5" type="Node3D" parent="Lot2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3244, 0, 4.98469)
+
+[node name="Hunter6" type="Node3D" parent="Lot2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3244, 0, 4.98469)
+
+[node name="Hunter7" type="Node3D" parent="Lot2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.23081, 0, 1.69959)
+
+[node name="Auctioneer" type="Node3D" parent="Lot2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2.4)
+
+[node name="Caretaker" type="Node3D" parent="Lot2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3, 0, 2.7)
+
+[node name="PlayerStand" type="Node3D" parent="Lot2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3, 0, 3.9)
+
+[node name="PreviewSpot" type="Node3D" parent="Lot2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.95)
+
+[node name="Lamp" type="SpotLight3D" parent="Lot2"]
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 2.45, 0)
+light_color = Color(1, 0.93, 0.8, 1)
+light_energy = 2.5
+shadow_enabled = false
+spot_range = 5.5
+spot_angle = 60
+visible = false
+
+[node name="M0" type="MeshInstance3D" parent="Lot2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+mesh = SubResource("CylinderMesh_35")
+material_override = SubResource("StandardMaterial3D_13")
+
+[node name="No" type="Label3D" parent="Lot2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.9, 1.9)
+text = "№ 102"
+font_size = 48
+outline_size = 6
+pixel_size = 0.008
+modulate = Color(0.93, 0.93, 0.9, 1)
+outline_modulate = Color(0.07, 0.07, 0.08, 1)
+
+[node name="Lot3" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.1, 0, -8)
+script = ExtResource("2_lot")
+lot_kind = 2
+cell_size = Vector3(3, 2.5, 3)
+has_door = true
+
+[node name="Cell" type="Node3D" parent="Lot3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.06, 0)
+
+[node name="Door" type="AnimatableBody3D" parent="Lot3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.81, 1.42)
+collision_layer = 1
+sync_to_physics = true
+
+[node name="M0" type="MeshInstance3D" parent="Lot3/Door"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("BoxMesh_30")
+material_override = SubResource("StandardMaterial3D_38")
+
+[node name="S0" type="CollisionShape3D" parent="Lot3/Door"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_31")
+
+[node name="M1" type="MeshInstance3D" parent="Lot3/Door"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.875, 0.072)
+mesh = SubResource("BoxMesh_33")
+material_override = SubResource("StandardMaterial3D_32")
+
+[node name="Hunter0" type="Node3D" parent="Lot3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.96817, 0, 1.85472)
+
+[node name="Hunter1" type="Node3D" parent="Lot3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.19707, 0, 3.28892)
+
+[node name="Hunter2" type="Node3D" parent="Lot3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.19707, 0, 3.28892)
+
+[node name="Hunter3" type="Node3D" parent="Lot3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.96817, 0, 1.85472)
+
+[node name="Hunter4" type="Node3D" parent="Lot3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.23081, 0, 1.69959)
+
+[node name="Hunter5" type="Node3D" parent="Lot3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3244, 0, 4.98469)
+
+[node name="Hunter6" type="Node3D" parent="Lot3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3244, 0, 4.98469)
+
+[node name="Hunter7" type="Node3D" parent="Lot3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.23081, 0, 1.69959)
+
+[node name="Auctioneer" type="Node3D" parent="Lot3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2.4)
+
+[node name="Caretaker" type="Node3D" parent="Lot3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3, 0, 2.7)
+
+[node name="PlayerStand" type="Node3D" parent="Lot3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3, 0, 3.9)
+
+[node name="PreviewSpot" type="Node3D" parent="Lot3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.95)
+
+[node name="Lamp" type="SpotLight3D" parent="Lot3"]
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 2.45, 0)
+light_color = Color(1, 0.93, 0.8, 1)
+light_energy = 2.5
+shadow_enabled = false
+spot_range = 5.5
+spot_angle = 60
+
+[node name="M0" type="MeshInstance3D" parent="Lot3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+mesh = SubResource("CylinderMesh_35")
+material_override = SubResource("StandardMaterial3D_34")
+
+[node name="No" type="Label3D" parent="Lot3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.9, 1.9)
+text = "№ 103"
+font_size = 48
+outline_size = 6
+pixel_size = 0.008
+modulate = Color(0.93, 0.93, 0.9, 1)
+outline_modulate = Color(0.07, 0.07, 0.08, 1)
+
+[node name="Lot4" type="Node3D" parent="."]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 3.6, 0, 8)
+script = ExtResource("2_lot")
+lot_kind = 2
+cell_size = Vector3(3, 2.5, 3)
+has_door = true
+dark = true
+
+[node name="Cell" type="Node3D" parent="Lot4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.06, 0)
+
+[node name="Door" type="AnimatableBody3D" parent="Lot4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.81, 1.42)
+collision_layer = 1
+sync_to_physics = true
+
+[node name="M0" type="MeshInstance3D" parent="Lot4/Door"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("BoxMesh_30")
+material_override = SubResource("StandardMaterial3D_39")
+
+[node name="S0" type="CollisionShape3D" parent="Lot4/Door"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_31")
+
+[node name="M1" type="MeshInstance3D" parent="Lot4/Door"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.875, 0.072)
+mesh = SubResource("BoxMesh_33")
+material_override = SubResource("StandardMaterial3D_32")
+
+[node name="Hunter0" type="Node3D" parent="Lot4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.96817, 0, 1.85472)
+
+[node name="Hunter1" type="Node3D" parent="Lot4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.19707, 0, 3.28892)
+
+[node name="Hunter2" type="Node3D" parent="Lot4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.19707, 0, 3.28892)
+
+[node name="Hunter3" type="Node3D" parent="Lot4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.96817, 0, 1.85472)
+
+[node name="Hunter4" type="Node3D" parent="Lot4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.23081, 0, 1.69959)
+
+[node name="Hunter5" type="Node3D" parent="Lot4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3244, 0, 4.98469)
+
+[node name="Hunter6" type="Node3D" parent="Lot4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3244, 0, 4.98469)
+
+[node name="Hunter7" type="Node3D" parent="Lot4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.23081, 0, 1.69959)
+
+[node name="Auctioneer" type="Node3D" parent="Lot4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2.4)
+
+[node name="Caretaker" type="Node3D" parent="Lot4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3, 0, 2.7)
+
+[node name="PlayerStand" type="Node3D" parent="Lot4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3, 0, 3.9)
+
+[node name="PreviewSpot" type="Node3D" parent="Lot4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.95)
+
+[node name="Lamp" type="SpotLight3D" parent="Lot4"]
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 2.45, 0)
+light_color = Color(1, 0.93, 0.8, 1)
+light_energy = 2.5
+shadow_enabled = false
+spot_range = 5.5
+spot_angle = 60
+visible = false
+
+[node name="M0" type="MeshInstance3D" parent="Lot4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+mesh = SubResource("CylinderMesh_35")
+material_override = SubResource("StandardMaterial3D_13")
+
+[node name="No" type="Label3D" parent="Lot4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.9, 1.9)
+text = "№ 104"
+font_size = 48
+outline_size = 6
+pixel_size = 0.008
+modulate = Color(0.93, 0.93, 0.9, 1)
+outline_modulate = Color(0.07, 0.07, 0.08, 1)
+
+[node name="Lot5" type="Node3D" parent="."]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 0.2, 0, 8)
+script = ExtResource("2_lot")
+lot_kind = 2
+cell_size = Vector3(3, 2.5, 3)
+has_door = true
+
+[node name="Cell" type="Node3D" parent="Lot5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.06, 0)
+
+[node name="Door" type="AnimatableBody3D" parent="Lot5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.81, 1.42)
+collision_layer = 1
+sync_to_physics = true
+
+[node name="M0" type="MeshInstance3D" parent="Lot5/Door"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("BoxMesh_30")
+material_override = SubResource("StandardMaterial3D_40")
+
+[node name="S0" type="CollisionShape3D" parent="Lot5/Door"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_31")
+
+[node name="M1" type="MeshInstance3D" parent="Lot5/Door"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.875, 0.072)
+mesh = SubResource("BoxMesh_33")
+material_override = SubResource("StandardMaterial3D_32")
+
+[node name="Hunter0" type="Node3D" parent="Lot5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.96817, 0, 1.85472)
+
+[node name="Hunter1" type="Node3D" parent="Lot5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.19707, 0, 3.28892)
+
+[node name="Hunter2" type="Node3D" parent="Lot5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.19707, 0, 3.28892)
+
+[node name="Hunter3" type="Node3D" parent="Lot5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.96817, 0, 1.85472)
+
+[node name="Hunter4" type="Node3D" parent="Lot5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.23081, 0, 1.69959)
+
+[node name="Hunter5" type="Node3D" parent="Lot5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3244, 0, 4.98469)
+
+[node name="Hunter6" type="Node3D" parent="Lot5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3244, 0, 4.98469)
+
+[node name="Hunter7" type="Node3D" parent="Lot5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.23081, 0, 1.69959)
+
+[node name="Auctioneer" type="Node3D" parent="Lot5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2.4)
+
+[node name="Caretaker" type="Node3D" parent="Lot5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3, 0, 2.7)
+
+[node name="PlayerStand" type="Node3D" parent="Lot5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3, 0, 3.9)
+
+[node name="PreviewSpot" type="Node3D" parent="Lot5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.95)
+
+[node name="Lamp" type="SpotLight3D" parent="Lot5"]
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 2.45, 0)
+light_color = Color(1, 0.93, 0.8, 1)
+light_energy = 2.5
+shadow_enabled = false
+spot_range = 5.5
+spot_angle = 60
+
+[node name="M0" type="MeshInstance3D" parent="Lot5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+mesh = SubResource("CylinderMesh_35")
+material_override = SubResource("StandardMaterial3D_34")
+
+[node name="No" type="Label3D" parent="Lot5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.9, 1.9)
+text = "№ 105"
+font_size = 48
+outline_size = 6
+pixel_size = 0.008
+modulate = Color(0.93, 0.93, 0.9, 1)
+outline_modulate = Color(0.07, 0.07, 0.08, 1)
+
+[node name="Lot6" type="Node3D" parent="."]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -2.45, 0, 7.05)
+script = ExtResource("2_lot")
+lot_kind = 1
+cell_size = Vector3(1.5, 2, 1.5)
+has_door = true
+
+[node name="Cell" type="Node3D" parent="Lot6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.06, 0)
+
+[node name="Door" type="AnimatableBody3D" parent="Lot6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.06, 0.67)
+collision_layer = 1
+sync_to_physics = true
+
+[node name="M0" type="MeshInstance3D" parent="Lot6/Door"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("BoxMesh_42")
+material_override = SubResource("StandardMaterial3D_41")
+
+[node name="S0" type="CollisionShape3D" parent="Lot6/Door"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_43")
+
+[node name="M1" type="MeshInstance3D" parent="Lot6/Door"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.7, 0.072)
+mesh = SubResource("BoxMesh_44")
+material_override = SubResource("StandardMaterial3D_32")
+
+[node name="Hunter0" type="Node3D" parent="Lot6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.54414, 0, 1.58976)
+
+[node name="Hunter1" type="Node3D" parent="Lot6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.02606, 0, 2.81908)
+
+[node name="Hunter2" type="Node3D" parent="Lot6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.02606, 0, 2.81908)
+
+[node name="Hunter3" type="Node3D" parent="Lot6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.54414, 0, 1.58976)
+
+[node name="Hunter4" type="Node3D" parent="Lot6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.75528, 0, 1.54508)
+
+[node name="Hunter5" type="Node3D" parent="Lot6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.11309, 0, 4.53154)
+
+[node name="Hunter6" type="Node3D" parent="Lot6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.11309, 0, 4.53154)
+
+[node name="Hunter7" type="Node3D" parent="Lot6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.75528, 0, 1.54508)
+
+[node name="Auctioneer" type="Node3D" parent="Lot6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 1.8)
+
+[node name="Caretaker" type="Node3D" parent="Lot6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6, 0, 2)
+
+[node name="PlayerStand" type="Node3D" parent="Lot6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 3)
+
+[node name="PreviewSpot" type="Node3D" parent="Lot6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.2)
+
+[node name="Lamp" type="SpotLight3D" parent="Lot6"]
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 1.95, 0)
+light_color = Color(1, 0.93, 0.8, 1)
+light_energy = 2
+shadow_enabled = false
+spot_range = 3.5
+spot_angle = 70
+
+[node name="No" type="Label3D" parent="Lot6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4, 1.1)
+text = "L1"
+font_size = 40
+outline_size = 6
+pixel_size = 0.008
+modulate = Color(0.93, 0.93, 0.9, 1)
+outline_modulate = Color(0.07, 0.07, 0.08, 1)
+
+[node name="Lot7" type="Node3D" parent="."]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, -4.35, 0, 7.05)
+script = ExtResource("2_lot")
+lot_kind = 1
+cell_size = Vector3(1.5, 2, 1.5)
+has_door = true
+
+[node name="Cell" type="Node3D" parent="Lot7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.06, 0)
+
+[node name="Door" type="AnimatableBody3D" parent="Lot7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.06, 0.67)
+collision_layer = 1
+sync_to_physics = true
+
+[node name="M0" type="MeshInstance3D" parent="Lot7/Door"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("BoxMesh_42")
+material_override = SubResource("StandardMaterial3D_45")
+
+[node name="S0" type="CollisionShape3D" parent="Lot7/Door"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_43")
+
+[node name="M1" type="MeshInstance3D" parent="Lot7/Door"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.7, 0.072)
+mesh = SubResource("BoxMesh_44")
+material_override = SubResource("StandardMaterial3D_32")
+
+[node name="Hunter0" type="Node3D" parent="Lot7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.54414, 0, 1.58976)
+
+[node name="Hunter1" type="Node3D" parent="Lot7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.02606, 0, 2.81908)
+
+[node name="Hunter2" type="Node3D" parent="Lot7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.02606, 0, 2.81908)
+
+[node name="Hunter3" type="Node3D" parent="Lot7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.54414, 0, 1.58976)
+
+[node name="Hunter4" type="Node3D" parent="Lot7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.75528, 0, 1.54508)
+
+[node name="Hunter5" type="Node3D" parent="Lot7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.11309, 0, 4.53154)
+
+[node name="Hunter6" type="Node3D" parent="Lot7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.11309, 0, 4.53154)
+
+[node name="Hunter7" type="Node3D" parent="Lot7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.75528, 0, 1.54508)
+
+[node name="Auctioneer" type="Node3D" parent="Lot7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, 1.8)
+
+[node name="Caretaker" type="Node3D" parent="Lot7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6, 0, 2)
+
+[node name="PlayerStand" type="Node3D" parent="Lot7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 3)
+
+[node name="PreviewSpot" type="Node3D" parent="Lot7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.2)
+
+[node name="Lamp" type="SpotLight3D" parent="Lot7"]
+transform = Transform3D(1, 0, 0, 0, 0, 1, 0, -1, 0, 0, 1.95, 0)
+light_color = Color(1, 0.93, 0.8, 1)
+light_energy = 2
+shadow_enabled = false
+spot_range = 3.5
+spot_angle = 70
+
+[node name="No" type="Label3D" parent="Lot7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4, 1.1)
+text = "L2"
+font_size = 40
+outline_size = 6
+pixel_size = 0.008
+modulate = Color(0.93, 0.93, 0.9, 1)
+outline_modulate = Color(0.07, 0.07, 0.08, 1)
+
+[node name="Gantry" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+collision_layer = 1
+
+[node name="M0" type="MeshInstance3D" parent="Gantry"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 2.25, 0)
+mesh = SubResource("BoxMesh_47")
+material_override = SubResource("StandardMaterial3D_46")
+
+[node name="S0" type="CollisionShape3D" parent="Gantry"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 2.25, 0)
+shape = SubResource("BoxShape3D_48")
+
+[node name="M1" type="MeshInstance3D" parent="Gantry"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 2.25, 0)
+mesh = SubResource("BoxMesh_47")
+material_override = SubResource("StandardMaterial3D_46")
+
+[node name="S1" type="CollisionShape3D" parent="Gantry"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 2.25, 0)
+shape = SubResource("BoxShape3D_48")
+
+[node name="M2" type="MeshInstance3D" parent="Gantry"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.6, 0)
+mesh = SubResource("BoxMesh_49")
+material_override = SubResource("StandardMaterial3D_46")
+
+[node name="M3" type="MeshInstance3D" parent="Gantry"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 4.42, 0)
+mesh = SubResource("BoxMesh_51")
+material_override = SubResource("StandardMaterial3D_50")
+
+[node name="M4" type="MeshInstance3D" parent="Gantry"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 4.42, 0)
+mesh = SubResource("BoxMesh_51")
+material_override = SubResource("StandardMaterial3D_50")
+
+[node name="M5" type="MeshInstance3D" parent="Gantry"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 4.42, 0)
+mesh = SubResource("BoxMesh_51")
+material_override = SubResource("StandardMaterial3D_50")
+
+[node name="M6" type="MeshInstance3D" parent="Gantry"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 4.42, 0)
+mesh = SubResource("BoxMesh_51")
+material_override = SubResource("StandardMaterial3D_50")
+
+[node name="Signs" type="Node3D" parent="."]
+
+[node name="BroomSign" type="Label3D" parent="Signs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.2, -6.05)
+text = "BROOM CLEAN OR ELSE\nПОДМЕТИ, А ТО..."
+font_size = 110
+outline_size = 14
+pixel_size = 0.012
+modulate = Color(0.86, 0.16, 0.13, 1)
+outline_modulate = Color(0.93, 0.93, 0.9, 1)
+
+[node name="HauntedSign" type="Label3D" parent="Signs"]
+transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 4.2, 6.05)
+text = "ЯЧЕЙКА 13 — С ПРИВИДЕНИЯМИ\nUNIT 13 IS HAUNTED (NO REFUNDS)"
+font_size = 70
+outline_size = 10
+pixel_size = 0.012
+modulate = Color(0.93, 0.93, 0.9, 1)
+outline_modulate = Color(0.07, 0.07, 0.08, 1)
+
+[node name="M0" type="MeshInstance3D" parent="Signs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 3.9, -6.06)
+mesh = SubResource("BoxMesh_53")
+material_override = SubResource("StandardMaterial3D_52")
+
+[node name="Sign24" type="Label3D" parent="Signs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 3.9, -6)
+text = "24H"
+font_size = 56
+outline_size = 6
+pixel_size = 0.01
+modulate = Color(0.93, 0.93, 0.9, 1)
+
+[node name="Office" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 0, -9)
+collision_layer = 1
+
+[node name="M0" type="MeshInstance3D" parent="Office"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
+mesh = SubResource("BoxMesh_55")
+material_override = SubResource("StandardMaterial3D_54")
+
+[node name="S0" type="CollisionShape3D" parent="Office"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
+shape = SubResource("BoxShape3D_56")
+
+[node name="M1" type="MeshInstance3D" parent="Office"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.95, 0)
+mesh = SubResource("BoxMesh_57")
+material_override = SubResource("StandardMaterial3D_13")
+
+[node name="M2" type="MeshInstance3D" parent="Office"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.62, 1.6, 0)
+mesh = SubResource("BoxMesh_59")
+material_override = SubResource("StandardMaterial3D_58")
+
+[node name="M3" type="MeshInstance3D" parent="Office"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.05, 1.62)
+mesh = SubResource("BoxMesh_61")
+material_override = SubResource("StandardMaterial3D_60")
+
+[node name="OfficeLabel" type="Label3D" parent="Office"]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, 1.7, 2.5, 0)
+text = "ОФИС / OFFICE"
+font_size = 56
+outline_size = 8
+pixel_size = 0.01
+modulate = Color(0.16, 0.38, 0.82, 1)
+outline_modulate = Color(0.93, 0.93, 0.9, 1)
+
+[node name="Vending" type="StaticBody3D" parent="."]
+transform = Transform3D(0, 0, 1, 0, 1, 0, -1, 0, 0, -12.6, 0, -6)
+collision_layer = 1
+
+[node name="M0" type="MeshInstance3D" parent="Vending"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, 0)
+mesh = SubResource("BoxMesh_62")
+material_override = SubResource("StandardMaterial3D_45")
+
+[node name="S0" type="CollisionShape3D" parent="Vending"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, 0)
+shape = SubResource("BoxShape3D_63")
+
+[node name="M1" type="MeshInstance3D" parent="Vending"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0.41)
+mesh = SubResource("BoxMesh_65")
+material_override = SubResource("StandardMaterial3D_64")
+
+[node name="VendLabel" type="Label3D" parent="Vending"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0.44)
+text = "C0LA"
+font_size = 40
+outline_size = 4
+pixel_size = 0.006
+modulate = Color(0.93, 0.93, 0.9, 1)
+
+[node name="Perimeter" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+collision_layer = 1
+
+[node name="M0" type="MeshInstance3D" parent="Perimeter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, -20)
+mesh = SubResource("BoxMesh_67")
+material_override = SubResource("StandardMaterial3D_66")
+
+[node name="S0" type="CollisionShape3D" parent="Perimeter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, -20)
+shape = SubResource("BoxShape3D_68")
+
+[node name="M1" type="MeshInstance3D" parent="Perimeter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0.6, 0)
+mesh = SubResource("BoxMesh_69")
+material_override = SubResource("StandardMaterial3D_66")
+
+[node name="S1" type="CollisionShape3D" parent="Perimeter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -20, 0.6, 0)
+shape = SubResource("BoxShape3D_70")
+
+[node name="M2" type="MeshInstance3D" parent="Perimeter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0.6, 0)
+mesh = SubResource("BoxMesh_69")
+material_override = SubResource("StandardMaterial3D_66")
+
+[node name="S2" type="CollisionShape3D" parent="Perimeter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0.6, 0)
+shape = SubResource("BoxShape3D_70")
+
+[node name="M3" type="MeshInstance3D" parent="Perimeter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0.6, 20)
+mesh = SubResource("BoxMesh_71")
+material_override = SubResource("StandardMaterial3D_66")
+
+[node name="S3" type="CollisionShape3D" parent="Perimeter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0.6, 20)
+shape = SubResource("BoxShape3D_72")
+
+[node name="M4" type="MeshInstance3D" parent="Perimeter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 0.6, 20)
+mesh = SubResource("BoxMesh_73")
+material_override = SubResource("StandardMaterial3D_66")
+
+[node name="S4" type="CollisionShape3D" parent="Perimeter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 0.6, 20)
+shape = SubResource("BoxShape3D_74")
+
+[node name="M5" type="MeshInstance3D" parent="Perimeter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 2, 20)
+mesh = SubResource("BoxMesh_75")
+material_override = SubResource("StandardMaterial3D_37")
+
+[node name="S5" type="CollisionShape3D" parent="Perimeter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 2, 20)
+shape = SubResource("BoxShape3D_76")
+
+[node name="M6" type="MeshInstance3D" parent="Perimeter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 2, 20)
+mesh = SubResource("BoxMesh_75")
+material_override = SubResource("StandardMaterial3D_37")
+
+[node name="S6" type="CollisionShape3D" parent="Perimeter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 2, 20)
+shape = SubResource("BoxShape3D_76")
+
+[node name="M7" type="MeshInstance3D" parent="Perimeter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 4.2, 20)
+mesh = SubResource("BoxMesh_77")
+material_override = SubResource("StandardMaterial3D_37")
+
+[node name="GateSign" type="Label3D" parent="Perimeter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 4.2, 20.25)
+text = "СКЛАД «ХРАНИ ХЛАМ»\nSELF STORAGE 'KEEP YOUR JUNK'"
+font_size = 56
+outline_size = 6
+pixel_size = 0.01
+modulate = Color(0.07, 0.07, 0.08, 1)
+outline_modulate = Color(0.97, 0.82, 0.12, 1)
+
+[node name="M8" type="MeshInstance3D" parent="Perimeter"]
+transform = Transform3D(0.70711, 0, 0.70711, 0, 1, 0, -0.70711, 0, 0.70711, 19.7, 3.5, -19.7)
+mesh = SubResource("BoxMesh_78")
+material_override = SubResource("StandardMaterial3D_32")
+
+[node name="M9" type="MeshInstance3D" parent="Perimeter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.85, 1.8, -19.85)
+mesh = SubResource("BoxMesh_79")
+material_override = SubResource("StandardMaterial3D_46")
+
+[node name="Tires" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16, 0, -14)
+collision_layer = 1
+
+[node name="M0" type="MeshInstance3D" parent="Tires"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.13, 0)
+mesh = SubResource("CylinderMesh_80")
+material_override = SubResource("StandardMaterial3D_32")
+
+[node name="M1" type="MeshInstance3D" parent="Tires"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.08, 0.39, 0.05)
+mesh = SubResource("CylinderMesh_80")
+material_override = SubResource("StandardMaterial3D_32")
+
+[node name="M2" type="MeshInstance3D" parent="Tires"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.16, 0.65, 0.1)
+mesh = SubResource("CylinderMesh_80")
+material_override = SubResource("StandardMaterial3D_32")
+
+[node name="S0" type="CollisionShape3D" parent="Tires"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.39, 0)
+shape = SubResource("CylinderShape3D_81")
+
+[node name="Barrels" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 0, 14)
+collision_layer = 1
+
+[node name="M0" type="MeshInstance3D" parent="Barrels"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
+mesh = SubResource("CylinderMesh_82")
+material_override = SubResource("StandardMaterial3D_41")
+
+[node name="S0" type="CollisionShape3D" parent="Barrels"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
+shape = SubResource("CylinderShape3D_83")
+
+[node name="M1" type="MeshInstance3D" parent="Barrels"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 0.45, 0.2)
+mesh = SubResource("CylinderMesh_82")
+material_override = SubResource("StandardMaterial3D_84")
+
+[node name="S1" type="CollisionShape3D" parent="Barrels"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 0.45, 0.2)
+shape = SubResource("CylinderShape3D_83")

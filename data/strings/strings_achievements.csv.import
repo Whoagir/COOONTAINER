@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://pex6vio3bocu"
+
+[deps]
+
+files=["res://data/strings/strings_achievements.ru.translation", "res://data/strings/strings_achievements.en.translation"]
+
+source_file="res://data/strings/strings_achievements.csv"
+dest_files=["res://data/strings/strings_achievements.ru.translation", "res://data/strings/strings_achievements.en.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

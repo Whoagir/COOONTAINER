@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/ItemDef.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "sofa_leather"
+name_ru = "Диван кожаный"
+name_en = "Leather Sofa"
+archetype_id = "sofa"
+facets = Array[int]([1, 13])
+value_base = 200
+mass_override = 0.0
+liquid_id = 0
+liquid_amount = 1.0
+flammable = true
+illegal = false
+dusty_default = 0.2
+vendor_affinity = Array[String](["vendor_household"])
+wearable_slot = "none"
+break_threshold = 60.0
+color = Color(0.2902, 0.1647, 0.102, 1.0)
+scale = 1.0
+tags = Array[String]([])
+lore_ru = ""
+lore_en = ""

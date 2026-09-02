@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://behf1r2dwllcm"
+
+[deps]
+
+files=["res://data/strings/strings_vehicles.ru.translation", "res://data/strings/strings_vehicles.en.translation"]
+
+source_file="res://data/strings/strings_vehicles.csv"
+dest_files=["res://data/strings/strings_vehicles.ru.translation", "res://data/strings/strings_vehicles.en.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

@@ -1,0 +1,75 @@
+[gd_resource type="Resource" script_class="LotPreset" load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://core/LotPreset.gd" id="1"]
+[ext_resource type="Script" path="res://core/LotSpawn.gd" id="2"]
+
+[sub_resource type="Resource" id="s1"]
+script = ExtResource("2")
+item_id = "bag_work"
+xform = Transform3D(0.9511, 0, -0.309, 0, 1.0, 0, 0.309, 0, 0.9511, -0.38, 0.0, -0.36)
+nested = Array[String](["jewelry_box_velvet", "cash_20"])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s2"]
+script = ExtResource("2")
+item_id = "jewelry_box_music"
+xform = Transform3D(0.9781, 0, 0.2079, 0, 1.0, 0, -0.2079, 0, 0.9781, 0.42, 0.0, -0.38)
+nested = Array[String](["watch_pocket"])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s3"]
+script = ExtResource("2")
+item_id = "camera_polaroid"
+xform = Transform3D(0.9063, 0, -0.4226, 0, 1.0, 0, 0.4226, 0, 0.9063, 0.08, 0.0, 0.08)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s4"]
+script = ExtResource("2")
+item_id = "book_diary"
+xform = Transform3D(0.3746, 0, -0.9272, 0, 1.0, 0, 0.9272, 0, 0.3746, -0.42, 0.0, 0.18)
+nested = Array[String](["cash_10"])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s5"]
+script = ExtResource("2")
+item_id = "cup_okayest"
+xform = Transform3D(0.9945, 0, 0.1045, 0, 1.0, 0, -0.1045, 0, 0.9945, 0.44, 0.0, 0.28)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s6"]
+script = ExtResource("2")
+item_id = "letter_love"
+xform = Transform3D(0.9976, 0, -0.0698, 0, 1.0, 0, 0.0698, 0, 0.9976, 0.18, 0.0, 0.46)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[resource]
+script = ExtResource("1")
+id = "hangar_03"
+district_id = 1
+lot_kind = 0
+min_bid = 10
+info_mode = 2
+preview_seconds = 16.0
+clearout_seconds = 80.0
+lock_chance = 0.15
+spawn_list = Array[Resource]([SubResource("s1"), SubResource("s2"), SubResource("s3"), SubResource("s4"), SubResource("s5"), SubResource("s6")])
+pacing_tag = 1
+broom_required = false
+hunters_count = 6
+order = 3
+tale_ru = "Рабочая сумка. Хозяин клялся, что там только бутерброды. В бархатной шкатулке — дедовы карманные часы. На фото — Мин и слиток. Мин в отпуске."
+tale_en = "A work bag. Owner swore it was only sandwiches. The velvet box holds grandpa's pocket watch. Photos show a Ming and a gold bar. The Ming is on vacation."
+docs_ru = "ОПИСЬ (сдал отдел кадров):\n— сумка рабочая\n— шкатулка + часы карманные\n— Polaroyd\n— ваза Мин / слиток — на фото, не здесь"
+docs_en = "MANIFEST (HR intake):\n— work bag\n— jewelry box + pocket watch\n— Polaroyd\n— Ming / gold bar — in the photos, not here"
+photo_item_ids = Array[String](["bag_work", "camera_polaroid", "vase_ming", "gold_bar"])
+cell_size = Vector3(1.5, 1.2, 1.5)
+dark = false

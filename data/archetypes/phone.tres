@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Archetype" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/Archetype.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "phone"
+builder = "phone"
+shard_count = 4
+size_class = 0
+mass_default = 0.18
+dims = Vector3(0.07, 0.012, 0.14)
+cloth = false
+container = false
+container_capacity = 3
+light_fixture = false
+base_color = Color(0.1255, 0.1255, 0.1412, 1.0)
+secondary_color = Color(0.2667, 0.2667, 0.2667, 1.0)
+friction = 0.6
+bounce = 0.05

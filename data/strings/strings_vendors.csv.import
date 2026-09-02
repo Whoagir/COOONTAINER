@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://buxe08rct6din"
+
+[deps]
+
+files=["res://data/strings/strings_vendors.ru.translation", "res://data/strings/strings_vendors.en.translation"]
+
+source_file="res://data/strings/strings_vendors.csv"
+dest_files=["res://data/strings/strings_vendors.ru.translation", "res://data/strings/strings_vendors.en.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

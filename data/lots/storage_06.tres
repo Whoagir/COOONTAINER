@@ -1,0 +1,347 @@
+[gd_resource type="Resource" script_class="LotPreset" load_steps=42 format=3]
+
+[ext_resource type="Script" path="res://core/LotPreset.gd" id="1"]
+[ext_resource type="Script" path="res://core/LotSpawn.gd" id="2"]
+
+[sub_resource type="Resource" id="s1"]
+script = ExtResource("2")
+item_id = "cup_soviet_gold"
+xform = Transform3D(0.9781, 0, 0.2079, 0, 1.0, 0, -0.2079, 0, 0.9781, -0.28, 0.0, -0.28)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s2"]
+script = ExtResource("2")
+item_id = "cup_soviet_gold"
+xform = Transform3D(0.9903, 0, 0.1392, 0, 1.0, 0, -0.1392, 0, 0.9903, -0.28, 0.1, -0.28)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s3"]
+script = ExtResource("2")
+item_id = "cup_soviet_gold"
+xform = Transform3D(0.9976, 0, 0.0698, 0, 1.0, 0, -0.0698, 0, 0.9976, -0.28, 0.2, -0.28)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s4"]
+script = ExtResource("2")
+item_id = "cup_soviet_gold"
+xform = Transform3D(0.9781, 0, 0.2079, 0, 1.0, 0, -0.2079, 0, 0.9781, -0.28, 0.3, -0.28)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s5"]
+script = ExtResource("2")
+item_id = "cup_soviet_gold"
+xform = Transform3D(0.9903, 0, 0.1392, 0, 1.0, 0, -0.1392, 0, 0.9903, -0.28, 0.4, -0.28)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s6"]
+script = ExtResource("2")
+item_id = "cup_soviet_gold"
+xform = Transform3D(0.9903, 0, -0.1392, 0, 1.0, 0, 0.1392, 0, 0.9903, 0.0, 0.0, -0.28)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s7"]
+script = ExtResource("2")
+item_id = "cup_soviet_gold"
+xform = Transform3D(0.9781, 0, -0.2079, 0, 1.0, 0, 0.2079, 0, 0.9781, 0.0, 0.1, -0.28)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s8"]
+script = ExtResource("2")
+item_id = "cup_soviet_gold"
+xform = Transform3D(0.9613, 0, -0.2756, 0, 1.0, 0, 0.2756, 0, 0.9613, 0.0, 0.2, -0.28)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s9"]
+script = ExtResource("2")
+item_id = "cup_soviet_gold"
+xform = Transform3D(0.9903, 0, -0.1392, 0, 1.0, 0, 0.1392, 0, 0.9903, 0.0, 0.3, -0.28)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s10"]
+script = ExtResource("2")
+item_id = "cup_soviet_gold"
+xform = Transform3D(0.9781, 0, -0.2079, 0, 1.0, 0, 0.2079, 0, 0.9781, 0.0, 0.4, -0.28)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s11"]
+script = ExtResource("2")
+item_id = "cup_soviet_gold"
+xform = Transform3D(0.9781, 0, 0.2079, 0, 1.0, 0, -0.2079, 0, 0.9781, 0.28, 0.0, -0.28)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s12"]
+script = ExtResource("2")
+item_id = "cup_soviet_gold"
+xform = Transform3D(0.9903, 0, 0.1392, 0, 1.0, 0, -0.1392, 0, 0.9903, 0.28, 0.1, -0.28)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s13"]
+script = ExtResource("2")
+item_id = "cup_soviet_gold"
+xform = Transform3D(0.9976, 0, 0.0698, 0, 1.0, 0, -0.0698, 0, 0.9976, 0.28, 0.2, -0.28)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s14"]
+script = ExtResource("2")
+item_id = "cup_soviet_gold"
+xform = Transform3D(0.9781, 0, 0.2079, 0, 1.0, 0, -0.2079, 0, 0.9781, 0.28, 0.3, -0.28)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s15"]
+script = ExtResource("2")
+item_id = "cup_soviet_gold"
+xform = Transform3D(0.9903, 0, 0.1392, 0, 1.0, 0, -0.1392, 0, 0.9903, 0.28, 0.4, -0.28)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s16"]
+script = ExtResource("2")
+item_id = "cup_soviet_gold"
+xform = Transform3D(0.9903, 0, -0.1392, 0, 1.0, 0, 0.1392, 0, 0.9903, -0.28, 0.0, 0.0)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s17"]
+script = ExtResource("2")
+item_id = "cup_soviet_gold"
+xform = Transform3D(0.9781, 0, -0.2079, 0, 1.0, 0, 0.2079, 0, 0.9781, -0.28, 0.1, 0.0)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s18"]
+script = ExtResource("2")
+item_id = "cup_soviet_gold"
+xform = Transform3D(0.9613, 0, -0.2756, 0, 1.0, 0, 0.2756, 0, 0.9613, -0.28, 0.2, 0.0)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s19"]
+script = ExtResource("2")
+item_id = "cup_soviet_gold"
+xform = Transform3D(0.9903, 0, -0.1392, 0, 1.0, 0, 0.1392, 0, 0.9903, -0.28, 0.3, 0.0)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s20"]
+script = ExtResource("2")
+item_id = "cup_soviet_gold"
+xform = Transform3D(0.9781, 0, -0.2079, 0, 1.0, 0, 0.2079, 0, 0.9781, -0.28, 0.4, 0.0)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s21"]
+script = ExtResource("2")
+item_id = "cup_soviet_gold"
+xform = Transform3D(0.9781, 0, 0.2079, 0, 1.0, 0, -0.2079, 0, 0.9781, 0.28, 0.0, 0.0)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s22"]
+script = ExtResource("2")
+item_id = "cup_soviet_gold"
+xform = Transform3D(0.9903, 0, 0.1392, 0, 1.0, 0, -0.1392, 0, 0.9903, 0.28, 0.1, 0.0)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s23"]
+script = ExtResource("2")
+item_id = "cup_soviet_gold"
+xform = Transform3D(0.9976, 0, 0.0698, 0, 1.0, 0, -0.0698, 0, 0.9976, 0.28, 0.2, 0.0)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s24"]
+script = ExtResource("2")
+item_id = "cup_soviet_gold"
+xform = Transform3D(0.9781, 0, 0.2079, 0, 1.0, 0, -0.2079, 0, 0.9781, 0.28, 0.3, 0.0)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s25"]
+script = ExtResource("2")
+item_id = "cup_soviet_gold"
+xform = Transform3D(0.9903, 0, 0.1392, 0, 1.0, 0, -0.1392, 0, 0.9903, 0.28, 0.4, 0.0)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s26"]
+script = ExtResource("2")
+item_id = "cup_soviet_gold"
+xform = Transform3D(0.9903, 0, -0.1392, 0, 1.0, 0, 0.1392, 0, 0.9903, -0.28, 0.0, 0.28)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s27"]
+script = ExtResource("2")
+item_id = "cup_soviet_gold"
+xform = Transform3D(0.9781, 0, -0.2079, 0, 1.0, 0, 0.2079, 0, 0.9781, -0.28, 0.1, 0.28)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s28"]
+script = ExtResource("2")
+item_id = "cup_soviet_gold"
+xform = Transform3D(0.9613, 0, -0.2756, 0, 1.0, 0, 0.2756, 0, 0.9613, -0.28, 0.2, 0.28)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s29"]
+script = ExtResource("2")
+item_id = "cup_soviet_gold"
+xform = Transform3D(0.9903, 0, -0.1392, 0, 1.0, 0, 0.1392, 0, 0.9903, -0.28, 0.3, 0.28)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s30"]
+script = ExtResource("2")
+item_id = "cup_soviet_gold"
+xform = Transform3D(0.9781, 0, -0.2079, 0, 1.0, 0, 0.2079, 0, 0.9781, -0.28, 0.4, 0.28)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s31"]
+script = ExtResource("2")
+item_id = "cup_soviet_gold"
+xform = Transform3D(0.9781, 0, 0.2079, 0, 1.0, 0, -0.2079, 0, 0.9781, 0.0, 0.0, 0.28)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s32"]
+script = ExtResource("2")
+item_id = "cup_soviet_gold"
+xform = Transform3D(0.9903, 0, 0.1392, 0, 1.0, 0, -0.1392, 0, 0.9903, 0.0, 0.1, 0.28)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s33"]
+script = ExtResource("2")
+item_id = "cup_soviet_gold"
+xform = Transform3D(0.9976, 0, 0.0698, 0, 1.0, 0, -0.0698, 0, 0.9976, 0.0, 0.2, 0.28)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s34"]
+script = ExtResource("2")
+item_id = "cup_soviet_gold"
+xform = Transform3D(0.9781, 0, 0.2079, 0, 1.0, 0, -0.2079, 0, 0.9781, 0.0, 0.3, 0.28)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s35"]
+script = ExtResource("2")
+item_id = "cup_soviet_gold"
+xform = Transform3D(0.9903, 0, 0.1392, 0, 1.0, 0, -0.1392, 0, 0.9903, 0.0, 0.4, 0.28)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s36"]
+script = ExtResource("2")
+item_id = "cup_soviet_gold"
+xform = Transform3D(0.9903, 0, -0.1392, 0, 1.0, 0, 0.1392, 0, 0.9903, 0.28, 0.0, 0.28)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s37"]
+script = ExtResource("2")
+item_id = "cup_soviet_gold"
+xform = Transform3D(0.9781, 0, -0.2079, 0, 1.0, 0, 0.2079, 0, 0.9781, 0.28, 0.1, 0.28)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s38"]
+script = ExtResource("2")
+item_id = "cup_soviet_gold"
+xform = Transform3D(0.9613, 0, -0.2756, 0, 1.0, 0, 0.2756, 0, 0.9613, 0.28, 0.2, 0.28)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s39"]
+script = ExtResource("2")
+item_id = "cup_soviet_gold"
+xform = Transform3D(0.9903, 0, -0.1392, 0, 1.0, 0, 0.1392, 0, 0.9903, 0.28, 0.3, 0.28)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s40"]
+script = ExtResource("2")
+item_id = "cup_soviet_gold"
+xform = Transform3D(0.9781, 0, -0.2079, 0, 1.0, 0, 0.2079, 0, 0.9781, 0.28, 0.4, 0.28)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[resource]
+script = ExtResource("1")
+id = "storage_06"
+district_id = 2
+lot_kind = 1
+min_bid = 85
+info_mode = 0
+preview_seconds = 15.0
+clearout_seconds = 120.0
+lock_chance = 0.25
+spawn_list = Array[Resource]([SubResource("s1"), SubResource("s2"), SubResource("s3"), SubResource("s4"), SubResource("s5"), SubResource("s6"), SubResource("s7"), SubResource("s8"), SubResource("s9"), SubResource("s10"), SubResource("s11"), SubResource("s12"), SubResource("s13"), SubResource("s14"), SubResource("s15"), SubResource("s16"), SubResource("s17"), SubResource("s18"), SubResource("s19"), SubResource("s20"), SubResource("s21"), SubResource("s22"), SubResource("s23"), SubResource("s24"), SubResource("s25"), SubResource("s26"), SubResource("s27"), SubResource("s28"), SubResource("s29"), SubResource("s30"), SubResource("s31"), SubResource("s32"), SubResource("s33"), SubResource("s34"), SubResource("s35"), SubResource("s36"), SubResource("s37"), SubResource("s38"), SubResource("s39"), SubResource("s40")])
+pacing_tag = 0
+broom_required = false
+hunters_count = 6
+order = 6
+tale_ru = "Сорок чашек. Хозяин коллекционировал «золотой ободок». Сорок раз. Аукционист называет это сервизом. Скупщик назовёт это проблемой."
+tale_en = "Forty teacups. The owner collected «gold rims». Forty times. The auctioneer calls it a service set. The vendor will call it a problem."
+docs_ru = "ЛОКЕР 06 — ФАРФОР:\nЧашка с золотом × 40\nДругого нет\nВес: не взвешивали\nПримечание: не ронять. Все."
+docs_en = "LOCKER 06 — CHINA:\nGold-trim teacup × 40\nNothing else\nWeight: not weighed\nNote: do not drop. Any of them."
+photo_item_ids = Array[String]([])
+cell_size = Vector3(1.0, 2.0, 1.0)
+dark = false

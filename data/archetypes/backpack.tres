@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Archetype" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/Archetype.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "backpack"
+builder = "backpack"
+shard_count = 4
+size_class = 1
+mass_default = 1.2
+dims = Vector3(0.35, 0.45, 0.2)
+cloth = true
+container = true
+container_capacity = 3
+light_fixture = false
+base_color = Color(0.1882, 0.3137, 0.6275, 1.0)
+secondary_color = Color(0.2, 0.2, 0.2, 1.0)
+friction = 1.0
+bounce = 0.0

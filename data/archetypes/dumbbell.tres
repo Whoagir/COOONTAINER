@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Archetype" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/Archetype.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "dumbbell"
+builder = "dumbbell"
+shard_count = 4
+size_class = 1
+mass_default = 10.0
+dims = Vector3(0.4, 0.15, 0.15)
+cloth = false
+container = false
+container_capacity = 3
+light_fixture = false
+base_color = Color(0.2, 0.2, 0.2, 1.0)
+secondary_color = Color(0.5333, 0.5333, 0.5333, 1.0)
+friction = 0.8
+bounce = 0.02

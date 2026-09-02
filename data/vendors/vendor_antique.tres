@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="VendorDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/VendorDef.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "vendor_antique"
+name_ru = "Салон «Патина»"
+name_en = "Patina Antiques"
+vendor_type = 0
+phobias = Array[int]([2])
+favorite_facets = Array[int]([0, 8])
+hated_facets = Array[int]([])
+base_multiplier = 0.7
+buys_illegal = false
+calls_police_on_illegal = true
+green_zone_base = 0.3
+greed = 0.6
+unlock_cost = 300
+unlock_requires_vendor = "vendor_tiny"
+body_color = Color(0.3529, 0.2275, 0.4157, 1.0)
+voice_pitch = 0.85
+lines_greet_ru = Array[String](["Ах. Ещё один охотник за сокровищами.", "Осторожнее с прилавком, ему двести лет.", "Покажите, что вы там... принесли.", "Фарфор? Бумаги? Или снова хлам?", "Добро пожаловать. Пыль не трогать, она антикварная.", "Я оценю. Вы — расстроитесь."])
+lines_greet_en = Array[String](["Ah. Another treasure hunter.", "Mind the counter, it's two hundred years old.", "Show me what you've... dragged in.", "Porcelain? Papers? Or junk again?", "Welcome. Don't touch the dust, it's antique.", "I shall appraise. You shall be disappointed."])
+lines_scream_ru = Array[String](["Вы это МЫЛИ?! Варвар!", "Скол! Тут скол! Я его вижу!", "Боже. Кто-то это любил.", "Это... это не то, о чём я подумал?", "Осторожно! Оно дышит историей и плесенью!", "Ах! Мой монокль!"])
+lines_scream_en = Array[String](["You WASHED it?! Barbarian!", "A chip! There's a chip! I see it!", "Good heavens. Someone loved this.", "Is that... is that what I think it is?", "Careful! It breathes history and mold!", "Ah! My monocle!"])
+lines_deal_ru = Array[String](["Приемлемо. Оформим.", "Договорились. Не трогайте больше ничего.", "Беру. Это войдёт в коллекцию. Или в подвал.", "Ладно. Ради искусства.", "Ваша цена оскорбительна, но я согласен.", "Куплено. Уходите тихо."])
+lines_deal_en = Array[String](["Acceptable. Let's proceed.", "Agreed. Now stop touching things.", "I'll take it. It joins the collection. Or the basement.", "Fine. For art's sake.", "Your price is offensive, but I accept.", "Purchased. Leave quietly."])
+lines_reject_ru = Array[String](["Это не Мин. Это Минск.", "Вы оцениваете по весу? Это не сыр.", "Нет. Ещё раз нет. И — нет.", "За такую цену продайте это музею. Плохому.", "Я антиквар, а не благотворитель.", "Смешно. Нет."])
+lines_reject_en = Array[String](["That is not Ming. That is Minsk.", "Are you pricing by weight? It's not cheese.", "No. Again, no. And also no.", "At that price, sell it to a museum. A bad one.", "I'm an antiquarian, not a charity.", "Amusing. No."])
+lines_phobia_ru = Array[String](["СКОТЧ?! На антиквариате?! Вон!", "Уберите эту липкую мерзость!", "У меня аллергия на скотч. Душевная.", "Кто-то заклеил историю! Кто-то заклеил ИСТОРИЮ!", "Это преступление против реставрации!"])
+lines_phobia_en = Array[String](["DUCT TAPE?! On an antique?! Out!", "Remove that sticky abomination!", "I'm allergic to tape. Spiritually.", "Someone taped over history! TAPED OVER HISTORY!", "This is a crime against restoration!"])

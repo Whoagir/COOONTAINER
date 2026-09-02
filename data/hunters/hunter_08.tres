@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="AuctionBrain" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/AuctionBrain.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "hunter_08"
+name_ru = "Акула"
+name_en = "The Shark"
+nickname_ru = "Акула"
+nickname_en = "Shark"
+estimate_error = 0.08
+greed = 0.55
+bluff_chance = 0.15
+setup_chance = 0.35
+patience = 0.95
+aggression = 0.3
+brawl_temper = 0.15
+info_sensitivity = 1.2
+body_color = Color(0.251, 0.2824, 0.3451, 1.0)
+hat = false
+bald = true
+voice_pitch = 0.85
+catchphrases_ru = Array[String](["...", "Хм.", "Плюс сто.", "Нет.", "Продолжайте.", "Я знаю, что там.", "Да."])
+catchphrases_en = Array[String](["...", "Hm.", "Plus a hundred.", "No.", "Go on.", "I know what's in there.", "Yes."])
+height = 1.9
+fatness = 1.05

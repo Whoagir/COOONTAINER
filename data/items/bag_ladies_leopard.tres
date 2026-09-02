@@ -1,0 +1,56 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://core/ItemDef.gd" id="1"]
+[ext_resource type="Script" path="res://core/LootRef.gd" id="2"]
+
+[sub_resource type="Resource" id="lr1"]
+script = ExtResource("2")
+item_id = "phone_flip"
+chance = 0.5
+count_min = 1
+count_max = 1
+
+[sub_resource type="Resource" id="lr2"]
+script = ExtResource("2")
+item_id = "cash_20"
+chance = 0.5
+count_min = 1
+count_max = 2
+
+[sub_resource type="Resource" id="lr3"]
+script = ExtResource("2")
+item_id = "perfume_cheap"
+chance = 0.4
+count_min = 1
+count_max = 1
+
+[sub_resource type="Resource" id="lr4"]
+script = ExtResource("2")
+item_id = "tool_lighter"
+chance = 0.3
+count_min = 1
+count_max = 1
+
+[resource]
+script = ExtResource("1")
+id = "bag_ladies_leopard"
+name_ru = "Сумка леопардовая"
+name_en = "Leopard Handbag"
+archetype_id = "bag"
+facets = Array[int]([2])
+value_base = 25
+mass_override = 0.0
+liquid_id = 0
+liquid_amount = 1.0
+flammable = true
+illegal = false
+dusty_default = 0.0
+nest_loot = Array[Resource]([SubResource("lr1"), SubResource("lr2"), SubResource("lr3"), SubResource("lr4")])
+vendor_affinity = Array[String](["vendor_household", "vendor_tiny"])
+wearable_slot = "none"
+break_threshold = 25.0
+color = Color(0.7529, 0.6275, 0.251, 1.0)
+scale = 0.8
+tags = Array[String]([])
+lore_ru = ""
+lore_en = ""

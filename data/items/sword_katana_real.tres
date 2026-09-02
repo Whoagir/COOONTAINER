@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/ItemDef.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "sword_katana_real"
+name_ru = "Катана настоящая"
+name_en = "Real Katana"
+archetype_id = "sword"
+facets = Array[int]([10, 11])
+value_base = 900
+mass_override = 0.0
+liquid_id = 0
+liquid_amount = 1.0
+flammable = false
+illegal = true
+dusty_default = 0.0
+vendor_affinity = Array[String](["vendor_dark", "vendor_antique"])
+wearable_slot = "none"
+break_threshold = 25.0
+color = Color(0.8784, 0.8784, 0.9098, 1.0)
+scale = 1.0
+tags = Array[String]([])
+lore_ru = ""
+lore_en = ""

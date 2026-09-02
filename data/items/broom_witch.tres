@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/ItemDef.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "broom_witch"
+name_ru = "Метла ведьмы"
+name_en = "Witch Broom"
+archetype_id = "broom"
+facets = Array[int]([])
+value_base = 9
+mass_override = 0.0
+liquid_id = 0
+liquid_amount = 1.0
+flammable = true
+illegal = false
+dusty_default = 0.0
+vendor_affinity = Array[String](["vendor_antique", "vendor_dark"])
+wearable_slot = "none"
+break_threshold = 25.0
+color = Color(0.2275, 0.1647, 0.102, 1.0)
+scale = 1.0
+tags = Array[String](["broom"])
+lore_ru = ""
+lore_en = ""

@@ -1,0 +1,106 @@
+keys,ru,en
+SET_TITLE,Настройки,Settings
+SET_BACK,Назад,Back
+SET_RESET,Сбросить всё,Reset all
+SET_RESET_BINDS,Сбросить клавиши,Reset all binds
+SET_RESET_ACTION,Сбросить,Reset
+SET_TAB_GAME,Игра,Game
+SET_TAB_CONTROLS,Управление,Controls
+SET_TAB_VIDEO,Видео,Video
+SET_TAB_AUDIO,Звук,Audio
+SET_OPEN,Настройки,Settings
+SET_LOCALE,Язык,Language
+SET_LOC_AUTO,Авто,Auto
+SET_LOC_RU,Русский,Russian
+SET_LOC_EN,English,English
+SET_MOUSE,Чувствительность мыши,Mouse sensitivity
+SET_INVERT_Y,Инвертировать ось Y,Invert Y axis
+SET_FOV,Поле зрения,Field of view
+SET_CROSSHAIR,Размер прицела,Crosshair size
+SET_UI_SCALE,Масштаб интерфейса,UI scale
+SET_SHAKE,Тряска камеры,Screen shake
+SET_SUBTITLES,Субтитры,Subtitles
+SET_PARTICLES,Частицы,Particles
+SET_PART_LOW,Мало,Low
+SET_PART_MED,Средне,Medium
+SET_PART_HIGH,Много,High
+SET_BINDS_HINT,"Нажми кнопку — назначь клавишу, мышь или колесо. Esc — отмена.","Click a bind, then press a key, mouse button or wheel. Esc cancels."
+SET_PRESS_KEY,нажми клавишу…,press a key…
+SET_CONFLICT,%s уже занята: %s,%s already used by %s
+SET_NEED_BIND,Это действие нельзя оставить пустым,This action needs a binding
+SET_UNKNOWN_ACTION,Неизвестное действие,Unknown action
+SET_BAD_EVENT,Так не назначить,Can't bind that
+SET_FULLSCREEN,Полный экран,Fullscreen
+SET_VSYNC,Вертикальная синхронизация,VSync
+SET_MSAA,Сглаживание,Anti-aliasing
+SET_MSAA_OFF,Выкл,Off
+SET_MSAA_2,2x,2x
+SET_MSAA_4,4x,4x
+SET_SHADOWS,Тени,Shadows
+SET_SHAD_OFF,Выкл,Off
+SET_SHAD_LOW,Низкие,Low
+SET_SHAD_MED,Средние,Medium
+SET_SHAD_HIGH,Высокие,High
+SET_MAX_FPS,Лимит FPS,Max FPS
+SET_FPS_UNLIM,Без лимита,Unlimited
+SET_FPS_60,60,60
+SET_FPS_120,120,120
+SET_FPS_144,144,144
+SET_FPS_240,240,240
+SET_RENDER_SCALE,Масштаб 3D,3D render scale
+SET_VOL_MASTER,Общая громкость,Master volume
+SET_VOL_MUSIC,Музыка,Music
+SET_VOL_SFX,Эффекты,Sound effects
+SET_VOL_VOICE,Голос,Voice
+SET_MIC_GAIN,Усиление микрофона,Mic gain
+SET_VOICE_MUTED,Выключить голос,Mute voice
+SET_PTT,Рация по клавише (PTT),Push to talk
+SET_KEY_LMB,ЛКМ,LMB
+SET_KEY_RMB,ПКМ,RMB
+SET_KEY_MMB,СКМ,MMB
+SET_KEY_WHEEL_UP,Колесо ↑,Wheel ↑
+SET_KEY_WHEEL_DOWN,Колесо ↓,Wheel ↓
+SET_KEY_WHEEL_LEFT,Колесо ←,Wheel ←
+SET_KEY_WHEEL_RIGHT,Колесо →,Wheel →
+SET_KEY_MB,Кнопка %d,Button %d
+SET_KEY_SPACE,Пробел,Space
+SET_KEY_SHIFT,Шифт,Shift
+SET_KEY_BACKSPACE,←BS,Backspace
+SET_ACT_MOVE_FORWARD,Вперёд,Move forward
+SET_ACT_MOVE_BACK,Назад,Move back
+SET_ACT_MOVE_LEFT,Влево,Move left
+SET_ACT_MOVE_RIGHT,Вправо,Move right
+SET_ACT_JUMP,Прыжок,Jump
+SET_ACT_SPRINT,Бег,Sprint
+SET_ACT_GRAB,Хват,Grab
+SET_ACT_RELEASE,Отпустить,Release
+SET_ACT_SECOND_HAND,Вторая рука,Second hand
+SET_ACT_USE,Использовать,Use
+SET_ACT_THROW,Бросить,Throw
+SET_ACT_FLASHLIGHT,Фонарик,Flashlight
+SET_ACT_PADDLE,Весло,Paddle
+SET_ACT_PIN,Пин,Pin
+SET_ACT_VOICE,Голос,Voice
+SET_ACT_PAUSE,Пауза,Pause
+SET_ACT_ALT_USE,Карман / альт,Pocket / alt use
+SET_LOADING,грузим барахло…,hauling junk…
+SET_LOAD_01,"Ищем вазу, которая ещё не в осколках…","Looking for a vase that isn't shards yet…"
+SET_LOAD_02,Клеим скотч на скотч на скотч…,Taping tape onto tape onto tape…
+SET_LOAD_03,Лысый хантер уже перебивает…,The bald hunter is already overbidding…
+SET_LOAD_04,Котёл не кастрюля. Проверяем…,The pot is not a saucepan. Checking…
+SET_LOAD_05,Считаем купюры зубами…,Counting bills with our teeth…
+SET_LOAD_06,"Весло криво, ставка ровная…","Paddle is crooked, bid is straight…"
+SET_LOAD_07,Пыль не оттирается. Ещё раз…,Dust won't come off. Once more…
+SET_LOAD_08,Хомяк в сумке. Не трясти…,Hamster in the bag. Do not shake…
+SET_LOAD_09,"Грузим комод вдвоём, в соло…","Loading a dresser as a team, solo…"
+SET_LOAD_10,Менты уже выехали. Или нет…,Cops are already rolling. Or not…
+SET_LOAD_11,Скупщик орёт. Это нормально…,The vendor is yelling. That's normal…
+SET_LOAD_12,Ищем ключ от сейфа в сейфе…,Looking for the safe key inside the safe…
+SET_LOAD_13,Краска на друге сохнет…,Paint on your buddy is drying…
+SET_LOAD_14,Тачка на кочках. Держи вазу…,Car on bumps. Hold the vase…
+SET_LOAD_15,Казино честное. Ха. Грузим…,The casino is fair. Ha. Loading…
+SET_LOAD_16,Фонарик в тёмном гараже…,Flashlight in a dark garage…
+SET_LOAD_17,Снимаем купюры с котла…,Pulling bills out of the pot…
+SET_LOAD_18,Смотритель орёт про метлу…,Caretaker is yelling about the broom…
+SET_LOAD_19,Единорог влезает в кузов…,The unicorn is climbing into the truck…
+SET_LOAD_20,Ещё секунда и можно орать…,One more second and you can scream…

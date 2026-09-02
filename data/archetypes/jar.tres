@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Archetype" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/Archetype.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "jar"
+builder = "jar"
+shard_count = 4
+size_class = 1
+mass_default = 0.6
+dims = Vector3(0.1, 0.15, 0.1)
+cloth = false
+container = false
+container_capacity = 3
+light_fixture = false
+base_color = Color(0.7843, 0.8471, 0.8784, 1.0)
+secondary_color = Color(0.6275, 0.6275, 0.6275, 1.0)
+friction = 0.6
+bounce = 0.05

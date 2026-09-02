@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/ItemDef.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "fan_industrial"
+name_ru = "Вентилятор цеховой"
+name_en = "Industrial Fan"
+archetype_id = "fan"
+facets = Array[int]([])
+value_base = 25
+mass_override = 0.0
+liquid_id = 0
+liquid_amount = 1.0
+flammable = false
+illegal = false
+dusty_default = 0.0
+vendor_affinity = Array[String](["vendor_household", "vendor_tech"])
+wearable_slot = "none"
+break_threshold = 25.0
+color = Color(0.251, 0.251, 0.2824, 1.0)
+scale = 1.4
+tags = Array[String](["electronics"])
+lore_ru = ""
+lore_en = ""

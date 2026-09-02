@@ -1,0 +1,34 @@
+[gd_scene load_steps=2 format=3 uid="uid://cvehvan0000001"]
+
+[ext_resource type="PackedScene" path="res://world/vehicles/Vehicle.tscn" id="1_base"]
+
+[node name="VanLeaky" instance=ExtResource("1_base")]
+mass = 1150.0
+vtype = "van_leaky"
+body_color = Color(0.75, 0.75, 0.68, 1)
+accel = 4.8
+brake_decel = 8.5
+top_speed = 14.0
+max_steer = 0.55
+wheel_radius = 0.34
+wheel_y = 0.42
+track = 1.65
+axle_front = 1.55
+axle_rear = 1.35
+suspension_stiffness = 32.0
+damping_compression = 1.4
+damping_relaxation = 2.0
+friction_slip = 3.4
+roll_influence = 0.1
+body_size = Vector3(1.8, 0.41, 4.6)
+cab_size = Vector3(1.8, 1.25, 1.3)
+cab_z = -1.05
+hood_length = 0.6
+bed_size = Vector3(1.8, 1.0, 2.6)
+bed_z = 0.95
+bed_missing_wall = -1
+bed_hole = Vector2(0.4, 0.4)
+bed_hole_z = 0.85
+bed_roof = true
+bed_roof_height = 1.5
+tailgate_height = 0.3

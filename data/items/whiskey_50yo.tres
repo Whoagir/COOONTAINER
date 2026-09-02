@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/ItemDef.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "whiskey_50yo"
+name_ru = "Виски 50 лет"
+name_en = "50-Year-Old Whiskey"
+archetype_id = "bottle"
+facets = Array[int]([0, 6, 1])
+value_base = 1800
+mass_override = 0.0
+liquid_id = 1
+liquid_amount = 1.0
+flammable = true
+illegal = false
+dusty_default = 0.6
+vendor_affinity = Array[String](["vendor_antique"])
+wearable_slot = "none"
+break_threshold = 3.5
+color = Color(0.1647, 0.0941, 0.0314, 1.0)
+scale = 1.0
+tags = Array[String]([])
+lore_ru = "Старше вашего отца. Вкуснее тоже."
+lore_en = "Older than your dad. Tastes better too."

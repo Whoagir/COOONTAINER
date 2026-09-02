@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/ItemDef.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "lamp_table_tiffany"
+name_ru = "Лампа «Тиффани»"
+name_en = "Tiffanny Lamp"
+archetype_id = "lamp_table"
+facets = Array[int]([0, 1])
+value_base = 260
+mass_override = 0.0
+liquid_id = 0
+liquid_amount = 1.0
+flammable = false
+illegal = false
+dusty_default = 0.5
+vendor_affinity = Array[String](["vendor_antique"])
+wearable_slot = "none"
+break_threshold = 3.8
+color = Color(0.7529, 0.251, 0.251, 1.0)
+scale = 1.0
+tags = Array[String]([])
+lore_ru = ""
+lore_en = ""

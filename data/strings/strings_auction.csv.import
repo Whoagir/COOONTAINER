@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://d2xtqq00hxl6m"
+
+[deps]
+
+files=["res://data/strings/strings_auction.ru.translation", "res://data/strings/strings_auction.en.translation"]
+
+source_file="res://data/strings/strings_auction.csv"
+dest_files=["res://data/strings/strings_auction.ru.translation", "res://data/strings/strings_auction.en.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

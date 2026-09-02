@@ -1,0 +1,33 @@
+keys,ru,en
+JOBS_BOARD_HINT,E — доска объявлений (3 вакансии),E — job board (3 openings)
+JOBS_TITLE,РАБОТА / JOBS,JOBS BOARD
+JOBS_TAKE,Взять,Take
+JOBS_CLOSE,Закрыть,Close
+JOBS_TAKEN_FMT,Взяли: %s,Took: %s
+JOBS_DONE_FMT,Работа сделана: +$%d,Job done: +$%d
+JOBS_ABANDON,Старую работу бросили — берём новую.,Dropped the old job — starting a new one.
+JOBS_SUGGEST,Денег мало. Работа — доска объявлений у трейлера,Low on cash. Jobs — board by the trailer
+JOBS_PROGRESS_FMT,%d/%d,%d/%d
+JANITOR_HINT_SCALED,"[E] Уборка — копейки (котёл жирный, −40%%)","[E] Cleanup — pennies (fat pot, −40%%)"
+JOB_JANITOR_TITLE,Швабра полов,Floor mop
+JOB_JANITOR_DESC,"Вынеси хлам из чужой ячейки, отчитайся бригадиру. Платят по факту.","Haul junk from someone's unit, report to the boss. Paid by the haul."
+JOB_JANITOR_OBJ,Швабра: вынеси хлам из ячейки склада → отчитайся бригадиру,Mop: clear a storage unit → report to the boss
+JOB_TRASH_TITLE,Мусорный рейс,Trash run
+JOB_TRASH_DESC,"Собери 6 кусков уличного хлама, брось в ящик у доски.","Collect 6 street junk pieces; dump them in the crate by the board."
+JOB_TRASH_OBJ,Собери 6 предметов хлама с улицы и брось в контейнер у %s,Collect 6 street junk items and toss them in the bin by %s
+JOB_DELIVERY_TITLE,Доставка коробки,Box delivery
+JOB_DELIVERY_DESC,"Тащи запечатанный ящик скупщику. Не роняй — пломба!","Drag the sealed crate to a vendor. Don't drop it — tamper seal!"
+JOB_DELIVERY_OBJ,Отнеси коробку скупщику %s,Deliver the crate to %s
+JOB_FLYERS_TITLE,Листовки,Flyers
+JOB_FLYERS_DESC,"Обойди четыре района и «расклей» листовки. Стоять у знака — считается.","Hit four districts and ""post"" flyers. Standing by the sign counts."
+JOB_FLYERS_OBJ,Расклей 4 листовки: ангар → гаражи → порт → казино,Post 4 flyers: hangar → garages → port → casino
+JOB_CAR_WASH_TITLE,Мойка тачек,Car wash
+JOB_CAR_WASH_DESC,"Возьми губку у доски. Стоя рядом с машиной на авторынке — трёшь 8 сек.","Grab the sponge at the board. Stand by a car at the lot and scrub 8 sec."
+JOB_CAR_WASH_OBJ,Помой машину у авторынка (губка в руке),Wash a car at the car market (sponge in hand)
+JOB_NIGHT_WATCH_TITLE,Ночная вахта,Night watch
+JOB_NIGHT_WATCH_DESC,"Постой у ворот склада минуту. Менты спят — ты нет.","Stand by the storage gates for a minute. Cops sleep — you don't."
+JOB_NIGHT_WATCH_OBJ,Постой у ворот склада 60 с,Stand by the storage gates for 60 s
+FLYER_LINE_0,«СКУПАЕМ ВСЁ» — даже совесть.,BUYING EVERYTHING — even your conscience.
+FLYER_LINE_1,Гаражи сдаются. Хлам — бесплатно.,Garages for rent. Junk — free.
+FLYER_LINE_2,Порт принимает контейнеры и надежды.,The port takes containers and hopes.
+FLYER_LINE_3,Казино: шанс 50/50 — выиграешь или просрёшь.,Casino: 50/50 — you win or you lose.

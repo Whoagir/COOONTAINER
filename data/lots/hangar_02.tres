@@ -1,0 +1,75 @@
+[gd_resource type="Resource" script_class="LotPreset" load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://core/LotPreset.gd" id="1"]
+[ext_resource type="Script" path="res://core/LotSpawn.gd" id="2"]
+
+[sub_resource type="Resource" id="s1"]
+script = ExtResource("2")
+item_id = "suitcase_plastic"
+xform = Transform3D(0.9903, 0, -0.1392, 0, 1.0, 0, 0.1392, 0, 0.9903, 0.0, 0.0, -0.32)
+nested = Array[String](["sock_single"])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s2"]
+script = ExtResource("2")
+item_id = "plant_pot_dead"
+xform = Transform3D(0.9272, 0, 0.3746, 0, 1.0, 0, -0.3746, 0, 0.9272, -0.48, 0.0, 0.38)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s3"]
+script = ExtResource("2")
+item_id = "hat_tinfoil"
+xform = Transform3D(0.766, 0, -0.6428, 0, 1.0, 0, 0.6428, 0, 0.766, 0.5, 0.0, 0.18)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s4"]
+script = ExtResource("2")
+item_id = "bill_lottery"
+xform = Transform3D(0.9945, 0, -0.1045, 0, 1.0, 0, 0.1045, 0, 0.9945, 0.2, 0.0, 0.48)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s5"]
+script = ExtResource("2")
+item_id = "poster_motivational"
+xform = Transform3D(0.9903, 0, -0.1392, 0, 1.0, 0, 0.1392, 0, 0.9903, 0.0, 0.0, 0.5)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s6"]
+script = ExtResource("2")
+item_id = "rag_dirty"
+xform = Transform3D(0.9903, 0, 0.1392, 0, 1.0, 0, -0.1392, 0, 0.9903, -0.48, 0.0, 0.02)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[resource]
+script = ExtResource("1")
+id = "hangar_02"
+district_id = 1
+lot_kind = 0
+min_bid = 28
+info_mode = 4
+preview_seconds = 12.0
+clearout_seconds = 60.0
+lock_chance = 0.0
+spawn_list = Array[Resource]([SubResource("s1"), SubResource("s2"), SubResource("s3"), SubResource("s4"), SubResource("s5"), SubResource("s6")])
+pacing_tag = 2
+broom_required = false
+hunters_count = 6
+order = 2
+tale_ru = "Этот чемодан пересек три границы. Интерпол до сих пор ищет второй носок. Хозяин клялся, что внутри наследство тёти. Тётя жива и звонит каждый вторник."
+tale_en = "This suitcase crossed three borders. Interpol is still looking for the other sock. The owner swore auntie's fortune was inside. Auntie is alive and calls every Tuesday."
+docs_ru = "ОПИСЬ (таможня, три границы):\n— чемодан пластик\n— носок — 1 (второй в розыске)\n— шапочка из фольги\n— билет лотереи, постер «Успех!»"
+docs_en = "MANIFEST (customs, three borders):\n— plastic suitcase\n— sock — 1 (the other is wanted)\n— tinfoil hat\n— lottery ticket, SUCCESS! poster"
+photo_item_ids = Array[String]([])
+cell_size = Vector3(1.5, 1.2, 1.5)
+dark = false

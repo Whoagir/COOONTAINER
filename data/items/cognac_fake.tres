@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/ItemDef.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "cognac_fake"
+name_ru = "Коньяк «из ларька»"
+name_en = "Kiosk Cognac"
+archetype_id = "bottle"
+facets = Array[int]([0, 6])
+value_base = 5
+mass_override = 0.0
+liquid_id = 1
+liquid_amount = 1.0
+flammable = true
+illegal = false
+dusty_default = 0.0
+vendor_affinity = Array[String](["vendor_tiny"])
+wearable_slot = "none"
+break_threshold = 4.5
+color = Color(0.4157, 0.2902, 0.1255, 1.0)
+scale = 1.0
+tags = Array[String]([])
+lore_ru = ""
+lore_en = ""

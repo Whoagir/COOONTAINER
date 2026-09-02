@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://cx6aih3duspes"
+
+[deps]
+
+files=["res://data/strings/strings_police.ru.translation", "res://data/strings/strings_police.en.translation"]
+
+source_file="res://data/strings/strings_police.csv"
+dest_files=["res://data/strings/strings_police.ru.translation", "res://data/strings/strings_police.en.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

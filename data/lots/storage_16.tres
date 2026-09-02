@@ -1,0 +1,107 @@
+[gd_resource type="Resource" script_class="LotPreset" load_steps=12 format=3]
+
+[ext_resource type="Script" path="res://core/LotPreset.gd" id="1"]
+[ext_resource type="Script" path="res://core/LotSpawn.gd" id="2"]
+
+[sub_resource type="Resource" id="s1"]
+script = ExtResource("2")
+item_id = "boombox_90s"
+xform = Transform3D(0.9903, 0, -0.1392, 0, 1.0, 0, 0.1392, 0, 0.9903, 0.0, 0.0, -0.16)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s2"]
+script = ExtResource("2")
+item_id = "backpack_hiking"
+xform = Transform3D(0.9848, 0, -0.1736, 0, 1.0, 0, 0.1736, 0, 0.9848, 0.0, 0.28, -0.08)
+nested = Array[String](["cassette_mixtape", "cash_10"])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s3"]
+script = ExtResource("2")
+item_id = "hoodie_grey"
+xform = Transform3D(0.9945, 0, -0.1045, 0, 1.0, 0, 0.1045, 0, 0.9945, 0.0, 1.02, 0.1)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s4"]
+script = ExtResource("2")
+item_id = "hat_fedora"
+xform = Transform3D(0.9135, 0, -0.4067, 0, 1.0, 0, 0.4067, 0, 0.9135, 0.0, 1.14, -0.22)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s5"]
+script = ExtResource("2")
+item_id = "cd_mixtape"
+xform = Transform3D(1.0, 0, 0.0, 0, 1.0, 0, 0.0, 0, 1.0, 0.28, 0.0, 0.28)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s6"]
+script = ExtResource("2")
+item_id = "cd_windows_98"
+xform = Transform3D(0.9903, 0, -0.1392, 0, 1.0, 0, 0.1392, 0, 0.9903, -0.28, 0.0, 0.28)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s7"]
+script = ExtResource("2")
+item_id = "cassette_answering"
+xform = Transform3D(0.9976, 0, -0.0698, 0, 1.0, 0, 0.0698, 0, 0.9976, 0.0, 0.0, 0.3)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s8"]
+script = ExtResource("2")
+item_id = "whiskey_half"
+xform = Transform3D(1.0, 0, 0.0, 0, 1.0, 0, 0.0, 0, 1.0, 0.3, 0.28, 0.22)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s9"]
+script = ExtResource("2")
+item_id = "remote_mystery"
+xform = Transform3D(0.9781, 0, -0.2079, 0, 1.0, 0, 0.2079, 0, 0.9781, -0.3, 0.28, 0.22)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s10"]
+script = ExtResource("2")
+item_id = "watch_kasio"
+xform = Transform3D(0.766, 0, -0.6428, 0, 1.0, 0, 0.6428, 0, 0.766, -0.28, 1.02, 0.28)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[resource]
+script = ExtResource("1")
+id = "storage_16"
+district_id = 2
+lot_kind = 1
+min_bid = 88
+info_mode = 0
+preview_seconds = 15.0
+clearout_seconds = 125.0
+lock_chance = 0.22
+spawn_list = Array[Resource]([SubResource("s1"), SubResource("s2"), SubResource("s3"), SubResource("s4"), SubResource("s5"), SubResource("s6"), SubResource("s7"), SubResource("s8"), SubResource("s9"), SubResource("s10")])
+pacing_tag = 0
+broom_required = false
+hunters_count = 6
+order = 16
+tale_ru = "Локер диджея. Он пикнул в девяносто четвёртом. Кассета «Лето 94» ещё крутится в голове. Виски на дне — недопитый, как карьера."
+tale_en = "A DJ's locker. He peaked in ninety-four. The Summer '94 tape still spins in his head. The whiskey at the bottom is half-drunk, like the career."
+docs_ru = "ЛОКЕР 16. Сдал охрана клуба «Плазма»:\nБумбокс 90-х — 1\nКассеты / диски — стопка\nРюкзак + худи\nВиски недопитый\nПульт от неизвестно чего"
+docs_en = "LOCKER 16. Intake: security at Club Plasma:\n'90s boombox — 1\nTapes / discs — a stack\nBackpack + hoodie\nHalf-drunk whiskey\nRemote to nothing"
+photo_item_ids = Array[String]([])
+cell_size = Vector3(1.0, 2.0, 1.0)
+dark = false

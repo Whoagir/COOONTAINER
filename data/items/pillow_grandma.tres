@@ -1,0 +1,49 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://core/ItemDef.gd" id="1"]
+[ext_resource type="Script" path="res://core/LootRef.gd" id="2"]
+
+[sub_resource type="Resource" id="lr1"]
+script = ExtResource("2")
+item_id = "cash_50"
+chance = 0.35
+count_min = 1
+count_max = 1
+
+[sub_resource type="Resource" id="lr2"]
+script = ExtResource("2")
+item_id = "cash_10"
+chance = 0.6
+count_min = 1
+count_max = 3
+
+[sub_resource type="Resource" id="lr3"]
+script = ExtResource("2")
+item_id = "letter_love"
+chance = 0.2
+count_min = 1
+count_max = 1
+
+[resource]
+script = ExtResource("1")
+id = "pillow_grandma"
+name_ru = "Подушка бабушкина"
+name_en = "Grandma's Pillow"
+archetype_id = "pillow"
+facets = Array[int]([3, 1])
+value_base = 4
+mass_override = 0.0
+liquid_id = 0
+liquid_amount = 1.0
+flammable = true
+illegal = false
+dusty_default = 0.4
+nest_loot = Array[Resource]([SubResource("lr1"), SubResource("lr2"), SubResource("lr3")])
+vendor_affinity = Array[String](["vendor_tiny"])
+wearable_slot = "none"
+break_threshold = 25.0
+color = Color(0.9412, 0.9098, 0.8157, 1.0)
+scale = 1.0
+tags = Array[String]([])
+lore_ru = ""
+lore_en = ""

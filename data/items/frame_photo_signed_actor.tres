@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/ItemDef.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "frame_photo_signed_actor"
+name_ru = "Фото с автографом актёра"
+name_en = "Signed Actor Photo"
+archetype_id = "frame_photo"
+facets = Array[int]([8])
+value_base = 80
+mass_override = 0.0
+liquid_id = 0
+liquid_amount = 1.0
+flammable = true
+illegal = false
+dusty_default = 0.0
+vendor_affinity = Array[String](["vendor_antique"])
+wearable_slot = "none"
+break_threshold = 25.0
+color = Color(0.9412, 0.9412, 0.9412, 1.0)
+scale = 1.0
+tags = Array[String]([])
+lore_ru = "«С любовью, Тим Круз». Круз через У."
+lore_en = "«Love, Tim Cruze». Cruze with a Z."

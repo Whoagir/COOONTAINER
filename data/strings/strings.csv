@@ -1,0 +1,174 @@
+keys,ru,en
+GAME_TITLE,COOONTAINER,COOONTAINER
+MENU_NEW_SLOT,Новый мир,New world
+MENU_CONTINUE,Продолжить,Continue
+MENU_JOIN,Присоединиться,Join friend
+MENU_QUIT,Выйти,Quit
+MENU_SLOT,Слот,Slot
+MENU_EMPTY,пусто,empty
+MENU_DELETE,Удалить,Delete
+MENU_HOST,Открыть мир,Open world
+MENU_JOIN_HINT,"Адрес хоста (IP:порт или код лобби Steam)","Host address (IP:port or Steam lobby code)"
+MENU_LANG,Язык,Language
+MENU_BACK,Назад,Back
+MENU_WON,ДОМ КУПЛЕН,HOUSE BOUGHT
+MENU_PLAYTIME,время,time
+MENU_LOTS,лотов,lots
+NOTIFY_DISTRICT_UNLOCKED,Открыт новый район,New district unlocked
+NOTIFY_BLACKLISTED,Вас внесли в чёрный список площадки,You are blacklisted here
+NOTIFY_HOUSE_TOO_POOR,"На дом не хватает. Иди рой барахло.","Not enough for a house. Go dig junk."
+NOTIFY_FRIEND_JOINED,Кореш подключился,Friend joined
+NOTIFY_CONNECTION_FAILED,Не подключилось,Connection failed
+NOTIFY_HOST_LEFT,Хост вылетел. Слот жив у хоста.,Host left. World slot lives with host.
+NOTIFY_LOBBY_CODE,Код для друзей: %s,Invite code: %s
+ITEM_LOCKED,Заперто. Отмычка или вскрывальщик.,Locked. Lockpick or locksmith.
+ITEM_LOCKPICK_BROKE,Отмычка сломалась,Lockpick broke
+ITEM_PET,Оно живое. Не бросай.,It's alive. Don't throw it.
+STATE_CHIPPED,скол,chipped
+STATE_SHARDS,осколки,shards
+STATE_BURNT,сгорело,burnt
+HUD_POT,КОТЁЛ,POT
+HUD_TIMER,ВЫВОЗ,CLEAR OUT
+HUD_OVERTIME,ОВЕРТАЙМ,OVERTIME
+HUD_PREVIEW,ПРЕВЬЮ,PREVIEW
+HUD_BID,СТАВКА,BID
+HUD_YOURS,ВАША,YOURS
+HUD_TALK,говорит,talking
+HUD_DRUNK,пьян,drunk
+HUD_BURNING,ГОРИШЬ,BURNING
+HUD_WANTED,МЕНТЫ,COPS
+PAUSE_TITLE,Пауза,Paused
+PAUSE_RESUME,Продолжить,Resume
+PAUSE_INVITE,Пригласить (Steam),Invite (Steam)
+PAUSE_MENU,В меню,Main menu
+PAUSE_VOLUME,Громкость,Volume
+PAUSE_MUSIC,Музыка,Music
+PAUSE_SENS,Чувствительность мыши,Mouse sensitivity
+PAUSE_CODE,Код лобби: %s,Lobby code: %s
+MENU_SUBTITLE,"Перекуп из трейлера. Пародия. Соло + кооп 1–4.","Trailer-park flipper. Parody. Solo + co-op 1–4."
+MENU_FOOTER,"Godot 4.6 • Jolt • WASD, ЛКМ хват, E юзать, G бросить, B весло, V голос","Godot 4.6 • Jolt • WASD, LMB grab, E use, G throw, B paddle, V voice"
+PAUSE_COPIED,Код скопирован,Code copied
+HUD_DEAD,ТЫ ТРУП. КРОВАТЬ ЖДЁТ.,YOU'RE DEAD. BED AWAITS.
+HANDS_NEED_TWO,Это двумя руками. Освободи.,Two hands needed. Drop stuff.
+HANDS_SLIPPED,Выскользнуло!,Slipped!
+HANDS_NO_FIT_POCKET,В карман не лезет,Won't fit in pocket
+HANDS_NO_POCKETS,У этой кофты нет карманов. Вообще.,This hoodie has no pockets. At all.
+HANDS_POCKETS_FULL,Карманы полные,Pockets full
+PADDLE_NOT_HERE,Весло только на аукционе,Paddle only at auction
+ITEM_WONT_BURN,Не горит,Won't burn
+POT_EMPTY,Котёл пуст,Pot is empty
+POT_DEPOSIT_HINT,Купюру в щель → котёл,Bill into slot → pot
+POT_WITHDRAW_HINT,[E] снять $%d купюрами,[E] withdraw $%d in bills
+HOUSE_FOR_SALE,ПРОДАЁТСЯ ДОМ $%d,HOUSE FOR SALE $%d
+HOUSE_SOLD,ПРОДАНО. ТЫ СЪЕХАЛ.,SOLD. YOU MOVED OUT.
+HOUSE_ALREADY,Ты уже съехал. Зачем ты тут.,You already moved out. Why are you here.
+HOUSE_BUY_HINT,[E] купить дом за $%d,[E] buy house for $%d
+NOTIFY_NEW_TOOL,В трейлере появилось: %s,New in trailer: %s
+NOTIFY_BROKE,"Котёл в нуле. Уборка чужих ячеек — в Storage.","Pot is empty. Janitor jobs — at Storage."
+NOTIFY_WIN,ДОМ КУПЛЕН. ТЫ СЪЕХАЛ ИЗ ТРЕЙЛЕРА.,HOUSE BOUGHT. YOU LEFT THE TRAILER.
+NOTIFY_SANDBOX,Город твой. Цели нет. Рой дальше.,City is yours. No goal. Keep digging.
+NOTIFY_LOT_BURNED,Лот сгорел. Лут мёртв.,Lot burned down. Loot is dead.
+NOTIFY_BLACKLIST_WARN,Ты в ЧС. Одного пустили. Не отсвечивай.,You're blacklisted. One allowed in. Keep low.
+NPC_FIREFIGHTER,Пожарный,Firefighter
+FF_ARRIVE,ГДЕ ГОРИТ?! РАЗОЙДИСЬ!,WHERE'S THE FIRE?! MOVE!
+FF_SPRAY,Держи водичку!,Have some water!
+FF_LEAVE,Больше не жгите. Пожалуйста.,Don't burn stuff again. Please.
+CREDITS_TEXT,"COOONTAINER
+Ты накопил на дом и съехал из трейлера.
+Спасибо, что орал с корешем в барахле.
+Пародия. Никто не пострадал, кроме вазы.
+Город остаётся твоим. Цели больше нет.","COOONTAINER
+You saved up for a house and left the trailer.
+Thanks for yelling with your buddy in the junk.
+Parody. Nobody got hurt, except the vase.
+The city is still yours. No goal anymore."
+DISTRICT_TRAILER_PARK,ТРЕЙЛЕР-ПАРК,TRAILER PARK
+DISTRICT_HANGAR,АНГАР СУМОК,BAG HANGAR
+DISTRICT_STORAGE,СКЛАДЫ,STORAGE
+DISTRICT_GARAGES,ГАРАЖИ,GARAGES
+DISTRICT_PORT,ПОРТ,PORT
+DISTRICT_CAR_MARKET,АВТОРЫНОК,CAR MARKET
+DISTRICT_VENDORS,СКУПЩИКИ,VENDORS
+DISTRICT_LOCKSMITH,ВСКРЫВАЛЬЩИК,LOCKSMITH
+DISTRICT_CASINO,КАЗИНО,CASINO
+DISTRICT_POLICE,УЧАСТОК,POLICE STATION
+MENU_HOWTO,Как играть,How to play
+HOWTO_TITLE,Записка от Петровича,A note from Petrovich
+HOWTO_1,"1. Котёл общий. Что в котле — то и ваше. Пусто — идёте мыть склады.","1. The pot is shared. What's in the pot is yours. Empty pot — you go mop storage units."
+HOWTO_2,"2. Аукцион: встань к аукционисту, доставай весло [B], пиши сумму, поднимай [ЛКМ]. Хантеры блефуют. Ты тоже можешь.","2. Auction: stand by the auctioneer, raise the paddle [B], write a number, lift it [LMB]. Hunters bluff. So can you."
+HOWTO_3,"3. Выиграл — вывоз. Таймер. Всё, что осталось внутри, когда дверь упала — не твоё. И штраф.","3. Won a lot — clear it out. Timer. Whatever is still inside when the door drops is not yours. Plus a fine."
+HOWTO_4,"4. Руки — твой инвентарь. [ЛКМ] взять, [F] вторая рука, [ПКМ] карман, [G] швырнуть. Тяжёлое тащите вдвоём.","4. Your hands are the inventory. [LMB] grab, [F] second hand, [RMB] pocket, [G] throw. Heavy stuff — carry together."
+HOWTO_5,"5. Хрупкое бьётся. Осколки — доллар. Скотч и доска чинят цену. Тряпка — грязь.","5. Fragile things break. Shards sell for a dollar. Tape and planks patch the price. A rag fixes dirt."
+HOWTO_6,"6. Скупщики покупают всё, но торгуются полоской. Держи [E] с вещью — перевернёшь: вылить, вытряхнуть, полистать.","6. Vendors buy anything but haggle with a bar. Hold [E] with an item to flip it: pour, shake out, leaf through."
+HOWTO_7,"7. Жидкости текут, огонь распространяется, менты приезжают. Казино нечестное. Дом стоит $25 000.","7. Liquids flow, fire spreads, cops show up. The casino is rigged. The house costs $25,000."
+HOWTO_8,"8. Ничего из этого не обязательно. Развлекайтесь.","8. None of this is mandatory. Have fun."
+HUD_RESPAWN_IN,Кровать через %d…,Bed in %d…
+BOARD_TITLE,ЗАПИСКА ПЕТРОВИЧА,PETROVICH'S NOTE
+BOARD_HOUSE,"Дом: $%d из $%d","House: $%d of $%d"
+BOARD_HOUSE_DONE,"Дом куплен. Трейлер — коту.","House bought. Trailer goes to the cat."
+BOARD_NEXT,"%s: ещё $%d заработать или %d лотов","%s: earn $%d more or clear %d lots"
+BOARD_ALL_OPEN,"Весь город открыт. Не благодари.","Whole city is open. Don't thank me."
+BOARD_LOTS,"Лотов вывезено: %d","Lots cleared: %d"
+LOTCARD_TITLE,ЛОТ ЗАКРЫТ,LOT CLOSED
+LOTCARD_HAUL,Вынесено вещей / на сумму,Items hauled / worth
+LOTCARD_PAID,Заплатили за лот,Paid for the lot
+LOTCARD_BEST,Лучшая находка,Best find
+LOTCARD_BROKEN,Разбито / сколото,Broken / chipped
+LOTCARD_PROFIT,"В плюсе на $%d. Пока не продали.","Up $%d. Until you try to sell it."
+LOTCARD_LOSS,"В минусе на $%d. Классика жанра.","Down $%d. Classic."
+LOTCARD_OVERTIME,"Овертайм. Смотритель запомнил. Итог: $%d.","Overtime. The caretaker remembers. Net: $%d."
+LOTCARD_LOCKED,"Кого-то заперли внутри. Штраф. Итог: $%d.","Someone got locked inside. Fine. Net: $%d."
+DEATH_FALL,"Гравитация. Опять.","Gravity. Again."
+DEATH_FIRE,"Сгорел. Вместе с лотом.","Burned. Along with the lot."
+DEATH_MELEE,"Кореш с плазмой был быстрее.","Your buddy with the plasma TV was faster."
+DEATH_BRAWL,"Хантеры бьют больно.","Hunters hit hard."
+DEATH_CAR,"Тачка. Не твоя.","A truck. Not yours."
+DEATH_GAG_GUN,"Пистолет оказался не гагом.","The gag gun wasn't a gag."
+DEATH_NAILS,"Гвозди. Босиком.","Nails. Barefoot."
+DEATH_BACK,"Спина. Тяжёлое поднимай вдвоём.","Your back. Lift heavy stuff together."
+CINE_SKIP,любая клавиша — пропустить,any key — skip
+CINE_INTRO_1,"Трейлер-парк «Ржавый Якорь». Понедельник.","Rusty Anchor trailer park. Monday."
+CINE_INTRO_2,"Петрович: «Дом — двадцать пять штук. Табличку не трогай, она моя».","Petrovich: “The house is twenty-five grand. Don't touch the sign, it's mine.”"
+CINE_INTRO_3,"Петрович: «В котле сорок баксов. Котёл общий. Кто просрал — тот и виноват».","Petrovich: “Forty bucks in the pot. Pot is shared. Whoever blows it, owns it.”"
+CINE_INTRO_4,"Петрович: «Аукцион в ангаре сумок. Сегодня. Иди, пока лысый всё не скупил».","Petrovich: “Bag auction at the hangar. Today. Go before the bald guy buys it all.”"
+CINE_END_TITLE,ДОМ КУПЛЕН,HOUSE BOUGHT
+CINE_END_1,"Двадцать пять штук. Из барахла, осколков и чужих ошибок.","Twenty-five grand. Out of junk, shards and other people's mistakes."
+CINE_END_2,"Петрович: «Ключи в почтовом ящике. Трейлер оставь коту».","Petrovich: “Keys are in the mailbox. Leave the trailer to the cat.”"
+CINE_END_3,"Город остаётся. Цель — нет. Ройте дальше.","The city stays. The goal doesn't. Keep digging."
+CINE_SOLD,ПРОДАНО,SOLD
+CRED_CHRONICLE,— ХРОНИКА —,— THE CHRONICLE —
+CRED_TAIL,"Спасибо, что орали вместе.","Thanks for yelling together."
+CRED_STAT_LOTS,Лотов вывезено,Lots cleared
+CRED_STAT_HAUL,Хаула вынесено на,Haul carried out
+CRED_STAT_SOLD,Вещей продано,Items sold
+CRED_STAT_BROKEN,Вещей разбито,Items broken
+CRED_STAT_FIRES,Пожаров устроено,Fires started
+CRED_STAT_CASINO,Проиграно в казино,Lost at the casino
+CRED_STAT_ARRESTS,Арестов,Arrests
+CRED_STAT_FINES,Штрафов уплачено,Fines paid
+CRED_STAT_BRIBES,Взяток дано на,Bribes handed over
+CRED_STAT_DEATHS,Смертей,Deaths
+CRED_STAT_DRINKS,Выпито глотков,Sips taken
+CRED_STAT_THROWS,Бросков,Throws
+CRED_STAT_JANITOR,Смен уборщиком,Janitor shifts
+CRED_STAT_TIME,Время кампании,Campaign time
+TRL_1,"Пародия про аукционы складов. Вдвоём орать громче.","A storage-auction parody. Yelling is louder with a friend."
+TRL_2_T,СТАВЬ ВЕСЛО,RAISE THE PADDLE
+TRL_2,"Восемь хантеров. Все блефуют. Лысый — особенно.","Eight hunters. All bluffing. Especially the bald one."
+TRL_3_T,РОЙ РУКАМИ,DIG WITH YOUR HANDS
+TRL_3,"Без сетки инвентаря. Без сканера. Таймер тикает.","No inventory grid. No scanner. The clock is ticking."
+TRL_4,"Осколки — доллар. Скотч — плюс двадцать.","Shards sell for a dollar. Tape adds twenty."
+TRL_5_T,"ПРОЛЕЙ. ПОДОЖГИ.","SPILL IT. LIGHT IT."
+TRL_5,"Бензин, виски, краска. Пожарные приедут. Когда-нибудь.","Gasoline, whiskey, paint. Firefighters will come. Eventually."
+TRL_6_T,КУЗОВ — НЕ ТЕТРИС,THE BED IS NOT TETRIS
+TRL_6,"Всё, что не привязано, улетит на первой кочке.","Anything not tied down leaves at the first bump."
+TRL_7_T,ТОРГУЙСЯ,HAGGLE
+TRL_7,"Скупщик купит всё. Спор — только о цене.","The vendor buys anything. The only argument is the price."
+TRL_8_T,ПРОИГРАЙ ВСЁ,LOSE IT ALL
+TRL_8,"Казино нечестное. Котёл общий. Друзья смотрят.","The casino is rigged. The pot is shared. Your friends are watching."
+TRL_9_T,БЕГИ,RUN
+TRL_9,"Штраф, участок, комната улик. Взятка — купюрой в руку.","Fine, station, evidence room. Bribes are paid cash-in-hand."
+TRL_10_T,СОЛО И КООП 1–4,SOLO AND CO-OP 1–4
+TRL_10,"Копите на дом. Или не копите. Город никуда не уедет.","Save up for the house. Or don't. The city isn't going anywhere."
+TRL_END,"Godot 4.6 • RU / EN • Steam","Godot 4.6 • RU / EN • Steam"
+HUD_OBJECTIVE,ЗАДАЧА,TASK

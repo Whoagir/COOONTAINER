@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Archetype" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/Archetype.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "dresser"
+builder = "dresser"
+shard_count = 5
+size_class = 3
+mass_default = 45.0
+dims = Vector3(1.0, 0.9, 0.5)
+cloth = false
+container = true
+container_capacity = 6
+light_fixture = false
+base_color = Color(0.4157, 0.2902, 0.1647, 1.0)
+secondary_color = Color(0.7529, 0.6275, 0.251, 1.0)
+friction = 0.9
+bounce = 0.0

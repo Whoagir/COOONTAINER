@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="AuctionBrain" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/AuctionBrain.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "hunter_07"
+name_ru = "Макс Хайп"
+name_en = "Max Hype"
+nickname_ru = "Ютубер"
+nickname_en = "The YouTuber"
+estimate_error = 0.4
+greed = 0.85
+bluff_chance = 0.35
+setup_chance = 0.15
+patience = 0.4
+aggression = 0.95
+brawl_temper = 0.25
+info_sensitivity = 0.8
+body_color = Color(0.8784, 0.251, 0.3765, 1.0)
+hat = true
+bald = false
+voice_pitch = 1.15
+catchphrases_ru = Array[String](["РЕБЯТА, ВЫ ЭТО ВИДЕЛИ?!", "Лайк, если думаешь, что там сейф!", "Тысяча! Контент решает!", "Это будет ЛУЧШИЙ выпуск!", "Ставлю ради подписчиков!", "Камера включена? Камера включена!", "Дизлайк этому гаражу. Шучу. Беру."])
+catchphrases_en = Array[String](["GUYS, DID YOU SEE THAT?!", "Smash like if you think there's a safe!", "One thousand! Content is king!", "This is gonna be the BEST episode!", "Bidding for the subscribers!", "Is the camera on? THE CAMERA IS ON!", "Dislike this garage. Kidding. Buying it."])
+height = 1.78
+fatness = 1.0

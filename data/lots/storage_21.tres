@@ -1,0 +1,147 @@
+[gd_resource type="Resource" script_class="LotPreset" load_steps=17 format=3]
+
+[ext_resource type="Script" path="res://core/LotPreset.gd" id="1"]
+[ext_resource type="Script" path="res://core/LotSpawn.gd" id="2"]
+
+[sub_resource type="Resource" id="s1"]
+script = ExtResource("2")
+item_id = "box_moving"
+xform = Transform3D(0.9903, 0, 0.1392, 0, 1.0, 0, -0.1392, 0, 0.9903, -0.9, 0.0, 1.12)
+nested = Array[String](["plate_ikeya", "cup_okayest"])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s2"]
+script = ExtResource("2")
+item_id = "box_amazoom"
+xform = Transform3D(0.9945, 0, -0.1045, 0, 1.0, 0, 0.1045, 0, 0.9945, 0.0, 0.0, 1.12)
+nested = Array[String](["remote_universal"])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s3"]
+script = ExtResource("2")
+item_id = "crate_fruit"
+xform = Transform3D(0.9781, 0, -0.2079, 0, 1.0, 0, 0.2079, 0, 0.9781, 0.9, 0.0, 1.12)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s4"]
+script = ExtResource("2")
+item_id = "box_moving"
+xform = Transform3D(0.9848, 0, -0.1736, 0, 1.0, 0, 0.1736, 0, 0.9848, -0.9, 0.38, 1.14)
+nested = Array[String](["vase_ikeya"])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s5"]
+script = ExtResource("2")
+item_id = "box_small_shoes"
+xform = Transform3D(0.9703, 0, 0.2419, 0, 1.0, 0, -0.2419, 0, 0.9703, 0.05, 0.38, 1.14)
+nested = Array[String](["letter_love"])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s6"]
+script = ExtResource("2")
+item_id = "box_mystery"
+xform = Transform3D(0.9976, 0, -0.0698, 0, 1.0, 0, 0.0698, 0, 0.9976, 0.9, 0.48, 1.14)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s7"]
+script = ExtResource("2")
+item_id = "plasma_55"
+xform = Transform3D(0.9976, 0, -0.0698, 0, 1.0, 0, 0.0698, 0, 0.9976, 0.0, 0.0, -1.18)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s8"]
+script = ExtResource("2")
+item_id = "dresser_oak"
+xform = Transform3D(0.0349, 0, -0.9994, 0, 1.0, 0, 0.9994, 0, 0.0349, -0.95, 0.0, -0.25)
+nested = Array[String](["ring_diamond", "necklace_pearl"])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s9"]
+script = ExtResource("2")
+item_id = "lamp_table_tiffany"
+xform = Transform3D(0.9848, 0, 0.1736, 0, 1.0, 0, -0.1736, 0, 0.9848, 1.05, 0.0, -1.08)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s10"]
+script = ExtResource("2")
+item_id = "jewelry_box_music"
+xform = Transform3D(0.9781, 0, -0.2079, 0, 1.0, 0, 0.2079, 0, 0.9781, 1.05, 0.48, -1.08)
+nested = Array[String](["ring_wedding"])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s11"]
+script = ExtResource("2")
+item_id = "nightstand_deco"
+xform = Transform3D(0.9903, 0, -0.1392, 0, 1.0, 0, 0.1392, 0, 0.9903, 1.1, 0.0, -0.35)
+nested = Array[String](["watch_pocket"])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s12"]
+script = ExtResource("2")
+item_id = "laptop_macbuk"
+xform = Transform3D(0.9703, 0, -0.2419, 0, 1.0, 0, 0.2419, 0, 0.9703, 0.35, 0.0, 0.2)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s13"]
+script = ExtResource("2")
+item_id = "camera_dslr"
+xform = Transform3D(0.9613, 0, 0.2756, 0, 1.0, 0, -0.2756, 0, 0.9613, -0.4, 0.0, 0.22)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s14"]
+script = ExtResource("2")
+item_id = "statue_david"
+xform = Transform3D(0.9848, 0, -0.1736, 0, 1.0, 0, 0.1736, 0, 0.9848, 1.2, 0.0, 0.3)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s15"]
+script = ExtResource("2")
+item_id = "book_first_edition"
+xform = Transform3D(0.3746, 0, -0.9272, 0, 1.0, 0, 0.9272, 0, 0.3746, -0.35, 0.0, 0.55)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[resource]
+script = ExtResource("1")
+id = "storage_21"
+district_id = 2
+lot_kind = 2
+min_bid = 80
+info_mode = 0
+preview_seconds = 15.0
+clearout_seconds = 190.0
+lock_chance = 0.26
+spawn_list = Array[Resource]([SubResource("s1"), SubResource("s2"), SubResource("s3"), SubResource("s4"), SubResource("s5"), SubResource("s6"), SubResource("s7"), SubResource("s8"), SubResource("s9"), SubResource("s10"), SubResource("s11"), SubResource("s12"), SubResource("s13"), SubResource("s14"), SubResource("s15")])
+pacing_tag = 1
+broom_required = false
+hunters_count = 8
+order = 21
+tale_ru = "Темно, потому что лампочка «на продажу». Плазма 55 у задней стены. В дубовом комоде — кольцо с очень уверенным стеклом. Или бриллиантом. Не включайте свет — и так видно."
+tale_en = "It's dark because the bulb is «for sale». A 55-inch plasma at the back wall. In the oak dresser — a ring of very confident glass. Or a diamond. Don't turn on the light — you can see anyway."
+docs_ru = "ЯЧЕЙКА 21 — ТЕХНИКА:\nПлазма 55 «Самсонг» — 1\nКомод дуб + кольцо\nЛампа Тиффани\nТемно: лампочку сняли и куда-то дели"
+docs_en = "UNIT 21 — TECH:\n55-inch Samsong plasma — 1\nOak dresser + a ring\nTiffanny lamp\nDark: they took the bulb and lost it"
+photo_item_ids = Array[String]([])
+cell_size = Vector3(3.0, 2.5, 3.0)
+dark = true

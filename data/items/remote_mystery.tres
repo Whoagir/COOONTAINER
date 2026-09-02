@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/ItemDef.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "remote_mystery"
+name_ru = "Пульт от неизвестно чего"
+name_en = "Remote to Nothing"
+archetype_id = "remote"
+facets = Array[int]([])
+value_base = 2
+mass_override = 0.0
+liquid_id = 0
+liquid_amount = 1.0
+flammable = false
+illegal = false
+dusty_default = 0.0
+vendor_affinity = Array[String](["vendor_tiny"])
+wearable_slot = "none"
+break_threshold = 25.0
+color = Color(0.502, 0.502, 0.502, 1.0)
+scale = 1.0
+tags = Array[String](["electronics"])
+lore_ru = "Ни одна кнопка ничего не делает. Или делает где-то."
+lore_en = "No button does anything. Or does it somewhere."

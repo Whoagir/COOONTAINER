@@ -1,0 +1,107 @@
+[gd_resource type="Resource" script_class="LotPreset" load_steps=12 format=3]
+
+[ext_resource type="Script" path="res://core/LotPreset.gd" id="1"]
+[ext_resource type="Script" path="res://core/LotSpawn.gd" id="2"]
+
+[sub_resource type="Resource" id="s1"]
+script = ExtResource("2")
+item_id = "box_mystery"
+xform = Transform3D(0.9848, 0, -0.1736, 0, 1.0, 0, 0.1736, 0, 0.9848, 0.0, 0.0, -0.32)
+nested = Array[String](["mouse_live"])
+locked_override = -1
+dirt_override = 0.7
+
+[sub_resource type="Resource" id="s2"]
+script = ExtResource("2")
+item_id = "gold_bar_painted"
+xform = Transform3D(0.9976, 0, -0.0698, 0, 1.0, 0, 0.0698, 0, 0.9976, 0.4, 0.0, 0.06)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = 0.6
+
+[sub_resource type="Resource" id="s3"]
+script = ExtResource("2")
+item_id = "sock_single"
+xform = Transform3D(0.9903, 0, 0.1392, 0, 1.0, 0, -0.1392, 0, 0.9903, -0.44, 0.0, 0.04)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = 0.85
+
+[sub_resource type="Resource" id="s4"]
+script = ExtResource("2")
+item_id = "hat_tinfoil"
+xform = Transform3D(0.8192, 0, -0.5736, 0, 1.0, 0, 0.5736, 0, 0.8192, 0.44, 0.0, -0.18)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s5"]
+script = ExtResource("2")
+item_id = "plant_pot_dead"
+xform = Transform3D(0.9781, 0, 0.2079, 0, 1.0, 0, -0.2079, 0, 0.9781, -0.44, 0.0, -0.2)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = 0.8
+
+[sub_resource type="Resource" id="s6"]
+script = ExtResource("2")
+item_id = "rag_dirty"
+xform = Transform3D(0.9397, 0, -0.342, 0, 1.0, 0, 0.342, 0, 0.9397, -0.18, 0.0, 0.2)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = 0.9
+
+[sub_resource type="Resource" id="s7"]
+script = ExtResource("2")
+item_id = "bill_lottery"
+xform = Transform3D(0.9945, 0, -0.1045, 0, 1.0, 0, 0.1045, 0, 0.9945, 0.18, 0.0, 0.22)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s8"]
+script = ExtResource("2")
+item_id = "jar_unknown_stuff"
+xform = Transform3D(0.9903, 0, -0.1392, 0, 1.0, 0, 0.1392, 0, 0.9903, 0.44, 0.0, 0.38)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = 0.7
+
+[sub_resource type="Resource" id="s9"]
+script = ExtResource("2")
+item_id = "poster_missing_cat"
+xform = Transform3D(0.9903, 0, -0.1392, 0, 1.0, 0, 0.1392, 0, 0.9903, 0.0, 0.0, 0.46)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s10"]
+script = ExtResource("2")
+item_id = "candle_stub"
+xform = Transform3D(1.0, 0, 0.0, 0, 1.0, 0, 0.0, 0, 1.0, -0.44, 0.0, 0.4)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = 0.5
+
+[resource]
+script = ExtResource("1")
+id = "hangar_11"
+district_id = 1
+lot_kind = 0
+min_bid = 38
+info_mode = 4
+preview_seconds = 12.0
+clearout_seconds = 60.0
+lock_chance = 0.0
+spawn_list = Array[Resource]([SubResource("s1"), SubResource("s2"), SubResource("s3"), SubResource("s4"), SubResource("s5"), SubResource("s6"), SubResource("s7"), SubResource("s8"), SubResource("s9"), SubResource("s10")])
+pacing_tag = 2
+broom_required = false
+hunters_count = 6
+order = 11
+tale_ru = "Коробка подписана «НЕ ОТКРЫВАТЬ». Хозяин клялся, что внутри клад Наполеона. Наполеон, если что, носил носок. Мышь уже провела инвентаризацию."
+tale_en = "The box says DO NOT OPEN. Owner swore Napoleon's hoard was inside. Napoleon, for the record, wore a sock. The mouse already did inventory."
+docs_ru = "ОПИСЬ №11 (печать «особо ценное» кривая):\n1× Слиток (краска «золото»)\n1× Носок (пара не найдена)\n1× Мышь (жила, жива)\n1× Билет лотереи (не стёрт)\nПодпись: «классика жанра»."
+docs_en = "INVENTORY #11 (the «high value» stamp is crooked):\n1× Gold bar (gold paint)\n1× Sock (pair not found)\n1× Mouse (was living, still is)\n1× Lottery ticket (unscratched)\nSigned: «a classic»."
+photo_item_ids = Array[String]([])
+cell_size = Vector3(1.5, 1.2, 1.5)
+dark = false

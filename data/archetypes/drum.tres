@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Archetype" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/Archetype.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "drum"
+builder = "drum"
+shard_count = 4
+size_class = 1
+mass_default = 3.0
+dims = Vector3(0.35, 0.2, 0.35)
+cloth = false
+container = false
+container_capacity = 3
+light_fixture = false
+base_color = Color(0.7529, 0.1255, 0.1255, 1.0)
+secondary_color = Color(0.8, 0.8, 0.8, 1.0)
+friction = 0.7
+bounce = 0.1

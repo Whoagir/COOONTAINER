@@ -1,0 +1,53 @@
+keys,ru,en
+NPC_COP,Мент,Cop
+POLICE_CUSTODY,РЕШЁТКА,JAIL
+POLICE_TRIGGER_ILLEGAL_SALE,Менты: незаконный сбыт,Cops: illegal sale
+POLICE_TRIGGER_THREAT,Менты: угроза,Cops: threat
+POLICE_TRIGGER_BRAWL,Менты: драка,Cops: brawl
+POLICE_TRIGGER_CAR_THEFT,Менты: угон,Cops: car theft
+POLICE_TRIGGER_OVERTIME,Менты: овертайм в ячейке,Cops: overtime in the unit
+POLICE_TRIGGER_BLACKLIST_ENTRY,Менты: ты в ЧС этой площадки,Cops: you're blacklisted here
+POLICE_TRIGGER_ARSON,Менты: поджог,Cops: arson
+POLICE_TOAST_DISPATCH,Менты выехали за %s,Cops dispatched after %s
+POLICE_TOAST_CAUGHT,%s повязали!,%s got busted!
+POLICE_TOAST_FINE,%s оштрафован на $%d,%s fined $%d
+POLICE_TOAST_ARRESTED,"%s едет в участок. Изъято вещей: %d","%s is going to the station. Items seized: %d"
+POLICE_TOAST_RELEASED,%s вышел из участка,%s walked out of the station
+POLICE_TOAST_ESCAPED,%s сбежал от ментов,%s escaped the cops
+POLICE_TOAST_BRIBE_OK,Взятка прошла,Bribe accepted
+POLICE_TOAST_BRIBE_NO,"Взятка не прошла. Деньги забрали.","Bribe refused. They kept the money."
+POLICE_TOAST_EVIDENCE_OPEN,Комната улик открыта на 30 сек,Evidence room open for 30 sec
+POLICE_TOAST_EVIDENCE_BOUGHT,Улики выкуплены за $%d,Evidence bought back for $%d
+POLICE_TOAST_SHOVE_WARN,"Мент запомнил. Ещё раз — арест.","The cop remembers. Once more — arrest."
+POLICE_HINT_DESK,[E] выкупить улики за $%d,[E] buy back evidence for $%d
+POLICE_HINT_DESK_EMPTY,Стол дежурного. Улик нет.,Duty desk. No evidence.
+POLICE_DESK_POOR,В котле не хватает,Pot can't cover it
+POLICE_DESK_OPEN,Уже открыто. Беги.,Already open. Run.
+POLICE_HINT_EVIDENCE_LOCKED,Комната улик. Заперто.,Evidence room. Locked.
+POLICE_HINT_EVIDENCE_OPEN,Комната улик открыта,Evidence room is open
+POLICE_HINT_EVIDENCE_PICK,[E] вскрыть отмычкой,[E] pick the lock
+POLICE_EVIDENCE_LOCKED,"Заперто. Плати, вскрывай или подмажь.","Locked. Pay, pick or grease."
+POLICE_HINT_BRIBE,[E] сунуть купюру менту,[E] slip the cop a bill
+POLICE_COP_STOP_0,Стоять!,Freeze!
+POLICE_COP_STOP_1,"А ну стоять, барахольщик!","Stop right there, junk rat!"
+POLICE_COP_STOP_2,Полиция! Стой!,Police! Stop!
+POLICE_COP_CHASE_0,Догоню!,I'll get you!
+POLICE_COP_CHASE_1,"Не беги, хуже будет!","Don't run, it'll be worse!"
+POLICE_COP_CHASE_2,Держи его!,Get him!
+POLICE_COP_GIVEUP_0,Ладно…,Fine…
+POLICE_COP_GIVEUP_1,Тьфу. Убежал.,Damn. He's gone.
+POLICE_COP_ARREST_0,Попался.,Gotcha.
+POLICE_COP_ARREST_1,Руки за спину.,Hands behind your back.
+POLICE_COP_FINE,Штраф $%d. Свободен.,Fine $%d. You're free.
+POLICE_COP_NO_MONEY,Денег нет? Поехали.,No money? Let's go.
+POLICE_COP_RELEASE_0,Свободен. Не попадайся.,You're free. Don't get caught.
+POLICE_COP_RELEASE_1,На выход.,Out.
+POLICE_COP_BRIBE_OK_0,Ничего не видел.,Saw nothing.
+POLICE_COP_BRIBE_OK_1,"Хорошего дня, гражданин.","Have a nice day, citizen."
+POLICE_COP_BRIBE_NO_0,Ты серьёзно? Это всё?,Seriously? That's it?
+POLICE_COP_BRIBE_NO_1,Мало. Но я заберу.,Not enough. But I'll keep it.
+POLICE_COP_IDLE_0,Чего надо?,What do you want?
+POLICE_COP_IDLE_1,Не мешай работать.,Don't bother me.
+POLICE_COP_SHOVED_0,Э! Ты на кого руку поднял?!,Hey! Who do you think you're pushing?!
+POLICE_COP_SHOVED_1,Ещё раз — и поедешь.,Once more and you're coming with me.
+POLICE_COP_LOCKPICK_0,Эй! Что ты там ковыряешь?!,Hey! What are you picking at?!

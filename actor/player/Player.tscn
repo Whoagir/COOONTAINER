@@ -1,0 +1,136 @@
+[gd_scene load_steps=11 format=3 uid="uid://cplayer000001"]
+
+[ext_resource type="Script" path="res://actor/player/Player.gd" id="1_player"]
+[ext_resource type="Script" path="res://actor/player/Hands.gd" id="2_hands"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_body"]
+radius = 0.35
+height = 1.8
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_body"]
+radius = 0.33
+height = 1.5
+
+[sub_resource type="SphereMesh" id="SphereMesh_head"]
+radius = 0.22
+height = 0.44
+radial_segments = 12
+rings = 6
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_arm"]
+radius = 0.06
+height = 0.5
+radial_segments = 8
+rings = 3
+
+[sub_resource type="SphereMesh" id="SphereMesh_talk"]
+radius = 0.08
+height = 0.16
+radial_segments = 8
+rings = 4
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_talk"]
+albedo_color = Color(0.2, 1, 0.3, 1)
+emission_enabled = true
+emission = Color(0.2, 1, 0.3, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_pocket"]
+size = Vector3(0.12, 0.14, 0.04)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pocket"]
+albedo_color = Color(0.25, 0.28, 0.45, 1)
+
+[node name="Player" type="CharacterBody3D"]
+collision_layer = 2
+collision_mask = 61
+script = ExtResource("1_player")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+shape = SubResource("CapsuleShape3D_body")
+
+[node name="Body" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+mesh = SubResource("CapsuleMesh_body")
+
+[node name="WearSlot" type="Node3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+
+[node name="Head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
+
+[node name="HeadMesh" type="MeshInstance3D" parent="Head"]
+mesh = SubResource("SphereMesh_head")
+
+[node name="TalkIcon" type="MeshInstance3D" parent="Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.45, 0)
+mesh = SubResource("SphereMesh_talk")
+material_override = SubResource("StandardMaterial3D_talk")
+
+[node name="Camera3D" type="Camera3D" parent="Head"]
+fov = 75.0
+near = 0.03
+far = 400.0
+
+[node name="LookRay" type="RayCast3D" parent="Head/Camera3D"]
+target_position = Vector3(0, 0, -2.6)
+collision_mask = 255
+collide_with_areas = true
+
+[node name="Hands" type="Node3D" parent="Head"]
+script = ExtResource("2_hands")
+
+[node name="HandR" type="Node3D" parent="Head/Hands"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.32, -0.3, -0.45)
+
+[node name="Arm" type="MeshInstance3D" parent="Head/Hands/HandR"]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0.05, -0.15, 0.2)
+mesh = SubResource("CapsuleMesh_arm")
+
+[node name="HandL" type="Node3D" parent="Head/Hands"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.32, -0.3, -0.45)
+
+[node name="Arm" type="MeshInstance3D" parent="Head/Hands/HandL"]
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, -0.05, -0.15, 0.2)
+mesh = SubResource("CapsuleMesh_arm")
+
+[node name="PaddleMount" type="Node3D" parent="Head/Hands"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.28, -0.35, -0.55)
+
+[node name="Pockets" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0)
+
+[node name="Pocket0" type="Node3D" parent="Pockets"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0, 0.15)
+
+[node name="Vis" type="MeshInstance3D" parent="Pockets/Pocket0"]
+mesh = SubResource("BoxMesh_pocket")
+material_override = SubResource("StandardMaterial3D_pocket")
+
+[node name="Pocket1" type="Node3D" parent="Pockets"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0, 0.15)
+
+[node name="Vis" type="MeshInstance3D" parent="Pockets/Pocket1"]
+mesh = SubResource("BoxMesh_pocket")
+material_override = SubResource("StandardMaterial3D_pocket")
+
+[node name="Pocket2" type="Node3D" parent="Pockets"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, -0.05, -0.25)
+
+[node name="Vis" type="MeshInstance3D" parent="Pockets/Pocket2"]
+mesh = SubResource("BoxMesh_pocket")
+material_override = SubResource("StandardMaterial3D_pocket")
+
+[node name="NamePlate" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.15, 0)
+billboard = 1
+text = "P"
+font_size = 48
+outline_size = 8
+
+[node name="SayLabel" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4, 0)
+billboard = 1
+modulate = Color(1, 0.95, 0.6, 1)
+font_size = 40
+outline_size = 10

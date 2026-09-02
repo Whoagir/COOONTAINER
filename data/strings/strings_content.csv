@@ -1,0 +1,22 @@
+keys,ru,en
+FACET_FRAGILE,Хрупкое,Fragile
+FACET_DIRTYABLE,Пачкается,Gets dirty
+FACET_CONTAINER,Контейнер,Container
+FACET_SHAKE_OUT,Трясучка,Shake it out
+FACET_LOCKED,Заперто,Locked
+FACET_WEARABLE,Надевается,Wearable
+FACET_LIQUID,Жидкость,Liquid
+FACET_ALIVE,Живое,Alive
+FACET_DOCUMENT,Бумага,Paper
+FACET_PATCHABLE,Латается,Patchable
+FACET_WEAPON,Оружие,Weapon
+FACET_ILLEGAL,Незаконное,Illegal
+FACET_HEAVY_CHEAP,Тяжёлый хлам,Heavy junk
+FACET_HEAVY_EXPENSIVE,Тяжёлое и дорогое,Heavy & pricey
+LIQUID_NONE,Пусто,Empty
+LIQUID_WHISKEY,Виски,Whiskey
+LIQUID_PAINT,Краска,Paint
+LIQUID_GLUE,Клей,Glue
+LIQUID_OIL,Масло,Oil
+LIQUID_GASOLINE,Бензин,Gasoline
+LIQUID_WATER,Вода,Water

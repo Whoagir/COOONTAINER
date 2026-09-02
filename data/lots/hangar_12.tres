@@ -1,0 +1,99 @@
+[gd_resource type="Resource" script_class="LotPreset" load_steps=11 format=3]
+
+[ext_resource type="Script" path="res://core/LotPreset.gd" id="1"]
+[ext_resource type="Script" path="res://core/LotSpawn.gd" id="2"]
+
+[sub_resource type="Resource" id="s1"]
+script = ExtResource("2")
+item_id = "bag_work"
+xform = Transform3D(0.9703, 0, -0.2419, 0, 1.0, 0, 0.2419, 0, 0.9703, -0.38, 0.0, -0.36)
+nested = Array[String](["cd_mixtape", "cash_5"])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s2"]
+script = ExtResource("2")
+item_id = "camera_polaroid"
+xform = Transform3D(0.9781, 0, 0.2079, 0, 1.0, 0, -0.2079, 0, 0.9781, 0.4, 0.0, -0.36)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s3"]
+script = ExtResource("2")
+item_id = "camera_film_old"
+xform = Transform3D(0.9511, 0, -0.309, 0, 1.0, 0, 0.309, 0, 0.9511, 0.1, 0.0, 0.02)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s4"]
+script = ExtResource("2")
+item_id = "book_encyclopedia"
+xform = Transform3D(0.0349, 0, -0.9994, 0, 1.0, 0, 0.9994, 0, 0.0349, 0.44, 0.0, 0.16)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s5"]
+script = ExtResource("2")
+item_id = "cup_thermos"
+xform = Transform3D(0.9903, 0, 0.1392, 0, 1.0, 0, -0.1392, 0, 0.9903, -0.42, 0.0, 0.16)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s6"]
+script = ExtResource("2")
+item_id = "letter_aunt"
+xform = Transform3D(0.9976, 0, -0.0698, 0, 1.0, 0, 0.0698, 0, 0.9976, 0.16, 0.0, 0.28)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s7"]
+script = ExtResource("2")
+item_id = "frame_photo_signed_actor"
+xform = Transform3D(0.9848, 0, -0.1736, 0, 1.0, 0, 0.1736, 0, 0.9848, -0.12, 0.0, 0.46)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s8"]
+script = ExtResource("2")
+item_id = "tablet_kids"
+xform = Transform3D(0.9613, 0, -0.2756, 0, 1.0, 0, 0.2756, 0, 0.9613, 0.42, 0.0, 0.42)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s9"]
+script = ExtResource("2")
+item_id = "candle_scented"
+xform = Transform3D(1.0, 0, 0.0, 0, 1.0, 0, 0.0, 0, 1.0, -0.44, 0.0, 0.42)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[resource]
+script = ExtResource("1")
+id = "hangar_12"
+district_id = 1
+lot_kind = 0
+min_bid = 16
+info_mode = 3
+preview_seconds = 15.0
+clearout_seconds = 74.0
+lock_chance = 0.05
+spawn_list = Array[Resource]([SubResource("s1"), SubResource("s2"), SubResource("s3"), SubResource("s4"), SubResource("s5"), SubResource("s6"), SubResource("s7"), SubResource("s8"), SubResource("s9")])
+pacing_tag = 0
+broom_required = false
+hunters_count = 6
+order = 12
+tale_ru = "Фотограф снимал свадьбы в Сочи. Говорил, что объектив стоит как квартира. Объектив остался в Сочи. В сумке — Polaroyd и томик энциклопедии."
+tale_en = "The photographer shot weddings in Sochi. Said the lens cost as much as a flat. The lens stayed in Sochi. The bag has a Polaroyd and an encyclopedia volume."
+docs_ru = "ОПИСЬ (сдал администратор ЗАГСа):\n— сумка рабочая, запах проявителя\n— зеркалка «Кэнун» (в описи есть, в сумке нет)\n— Polaroyd + Зенит\n— диск «Для тебя»\n— фото с автографом «Тим Круз»"
+docs_en = "MANIFEST (registry-office clerk intake):\n— work bag, developer smell\n— Canun DSLR (on the sheet, not in the bag)\n— Polaroyd + Zenith\n— a «For You» mix CD\n— signed photo of «Tim Cruze»"
+photo_item_ids = Array[String]([])
+cell_size = Vector3(1.5, 1.2, 1.5)
+dark = false

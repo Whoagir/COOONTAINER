@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/ItemDef.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "painting_horse"
+name_ru = "Конь задом наперёд"
+name_en = "Backwards Horse"
+archetype_id = "painting"
+facets = Array[int]([1])
+value_base = 45
+mass_override = 0.0
+liquid_id = 0
+liquid_amount = 1.0
+flammable = true
+illegal = false
+dusty_default = 0.4
+vendor_affinity = Array[String](["vendor_antique"])
+wearable_slot = "none"
+break_threshold = 25.0
+color = Color(0.502, 0.3765, 0.251, 1.0)
+scale = 1.0
+tags = Array[String](["painting"])
+lore_ru = "Художник настаивал: так задумано."
+lore_en = "The artist insisted it was intentional."

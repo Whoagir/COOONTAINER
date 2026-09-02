@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/ItemDef.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "vase_urn"
+name_ru = "Урна дедушки"
+name_en = "Grandpa's Urn"
+archetype_id = "vase"
+facets = Array[int]([0, 1, 2])
+value_base = 12
+mass_override = 0.0
+liquid_id = 0
+liquid_amount = 1.0
+flammable = false
+illegal = false
+dusty_default = 0.3
+vendor_affinity = Array[String](["vendor_antique"])
+wearable_slot = "none"
+break_threshold = 4.5
+color = Color(0.3137, 0.3137, 0.3137, 1.0)
+scale = 0.8
+tags = Array[String](["vase"])
+lore_ru = "Дед просил не трясти."
+lore_en = "Grandpa asked not to be shaken."

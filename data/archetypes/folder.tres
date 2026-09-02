@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Archetype" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/Archetype.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "folder"
+builder = "folder"
+shard_count = 3
+size_class = 1
+mass_default = 0.4
+dims = Vector3(0.24, 0.03, 0.32)
+cloth = false
+container = false
+container_capacity = 2
+light_fixture = false
+base_color = Color(0.7843, 0.6588, 0.3765, 1.0)
+secondary_color = Color(0.2, 0.2, 0.2, 1.0)
+friction = 0.9
+bounce = 0.0

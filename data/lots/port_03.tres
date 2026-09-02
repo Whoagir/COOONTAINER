@@ -1,0 +1,155 @@
+[gd_resource type="Resource" script_class="LotPreset" load_steps=18 format=3]
+
+[ext_resource type="Script" path="res://core/LotPreset.gd" id="1"]
+[ext_resource type="Script" path="res://core/LotSpawn.gd" id="2"]
+
+[sub_resource type="Resource" id="s1"]
+script = ExtResource("2")
+item_id = "sofa_velvet"
+xform = Transform3D(1.0, 0, 0.0, 0, 1.0, 0, 0.0, 0, 1.0, 0.0, 0.0, -2.5)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s2"]
+script = ExtResource("2")
+item_id = "wardrobe_antique"
+xform = Transform3D(0.0, 0, -1.0, 0, 1.0, 0, 1.0, 0, 0.0, 0.5, 0.0, -1.25)
+nested = Array[String](["suit_pinstripe"])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s3"]
+script = ExtResource("2")
+item_id = "statue_bronze"
+xform = Transform3D(0.9781, 0, -0.2079, 0, 1.0, 0, 0.2079, 0, 0.9781, -0.7, 0.0, -1.25)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s4"]
+script = ExtResource("2")
+item_id = "chandelier_crystal"
+xform = Transform3D(0.9903, 0, -0.1392, 0, 1.0, 0, 0.1392, 0, 0.9903, 0.0, 0.0, 0.0)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s5"]
+script = ExtResource("2")
+item_id = "fridge_smart"
+xform = Transform3D(0.9945, 0, 0.1045, 0, 1.0, 0, -0.1045, 0, 0.9945, 0.55, 0.0, 1.1)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s6"]
+script = ExtResource("2")
+item_id = "bust_marble"
+xform = Transform3D(0.9848, 0, -0.1736, 0, 1.0, 0, 0.1736, 0, 0.9848, -0.7, 0.0, 1.1)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s7"]
+script = ExtResource("2")
+item_id = "clock_grandfather_antique"
+xform = Transform3D(1.0, 0, 0.0, 0, 1.0, 0, 0.0, 0, 1.0, 0.0, 0.0, 1.9)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s8"]
+script = ExtResource("2")
+item_id = "typewriter_writer"
+xform = Transform3D(0.9781, 0, -0.2079, 0, 1.0, 0, 0.2079, 0, 0.9781, -0.55, 0.0, 2.5)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s9"]
+script = ExtResource("2")
+item_id = "camera_dslr"
+xform = Transform3D(0.9613, 0, 0.2756, 0, 1.0, 0, -0.2756, 0, 0.9613, 0.6, 0.0, 2.5)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s10"]
+script = ExtResource("2")
+item_id = "coin_jar_gold"
+xform = Transform3D(0.9945, 0, -0.1045, 0, 1.0, 0, 0.1045, 0, 0.9945, 0.0, 0.0, 2.5)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s11"]
+script = ExtResource("2")
+item_id = "book_first_edition"
+xform = Transform3D(0.9903, 0, -0.1392, 0, 1.0, 0, 0.1392, 0, 0.9903, -1.0, 0.0, 1.9)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s12"]
+script = ExtResource("2")
+item_id = "painting_black_square"
+xform = Transform3D(0.9976, 0, -0.0698, 0, 1.0, 0, 0.0698, 0, 0.9976, 0.0, 0.0, -1.8)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s13"]
+script = ExtResource("2")
+item_id = "trumpet_gold"
+xform = Transform3D(0.342, 0, -0.9397, 0, 1.0, 0, 0.9397, 0, 0.342, -0.85, 0.0, 0.0)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s14"]
+script = ExtResource("2")
+item_id = "jar_elvis_tooth"
+xform = Transform3D(1.0, 0, 0.0, 0, 1.0, 0, 0.0, 0, 1.0, 1.0, 0.0, 0.0)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s15"]
+script = ExtResource("2")
+item_id = "bat_signed"
+xform = Transform3D(0.766, 0, -0.6428, 0, 1.0, 0, 0.6428, 0, 0.766, 1.05, 0.0, -2.5)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s16"]
+script = ExtResource("2")
+item_id = "shoe_sneaker_rare"
+xform = Transform3D(0.9781, 0, 0.2079, 0, 1.0, 0, -0.2079, 0, 0.9781, -1.05, 0.0, -2.5)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[resource]
+script = ExtResource("1")
+id = "port_03"
+district_id = 4
+lot_kind = 4
+min_bid = 1800
+info_mode = 3
+preview_seconds = 30.0
+clearout_seconds = 360.0
+lock_chance = 0.22
+spawn_list = Array[Resource]([SubResource("s1"), SubResource("s2"), SubResource("s3"), SubResource("s4"), SubResource("s5"), SubResource("s6"), SubResource("s7"), SubResource("s8"), SubResource("s9"), SubResource("s10"), SubResource("s11"), SubResource("s12"), SubResource("s13"), SubResource("s14"), SubResource("s15"), SubResource("s16")])
+pacing_tag = 0
+broom_required = false
+hunters_count = 8
+order = 3
+tale_ru = "Коносамент 7741. Вертолёт и Волга — нет. Рояль — нет, есть шкаф. Люстра — да. Печать «не трясти» пережила всю дорогу в виде тряски."
+tale_en = "Bill of lading 7741. Helicopter and Volga — no. Grand piano — no, there's a wardrobe. Chandelier — yes. The «do not shake» stamp survived the whole trip as shaking."
+docs_ru = "КОНОСАМЕНТ / BILL OF LADING 7741-П\nПункт: Одесса → сюда\n1× Вертолёт (разобран) — НЕТ\n1× Автомобиль «Волга» — НЕТ\n1× Рояль — тоже нет, есть шкаф\n1× Люстра дворцовая — да, она\n1× Бюст «римский» — да\nПечать: «не трясти». Контейнер всю дорогу трясли."
+docs_en = "BILL OF LADING 7741-P\nRoute: Odessa → here\n1× Helicopter (disassembled) — NO\n1× Volga automobile — NO\n1× Grand piano — also no, there's a wardrobe\n1× Palace chandelier — yes, that one\n1× «Roman» bust — yes\nStamp: «do not shake». They shook it the whole way."
+photo_item_ids = Array[String]([])
+cell_size = Vector3(2.3, 2.4, 6.0)
+dark = false

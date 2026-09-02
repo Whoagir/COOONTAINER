@@ -1,0 +1,15 @@
+# Godot
+.godot/
+*.import.tmp
+export/
+*.pck
+*.exe
+!godot.windows.opt.tools.64.exe
+# Steam runtime
+steam_appid.txt
+addons/godotsteam/**/*.dll
+addons/godotsteam/**/*.so
+# OS
+Thumbs.db
+.DS_Store
+__pycache__/

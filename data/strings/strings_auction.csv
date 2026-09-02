@@ -1,0 +1,260 @@
+keys,ru,en
+NPC_AUCTIONEER,Аукционист,Auctioneer
+NPC_CARETAKER,Смотритель,Caretaker
+NPC_HUNTER,Хантер,Hunter
+AUCTION_INTERACT_HINT,[E] Начать торги,[E] Start the auction
+AUCTION_HINT_PREVIEW,Смотрим. Не трогать.,Preview. Don't touch.
+AUCTION_HINT_BIDDING,"Торги идут. B — весло, ЛКМ — ставка","Bidding. B — paddle, LMB — bid"
+AUCTION_HINT_HAMMER,Молот!,Hammer!
+AUCTION_HINT_COOLDOWN,Следующий лот скоро,Next lot soon
+AUCTION_HINT_LOCKED,Район закрыт,District locked
+AUCTION_HINT_THREAT,[E] Показать ему ствол,[E] Show him the gun
+AUCTION_CARETAKER_DONE_HINT,[E] Сдать ячейку,[E] Hand over the unit
+AUCTION_START_PRICE,стартовая,starting price
+AUCTION_NO_BIDS,ставок нет,no bids
+AUCTION_TOO_POOR,В котле не хватает,Pot can't cover that
+AUCTION_TOO_LOW,Минимум $%d,Minimum is $%d
+AUCTION_ALREADY_LEADING,Ты и так ведёшь,You're already leading
+AUCTION_NO_AUCTION,Рядом нет торгов,No auction nearby
+AUCTION_SOLD_TO,Продано: %s за $%d,Sold: %s for $%d
+AUCTION_YOU_WON,ТЫ ВЗЯЛ ЛОТ ЗА $%d. ЗАБИРАЙ.,YOU WON THE LOT FOR $%d. HAUL IT.
+AUCTION_YOU_WON_TAKE,Лот твой. Дверь открыта — выноси.,Lot is yours. Door's open — carry it out.
+AUCTION_CANT_PAY,Котёл пуст. Лот уплыл.,Pot is empty. Lot's gone.
+AUCTION_TRESPASS_WARN,Смотритель заметил. Второй раз — ЧС.,Caretaker saw you. Next time — blacklist.
+AUCTION_TRESPASS_BAN,Ты в ЧС площадки. Менты уже едут.,Blacklisted here. Cops are coming.
+AUCTION_NO_SALE,Ставок нет. Лот снят.,No bids. Lot withdrawn.
+AUCTION_FALLBACK_TALE,"Хозяин уехал в Тайланд, десять лет назад. Говорят, там что-то тикает. Или это холодильник.","Owner left for Thailand ten years ago. They say something ticks in there. Or it's a fridge."
+AUCTION_FALLBACK_DOCS,"ОПИСЬ (частично сгорела): ...ваза, коробки х3, ...ащик с..., ...чего ценного нет, честно.","INVENTORY (partly burnt): ...vase, boxes x3, ...rawer with..., ...nothing valuable, honestly."
+AUCTION_PHOTOS_TITLE,ФОТО ЛОТА,LOT PHOTOS
+AUCTION_DOCS_TITLE,ДОКУМЕНТЫ,DOCUMENTS
+AUCTION_BURNED,Лот сгорел. Торги отменены.,Lot burned. Auction cancelled.
+AUC_START_FMT,"Лот %s! Стартуем с $%d. Смотрим, не трогаем.","Lot %s! Starting at $%d. Look, don't touch."
+AUC_BIDDING_OPEN_1,Торги открыты! Кто даст больше?,Bidding is open! Who's got more?
+AUC_BIDDING_OPEN_2,Вёсла подняли! Поехали!,Paddles up! Let's go!
+AUC_BIDDING_OPEN_3,Начинаем! Не стесняемся!,We begin! Don't be shy!
+AUC_GOING_1,Раз...,Going once...
+AUC_GOING_2,Идёт...,Going...
+AUC_GOING_3,Кто-нибудь ещё?!,Anyone else?!
+AUC_GOING2_1,Два... последний шанс!,Going twice... last chance!
+AUC_GOING2_2,Всё?! Точно всё?!,That's it?! Really?!
+AUC_GOING2_3,Два!,Twice!
+AUC_SOLD_FMT,ПРОДАНО! %s за $%d!,SOLD! %s for $%d!
+AUC_SOLD_PLAYER_1,Продано этим... предпринимателям!,Sold to these... entrepreneurs!
+AUC_SOLD_PLAYER_2,Продано трейлеру! Поздравляю. Наверное.,Sold to the trailer! Congrats. I guess.
+AUC_SOLD_HUNTER_1,Уходит к профессионалу!,Goes to a professional!
+AUC_SOLD_HUNTER_2,Продано! Как всегда.,Sold! As usual.
+AUC_NO_BIDS_1,Никто?! Лот снят. Позор.,Nobody?! Lot withdrawn. Shame.
+AUC_NO_BIDS_2,Ноль желающих. Уносим.,Zero takers. Take it away.
+AUC_STEP_1,Ещё!,More!
+AUC_STEP_2,Слышу!,I hear you!
+AUC_STEP_3,Так!,Yes!
+AUC_BUSY_1,Торги уже идут. Не мешай.,Auction's on. Don't interrupt.
+AUC_BUSY_2,Подожди, следующий лот скоро.,Wait, next lot's coming.
+AUC_LOCKED_1,Здесь для вас закрыто. Пока.,Closed for you. For now.
+AUC_THREATENED_1,Тихо-тихо... стартовая пополам, только убери это.,Easy, easy... starting price halved, just put that away.
+AUC_THREATENED_2,Ладно! Скидка! Не надо!,Fine! Discount! Don't!
+AUC_EJECT_1,ВОН ОТСЮДА! ОХРАНА!,GET OUT! SECURITY!
+AUC_EJECT_2,Ты сюда больше не зайдёшь!,You're never coming back here!
+AUC_POLICE_1,Алло, полиция? Тут псих со стволом.,Hello, police? Psycho with a gun here.
+AUC_POLICE_2,Менты уже едут, друг.,Cops are on the way, pal.
+AUC_BRAWL_1,ДРАКА?! Прекратить! Менты!,A FIGHT?! Stop it! Cops!
+AUC_BRAWL_2,Это аукцион, а не бар!,This is an auction, not a bar!
+AUC_FIRE_1,ПОЖАР! Торги отменены! Все вон!,FIRE! Auction cancelled! Everyone out!
+AUC_CANT_PAY_1,Котёл пустой?! Лот уходит следующему.,Empty pot?! Lot goes to the next one.
+HUNTER_BID_1,Моё!,Mine!
+HUNTER_BID_2,Даю!,I'm in!
+HUNTER_BID_3,Ещё!,More!
+HUNTER_BID_4,Беру!,Taking it!
+HUNTER_PASS_1,Пас.,Pass.
+HUNTER_PASS_2,Да ну его.,Nah, forget it.
+HUNTER_PASS_3,Дороговато.,Too rich for me.
+HUNTER_PASS_4,Забирайте.,Take it.
+HUNTER_PASS_5,Не моё.,Not mine.
+HUNTER_WIN_1,Ха! Знал же!,Ha! I knew it!
+HUNTER_WIN_2,Учитесь, дети.,Learn, kids.
+HUNTER_WIN_3,Забираю. Плачьте.,Taking it. Cry.
+HUNTER_LOSE_1,Переплатил, дурак.,Overpaid, fool.
+HUNTER_LOSE_2,Там мусор, сто пудов.,It's junk, hundred percent.
+HUNTER_LOSE_3,Ну и ладно.,Whatever.
+HUNTER_LOSE_4,Удачи с этим хламом.,Good luck with that junk.
+HUNTER_TAUNT_1,Ты вообще знаешь, что там?,Do you even know what's in there?
+HUNTER_TAUNT_2,Сколько в котле, трейлер?,How much in the pot, trailer boy?
+HUNTER_TAUNT_3,Новенькие. Люблю новеньких.,Newbies. I love newbies.
+HUNTER_TAUNT_4,Не поднимай, порвёшь.,Don't lift it, you'll tear it.
+HUNTER_SETUP_1,О, а я тоже хочу!,Oh, I want it too!
+HUNTER_SETUP_2,Не отдам так просто!,Not letting it go that easy!
+HUNTER_SETUP_3,Ща поднимем цену, малыш.,Let's pump that price, kiddo.
+HUNTER_SETUP_DROP_1,Всё, твоё. Плати.,All yours. Pay up.
+HUNTER_SETUP_DROP_2,Ха-ха, наслаждайся.,Ha-ha, enjoy.
+HUNTER_SETUP_DROP_3,Развели. Как ребёнка.,Played. Like a child.
+HUNTER_BLUFF_1,ДАЮ! Не думая!,I'M IN! No thinking!
+HUNTER_BLUFF_2,Плевать на цену!,Price be damned!
+HUNTER_BLUFF_FAIL_1,Кхм. Пас.,Ahem. Pass.
+HUNTER_BLUFF_FAIL_2,Я пошутил.,I was joking.
+HUNTER_BRAWL_1,Ты меня толкнул?!,You shoved me?!
+HUNTER_BRAWL_2,Получи!,Take that!
+HUNTER_BRAWL_3,Иди сюда!,Come here!
+HUNTER_HAUL_1,Грузим! Аккуратно, это моё.,Load it! Careful, it's mine.
+HUNTER_HAUL_2,Смотрите и плачьте.,Watch and cry.
+CARE_WARN_1,ЭЙ! Смотреть — не трогать!,HEY! Look, don't touch!
+CARE_WARN_2,Назад! Превью!,Back off! Preview!
+CARE_WARN_3,Куда полез?! Выйди!,Where are you going?! Out!
+CARE_BAN_1,Всё, ты в чёрном списке! Менты!,That's it, blacklisted! Cops!
+CARE_BAN_2,Я предупреждал! Вон!,I warned you! Out!
+CARE_GLOAT_1,Смотрите, как увозят. Красиво.,Watch them haul it away. Beautiful.
+CARE_GLOAT_2,Не ваше. Никогда не было.,Not yours. Never was.
+CARE_GLOAT_3,В следующий раз кошелёк потолще.,Bring a fatter wallet next time.
+CARE_IDLE_1,...,...
+AUC_BIDDING_OPEN_4,Кто видит вазу? Кто видит котёл?!,Who sees a vase? Who sees the pot?!
+AUC_BIDDING_OPEN_5,Вёсла вверх — деньги вниз!,Paddles up — cash down!
+AUC_BIDDING_OPEN_6,Гараж открыт! Не стесняемся!,Unit's open! Don't be shy!
+AUC_BIDDING_OPEN_7,Торги! Котёл дрожит!,Bidding! The pot is shaking!
+AUC_BIDDING_OPEN_8,Поехали! Кто даст больше?,Let's go! Who's got more?
+AUC_BRAWL_3,Веслами не дерутся! Менты!,No paddle fights! Cops!
+AUC_BRAWL_4,"Это не казино, это АУКЦИОН!","This isn't a casino, it's an AUCTION!"
+AUC_BRAWL_5,Драка?! Котёл в шоке!,A fight?! The pot is shocked!
+AUC_BRAWL_6,Прекратить! Скотч на раны потом!,Stop it! Tape the wounds later!
+AUC_BRAWL_7,Толчки — в участок! Не сюда!,Shoving goes to the station! Not here!
+AUC_BUSY_3,Слышишь молот? Значит жди.,Hear the hammer? Then wait.
+AUC_BUSY_4,Сейчас не твой лот. Отойди.,Not your lot right now. Back off.
+AUC_BUSY_5,Торги живые. Не лезь в кадр.,Auction's live. Stay out of frame.
+AUC_BUSY_6,Подожди. Котёл занят.,Wait. The pot's busy.
+AUC_CANT_PAY_2,Котёл пуст?! Следующий!,Empty pot?! Next!
+AUC_CANT_PAY_3,Нет денег — нет лота. Классика.,No cash — no lot. Classic.
+AUC_CANT_PAY_4,Котёл сказал «нет». Лот уходит.,Pot said no. Lot moves on.
+AUC_CANT_PAY_5,Пустой котёл — полный позор.,Empty pot — full shame.
+AUC_EJECT_3,ВОН! И котёл ваш тоже вон!,OUT! And take your pot with you!
+AUC_EJECT_4,Охрана! Этот с веслом — вон!,Security! Paddle guy — out!
+AUC_EJECT_5,Больше ни ногой на площадку!,Never set foot on this yard again!
+AUC_EJECT_6,ЧС! Казино тоже не поможет!,Blacklist! Casino won't save you!
+AUC_FIRE_2,ГОРИТ! Лот в пепел! Вон!,IT'S BURNING! Lot to ash! Out!
+AUC_FIRE_3,Пожар! Котёл не тушит!,Fire! The pot doesn't put it out!
+AUC_FIRE_4,Огонь! Торги — всё! Бежим!,Fire! Auction's over! Run!
+AUC_FIRE_5,ГОРИТ ГАРАЖ! Ваза уже нет!,UNIT ON FIRE! Vase is toast!
+AUC_GOING_4,Раз... думайте быстрее!,Going once... think faster!
+AUC_GOING_5,Раз! Хомяк уже в котле?,Once! Is the hamster in the pot?
+AUC_GOING_6,Раз... ваза уплывает!,Once... the vase is slipping!
+AUC_GOING_7,Раз! Скотч не спасёт!,Once! Tape won't save you!
+AUC_GOING_8,Раз... последний шанс почти!,Once... almost last chance!
+AUC_GOING2_4,Два! Менты уже зевают!,Twice! Cops are already yawning!
+AUC_GOING2_5,Два... казино ждёт проигравших!,Twice... casino wants losers!
+AUC_GOING2_6,"Два! Котёл, скажи слово!","Twice! Pot, say something!"
+AUC_GOING2_7,Два... или пас навсегда!,Twice... or pass forever!
+AUC_GOING2_8,ДВА! Молот чешется!,TWICE! Hammer's itching!
+AUC_LOCKED_2,Вас тут не ждут. Пока.,You're not welcome. Yet.
+AUC_LOCKED_3,Район закрыт. Как сейф.,District locked. Like a safe.
+AUC_LOCKED_4,ЧС — значит вон. Без весла.,Blacklisted means out. No paddle.
+AUC_LOCKED_5,Дверь для вас — декорация.,This door is decoration for you.
+AUC_NO_BIDS_3,Тишина. Даже котёл молчит.,Silence. Even the pot is quiet.
+AUC_NO_BIDS_4,Ноль. Ваза остаётся мифом.,Zero. The vase stays a myth.
+AUC_NO_BIDS_5,Никого? Позор площади!,Nobody? Shame on the yard!
+AUC_NO_BIDS_6,Лот снят. Идите в казино.,Lot pulled. Go hit the casino.
+AUC_POLICE_3,Менты! Тут ствол и плохие манеры!,Cops! Gun and bad manners here!
+AUC_POLICE_4,"Алло, участок? Перекуп с сюрпризом.","Hello, station? Flipper with a surprise."
+AUC_POLICE_5,Полиция! Котёл не алиби!,Police! The pot is not an alibi!
+AUC_POLICE_6,Вызываю! Хомяк в заложниках? Нет.,Calling! Hamster hostage? No.
+AUC_SOLD_HUNTER_3,Продано лысому с блеском!,Sold to the shiny bald one!
+AUC_SOLD_HUNTER_4,"Уходит профи! Трейлер, плачь!","Goes to a pro! Trailer, cry!"
+AUC_SOLD_HUNTER_5,Продано! Бородатый хипстер ликует!,Sold! Bearded hipster rejoices!
+AUC_SOLD_HUNTER_6,Как всегда — к старому волку!,As usual — to the old wolf!
+AUC_SOLD_HUNTER_7,Продано охотнику! Котёл опустел!,Sold to a hunter! Pot just shrank!
+AUC_SOLD_HUNTER_8,Уходит знатоку гаражей!,Goes to a garage whisperer!
+AUC_SOLD_PLAYER_3,Продано трейлеру с дырявым котлом!,Sold to the trailer with a leaky pot!
+AUC_SOLD_PLAYER_4,Уходит новичкам! Удачи с хламом!,Goes to the newbies! Enjoy the junk!
+AUC_SOLD_PLAYER_5,Продано! Ищите вазу в сене!,Sold! Needle in a haystack time!
+AUC_SOLD_PLAYER_6,Этим! Скотч в подарок не даём!,To them! No free tape!
+AUC_SOLD_PLAYER_7,Продано пати! Не уроните хомяка!,Sold to the party! Don't drop the hamster!
+AUC_SOLD_PLAYER_8,Трейлер забирает! Казино плачет!,Trailer takes it! Casino weeps!
+AUC_STEP_4,Есть!,Got it!
+AUC_STEP_5,Принято!,Accepted!
+AUC_STEP_6,Живо!,Alive!
+AUC_STEP_7,Котёл кивнул!,The pot nodded!
+AUC_STEP_8,Вижу весло!,I see a paddle!
+AUC_THREATENED_3,Скидка! Только ствол вниз!,Discount! Just point that down!
+AUC_THREATENED_4,Ладно-ладно! Стартовая тает!,Okay okay! Starting price melts!
+AUC_THREATENED_5,Я слышу! Дешевле! Дешевле!,I hear you! Cheaper! Cheaper!
+AUC_THREATENED_6,Не надо! Котёл и так нервный!,Don't! The pot's already nervous!
+CARE_BAN_3,ЧС! Менты уже в пути!,Blacklist! Cops are rolling!
+CARE_BAN_4,Всё! Ты тут закончился!,That's it! You're done here!
+CARE_BAN_5,Предупреждал! Теперь участок!,I warned you! Now the station!
+CARE_BAN_6,Вон! И котёл свой забери!,Out! And take your pot!
+CARE_GLOAT_4,Смотрите: чужой хаул. Красота.,Watch: someone else's haul. Gorgeous.
+CARE_GLOAT_5,Не ваша ваза. Никогда.,Not your vase. Never was.
+CARE_GLOAT_6,Котёл тощий — лот чужой.,Thin pot — someone else's lot.
+CARE_GLOAT_7,Плачьте в весло. Мне нравится.,Cry into the paddle. I like it.
+CARE_GLOAT_8,Следующий раз — толще котёл.,Next time — fatter pot.
+CARE_WARN_4,"Глаза — да, руки — нет!","Eyes yes, hands no!"
+CARE_WARN_5,Превью! Не инвентаризация!,Preview! Not inventory day!
+CARE_WARN_6,Назад! Хомяк ещё не твой!,Back! Hamster isn't yours yet!
+CARE_WARN_7,Тронешь — в ЧС! Понял?!,Touch it — blacklist! Got it?!
+CARE_WARN_8,"Смотри через щель, гений!","Look through the slit, genius!"
+HUNTER_BLUFF_3,ТЫСЯЧА! ...почти.,A THOUSAND! ...almost.
+HUNTER_BLUFF_4,Беру всё! Котёл горит!,Taking it all! Pot's on fire!
+HUNTER_BLUFF_5,Плевать! Ваза того стоит!,Whatever! The vase is worth it!
+HUNTER_BLUFF_6,ДАЮ! Не моргая!,I'M IN! Without blinking!
+HUNTER_BLUFF_7,Ещё! Ещё! ...наверное!,More! More! ...probably!
+HUNTER_BLUFF_8,Ставлю как в казино!,Bidding like it's the casino!
+HUNTER_BLUFF_FAIL_3,Кхм. Шутка. Пас.,Ahem. Joke. Pass.
+HUNTER_BLUFF_FAIL_4,Я... передумал. Резко.,I... changed my mind. Fast.
+HUNTER_BLUFF_FAIL_5,Блеф. Как хомяк в коробке.,Bluff. Like a hamster in a box.
+HUNTER_BLUFF_FAIL_6,Пас. Котёл сказал «нет».,Pass. The pot said no.
+HUNTER_BLUFF_FAIL_7,Это был перформанс.,That was performance art.
+HUNTER_BLUFF_FAIL_8,"Ладно, забирайте хлам.","Fine, take the junk."
+HUNTER_BRAWL_4,Эй! Веслом не тыкай!,Hey! Don't poke with the paddle!
+HUNTER_BRAWL_5,"Ты меня толкнул, трейлер?!","You shoved me, trailer?!"
+HUNTER_BRAWL_6,Сейчас менты будут!,Cops are coming now!
+HUNTER_BRAWL_7,Руки! Котёл не броня!,Hands! The pot isn't armor!
+HUNTER_BRAWL_8,Драка? На аукционе?!,A fight? At an auction?!
+HUNTER_HAUL_3,Грузим! Ваза сверху!,Load it! Vase on top!
+HUNTER_HAUL_4,Аккуратно — это МОЁ!,Careful — this is MINE!
+HUNTER_HAUL_5,"Смотрите, как профи вывозит!",Watch a pro haul out!
+HUNTER_HAUL_6,Хомяка не трогать!,Don't touch the hamster!
+HUNTER_HAUL_7,Скотч готов? Грузим!,Tape ready? Loading!
+HUNTER_HAUL_8,Котёл пуст — кузов полон!,Pot empty — bed full!
+HUNTER_LOSE_5,Переплатил. Как в казино.,Overpaid. Like the casino.
+HUNTER_LOSE_6,Там носки. Сто пудов носки.,Socks in there. Guaranteed socks.
+HUNTER_LOSE_7,Ладно. Котёл ещё жив.,Fine. Pot still breathing.
+HUNTER_LOSE_8,Удачи с плесенью.,Good luck with the mold.
+HUNTER_LOSE_9,Я пас раньше. Умно.,I passed earlier. Smart.
+HUNTER_LOSE_10,Ваза — миф. Как честный крупье.,The vase is a myth. Like a fair dealer.
+HUNTER_PASS_6,Пас. Пусть трейлер страдает.,Pass. Let the trailer suffer.
+HUNTER_PASS_7,Не сегодня. Котёл мой цел.,Not today. My pot stays intact.
+HUNTER_PASS_8,Хлам. Даже скотч не склеит.,Junk. Tape can't fix that.
+HUNTER_PASS_9,Пас. Ищите вазу без меня.,Pass. Hunt the vase without me.
+HUNTER_PASS_10,Дорого для носков в коробке.,Too rich for a box of socks.
+HUNTER_SETUP_4,"О, и я в деле!","Oh, I'm in too!"
+HUNTER_SETUP_5,"Поднимем вместе, малыш!","Let's pump it together, kid!"
+HUNTER_SETUP_6,Не отдаю так дёшево!,Not giving it up that cheap!
+HUNTER_SETUP_7,Котёл твой? Проверим.,Your pot? We'll see.
+HUNTER_SETUP_8,Ещё сто! Для атмосферы!,A hundred more! For the vibe!
+HUNTER_SETUP_DROP_4,Твоё. Плати. Хи-хи.,Yours. Pay up. Heh-heh.
+HUNTER_SETUP_DROP_5,Развели. Котёл опустел?,Gotcha. Pot empty yet?
+HUNTER_SETUP_DROP_6,Наслаждайся хламом!,Enjoy the junk!
+HUNTER_SETUP_DROP_7,Я пас. Ты герой. Плати.,I pass. You're the hero. Pay.
+HUNTER_SETUP_DROP_8,Классика. Как на ТВ.,Classic. Just like TV.
+HUNTER_TAUNT_5,Котёл тонкий? Видно.,Thin pot? It shows.
+HUNTER_TAUNT_6,Там кирпичи. Доверься мне.,Bricks in there. Trust me.
+HUNTER_TAUNT_7,Не поднимай — порвёшь спину.,Don't lift — you'll tear your back.
+HUNTER_TAUNT_8,Новичок с веслом. Классика.,Newbie with a paddle. Classic.
+HUNTER_TAUNT_9,Хомяк смотрит и осуждает.,The hamster stares in judgment.
+HUNTER_TAUNT_10,Ставь. Потом плачь в скотч.,Bid. Then cry into the tape.
+HUNTER_WIN_4,"Моё! Котёл, прощай!","Mine! Pot, goodbye!"
+HUNTER_WIN_5,Ха! Ваза уже в кармане!,Ha! Vase is already pocketed!
+HUNTER_WIN_6,Учитесь у лысого!,Learn from the bald guy!
+HUNTER_WIN_7,Забираю. Хомяк мой.,Taking it. Hamster's mine.
+HUNTER_WIN_8,Победа! Казино подождёт!,Victory! Casino can wait!
+HUNTER_WIN_9,Я чуял золото. Или пыль.,I smelled gold. Or dust.
+HUNTER_WIN_10,"Смотрите и плачьте, новички!","Watch and weep, newbies!"
+AUCTION_POLAROID_BAD,Неудачный кадр (потолок),Bad shot (ceiling)
+HUNTER_HAUL_9,Это моё. Не трогать.,This is mine. Hands off.
+HUNTER_HAUL_10,Смотрите, как профи уносит вазу.,Watch a pro walk off with the vase.
+NEMESIS_LOSE_1,"Новичкам везёт. Один раз.","Beginner's luck. Once."
+NEMESIS_LOSE_2,"Два раза. Я запомнил твоё лицо.","Twice. I've memorized your face."
+NEMESIS_LOSE_3,"ТРИ. Это уже личное, салага.","THREE. It's personal now, rookie."
+NEMESIS_LOSE_4,"Четыре. Я звоню Петровичу.","Four. I'm calling Petrovich."
+NEMESIS_LOSE_5,"Пять. Всё. Я больше не Лысый — я Мститель.","Five. That's it. I'm not Baldy anymore — I'm the Avenger."
+NEMESIS_LOSE_6,"Сколько можно?! У меня же кредит на весло!","How many times?! I've got a loan on this paddle!"
+NEMESIS_WIN_1,"Вот так это делается, дети.","That's how it's done, kids."
+NEMESIS_WIN_2,"Второй раз. Лысина блестит — ты нет.","Second time. My head shines — you don't."
+NEMESIS_WIN_3,"Три-ноль. Иди мыть склады.","Three-nil. Go mop storage units."
+NEMESIS_WIN_4,"Я уже сбился со счёта. Ты — тоже, судя по котлу.","Lost count already. So did you, judging by your pot."

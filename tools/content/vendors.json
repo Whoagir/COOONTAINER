@@ -1,0 +1,457 @@
+[
+  {
+    "id": "vendor_tiny",
+    "name_ru": "Ларёк «У Петровича»", "name_en": "Petrovich's Stall",
+    "vendor_type": "HOUSEHOLD",
+    "phobias": ["MOUSE"],
+    "favorite_facets": [],
+    "hated_facets": [],
+    "base_multiplier": 0.45,
+    "buys_illegal": false, "calls_police_on_illegal": true,
+    "green_zone_base": 0.45, "greed": 0.4,
+    "unlock_cost": 0, "unlock_requires_vendor": "",
+    "body_color": "7a6a50", "voice_pitch": 0.95,
+    "lines_greet_ru": [
+      "Клади. Всё беру. Дёшево.",
+      "О, покупатель! Или продавец? Не важно, клади.",
+      "У Петровича всё берут и всё сдают.",
+      "Опять ты. Ну, показывай.",
+      "Чем богаты? Не богаты. Ясно.",
+      "Заходи, не стесняйся, цены всё равно смешные."
+    ],
+    "lines_greet_en": [
+      "Put it down. I buy anything. Cheap.",
+      "Oh, a buyer! Or a seller? Doesn't matter, put it down.",
+      "Petrovich buys all, Petrovich pays little.",
+      "You again. Fine, show me.",
+      "Whatcha got? Not much. Right.",
+      "Come in, don't be shy, the prices are a joke anyway."
+    ],
+    "lines_scream_ru": [
+      "Это что? Это ЧТО?!",
+      "Ты мне это на прилавок положил?!",
+      "Ой. Ой-ой. Ну ладно.",
+      "Такого я ещё не видел. И не хотел.",
+      "Оно ещё и грязное!",
+      "За это мне ещё и платить?!"
+    ],
+    "lines_scream_en": [
+      "What is that? WHAT IS THAT?!",
+      "You put THAT on my counter?!",
+      "Oh. Oh no. Well, fine.",
+      "Never seen one of those. Didn't want to.",
+      "It's dirty too!",
+      "And I'm supposed to PAY for this?!"
+    ],
+    "lines_deal_ru": [
+      "По рукам. Не жалуйся потом.",
+      "Беру. Куда ставить — не знаю.",
+      "Ладно, ладно. Твоя цена.",
+      "Сделка! Петрович доволен.",
+      "Держи копейки. Больше нет.",
+      "Продано. В смысле, куплено."
+    ],
+    "lines_deal_en": [
+      "Deal. Don't come crying later.",
+      "I'll take it. No idea where I'll put it.",
+      "Fine, fine. Your price.",
+      "Deal! Petrovich is pleased.",
+      "Here's your pennies. That's all I've got.",
+      "Sold. I mean, bought."
+    ],
+    "lines_reject_ru": [
+      "Столько? За ЭТО? Ха.",
+      "Ты меня с банком путаешь.",
+      "Скинь ноль. Или два.",
+      "У меня ларёк, а не казино.",
+      "Не-не-не. Меньше.",
+      "Я за такое сам приплачивать не буду."
+    ],
+    "lines_reject_en": [
+      "That much? For THIS? Ha.",
+      "You're confusing me with a bank.",
+      "Drop a zero. Or two.",
+      "This is a stall, not a casino.",
+      "No-no-no. Less.",
+      "I'm not paying extra for THAT."
+    ],
+    "lines_phobia_ru": [
+      "МЫШЬ! МЫШЬ! УБЕРИ!",
+      "А-а-а! Оно шевелится!",
+      "Я на стол залезу! Я серьёзно!",
+      "Забирай грызуна и уходи!",
+      "Петрович боится. Петрович не платит."
+    ],
+    "lines_phobia_en": [
+      "MOUSE! MOUSE! GET IT AWAY!",
+      "AAAH! It's moving!",
+      "I'll climb on the table! I mean it!",
+      "Take the rodent and leave!",
+      "Petrovich scared. Petrovich not paying."
+    ]
+  },
+  {
+    "id": "vendor_antique",
+    "name_ru": "Салон «Патина»", "name_en": "Patina Antiques",
+    "vendor_type": "ANTIQUE",
+    "phobias": ["TAPE"],
+    "favorite_facets": ["FRAGILE", "DOCUMENT"],
+    "hated_facets": [],
+    "base_multiplier": 0.7,
+    "buys_illegal": false, "calls_police_on_illegal": true,
+    "green_zone_base": 0.3, "greed": 0.6,
+    "unlock_cost": 300, "unlock_requires_vendor": "vendor_tiny",
+    "body_color": "5a3a6a", "voice_pitch": 0.85,
+    "lines_greet_ru": [
+      "Ах. Ещё один охотник за сокровищами.",
+      "Осторожнее с прилавком, ему двести лет.",
+      "Покажите, что вы там... принесли.",
+      "Фарфор? Бумаги? Или снова хлам?",
+      "Добро пожаловать. Пыль не трогать, она антикварная.",
+      "Я оценю. Вы — расстроитесь."
+    ],
+    "lines_greet_en": [
+      "Ah. Another treasure hunter.",
+      "Mind the counter, it's two hundred years old.",
+      "Show me what you've... dragged in.",
+      "Porcelain? Papers? Or junk again?",
+      "Welcome. Don't touch the dust, it's antique.",
+      "I shall appraise. You shall be disappointed."
+    ],
+    "lines_scream_ru": [
+      "Вы это МЫЛИ?! Варвар!",
+      "Скол! Тут скол! Я его вижу!",
+      "Боже. Кто-то это любил.",
+      "Это... это не то, о чём я подумал?",
+      "Осторожно! Оно дышит историей и плесенью!",
+      "Ах! Мой монокль!"
+    ],
+    "lines_scream_en": [
+      "You WASHED it?! Barbarian!",
+      "A chip! There's a chip! I see it!",
+      "Good heavens. Someone loved this.",
+      "Is that... is that what I think it is?",
+      "Careful! It breathes history and mold!",
+      "Ah! My monocle!"
+    ],
+    "lines_deal_ru": [
+      "Приемлемо. Оформим.",
+      "Договорились. Не трогайте больше ничего.",
+      "Беру. Это войдёт в коллекцию. Или в подвал.",
+      "Ладно. Ради искусства.",
+      "Ваша цена оскорбительна, но я согласен.",
+      "Куплено. Уходите тихо."
+    ],
+    "lines_deal_en": [
+      "Acceptable. Let's proceed.",
+      "Agreed. Now stop touching things.",
+      "I'll take it. It joins the collection. Or the basement.",
+      "Fine. For art's sake.",
+      "Your price is offensive, but I accept.",
+      "Purchased. Leave quietly."
+    ],
+    "lines_reject_ru": [
+      "Это не Мин. Это Минск.",
+      "Вы оцениваете по весу? Это не сыр.",
+      "Нет. Ещё раз нет. И — нет.",
+      "За такую цену продайте это музею. Плохому.",
+      "Я антиквар, а не благотворитель.",
+      "Смешно. Нет."
+    ],
+    "lines_reject_en": [
+      "That is not Ming. That is Minsk.",
+      "Are you pricing by weight? It's not cheese.",
+      "No. Again, no. And also no.",
+      "At that price, sell it to a museum. A bad one.",
+      "I'm an antiquarian, not a charity.",
+      "Amusing. No."
+    ],
+    "lines_phobia_ru": [
+      "СКОТЧ?! На антиквариате?! Вон!",
+      "Уберите эту липкую мерзость!",
+      "У меня аллергия на скотч. Душевная.",
+      "Кто-то заклеил историю! Кто-то заклеил ИСТОРИЮ!",
+      "Это преступление против реставрации!"
+    ],
+    "lines_phobia_en": [
+      "DUCT TAPE?! On an antique?! Out!",
+      "Remove that sticky abomination!",
+      "I'm allergic to tape. Spiritually.",
+      "Someone taped over history! TAPED OVER HISTORY!",
+      "This is a crime against restoration!"
+    ]
+  },
+  {
+    "id": "vendor_household",
+    "name_ru": "База «Всё для дома»", "name_en": "Everything Home Depot",
+    "vendor_type": "HOUSEHOLD",
+    "phobias": ["PAINT"],
+    "favorite_facets": ["CONTAINER", "DIRTYABLE"],
+    "hated_facets": [],
+    "base_multiplier": 0.65,
+    "buys_illegal": false, "calls_police_on_illegal": true,
+    "green_zone_base": 0.4, "greed": 0.5,
+    "unlock_cost": 600, "unlock_requires_vendor": "vendor_tiny",
+    "body_color": "c07030", "voice_pitch": 1.1,
+    "lines_greet_ru": [
+      "Привет! Комоды есть? Комоды всегда надо.",
+      "Заезжай! Чистое беру дороже, грязное — тоже беру.",
+      "О, руки в масле! Мой человек.",
+      "Тащи сюда. Если пролезет в дверь — куплю.",
+      "Мебель? Посуда? Ведро? Всё моё.",
+      "Здорово! Бабушка чистила? Нет? Жаль."
+    ],
+    "lines_greet_en": [
+      "Hey there! Got dressers? Always need dressers.",
+      "Roll on in! Clean stuff pays more, dirty stuff still pays.",
+      "Oh, oily hands! My kind of person.",
+      "Drag it in. If it fits through the door, I buy it.",
+      "Furniture? Dishes? A bucket? All mine.",
+      "Howdy! Did grandma clean it? No? Pity."
+    ],
+    "lines_scream_ru": [
+      "Ящик не выдвигается! ЯЩИК!",
+      "Это ж пылью на палец! На палец!",
+      "Ого. Ого-го. Куда его?",
+      "Это диван или зверь?!",
+      "Ой, ножка отвалилась. Твоя ножка. То есть его.",
+      "Ты это на чём вёз? На себе?!"
+    ],
+    "lines_scream_en": [
+      "The drawer won't open! THE DRAWER!",
+      "That's a finger of dust! A FINGER!",
+      "Whoa. Whoa-ho. Where do I put that?",
+      "Is that a sofa or an animal?!",
+      "Oops, a leg fell off. Your leg. I mean its leg.",
+      "What did you haul that on? Your back?!"
+    ],
+    "lines_deal_ru": [
+      "По рукам! Помоги занести.",
+      "Беру. В подсобку. Там ещё сорок таких.",
+      "Годится. Чистое — люблю.",
+      "Ладно, договорились. Только без царапин.",
+      "Куплю. Ставь к тем комодам. Да, к тем.",
+      "Сделка! Скидку на швабру хочешь?"
+    ],
+    "lines_deal_en": [
+      "Deal! Help me carry it.",
+      "I'll take it. Back room. There's forty more like it.",
+      "Works for me. I love a clean one.",
+      "Alright, deal. No more scratches though.",
+      "Buying. Put it by those dressers. Yes, those.",
+      "Deal! Want a discount on a mop?"
+    ],
+    "lines_reject_ru": [
+      "Э, столько стоит новый. С доставкой.",
+      "Помой сначала, потом торгуйся.",
+      "Дорого. У меня таких три и все не продаются.",
+      "Не-не. Это ж ДСП. ДСП, понимаешь?",
+      "За такое я тебе сам дам… в долг.",
+      "Ты цену где взял? На потолке?"
+    ],
+    "lines_reject_en": [
+      "Hey, that's what a NEW one costs. With delivery.",
+      "Wash it first, then haggle.",
+      "Too much. I've got three and none of them sell.",
+      "Nah-nah. That's particleboard. PARTICLEBOARD.",
+      "For that I'd rather lend you money.",
+      "Where'd you get that price? The ceiling?"
+    ],
+    "lines_phobia_ru": [
+      "КРАСКА! Она везде будет! ВЕЗДЕ!",
+      "Убери банку! У меня новый пол!",
+      "Не-не-не, не открывай! НЕ ОТКРЫВАЙ!",
+      "Я это отмывал три недели в прошлый раз!",
+      "Краска — это навсегда! Как тёща!"
+    ],
+    "lines_phobia_en": [
+      "PAINT! It gets EVERYWHERE!",
+      "Take the can away! I just did the floors!",
+      "No-no-no, don't open it! DON'T OPEN IT!",
+      "Last time I scrubbed for three weeks!",
+      "Paint is forever! Like a mother-in-law!"
+    ]
+  },
+  {
+    "id": "vendor_tech",
+    "name_ru": "Сервис «Байт и Молоток»", "name_en": "Byte & Hammer Repairs",
+    "vendor_type": "TECH",
+    "phobias": ["WET"],
+    "favorite_facets": [],
+    "hated_facets": ["LIQUID"],
+    "base_multiplier": 0.7,
+    "buys_illegal": false, "calls_police_on_illegal": true,
+    "green_zone_base": 0.3, "greed": 0.6,
+    "unlock_cost": 1200, "unlock_requires_vendor": "vendor_tiny",
+    "body_color": "30a0c0", "voice_pitch": 1.2,
+    "lines_greet_ru": [
+      "Включается? Нет? Всё равно интересно.",
+      "Плазма? Ноут? Или снова тостер?",
+      "Клади на антистатик. Вот сюда.",
+      "О! Железо! Дай посмотреть!",
+      "Гарантия закончилась в 2009-м? Отлично, беру.",
+      "Не трогай провода. Провода — мои."
+    ],
+    "lines_greet_en": [
+      "Does it turn on? No? Still interested.",
+      "Plasma? Laptop? Or a toaster again?",
+      "Put it on the anti-static mat. Right there.",
+      "Ooh! Hardware! Let me see!",
+      "Warranty expired in 2009? Perfect, I'll take it.",
+      "Don't touch the cables. The cables are mine."
+    ],
+    "lines_scream_ru": [
+      "Экран! Экран паутинкой!",
+      "Тут батарея вздулась! Она БЕРЕМЕННА!",
+      "Кто-то это ронял. Много раз. С любовью.",
+      "Пахнет горелым! Обожаю!",
+      "Это же ЭЛТ! Спину береги!",
+      "Ой. Оно пикнуло. Оно живое."
+    ],
+    "lines_scream_en": [
+      "The screen! Spiderweb screen!",
+      "The battery's swollen! It's PREGNANT!",
+      "Someone dropped this. Repeatedly. With love.",
+      "Smells burnt! I love it!",
+      "That's a CRT! Mind your back!",
+      "Oh. It beeped. It's alive."
+    ],
+    "lines_deal_ru": [
+      "Беру. На запчасти. Или на алтарь.",
+      "Окей. Перепрошью и продам втридорога.",
+      "Договорились. Кабель в подарок. Не тот.",
+      "Годно. Ставь к серверу. Это не сервер, но ставь.",
+      "Сделка. Пароль не спрашиваю.",
+      "Куплено. Данные твои? Уже нет."
+    ],
+    "lines_deal_en": [
+      "Taking it. For parts. Or the shrine.",
+      "Okay. I'll reflash it and sell it for triple.",
+      "Deal. Free cable. Not the right one.",
+      "Good. Put it by the server. It's not a server, but still.",
+      "Deal. I won't ask for the password.",
+      "Bought. Your data? Not anymore."
+    ],
+    "lines_reject_ru": [
+      "За «АйФон 4S»? Это не 2011-й.",
+      "Оно даже не включается. Скидывай.",
+      "Не. Там конденсаторы плачут.",
+      "Столько стоит новый. И он работает.",
+      "Ты ноль лишний нажал. Как на клавиатуре.",
+      "Не-а. Это же «Самсонг», не «Самсунг»."
+    ],
+    "lines_reject_en": [
+      "For an iPhon 4S? It's not 2011.",
+      "It doesn't even power on. Lower it.",
+      "Nope. The capacitors are crying.",
+      "That's the price of a new one. That works.",
+      "You hit an extra zero. Like on a keyboard.",
+      "Nah. It's a Samsong, not the real one."
+    ],
+    "lines_phobia_ru": [
+      "МОКРОЕ! Не неси мокрое к железу!",
+      "Вода! Короткое! Всё, я пропал!",
+      "Вытирай! ВЫТИРАЙ, пока не дымит!",
+      "Оно капает! На МАТЕРИНКУ капает!",
+      "Убери! Я и так на рисе живу!"
+    ],
+    "lines_phobia_en": [
+      "WET! Don't bring wet stuff near hardware!",
+      "Water! Short circuit! I'm doomed!",
+      "Wipe it! WIPE IT before it smokes!",
+      "It's dripping! On the MOTHERBOARD!",
+      "Get it away! I already live on rice!"
+    ]
+  },
+  {
+    "id": "vendor_dark",
+    "name_ru": "Гараж «Без Вопросов»", "name_en": "No Questions Garage",
+    "vendor_type": "DARK",
+    "phobias": ["HAMSTER"],
+    "favorite_facets": ["ILLEGAL", "WEAPON"],
+    "hated_facets": [],
+    "base_multiplier": 0.8,
+    "buys_illegal": true, "calls_police_on_illegal": false,
+    "green_zone_base": 0.22, "greed": 0.8,
+    "unlock_cost": 2500, "unlock_requires_vendor": "vendor_tiny",
+    "body_color": "202028", "voice_pitch": 0.7,
+    "lines_greet_ru": [
+      "Тихо. Клади. Не смотри мне в глаза.",
+      "Вопросов не задаю. Ты тоже не задавай.",
+      "Опять ты. Хвоста нет? Проверь.",
+      "Что принёс? Хорошее — это то, что не ищут.",
+      "Заходи. Дверь закрой. Обе.",
+      "Ну? Показывай, что «нашёл»."
+    ],
+    "lines_greet_en": [
+      "Quiet. Put it down. Don't look me in the eye.",
+      "I ask no questions. You ask none either.",
+      "You again. Anyone tail you? Check.",
+      "Whatcha got? Good stuff is stuff nobody's looking for.",
+      "Come in. Close the door. Both of them.",
+      "Well? Show me what you «found»."
+    ],
+    "lines_scream_ru": [
+      "Это с серийником?! Спили!",
+      "Тихо-тихо-тихо! Это ж... ага.",
+      "Ты это где взял? Не отвечай.",
+      "О-о. Это ж Сержа. Был Сержа.",
+      "Убери со света! Со света убери!",
+      "Хех. Хе-хе. Мне нравится."
+    ],
+    "lines_scream_en": [
+      "That has a serial number?! File it off!",
+      "Quiet-quiet-quiet! That's... yeah.",
+      "Where'd you get that? Don't answer.",
+      "Oh-ho. That's Serge's. WAS Serge's.",
+      "Get it out of the light! Out of the light!",
+      "Heh. Heh-heh. I like it."
+    ],
+    "lines_deal_ru": [
+      "Договорились. Мы не встречались.",
+      "Беру. Деньги в конверте. Конверта нет.",
+      "Ладно. Но ты меня не знаешь.",
+      "По рукам. Руки мыть после.",
+      "Сделка. Тебя здесь не было.",
+      "Куплю. Скажи, что это подарок."
+    ],
+    "lines_deal_en": [
+      "Deal. We never met.",
+      "I'll take it. Cash in an envelope. No envelope.",
+      "Fine. But you don't know me.",
+      "Deal. Wash your hands after.",
+      "Done. You were never here.",
+      "Buying. Say it was a gift."
+    ],
+    "lines_reject_ru": [
+      "Много хочешь. Мало живёшь.",
+      "За такое я ещё и риск беру. Скидывай.",
+      "Не. Слишком чистое. Подозрительно.",
+      "Половину. Иначе дверь — там.",
+      "Ты на кого работаешь? Шучу. Не шучу. Скидывай.",
+      "Не смешно. Меньше."
+    ],
+    "lines_reject_en": [
+      "You want a lot. You'll live a little.",
+      "I'm taking the risk here. Lower it.",
+      "Nah. Too clean. Suspicious.",
+      "Half. Or the door is that way.",
+      "Who do you work for? Kidding. Not kidding. Lower it.",
+      "Not funny. Less."
+    ],
+    "lines_phobia_ru": [
+      "ХОМЯК! Убери хомяка! Я серьёзно!",
+      "Оно смотрит! Оно ЗНАЕТ!",
+      "У меня было детство. Там был хомяк. Не спрашивай.",
+      "Нет-нет-нет. Не этот. Не эти щёки.",
+      "Всё, сделки нет. Хомяк — вон."
+    ],
+    "lines_phobia_en": [
+      "HAMSTER! Get the hamster away! I mean it!",
+      "It's looking at me! It KNOWS!",
+      "I had a childhood. There was a hamster. Don't ask.",
+      "No-no-no. Not that one. Not those cheeks.",
+      "That's it, no deal. Hamster out."
+    ]
+  }
+]

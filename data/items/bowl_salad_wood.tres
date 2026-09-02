@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/ItemDef.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "bowl_salad_wood"
+name_ru = "Салатник деревянный"
+name_en = "Wooden Salad Bowl"
+archetype_id = "bowl"
+facets = Array[int]([1])
+value_base = 6
+mass_override = 0.0
+liquid_id = 0
+liquid_amount = 1.0
+flammable = true
+illegal = false
+dusty_default = 0.2
+vendor_affinity = Array[String](["vendor_household"])
+wearable_slot = "none"
+break_threshold = 25.0
+color = Color(0.6275, 0.4392, 0.251, 1.0)
+scale = 1.0
+tags = Array[String]([])
+lore_ru = ""
+lore_en = ""

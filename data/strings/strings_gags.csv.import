@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://bnk8xf65x7x2"
+
+[deps]
+
+files=["res://data/strings/strings_gags.ru.translation", "res://data/strings/strings_gags.en.translation"]
+
+source_file="res://data/strings/strings_gags.csv"
+dest_files=["res://data/strings/strings_gags.ru.translation", "res://data/strings/strings_gags.en.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

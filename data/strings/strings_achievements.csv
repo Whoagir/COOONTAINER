@@ -1,0 +1,85 @@
+keys,ru,en
+ACH_MOVED_OUT,Съехал,Moved Out
+ACH_MOVED_OUT_D,Купил дом и вылез из трейлера,Bought a house and left the trailer
+ACH_HIT_AND_RUN,Не заметил,Didn't See You There
+ACH_HIT_AND_RUN_D,Сбил кореша тачкой. Он сам вышел на дорогу.,Ran over a friend with the truck. He walked onto the road himself.
+ACH_GRUDGE,Толик больше не Лысый,Tolik Is Not Bald Anymore
+ACH_GRUDGE_D,Перебил Толика Лысого пять раз. Он теперь Мститель.,Outbid Tolik the Bald five times. He's the Avenger now.
+ACH_VASE,Ваза за доллар,One-Dollar Vase
+ACH_VASE_D,Разбил вазу. Осколки всё равно продал.,Broke a vase. Sold the shards anyway.
+ACH_BUTTERFINGERS,Руки-крюки,Butterfingers
+ACH_BUTTERFINGERS_D,Разбил 25 вещей,Broke 25 items
+ACH_OVERCLEANED,Помыл и порвал,Cleaned Through
+ACH_OVERCLEANED_D,Тёр тряпкой, пока не порвал,Scrubbed until it tore
+ACH_TAPE,Доктор Скотч,Duct Tape Doctor
+ACH_TAPE_D,Заклеил 15 вещей скотчем,Taped 15 items
+ACH_BOOKWORM,Книжный червь,Bookworm
+ACH_BOOKWORM_D,Вытряс 10 вещей из книг и сумок,Shook 10 things out of books and bags
+ACH_LOCKPICK,Тихо-тихо,Hush Hush
+ACH_LOCKPICK_D,Вскрыл замок отмычкой,Picked a lock
+ACH_BANG,БАХ,BANG
+ACH_BANG_D,Выстрелил из пистолета с флажком,Fired the gag gun
+ACH_FRIENDLY_FIRE,Кореш,Buddy
+ACH_FRIENDLY_FIRE_D,Пистолет-гаг оказался не гагом,The gag gun wasn't a gag
+ACH_CONNOISSEUR,Ценитель,Connoisseur
+ACH_CONNOISSEUR_D,Выпил найденное 10 раз,Drank the loot 10 times
+ACH_BLACKOUT,Затмение,Blackout
+ACH_BLACKOUT_D,Допился до состояния камеры-качели,Drank until the camera swung
+ACH_PAINTED,Покрасил кореша,Painted Buddy
+ACH_PAINTED_D,Облил человека краской,Splashed a person with paint
+ACH_NINE_LIVES,Девять жизней,Nine Lives
+ACH_NINE_LIVES_D,Умер 9 раз,Died 9 times
+ACH_WELL_DONE,Прожарка,Well Done
+ACH_WELL_DONE_D,Сгорел,Burned to death
+ACH_CLOWN,Клоун,Clown
+ACH_CLOWN_D,Надел костюм клоуна,Wore the clown costume
+ACH_UNICORN,Единорог,Unicorn
+ACH_UNICORN_D,Надел костюм единорога,Wore the unicorn costume
+ACH_SLIPPERY,Скользко,Slippery
+ACH_SLIPPERY_D,Наделал 30 луж,Made 30 puddles
+ACH_ARSONIST,Поджигатель,Arsonist
+ACH_ARSONIST_D,Огонь горел минуту без остановки,Fire burned for a full minute
+ACH_BURNED_GARAGE,Сжёг гараж,Burned the Garage
+ACH_BURNED_GARAGE_D,Лот сгорел целиком,A whole lot burned down
+ACH_PYRO,Пиро,Pyro
+ACH_PYRO_D,Поджёг что-то зажигалкой,Lit something with a lighter
+ACH_NEEDLE,Иголка,Needle
+ACH_NEEDLE_D,Нашёл стразину в стоге хлама,Found the rhinestone in the junk haystack
+ACH_BRIBE,Договорились,We Have a Deal
+ACH_BRIBE_D,Дал взятку менту купюрой,Bribed a cop with a bill
+ACH_LOCKED_INSIDE,Заперли,Locked In
+ACH_LOCKED_INSIDE_D,Остался внутри ячейки после овертайма,Stayed inside the unit after overtime
+ACH_FIRST_HAMMER,Молот,Hammer
+ACH_FIRST_HAMMER_D,Выиграл первый лот,Won your first lot
+ACH_BLUFFED,Развёл лысого,Called the Bluff
+ACH_BLUFFED_D,Хантер блефовал — ты не повёлся,A hunter bluffed — you didn't bite
+ACH_BRAWLER,Потасовка,Brawler
+ACH_BRAWLER_D,Уронил хантера дважды,Knocked a hunter down twice
+ACH_ARRESTED,Повязали,Busted
+ACH_ARRESTED_D,Посидел за решёткой,Spent time behind bars
+ACH_CASINO_BUST,Дом всегда выигрывает,House Always Wins
+ACH_CASINO_BUST_D,Проиграл в казино вещь дороже $200,Lost an item worth $200+ at the casino
+ACH_CASINO_WIN,Пока повезло,Lucky For Now
+ACH_CASINO_WIN_D,Выиграл в казино $200+,Won $200+ at the casino
+ACH_JANITOR,Дно,Rock Bottom
+ACH_JANITOR_D,Отработал уборку за копейки,Did a janitor job for pennies
+ACH_HAMSTER,Борис,Boris
+ACH_HAMSTER_D,Продал хомяка. Живого.,Sold the hamster. Alive.
+ACH_PHONE_LIAR,ЦеноБот,PriceBot
+ACH_PHONE_LIAR_D,Оценщик в телефоне соврал в 3 раза,The phone appraiser lied 3x
+ACH_CAR_THIEF,Угон,Grand Theft Junk
+ACH_CAR_THIEF_D,Угнал чужую тачку,Stole someone's car
+ACH_FIRST_CAR,Своя тачка,Wheels
+ACH_FIRST_CAR_D,Купил тачку на авторынке,Bought a car at the market
+ACH_BUMP,Кочка,Bump
+ACH_BUMP_D,Лут подпрыгнул в кузове на кочке,Loot jumped in the bed on a bump
+ACH_SAFE,Сейф,Safe
+ACH_SAFE_D,Вскрыл сейф,Cracked a safe
+ACH_HAGGLE,Идеальный торг,Perfect Haggle
+ACH_HAGGLE_D,Попал в узкое зелёное идеально,Nailed a narrow green zone
+ACH_THREAT,Угроза,Threat
+ACH_THREAT_D,Угрожал аукционисту,Threatened the auctioneer
+ACH_PHOBIA,Фобия,Phobia
+ACH_PHOBIA_D,Напугал скупщика его страхом,Scared a vendor with their phobia
+ACH_FULL_PARTY,Пачка,Full Party
+ACH_FULL_PARTY_D,Играли вчетвером,Played with four

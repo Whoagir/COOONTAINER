@@ -1,0 +1,32 @@
+[gd_resource type="Resource" script_class="VendorDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/VendorDef.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "vendor_tiny"
+name_ru = "Ларёк «У Петровича»"
+name_en = "Petrovich's Stall"
+vendor_type = 1
+phobias = Array[int]([1])
+favorite_facets = Array[int]([])
+hated_facets = Array[int]([])
+base_multiplier = 0.45
+buys_illegal = false
+calls_police_on_illegal = true
+green_zone_base = 0.45
+greed = 0.4
+unlock_cost = 0
+unlock_requires_vendor = ""
+body_color = Color(0.4784, 0.4157, 0.3137, 1.0)
+voice_pitch = 0.95
+lines_greet_ru = Array[String](["Клади. Всё беру. Дёшево.", "О, покупатель! Или продавец? Не важно, клади.", "У Петровича всё берут и всё сдают.", "Опять ты. Ну, показывай.", "Чем богаты? Не богаты. Ясно.", "Заходи, не стесняйся, цены всё равно смешные."])
+lines_greet_en = Array[String](["Put it down. I buy anything. Cheap.", "Oh, a buyer! Or a seller? Doesn't matter, put it down.", "Petrovich buys all, Petrovich pays little.", "You again. Fine, show me.", "Whatcha got? Not much. Right.", "Come in, don't be shy, the prices are a joke anyway."])
+lines_scream_ru = Array[String](["Это что? Это ЧТО?!", "Ты мне это на прилавок положил?!", "Ой. Ой-ой. Ну ладно.", "Такого я ещё не видел. И не хотел.", "Оно ещё и грязное!", "За это мне ещё и платить?!"])
+lines_scream_en = Array[String](["What is that? WHAT IS THAT?!", "You put THAT on my counter?!", "Oh. Oh no. Well, fine.", "Never seen one of those. Didn't want to.", "It's dirty too!", "And I'm supposed to PAY for this?!"])
+lines_deal_ru = Array[String](["По рукам. Не жалуйся потом.", "Беру. Куда ставить — не знаю.", "Ладно, ладно. Твоя цена.", "Сделка! Петрович доволен.", "Держи копейки. Больше нет.", "Продано. В смысле, куплено."])
+lines_deal_en = Array[String](["Deal. Don't come crying later.", "I'll take it. No idea where I'll put it.", "Fine, fine. Your price.", "Deal! Petrovich is pleased.", "Here's your pennies. That's all I've got.", "Sold. I mean, bought."])
+lines_reject_ru = Array[String](["Столько? За ЭТО? Ха.", "Ты меня с банком путаешь.", "Скинь ноль. Или два.", "У меня ларёк, а не казино.", "Не-не-не. Меньше.", "Я за такое сам приплачивать не буду."])
+lines_reject_en = Array[String](["That much? For THIS? Ha.", "You're confusing me with a bank.", "Drop a zero. Or two.", "This is a stall, not a casino.", "No-no-no. Less.", "I'm not paying extra for THAT."])
+lines_phobia_ru = Array[String](["МЫШЬ! МЫШЬ! УБЕРИ!", "А-а-а! Оно шевелится!", "Я на стол залезу! Я серьёзно!", "Забирай грызуна и уходи!", "Петрович боится. Петрович не платит."])
+lines_phobia_en = Array[String](["MOUSE! MOUSE! GET IT AWAY!", "AAAH! It's moving!", "I'll climb on the table! I mean it!", "Take the rodent and leave!", "Petrovich scared. Petrovich not paying."])

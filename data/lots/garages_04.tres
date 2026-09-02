@@ -1,0 +1,171 @@
+[gd_resource type="Resource" script_class="LotPreset" load_steps=20 format=3]
+
+[ext_resource type="Script" path="res://core/LotPreset.gd" id="1"]
+[ext_resource type="Script" path="res://core/LotSpawn.gd" id="2"]
+
+[sub_resource type="Resource" id="s1"]
+script = ExtResource("2")
+item_id = "engine_v8"
+xform = Transform3D(0.9781, 0, -0.2079, 0, 1.0, 0, 0.2079, 0, 0.9781, -1.6, 0.0, -2.3)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s2"]
+script = ExtResource("2")
+item_id = "fridge_smart"
+xform = Transform3D(0.9945, 0, 0.1045, 0, 1.0, 0, -0.1045, 0, 0.9945, 2.0, 0.0, -2.2)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s3"]
+script = ExtResource("2")
+item_id = "wardrobe_narnia"
+xform = Transform3D(0.0, 0, -1.0, 0, 1.0, 0, 1.0, 0, 0.0, 2.0, 0.0, -0.4)
+nested = Array[String](["jacket_leather", "costume_santa"])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s4"]
+script = ExtResource("2")
+item_id = "sofa_sagging"
+xform = Transform3D(0.9976, 0, -0.0698, 0, 1.0, 0, 0.0698, 0, 0.9976, 0.2, 0.0, -2.35)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s5"]
+script = ExtResource("2")
+item_id = "plasma_55"
+xform = Transform3D(0.9903, 0, -0.1392, 0, 1.0, 0, 0.1392, 0, 0.9903, 0.1, 0.0, -1.2)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s6"]
+script = ExtResource("2")
+item_id = "dresser_ikeya"
+xform = Transform3D(0.0, 0, -1.0, 0, 1.0, 0, 1.0, 0, 0.0, -2.05, 0.0, -0.5)
+nested = Array[String](["tshirt_band"])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s7"]
+script = ExtResource("2")
+item_id = "laptop_macbuk"
+xform = Transform3D(0.9613, 0, -0.2756, 0, 1.0, 0, 0.2756, 0, 0.9613, -2.0, 0.92, -0.5)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s8"]
+script = ExtResource("2")
+item_id = "monitor_ultrawide"
+xform = Transform3D(0.9945, 0, -0.1045, 0, 1.0, 0, 0.1045, 0, 0.9945, 1.6, 0.0, 0.5)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s9"]
+script = ExtResource("2")
+item_id = "camera_dslr"
+xform = Transform3D(0.9511, 0, 0.309, 0, 1.0, 0, -0.309, 0, 0.9511, 1.1, 0.0, 0.7)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s10"]
+script = ExtResource("2")
+item_id = "toolbox_grandpa"
+xform = Transform3D(0.9848, 0, -0.1736, 0, 1.0, 0, 0.1736, 0, 0.9848, -1.7, 0.0, 0.4)
+nested = Array[String](["drill_cordless", "cash_50"])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s11"]
+script = ExtResource("2")
+item_id = "bicycle_racing"
+xform = Transform3D(0.9397, 0, -0.342, 0, 1.0, 0, 0.342, 0, 0.9397, -1.8, 0.0, 1.6)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s12"]
+script = ExtResource("2")
+item_id = "tire_racing"
+xform = Transform3D(0.9903, 0, -0.1392, 0, 1.0, 0, 0.1392, 0, 0.9903, 1.8, 0.0, 1.1)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s13"]
+script = ExtResource("2")
+item_id = "tire_bald"
+xform = Transform3D(0.9945, 0, 0.1045, 0, 1.0, 0, -0.1045, 0, 0.9945, -0.2, 0.0, 1.5)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s14"]
+script = ExtResource("2")
+item_id = "oil_jug_engine"
+xform = Transform3D(0.9703, 0, -0.2419, 0, 1.0, 0, 0.2419, 0, 0.9703, 0.4, 0.0, 0.8)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s15"]
+script = ExtResource("2")
+item_id = "gasoline_canister"
+xform = Transform3D(0.9903, 0, -0.1392, 0, 1.0, 0, 0.1392, 0, 0.9903, -0.2, 0.0, 0.85)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s16"]
+script = ExtResource("2")
+item_id = "box_moving"
+xform = Transform3D(0.9945, 0, -0.1045, 0, 1.0, 0, 0.1045, 0, 0.9945, -0.8, 0.0, 2.25)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s17"]
+script = ExtResource("2")
+item_id = "crate_military"
+xform = Transform3D(0.9903, 0, 0.1392, 0, 1.0, 0, -0.1392, 0, 0.9903, 0.4, 0.0, 2.2)
+nested = Array[String](["gun_gag_cap", "tool_matches"])
+locked_override = 1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s18"]
+script = ExtResource("2")
+item_id = "fan_industrial"
+xform = Transform3D(0.9848, 0, -0.1736, 0, 1.0, 0, 0.1736, 0, 0.9848, 2.05, 0.0, 2.2)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[resource]
+script = ExtResource("1")
+id = "garages_04"
+district_id = 3
+lot_kind = 3
+min_bid = 450
+info_mode = 3
+preview_seconds = 24.0
+clearout_seconds = 270.0
+lock_chance = 0.22
+spawn_list = Array[Resource]([SubResource("s1"), SubResource("s2"), SubResource("s3"), SubResource("s4"), SubResource("s5"), SubResource("s6"), SubResource("s7"), SubResource("s8"), SubResource("s9"), SubResource("s10"), SubResource("s11"), SubResource("s12"), SubResource("s13"), SubResource("s14"), SubResource("s15"), SubResource("s16"), SubResource("s17"), SubResource("s18")])
+pacing_tag = 0
+broom_required = false
+hunters_count = 7
+order = 4
+tale_ru = "Мастерская с Нарнией. Задней стенки нет — дальше стена. Мотор V8 хромированный настоящий. Вертолёт дописали карандашом и сами посмеялись."
+tale_en = "A workshop with Narnia. No back panel — just the wall. The chrome V8 is real. Someone added a helicopter in pencil and laughed at themselves."
+docs_ru = "ГАРАЖ 04 — МАСТЕРСКАЯ (опись на масляной бумаге):\nМотор V8 хромированный — 1\nХолодильник умный (знает ваши грехи) — 1\nПлазма 55 — 1\nШкаф «Нарния» — задней стенки нет, дальше стена\nВертолёт — нет. Кто-то дописал карандашом."
+docs_en = "GARAGE 04 — WORKSHOP (manifest on oily paper):\nChrome V8 engine — 1\nSmart fridge (knows your sins) — 1\n55-inch plasma — 1\nNarnia wardrobe — no back panel, just the wall\nHelicopter — no. Someone added that in pencil."
+photo_item_ids = Array[String]([])
+cell_size = Vector3(5.0, 3.0, 6.0)
+dark = false

@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="AuctionBrain" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/AuctionBrain.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "hunter_01"
+name_ru = "Толик Лысый"
+name_en = "Tolik the Bald"
+nickname_ru = "Лысый"
+nickname_en = "Baldy"
+estimate_error = 0.2
+greed = 0.75
+bluff_chance = 0.45
+setup_chance = 0.25
+patience = 0.6
+aggression = 0.7
+brawl_temper = 0.35
+info_sensitivity = 0.9
+body_color = Color(0.4157, 0.2902, 0.2275, 1.0)
+hat = false
+bald = true
+voice_pitch = 0.9
+catchphrases_ru = Array[String](["Пятьсот! Шучу. Или нет.", "Я этот гараж носом чую.", "Ты у меня ещё поплачешь, весло.", "Э, я первый поднял! Все видели!", "Там плазма. Точно плазма. Наверное.", "Лысина блестит — значит выигрываю.", "Ставлю. Потом подумаю."])
+catchphrases_en = Array[String](["Five hundred! Kidding. Or am I?", "I can smell this garage from here.", "You'll cry into that paddle, kid.", "Hey, I raised first! Everyone saw!", "There's a plasma in there. Definitely. Probably.", "Shiny head, shiny win.", "Bid now. Think later."])
+height = 1.72
+fatness = 1.25

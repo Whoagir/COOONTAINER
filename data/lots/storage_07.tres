@@ -1,0 +1,131 @@
+[gd_resource type="Resource" script_class="LotPreset" load_steps=15 format=3]
+
+[ext_resource type="Script" path="res://core/LotPreset.gd" id="1"]
+[ext_resource type="Script" path="res://core/LotSpawn.gd" id="2"]
+
+[sub_resource type="Resource" id="s1"]
+script = ExtResource("2")
+item_id = "box_moving"
+xform = Transform3D(0.9848, 0, -0.1736, 0, 1.0, 0, 0.1736, 0, 0.9848, -0.85, 0.0, 1.1)
+nested = Array[String](["cup_okayest"])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s2"]
+script = ExtResource("2")
+item_id = "crate_wooden"
+xform = Transform3D(0.9903, 0, 0.1392, 0, 1.0, 0, -0.1392, 0, 0.9903, 0.1, 0.0, 1.12)
+nested = Array[String](["whiskey_cheap"])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s3"]
+script = ExtResource("2")
+item_id = "box_amazoom"
+xform = Transform3D(0.9945, 0, -0.1045, 0, 1.0, 0, 0.1045, 0, 0.9945, 0.95, 0.0, 1.08)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s4"]
+script = ExtResource("2")
+item_id = "mattress_kids"
+xform = Transform3D(0.0, 0, -1.0, 0, 1.0, 0, 1.0, 0, 0.0, 0.2, 0.0, 0.2)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s5"]
+script = ExtResource("2")
+item_id = "painting_maybe_master"
+xform = Transform3D(0.9976, 0, -0.0698, 0, 1.0, 0, 0.0698, 0, 0.9976, 0.0, 0.0, -1.2)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s6"]
+script = ExtResource("2")
+item_id = "painting_motel"
+xform = Transform3D(0.0698, 0, -0.9976, 0, 1.0, 0, 0.9976, 0, 0.0698, -1.15, 0.0, -0.4)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s7"]
+script = ExtResource("2")
+item_id = "lamp_table_tiffany"
+xform = Transform3D(0.9781, 0, 0.2079, 0, 1.0, 0, -0.2079, 0, 0.9781, 0.95, 0.0, -1.05)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s8"]
+script = ExtResource("2")
+item_id = "nightstand_deco"
+xform = Transform3D(0.9903, 0, -0.1392, 0, 1.0, 0, 0.1392, 0, 0.9903, -0.95, 0.0, -1.05)
+nested = Array[String](["letter_love", "watch_kasio"])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s9"]
+script = ExtResource("2")
+item_id = "jewelry_box_velvet"
+xform = Transform3D(0.9703, 0, -0.2419, 0, 1.0, 0, 0.2419, 0, 0.9703, -0.95, 0.58, -1.05)
+nested = Array[String](["ring_class"])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s10"]
+script = ExtResource("2")
+item_id = "book_first_edition"
+xform = Transform3D(0.342, 0, -0.9397, 0, 1.0, 0, 0.9397, 0, 0.342, 0.55, 0.0, -0.55)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s11"]
+script = ExtResource("2")
+item_id = "rag_dirty"
+xform = Transform3D(0.9397, 0, -0.342, 0, 1.0, 0, 0.342, 0, 0.9397, 1.15, 0.0, 0.4)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s12"]
+script = ExtResource("2")
+item_id = "bucket_kfs"
+xform = Transform3D(1.0, 0, 0.0, 0, 1.0, 0, 0.0, 0, 1.0, 1.2, 0.0, 0.75)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s13"]
+script = ExtResource("2")
+item_id = "tool_broom"
+xform = Transform3D(0.9903, 0, -0.1392, 0, 1.0, 0, 0.1392, 0, 0.9903, 1.25, 0.0, 0.15)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[resource]
+script = ExtResource("1")
+id = "storage_07"
+district_id = 2
+lot_kind = 2
+min_bid = 65
+info_mode = 2
+preview_seconds = 15.0
+clearout_seconds = 180.0
+lock_chance = 0.33
+spawn_list = Array[Resource]([SubResource("s1"), SubResource("s2"), SubResource("s3"), SubResource("s4"), SubResource("s5"), SubResource("s6"), SubResource("s7"), SubResource("s8"), SubResource("s9"), SubResource("s10"), SubResource("s11"), SubResource("s12"), SubResource("s13")])
+pacing_tag = 1
+broom_required = true
+hunters_count = 7
+order = 7
+tale_ru = "Картина к стене. Может, мастер. Может, мотель. На фото — плазма и слиток. В ячейке — лампа Тиффани и кольцо выпускника. Метла у двери, залог любят."
+tale_en = "A painting face to the wall. Maybe a master. Maybe a motel. Photos show a plasma and a gold bar. The unit has a Tiffanny lamp and a class ring. Broom at the door — they love the deposit."
+docs_ru = "ЯЧЕЙКА 07 — ЖИВОПИСЬ:\nКартина «мастер?» — к стене\nЛампа Тиффани — 1\nПлазма / слиток — на фото\nМетла — обязательна"
+docs_en = "UNIT 07 — PAINTING:\n«Master?» painting — face to wall\nTiffanny lamp — 1\nPlasma / gold — in the photos\nBroom — required"
+photo_item_ids = Array[String](["painting_motel", "lamp_table_ugly", "plasma_55", "gold_bar"])
+cell_size = Vector3(3.0, 2.5, 3.0)
+dark = true

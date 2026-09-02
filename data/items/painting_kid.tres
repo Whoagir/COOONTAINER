@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/ItemDef.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "painting_kid"
+name_ru = "Каляка ребёнка в раме"
+name_en = "Framed Kid Scribble"
+archetype_id = "painting"
+facets = Array[int]([1])
+value_base = 3
+mass_override = 0.0
+liquid_id = 0
+liquid_amount = 1.0
+flammable = true
+illegal = false
+dusty_default = 0.0
+vendor_affinity = Array[String](["vendor_tiny"])
+wearable_slot = "none"
+break_threshold = 25.0
+color = Color(0.9412, 0.8784, 0.251, 1.0)
+scale = 0.6
+tags = Array[String](["painting"])
+lore_ru = ""
+lore_en = ""

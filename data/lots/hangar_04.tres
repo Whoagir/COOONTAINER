@@ -1,0 +1,91 @@
+[gd_resource type="Resource" script_class="LotPreset" load_steps=10 format=3]
+
+[ext_resource type="Script" path="res://core/LotPreset.gd" id="1"]
+[ext_resource type="Script" path="res://core/LotSpawn.gd" id="2"]
+
+[sub_resource type="Resource" id="s1"]
+script = ExtResource("2")
+item_id = "backpack_school"
+xform = Transform3D(0.9659, 0, -0.2588, 0, 1.0, 0, 0.2588, 0, 0.9659, -0.38, 0.0, -0.32)
+nested = Array[String](["usb_cat_videos", "cash_5"])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s2"]
+script = ExtResource("2")
+item_id = "boombox_90s"
+xform = Transform3D(0.9903, 0, 0.1392, 0, 1.0, 0, -0.1392, 0, 0.9903, 0.3, 0.0, -0.32)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s3"]
+script = ExtResource("2")
+item_id = "book_encyclopedia"
+xform = Transform3D(0.0, 0, -1.0, 0, 1.0, 0, 1.0, 0, 0.0, 0.46, 0.0, 0.12)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s4"]
+script = ExtResource("2")
+item_id = "tablet_kids"
+xform = Transform3D(0.9397, 0, -0.342, 0, 1.0, 0, 0.342, 0, 0.9397, -0.4, 0.0, 0.16)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s5"]
+script = ExtResource("2")
+item_id = "poster_band"
+xform = Transform3D(0.9962, 0, -0.0872, 0, 1.0, 0, 0.0872, 0, 0.9962, 0.0, 0.0, 0.44)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s6"]
+script = ExtResource("2")
+item_id = "toy_car_hotwheelz"
+xform = Transform3D(0.9659, 0, 0.2588, 0, 1.0, 0, -0.2588, 0, 0.9659, 0.5, 0.0, 0.38)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s7"]
+script = ExtResource("2")
+item_id = "cd_mixtape"
+xform = Transform3D(0.9903, 0, -0.1392, 0, 1.0, 0, 0.1392, 0, 0.9903, -0.5, 0.0, 0.42)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[sub_resource type="Resource" id="s8"]
+script = ExtResource("2")
+item_id = "cup_okayest"
+xform = Transform3D(1.0, 0, 0.0, 0, 1.0, 0, 0.0, 0, 1.0, 0.22, 0.0, 0.18)
+nested = Array[String]([])
+locked_override = -1
+dirt_override = -1.0
+
+[resource]
+script = ExtResource("1")
+id = "hangar_04"
+district_id = 1
+lot_kind = 0
+min_bid = 12
+info_mode = 3
+preview_seconds = 15.0
+clearout_seconds = 72.0
+lock_chance = 0.0
+spawn_list = Array[Resource]([SubResource("s1"), SubResource("s2"), SubResource("s3"), SubResource("s4"), SubResource("s5"), SubResource("s6"), SubResource("s7"), SubResource("s8")])
+pacing_tag = 0
+broom_required = false
+hunters_count = 6
+order = 4
+tale_ru = "Школьный рюкзак. Аукционист говорит, что внутри МакБук. МакБук в описи. В рюкзаке — флешка с котами и пятёрка. Том 7 энциклопедии не врёт: он тяжёлый."
+tale_en = "A school backpack. Auctioneer says there's a MacBuk inside. The MacBuk is on the sheet. The pack has a cat-video stick and a five. Encyclopedia vol. 7 does not lie: it is heavy."
+docs_ru = "ОПИСЬ (школьный рюкзак, сдал вахтёр):\n— рюкзак синий, запах буфета\n— ноутбук «МакБук» (в описи есть, в сумке нет)\n— диск «Для тебя»\n— учебник том 7, закладка — купюра\n— плакат Металликки, клейкая сторона наружу"
+docs_en = "MANIFEST (school backpack, night guard intake):\n— blue backpack, cafeteria smell\n— MacBuk laptop (on the sheet, not in the bag)\n— a «For You» mix CD\n— encyclopedia vol. 7, bookmark is a bill\n— Metalicca poster, sticky side out"
+photo_item_ids = Array[String]([])
+cell_size = Vector3(1.5, 1.2, 1.5)
+dark = false

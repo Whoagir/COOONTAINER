@@ -1,0 +1,56 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://core/ItemDef.gd" id="1"]
+[ext_resource type="Script" path="res://core/LootRef.gd" id="2"]
+
+[sub_resource type="Resource" id="lr1"]
+script = ExtResource("2")
+item_id = "frame_photo_wedding"
+chance = 0.5
+count_min = 1
+count_max = 1
+
+[sub_resource type="Resource" id="lr2"]
+script = ExtResource("2")
+item_id = "letter_debt"
+chance = 0.3
+count_min = 1
+count_max = 1
+
+[sub_resource type="Resource" id="lr3"]
+script = ExtResource("2")
+item_id = "cash_50"
+chance = 0.25
+count_min = 1
+count_max = 1
+
+[sub_resource type="Resource" id="lr4"]
+script = ExtResource("2")
+item_id = "necklace_pearl_fake"
+chance = 0.3
+count_min = 1
+count_max = 1
+
+[resource]
+script = ExtResource("1")
+id = "dresser_grandma"
+name_ru = "Комод бабушкин"
+name_en = "Grandma's Dresser"
+archetype_id = "dresser"
+facets = Array[int]([2, 1, 13])
+value_base = 80
+mass_override = 0.0
+liquid_id = 0
+liquid_amount = 1.0
+flammable = false
+illegal = false
+dusty_default = 0.7
+nest_loot = Array[Resource]([SubResource("lr1"), SubResource("lr2"), SubResource("lr3"), SubResource("lr4")])
+vendor_affinity = Array[String](["vendor_antique", "vendor_household"])
+wearable_slot = "none"
+break_threshold = 60.0
+color = Color(0.4784, 0.3529, 0.2275, 1.0)
+scale = 1.0
+tags = Array[String]([])
+lore_ru = ""
+lore_en = ""

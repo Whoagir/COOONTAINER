@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/ItemDef.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "chandelier_grand"
+name_ru = "Люстра дворцовая"
+name_en = "Palace Chandelier"
+archetype_id = "chandelier"
+facets = Array[int]([0, 1, 13])
+value_base = 900
+mass_override = 0.0
+liquid_id = 0
+liquid_amount = 1.0
+flammable = false
+illegal = false
+dusty_default = 0.6
+vendor_affinity = Array[String](["vendor_antique"])
+wearable_slot = "none"
+break_threshold = 3.5
+color = Color(0.9725, 0.9725, 1.0, 1.0)
+scale = 1.4
+tags = Array[String]([])
+lore_ru = ""
+lore_en = ""

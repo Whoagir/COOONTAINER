@@ -1,0 +1,49 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://core/ItemDef.gd" id="1"]
+[ext_resource type="Script" path="res://core/LootRef.gd" id="2"]
+
+[sub_resource type="Resource" id="lr1"]
+script = ExtResource("2")
+item_id = "cassette_mixtape"
+chance = 0.3
+count_min = 1
+count_max = 1
+
+[sub_resource type="Resource" id="lr2"]
+script = ExtResource("2")
+item_id = "letter_love"
+chance = 0.4
+count_min = 1
+count_max = 1
+
+[sub_resource type="Resource" id="lr3"]
+script = ExtResource("2")
+item_id = "cash_10"
+chance = 0.3
+count_min = 1
+count_max = 1
+
+[resource]
+script = ExtResource("1")
+id = "box_small_shoes"
+name_ru = "Коробка из-под обуви"
+name_en = "Shoebox"
+archetype_id = "box_small"
+facets = Array[int]([2])
+value_base = 1
+mass_override = 0.0
+liquid_id = 0
+liquid_amount = 1.0
+flammable = true
+illegal = false
+dusty_default = 0.0
+nest_loot = Array[Resource]([SubResource("lr1"), SubResource("lr2"), SubResource("lr3")])
+vendor_affinity = Array[String](["vendor_tiny"])
+wearable_slot = "none"
+break_threshold = 25.0
+color = Color(0.8471, 0.7843, 0.6588, 1.0)
+scale = 1.0
+tags = Array[String]([])
+lore_ru = ""
+lore_en = ""
