@@ -847,7 +847,11 @@ func _process(delta: float) -> void:
 			b.global_transform = pp.global_transform
 			b.scale = Vector3.ONE * b.def.scale
 	if worn and is_instance_valid(worn):
-		worn.global_transform = wear_slot.global_transform
+		# WearSlot сидит под Body, а тело «дышит» неравномерным scale (1, 1+ε, 0.88) — Jolt не умеет
+		# неравномерный scale у RigidBody и сыплет ошибками каждый кадр. Берём только поворот и позицию.
+		var ws := wear_slot.global_transform
+		worn.global_transform = Transform3D(Basis(ws.basis.get_rotation_quaternion()), ws.origin)
+		worn.scale = Vector3.ONE * worn.def.scale
 	if talk_icon.visible:
 		talk_icon.rotate_y(delta * 3.0)
 	_anim_arms(delta)
