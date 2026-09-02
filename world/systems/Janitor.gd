@@ -80,6 +80,14 @@ class JanitorBoss extends Npc:
 		return "[E]"
 
 
+func job_target() -> Vector3:
+	if anchor and is_instance_valid(anchor):
+		return anchor.cell_center()
+	if boss and is_instance_valid(boss):
+		return boss.global_position
+	return Vector3.ZERO
+
+
 func system_name() -> String:
 	return "Janitor"
 
@@ -153,7 +161,7 @@ func boss_hint() -> String:
 	if active:
 		return tr("JANITOR_HINT_BUSY")
 	if Economy.pot >= POT_THRESHOLD:
-		return tr("JANITOR_HINT_RICH") % POT_THRESHOLD
+		return tr("JANITOR_HINT_SCALED")
 	return tr("JANITOR_HINT_START")
 
 
@@ -171,9 +179,6 @@ func try_start(player: Node) -> bool:
 	if not Net.is_host() or active:
 		return false
 	var b := _ensure_boss()
-	if Economy.pot >= POT_THRESHOLD:
-		b.say(tr("JANITOR_TOO_RICH"), 3.0, "shout")
-		return false
 	if Game.world_mode == Types.WorldMode.CLEAR_OUT or Game.world_mode == Types.WorldMode.AUCTION:
 		b.say(tr("JANITOR_BUSY_MODE"), 3.0, "shout")
 		return false
@@ -421,6 +426,8 @@ func _finish_job(timed_out: bool) -> void:
 	if bonus:
 		payout += PAY_FLOOR
 	if payout > 0:
+		if Economy.pot >= POT_THRESHOLD:
+			payout = int(ceil(payout * 0.6))
 		Economy.add(payout, "janitor")
 	var msg := (tr("JANITOR_TIMEOUT") if timed_out else tr("JANITOR_PAID")) % payout
 	if bonus:

@@ -18,6 +18,9 @@ var crosshair: Control
 var bid_panel: PanelContainer
 var bid_label: Label
 var bid_leader: Label
+var bid_required: Label
+var bid_mine: Label
+var bid_help_row: HFlowContainer
 var status_label: Label
 var vignette: ColorRect
 var dead_label: Label
@@ -44,6 +47,8 @@ var _delta_timer := 0.0
 var _ach_timer := 0.0
 var _sub_timer := 0.0
 var _doc_timer := 0.0
+var _bid_paddle_up := false
+var _bid_required_amt := -1
 
 
 func _ready() -> void:
@@ -155,9 +160,12 @@ func _build() -> void:
 
 	# ставка на аукционе — справа сверху
 	bid_panel = PanelContainer.new()
-	bid_panel.set_anchors_preset(Control.PRESET_TOP_RIGHT)
-	bid_panel.position = Vector2(-300, 16)
-	bid_panel.custom_minimum_size = Vector2(280, 0)
+	# прижата к правому краю и растёт влево — не уезжает за экран, сколько бы цифр ни набрали
+	bid_panel.set_anchors_and_offsets_preset(Control.PRESET_TOP_RIGHT)
+	bid_panel.offset_right = -20
+	bid_panel.offset_top = 16
+	bid_panel.grow_horizontal = Control.GROW_DIRECTION_BEGIN
+	bid_panel.custom_minimum_size = Vector2(300, 0)
 	bid_panel.visible = false
 	root.add_child(bid_panel)
 	_style_panel(bid_panel, UiTheme.MAGENTA)
@@ -172,6 +180,20 @@ func _build() -> void:
 	bid_leader = _mk_label(18, UiTheme.TEXT_DIM, false)
 	bid_leader.text = ""
 	bv.add_child(bid_leader)
+	bid_required = _mk_label(17, UiTheme.ACCENT_DIM, false)
+	bid_required.text = ""
+	bid_required.visible = false
+	bv.add_child(bid_required)
+	bid_mine = _mk_label(40, UiTheme.SUCCESS)
+	bid_mine.text = "$0"
+	bid_mine.visible = false
+	bv.add_child(bid_mine)
+	bid_help_row = HFlowContainer.new()
+	bid_help_row.add_theme_constant_override("h_separation", 6)
+	bid_help_row.add_theme_constant_override("v_separation", 4)
+	bid_help_row.custom_minimum_size = Vector2(300, 0)
+	bid_help_row.visible = false
+	bv.add_child(bid_help_row)
 
 	# прицел
 	crosshair = Control.new()
@@ -433,13 +455,83 @@ func clear_timer() -> void:
 	timer_panel.visible = false
 
 
-func set_bid(amount: int, leader: String, yours: bool) -> void:
+func _mk_keycap(text: String) -> PanelContainer:
+	var key_sb := StyleBoxFlat.new()
+	key_sb.bg_color = UiTheme.BORDER_DARK
+	key_sb.border_color = UiTheme.ACCENT_DIM
+	key_sb.set_border_width_all(2)
+	key_sb.set_corner_radius_all(6)
+	key_sb.content_margin_left = 8
+	key_sb.content_margin_right = 8
+	key_sb.content_margin_top = 3
+	key_sb.content_margin_bottom = 3
+	var panel := PanelContainer.new()
+	panel.add_theme_stylebox_override("panel", key_sb)
+	var l := _mk_label(16, UiTheme.TEXT, false)
+	l.text = text
+	panel.add_child(l)
+	return panel
+
+
+func set_bid(amount: int, leader: String, yours: bool, required: int = -1) -> void:
 	bid_panel.visible = amount >= 0
 	if amount < 0:
+		bid_mine.visible = false
+		bid_help_row.visible = false
 		return
 	bid_label.text = "$%d" % amount
 	bid_leader.text = ("★ " + tr("HUD_YOURS")) if yours else leader
 	bid_label.add_theme_color_override("font_color", UiTheme.SUCCESS if yours else UiTheme.TEXT)
+	_bid_required_amt = required
+	bid_required.visible = required >= 0
+	if required >= 0:
+		bid_required.text = tr("HUD_BID_REQUIRED") % required
+	_refresh_bid_help()
+
+
+func set_my_bid(value: int, _typing: bool = false) -> void:
+	if value < 0 or not _bid_paddle_up or not bid_panel.visible:
+		bid_mine.visible = false
+		return
+	bid_mine.visible = true
+	bid_mine.text = "$%d" % value
+	bid_mine.add_theme_color_override("font_color", UiTheme.SUCCESS)
+
+
+func set_bid_paddle_up(up: bool) -> void:
+	_bid_paddle_up = up
+	if not up:
+		bid_mine.visible = false
+	_refresh_bid_help()
+
+
+func _refresh_bid_help() -> void:
+	for c in bid_help_row.get_children():
+		c.queue_free()
+	if not bid_panel.visible:
+		bid_help_row.visible = false
+		return
+	bid_help_row.visible = true
+	if not _bid_paddle_up:
+		bid_help_row.add_child(_mk_keycap("B"))
+		var down := _mk_label(15, UiTheme.TEXT_DIM, false)
+		down.text = tr("HUD_BID_HELP_DOWN")
+		bid_help_row.add_child(down)
+		return
+	var parts: PackedStringArray = tr("HUD_BID_HELP_UP").split(",", false)
+	var keys: PackedStringArray = ["B", "0–9", "R", "⟲", "LMB/↵"]
+	if parts.size() == 4:
+		parts.insert(2, tr("HUD_BID_HELP_MIN"))
+	for i in keys.size():
+		bid_help_row.add_child(_mk_keycap(keys[i]))
+		if i < parts.size():
+			var cap := _mk_label(14, UiTheme.TEXT_DIM, false)
+			cap.text = parts[i]
+			bid_help_row.add_child(cap)
+		if i < keys.size() - 1:
+			var dot := _mk_label(14, UiTheme.TEXT_DIM, false)
+			dot.text = "·"
+			bid_help_row.add_child(dot)
 
 
 ## Текущая цель («что делать»): текст + необязательная точка в мире — худ дописывает расстояние.

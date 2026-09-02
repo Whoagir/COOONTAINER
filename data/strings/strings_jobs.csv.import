@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://cmfs3lmhi88pm"
+
+[deps]
+
+files=["res://data/strings/strings_jobs.ru.translation", "res://data/strings/strings_jobs.en.translation"]
+
+source_file="res://data/strings/strings_jobs.csv"
+dest_files=["res://data/strings/strings_jobs.ru.translation", "res://data/strings/strings_jobs.en.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

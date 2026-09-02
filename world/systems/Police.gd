@@ -429,8 +429,18 @@ func _catch(c: PoliceCase, p: Player) -> void:
 		c.timer = FINE_UNCUFF_SEC
 		_say_from(c, tr("POLICE_COP_FINE") % amount, "fine")
 		_toast_all("POLICE_TOAST_FINE", [_pname(p), amount])
+		_suggest_jobs()
 	else:
 		_arrest(c, p)
+
+
+func _suggest_jobs() -> void:
+	var jobs: Node = Game.world.system("Jobs") if Game.world else null
+	if jobs and jobs.has_method("suggest_work"):
+		jobs.suggest_work("police")
+	var jan: Node = Game.world.system("Janitor") if Game.world else null
+	if jan and jan.has_method("offer_job"):
+		jan.offer_job()
 
 
 func _finish_fine(c: PoliceCase, p: Player) -> void:
@@ -459,6 +469,7 @@ func _arrest(c: PoliceCase, p: Player) -> void:
 	c.car.drive_to(dest, CAR_TO_STATION_SEC)
 	Net.broadcast_event("police_car_drive", {"id": c.car.car_id, "to": dest, "dur": CAR_TO_STATION_SEC})
 	c.car.arrived.connect(func(): _on_arrived_station(c), CONNECT_ONE_SHOT)
+	_suggest_jobs()
 
 
 func _on_arrived_station(c: PoliceCase) -> void:
@@ -498,6 +509,7 @@ func _release(peer: int, reason: String) -> void:
 			if _desk_cop and is_instance_valid(_desk_cop):
 				_desk_cop.say(cop_line("RELEASE"), 2.5, "release")
 			_toast_all("POLICE_TOAST_RELEASED", [_pname(p)])
+			_suggest_jobs()
 	Net.broadcast_event("police_custody", {"peer": peer, "on": false})
 	if _custody.is_empty():
 		_set_jail_door(false)

@@ -19,6 +19,7 @@ var _shot_n := 0
 var p: Player
 var w
 var _bid_sent := false
+var _bid_kbd_tested := false
 var _carried: Array = []
 var _sold := 0
 var _log: Array[String] = []
@@ -78,8 +79,9 @@ func _process(delta: float) -> void:
 		7: await _s_police()
 		8: await _s_vehicle()
 		9: await _s_janitor()
-		10: await _s_house()
-		11: _finish()
+		10: await _s_jobs()
+		11: await _s_house()
+		12: _finish()
 	_busy = false
 
 
@@ -91,6 +93,7 @@ func _next() -> void:
 	_stage += 1
 	_stage_t = 0.0
 	_bid_sent = false
+	_bid_kbd_tested = false
 
 
 func _timeout(name: String, limit: float = STAGE_TIMEOUT) -> bool:
@@ -106,7 +109,7 @@ func _timeout(name: String, limit: float = STAGE_TIMEOUT) -> bool:
 func _s_boot() -> void:
 	if _stage_t < 1.5:
 		return
-	var systems := ["Liquids", "Fire", "Auction", "ClearOut", "Vendors", "Casino", "Police", "Janitor", "Vehicles", "Locksmith", "TrailerHub", "Gags", "DayNight"]
+	var systems := ["Liquids", "Fire", "Auction", "ClearOut", "Vendors", "Casino", "Police", "Janitor", "Vehicles", "Locksmith", "TrailerHub", "Gags", "DayNight", "Jobs", "Interactables"]
 	var missing: Array = []
 	for s in systems:
 		if w.system(s) == null:
@@ -117,6 +120,18 @@ func _s_boot() -> void:
 	var anchors := get_tree().get_nodes_in_group("lot_anchors")
 	_ok("lot_anchors", anchors.size() >= 10, "%d anchors" % anchors.size())
 	_ok("player_spawn", p != null and p.global_position.length() < 500.0, str(p.global_position.round()))
+	var inter = w.system("Interactables")
+	var vm: Node = inter.get_node_or_null("Vending_0") if inter else null
+	if vm and vm.has_method("interact"):
+		var n0: int = Net.items.size()
+		Economy.set_pot(maxi(Economy.pot, 20), "playtest")
+		var pot0: int = Economy.pot
+		vm.interact(p)
+		if Net.items.size() <= n0:
+			vm.interact(p)
+		_ok("vending_buy", Economy.pot == pot0 - 2 and Net.items.size() > n0, "pot %d→%d items +%d" % [pot0, Economy.pot, Net.items.size() - n0])
+	else:
+		_ok("vending_buy", false, "no vending")
 	_next()
 
 
@@ -232,6 +247,8 @@ func _s_auction() -> void:
 		return
 	var state: int = auc.state_of(anchor)
 	var s = auc.session_for(anchor)
+	if state == 2 and s != null and not _bid_kbd_tested:
+		await _test_bid_keyboard(auc, s)
 	# ставим ставку каждый раз, когда сессия в BIDDING и лидер не мы
 	if state == 2 and s != null:
 		var need: int = auc.required_bid(s)
@@ -247,6 +264,45 @@ func _s_auction() -> void:
 	if _stage_t > 70.0:
 		_ok("auction_win", false, "mode=%d state=%s bid_sent=%s" % [Game.world_mode, Auction.STATE_NAMES[state], str(_bid_sent)])
 		_next()
+
+
+func _inject_key(code: int) -> void:
+	var ev := InputEventKey.new()
+	ev.pressed = true
+	ev.echo = false
+	ev.keycode = code
+	ev.physical_keycode = code
+	Input.parse_input_event(ev)
+	if p.is_processing_input():
+		p._input(ev)
+
+
+func _test_bid_keyboard(auc: Auction, s: Auction.Session) -> void:
+	_bid_kbd_tested = true
+	p.paddle_up = true
+	p._update_paddle_visual()
+	await get_tree().physics_frame
+	if Game.world and Game.world.hud and Game.world.hud.has_method("set_bid_paddle_up"):
+		Game.world.hud.set_bid_paddle_up(true)
+	var had_input := p.is_processing_input()
+	p.set_process_input(true)
+	for code in [KEY_1, KEY_5, KEY_0]:
+		_inject_key(code)
+	var paddle = p.paddle()
+	var typed: int = int(paddle.value) if paddle else -1
+	_inject_key(KEY_ENTER)
+	await get_tree().create_timer(0.5).timeout
+	var ok150: bool = s.has_bids and s.current_bid == 150 and s.leader_kind == 1 and s.leader_id == p.peer_id
+	_ok("auction_bid_type", ok150, "typed=%d bid=%d req=%d leader=P%d" % [typed, s.current_bid, auc.required_bid(s), s.leader_id if s.has_bids else 0])
+	var prev: int = s.current_bid
+	w.handle_action(p.peer_id, "bid", {"amount": 1})
+	await get_tree().create_timer(0.1).timeout
+	_ok("auction_bid_reject", s.current_bid == prev, "bid still $%d" % s.current_bid)
+	p.set_process_input(had_input)
+	if DisplayServer.get_name() != "headless":
+		var dir := OS.get_user_data_dir().path_join("shots")
+		DirAccess.make_dir_recursive_absolute(dir)
+		get_viewport().get_texture().get_image().save_png(dir.path_join("bid_hud.png"))
 
 
 func _s_clearout() -> void:
@@ -454,6 +510,50 @@ func _s_janitor() -> void:
 		jan.try_finish_by(p)
 		await get_tree().create_timer(1.0).timeout
 		_ok("janitor_pay", Economy.pot > 0 and not jan.active, "payout=$%d (вынесено %d)" % [Economy.pot, out])
+	_next()
+
+
+func _s_jobs() -> void:
+	var jobs = w.system("Jobs")
+	if jobs == null:
+		_ok("jobs_system", false, "no Jobs system")
+		_next()
+		return
+	if _stage_t < 0.5:
+		return
+	_ok("jobs_system", true, "Jobs node ok")
+	jobs.playtest_set_offers(["flyers", "trash", "delivery"])
+	_ok("jobs_offers", jobs.offer_count() == 3, "%d offers" % jobs.offer_count())
+	var pot_before := Economy.pot
+	w.handle_action(p.peer_id, "job_take", {"id": "flyers"})
+	await get_tree().create_timer(0.3).timeout
+	for wp in jobs.flyer_waypoints():
+		p.global_position = wp + Vector3(0, 1.0, 0)
+		await get_tree().create_timer(0.35).timeout
+	await get_tree().create_timer(0.8).timeout
+	var flyers_gain := Economy.pot - pot_before
+	_ok("jobs_flyers", flyers_gain >= 50, "pot +$%d" % flyers_gain)
+	pot_before = Economy.pot
+	jobs.playtest_set_offers(["trash", "flyers", "delivery"])
+	w.handle_action(p.peer_id, "job_take", {"id": "trash"})
+	await get_tree().create_timer(0.3).timeout
+	var bin: Area3D = jobs.trash_bin_at(0)
+	var bin_pos: Vector3 = bin.global_position if bin else p.global_position
+	for i in 6:
+		var cheap: ItemDef = null
+		for d in Registry.all_items():
+			if d.value_base <= 30 and not d.is_cash():
+				cheap = d
+				break
+		if cheap == null:
+			break
+		var b: ItemBody = Net.spawn_item(cheap.id, Transform3D(Basis(), bin_pos + Vector3(randf_range(-0.2, 0.2), 0.5, randf_range(-0.2, 0.2))))
+		if b:
+			b.set_meta("street", true)
+		await get_tree().physics_frame
+	await get_tree().create_timer(1.2).timeout
+	var trash_gain := Economy.pot - pot_before
+	_ok("jobs_trash", trash_gain >= 45, "pot +$%d" % trash_gain)
 	_next()
 
 

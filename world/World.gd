@@ -497,8 +497,11 @@ func _on_mode_changed(m: int, prev: int) -> void:
 
 
 func _on_broke() -> void:
-	# котёл в нуле → уборка доступна (§13). Не soft-lock.
+	# котёл в нуле → доска объявлений + бригадир (§13). Не soft-lock.
 	Game.notify.emit(tr("NOTIFY_BROKE"), 5.0)
+	var jobs := system("Jobs")
+	if jobs and jobs.has_method("suggest_work"):
+		jobs.suggest_work("broke")
 	var jan := system("Janitor")
 	if jan and jan.has_method("offer_job"):
 		jan.offer_job()

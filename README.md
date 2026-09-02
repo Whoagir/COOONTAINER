@@ -17,7 +17,9 @@ Friendslop-пародия шоу про аукционы складов: вдв�
 
 - Хаб — **трейлер-парк**: кровати, котёл, полка инструментов, вывеска дома.
 - Старт с **$40** в котле. Районы по мере заработка: **ангар** (сумки) → **склады** → **гаражи** → **порт**.
-- На аукционе поднимаете **весло (B)**, блефуете с ИИ-хантерами, платит котёл.
+- На аукционе поднимаете **весло (B)**, набираете сумму **цифрами** (или **R** = минимум, колесо — шаг), **ЛКМ / Enter** — ставка; блефуете с ИИ-хантерами, платит котёл.
+- Оштрафовали / арестовали / котёл пуст — худ покажет **задачу** со стрелкой к **доске объявлений** у трейлера: 3 вакансии (швабра, мусорный рейс, доставка, листовки, мойка машин, ночной сторож).
+- По городу валяется **уличный хлам** — подбирайте и сдавайте; **мусорные баки** (E) — до 3 раз в день: хлам, находка или крыса.
 - Выиграли лот — **ClearOut**: таймер, разбор руками, погрузка; в овертайме дверь запирается.
 - Тащите хлам к скупщикам: оффер → мини-игра торга → оценка по фото с телефона; у скупщиков есть **фобии**.
 - Инструменты (фонарик, тряпка, скотч, отмычка, зажигалка, доска…) открываются по мере денег на полке хаба.
@@ -40,7 +42,7 @@ Friendslop-пародия шоу про аукционы складов: вдв�
 | Карман | ПКМ |
 | Бросок | G |
 | Фонарик (если в руках) | L |
-| Весло (ставки) | B |
+| Весло (ставки) | B, затем 0–9 / R (минимум) / +− / колесо, ЛКМ или Enter — поднять |
 | Пин / маркер для пати | СКМ |
 | Голос (push-to-talk) | V |
 | Пауза | Esc |
@@ -80,7 +82,9 @@ Friendslop-пародия шоу про аукционы складов: вдв�
 
 **Смерть** — рэгдолл, штамп «ТЫ ТРУП» с причиной, отсчёт до кровати; карманы — на землю.
 
-**Когда совсем дно** — работа уборщика в складах.
+**Когда совсем дно** — три **доски объявлений** (трейлер-парк, торговцы, полиция) с ротацией из 6 работ; после штрафа или ареста худ сам ведёт к доске. Уборщик в складах платит меньше, если котёл жирный.
+
+**Улица** — ~70 бесхозных вещей по городу и 10 мусорных баков с зарядами на день; 13 игрушек: торговые автоматы (застревают — пинайте), таксофоны с подсказками, дверь в биотуалет с гэгами, джукбокс в казино, груша у гаражей, лавки, насос на авторынке.
 
 **Хаос** — случайные gag-ивенты; лужи (виски / краска / масло / бензин / клей) и скольжение; огонь со спредом, пожарные, сгоревшие лоты; осколки; вложенность контейнеров; заплатки скотчем / доской.
 
@@ -188,7 +192,9 @@ A friendslop parody of storage-auction shows: buy mystery lots with a shared par
 
 - Hub is the **trailer park** (beds, pot, tool shelf, house sign).
 - Start with **$40** in the pot. Unlock districts as you earn: **hangar** bags → **storage** → **garages** → **port**.
-- Auction with the **paddle (B)**; AI hunters bluff; the pot pays.
+- Auction with the **paddle (B)**: type the amount with **digits** (or **R** = minimum, wheel = step), **LMB / Enter** to bid; AI hunters bluff; the pot pays.
+- Fined / arrested / pot empty → the HUD shows an **objective** with an arrow to the **job board** by the trailer: 3 rotating gigs (mop, trash run, delivery, flyers, car wash, night watch).
+- **Street junk** lies around town — grab and sell it; **dumpsters** (E) give up to 3 rummages per day: junk, a find, or a rat.
 - Won lot → **ClearOut** timer; overtime **locks the door**.
 - Sell to vendors (offer → haggle bar → phone photo estimate; vendors have **phobias**).
 - Tools unlock on the hub shelf as you make money.
@@ -209,7 +215,7 @@ A friendslop parody of storage-auction shows: buy mystery lots with a shared par
 | Pocket | RMB |
 | Throw | G |
 | Flashlight (if held) | L |
-| Paddle (bid) | B |
+| Paddle (bid) | B, then 0–9 / R (minimum) / +− / wheel, LMB or Enter to raise |
 | Pin / teammate marker | MMB |
 | Voice (push-to-talk) | V |
 | Pause | Esc |
@@ -223,7 +229,7 @@ Rebindable in Settings (WASD / grab / use stay protected).
 
 ## Features (short)
 
-8 auction hunters with scrawled paddles, bluffs & setups, five preview modes (door / slit / polaroids / docs / tale), a grudge-holding nemesis (Tolik the Bald), visible NPC hauls you can steal · **68** hand-authored lots in lean / jackpot / bust waves · district progression by earnings or lots (Petrovich's note by the pot tracks it) · ClearOut overtime lock + game-show result card · Vendors + haggle + phone + phobias · Locksmith · Casino roulette · Police heat / chase / fines / arrest / evidence / bribes · 3 cars with physical beds, lap-carry for passengers, run-overs · Janitor job when broke · World gags · Day/night (moonlit nights) · Liquids & slip · Fire spread & firefighters · Shards, nesting, tape/plank patches · Death overlay with cause · Intro & ending cutscenes, credits with a campaign chronicle · **42** achievements (*Duct Tape Doctor*, *One-Dollar Vase*, *Boris*, *Rock Bottom*, *Called the Bluff*, *Tolik Is Not Bald Anymore*…).
+8 auction hunters with scrawled paddles, bluffs & setups, five preview modes (door / slit / polaroids / docs / tale), a grudge-holding nemesis (Tolik the Bald), visible NPC hauls you can steal · **68** hand-authored lots in lean / jackpot / bust waves · district progression by earnings or lots (Petrovich's note by the pot tracks it) · ClearOut overtime lock + game-show result card · Vendors + haggle + phone + phobias · Locksmith · Casino roulette · Police heat / chase / fines / arrest / evidence / bribes · 3 cars with physical beds, lap-carry for passengers, run-overs · 3 job boards with 6 rotating gigs + HUD objective after fines/arrest · ~70 street-junk items, 10 dumpsters, 13 toys (vending, payphones, WC gags, jukebox, punching bag, benches, air pump) · World gags · Day/night (moonlit nights) · Liquids & slip · Fire spread & firefighters · Shards, nesting, tape/plank patches · Death overlay with cause · Intro & ending cutscenes, credits with a campaign chronicle · **42** achievements (*Duct Tape Doctor*, *One-Dollar Vase*, *Boris*, *Rock Bottom*, *Called the Bluff*, *Tolik Is Not Bald Anymore*…).
 
 ## Options
 

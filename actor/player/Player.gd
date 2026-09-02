@@ -379,6 +379,9 @@ func look_toward(target: Vector3) -> void:
 func _input(event: InputEvent) -> void:
 	if not is_local() or dead or get_tree().paused or cinematic:
 		return
+	if paddle_up and _paddle != null and _paddle.has_method("consume_input"):
+		if _paddle.consume_input(event):
+			return
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		var m := event as InputEventMouseMotion
 		var wob := 1.0 + drunk * 0.6 * sin(Time.get_ticks_msec() * 0.003)
@@ -1078,6 +1081,8 @@ func toggle_paddle() -> void:
 		return
 	paddle_up = not paddle_up
 	_update_paddle_visual()
+	if Game.world and Game.world.hud and Game.world.hud.has_method("set_bid_paddle_up"):
+		Game.world.hud.set_bid_paddle_up(paddle_up)
 	if paddle_up:
 		Net.request_action("paddle_show", {})
 
@@ -1093,6 +1098,8 @@ func _update_paddle_visual() -> void:
 	elif not paddle_up and _paddle:
 		_paddle.queue_free()
 		_paddle = null
+		if Game.world and Game.world.hud and Game.world.hud.has_method("set_my_bid"):
+			Game.world.hud.set_my_bid(-1, false)
 
 
 func _paddle_raise() -> void:

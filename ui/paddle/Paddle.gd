@@ -12,6 +12,7 @@ const MAX_VALUE := 999999
 var player: Node = null
 var value := 0
 var step := 5
+var _required := 0
 var _local := false
 var _typing := false
 var _face: PaddleFace
@@ -22,6 +23,7 @@ var _root: Node3D
 var _tw: Tween
 var _sync_timer := 0.0
 var _dirty := false
+var _flash_tw: Tween
 
 
 func _ready() -> void:
@@ -96,8 +98,8 @@ func _build() -> void:
 		_root.add_child(_face_label)
 	# зеркало для остальных — над веслом
 	_mirror = Label3D.new()
-	_mirror.font_size = 44
-	_mirror.pixel_size = 0.003
+	_mirror.font_size = 56
+	_mirror.pixel_size = 0.0035
 	_mirror.outline_size = 8
 	_mirror.modulate = Color(1, 0.95, 0.7)
 	_mirror.billboard = BaseMaterial3D.BILLBOARD_ENABLED
@@ -124,24 +126,29 @@ func set_value(v: int, sync := true) -> void:
 		return
 	value = v
 	_refresh()
-	if _local and sync:
-		_dirty = true
+	if _local:
+		var hud = Game.world.hud if Game.world else null
+		if hud and hud.has_method("set_my_bid"):
+			hud.set_my_bid(value, _typing)
+		if sync:
+			_dirty = true
 
 
 # ------------------------------------------------------------------ ввод владельца
 
-func _unhandled_input(event: InputEvent) -> void:
-	if not _local or player == null or not player.get("paddle_up"):
-		return
+## Player._input зовёт первым (до GUI); _unhandled_input — запасной путь.
+func consume_input(event: InputEvent) -> bool:
+	if not _local or player == null or not bool(player.get("paddle_up")):
+		return false
 	if event is InputEventMouseButton and event.pressed:
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
 			_typing = false
 			set_value(value + step)
-			get_viewport().set_input_as_handled()
-		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+			return true
+		if event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
 			_typing = false
 			set_value(maxi(value - step, 0))
-			get_viewport().set_input_as_handled()
+			return true
 	elif event is InputEventKey and event.pressed and not event.echo:
 		var d := _digit_of(event.keycode)
 		if d < 0:
@@ -153,13 +160,48 @@ func _unhandled_input(event: InputEvent) -> void:
 			set_value(value * 10 + d)
 			if value == 0:
 				_refresh()
-			get_viewport().set_input_as_handled()
-		elif event.keycode == KEY_BACKSPACE:
+			return true
+		var kc: int = event.keycode
+		var pk: int = event.physical_keycode
+		if kc == KEY_BACKSPACE:
 			set_value(value / 10)
-			get_viewport().set_input_as_handled()
-		elif event.keycode == KEY_ENTER or event.keycode == KEY_KP_ENTER:
+			return true
+		if kc == KEY_ENTER or kc == KEY_KP_ENTER or pk == KEY_ENTER or pk == KEY_KP_ENTER:
 			raise()
-			get_viewport().set_input_as_handled()
+			return true
+		if kc == KEY_EQUAL or kc == KEY_PLUS or kc == KEY_KP_ADD or pk == KEY_EQUAL or pk == KEY_PLUS or pk == KEY_KP_ADD:
+			_typing = false
+			set_value(value + step)
+			return true
+		if kc == KEY_MINUS or kc == KEY_KP_SUBTRACT or pk == KEY_MINUS or pk == KEY_KP_SUBTRACT:
+			_typing = false
+			set_value(maxi(value - step, 0))
+			return true
+		if kc == KEY_R or pk == KEY_R:
+			_typing = false
+			if _required > 0:
+				set_value(_required)
+			return true
+	return false
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if consume_input(event):
+		get_viewport().set_input_as_handled()
+
+
+func _flash_red() -> void:
+	if _face:
+		_face.modulate = Color(1.0, 0.35, 0.35)
+	if _face_label:
+		_face_label.modulate = Color(1.0, 0.25, 0.25)
+	if _flash_tw and _flash_tw.is_valid():
+		_flash_tw.kill()
+	_flash_tw = create_tween()
+	if _face:
+		_flash_tw.tween_property(_face, "modulate", Color.WHITE, 0.45)
+	if _face_label:
+		_flash_tw.parallel().tween_property(_face_label, "modulate", Color(0.1, 0.1, 0.35), 0.45)
 
 
 static func _digit_of(code: int) -> int:
@@ -216,6 +258,7 @@ func _on_net_event(kind: String, data: Dictionary) -> void:
 				return
 			step = int(data.get("step", step))
 			var req := int(data.get("req", 0))
+			_required = req
 			var i_lead: bool = bool(data.get("leader_is_player", false)) and int(data.get("leader_peer", 0)) == Net.my_id()
 			if not i_lead and not _typing and value < req:
 				set_value(req)
@@ -230,6 +273,16 @@ func _on_net_event(kind: String, data: Dictionary) -> void:
 				return
 			if int(data.get("peer", 0)) == player.get("peer_id"):
 				set_value(int(data.get("v", value)), false)
+		"auction_bid_reject":
+			if not _local:
+				return
+			var req_rej := int(data.get("req", 0))
+			var hud = Game.world.hud if Game.world else null
+			if hud:
+				hud.toast(tr("AUC_BID_TOO_LOW_FMT") % req_rej, 3.0)
+			if player != null and is_instance_valid(player):
+				AudioBus.play_at("buzzer", player.global_position, -6.0)
+			_flash_red()
 
 
 # ------------------------------------------------------------------ кривой шрифт (общее с хантерами)
@@ -294,12 +347,12 @@ class PaddleFace extends Control:
 			})
 		var lines: Array = []
 		var n: int = maxi(p_text.length(), 1)
-		var cell := minf(canvas.x / float(n) * 0.95, canvas.y * 0.62)
-		var digit_h := cell * 1.35
+		var cell := minf(canvas.x / float(n) * 0.98, canvas.y * 0.72)
+		var digit_h := cell * 1.48
 		var total_w := cell * float(n)
 		var x0 := (canvas.x - total_w) * 0.5
 		var y0 := (canvas.y - digit_h) * 0.5
-		var width := maxf(cell * 0.16, 6.0)
+		var width := maxf(cell * 0.19, 8.0)
 		var jitter := cell * 0.06
 		for i in n:
 			var ch := p_text[i] if i < p_text.length() else "0"

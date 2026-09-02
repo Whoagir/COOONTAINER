@@ -1,0 +1,34 @@
+keys,ru,en
+INT_VEND_HINT,Газировка — $2,Soda — $2
+INT_VEND_STUCK,Застряло — пнуть (E),Stuck — kick (E)
+INT_VEND_BROKE,Котёл пуст. Автомат обижен.,Pot's empty. The machine is offended.
+INT_PHONE_HINT,Звонок — $1,Call — $1
+INT_PHONE_WAIT,Гудки. Подождите.,Busy signal. Wait.
+INT_PHONE_WRONG,Не тот номер. Вам не рады.,Wrong number. They don't like you.
+INT_PHONE_NEXT,Следующий лот: %s. Не благодарите.,Next lot: %s. You're welcome.
+INT_PHONE_HOLD,Ваш звонок очень важен для нас,Your call is very important to us
+INT_PHONE_GARAGE,Гаражи откроются когда котёл потолстеет.,Garages open when the pot gets fat.
+INT_PHONE_CAT,Мяу. Это автоответчик кота.,Meow. This is the cat's voicemail.
+INT_PHONE_POT,Котёл — не кастрюля. Не путать.,The pot is not a saucepan. Don't mix them up.
+INT_PHONE_MUSIC,Оставайтесь на линии. Или не оставайтесь.,Please stay on the line. Or don't.
+INT_PHONE_COP,Менты берут купюрами. Мелочь не считается.,Cops take bills. Coins don't count.
+INT_WC_HINT,WC (E),WC (E)
+INT_WC_WAIT,Занято. Пахнет занятостью.,Occupied. Smells occupied.
+INT_WC_BUSY,ЗАНЯТО!,OCCUPIED!
+INT_WC_FIND,Кто-то забыл добро.,Someone forgot a souvenir.
+INT_JUKE_HINT,Музыка — $1,Music — $1
+INT_JUKE_BROKE,Автомат хочет монету. Котёл молчит.,It wants a coin. The pot says no.
+INT_JUKE_CASINO,Дом всегда выигрывает — радиоверсия,The House Always Wins — radio edit
+INT_JUKE_ROCK,Кочки и слёзы — хит авторынка,Bumps and Tears — car-lot hit
+INT_JUKE_VENDOR,Торгуйся тише — сборник скупщиков,Haggle Softer — vendor mixtape
+INT_JUKE_HUB,Трейлер 13 — гимн парка,Trailer 13 — park anthem
+INT_BAG_HINT,Ударить (E),Punch (E)
+INT_BAG_1,Как у хомяка,Hamster-tier
+INT_BAG_2,Дед-пас одобряет,Grandpa-pass approves
+INT_BAG_3,НОВЫЙ РЕКОРД… нет,NEW RECORD… no
+INT_BENCH_HINT,Присесть (E),Sit (E)
+INT_BENCH_STAND,Встать (E),Stand (E)
+INT_BENCH_SIT,Пять минут. Котёл подождёт.,Five minutes. The pot can wait.
+INT_BENCH_UP,Хватит сидеть — лоты сами себя не купят.,Enough sitting — lots won't buy themselves.
+INT_PUMP_HINT,Накачать (E),Pump (E)
+INT_PUMP_OK,Колёса как новые,Tires like new

@@ -1,0 +1,19 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://dxwpf02qwrm13"
+
+[deps]
+
+files=["res://data/strings/strings_street.ru.translation", "res://data/strings/strings_street.en.translation"]
+
+source_file="res://data/strings/strings_street.csv"
+dest_files=["res://data/strings/strings_street.ru.translation", "res://data/strings/strings_street.en.translation"]
+
+[params]
+
+compress=1
+delimiter=0
+unescape_keys=false
+unescape_translations=true

@@ -1301,8 +1301,7 @@ func _player_bid(peer: int, amount: int) -> void:
 		return
 	var req := required_bid(s)
 	if amount < req:
-		p.say(tr("AUCTION_TOO_LOW") % req)
-		AudioBus.play_at("buzzer", p.global_position, -6.0)
+		_notify_bid_too_low(peer, req)
 		return
 	if not Economy.can_afford(amount):
 		p.say(tr("AUCTION_TOO_POOR"))
@@ -1310,6 +1309,16 @@ func _player_bid(peer: int, amount: int) -> void:
 		return
 	var pname: String = p.name_plate.text if p.get("name_plate") else "P%d" % peer
 	_place_bid(s, amount, 1, peer, pname)
+
+
+func _notify_bid_too_low(peer: int, req: int) -> void:
+	if not Net.is_host():
+		return
+	var data := {"req": req}
+	if Net.peer_count() > 1:
+		Net._rpc_event.rpc_id(peer, "auction_bid_reject", data)
+	else:
+		Net.net_event.emit("auction_bid_reject", data)
 
 
 func _nearest_session(pos: Vector3, want_state: int) -> Session:
@@ -1636,6 +1645,9 @@ func _process(delta: float) -> void:
 			if Game.world_mode == Types.WorldMode.AUCTION:
 				hud.clear_timer()
 		return
+	if not bool(Game.save.get("bid_coached", false)) and int(best.get("state", 0)) == State.BIDDING:
+		Game.save["bid_coached"] = true
+		hud.toast(tr("AUC_COACH"), 6.0)
 	_hud_key = str(best["anchor"])
 	best["timer"] = maxf(0.0, float(best.get("timer", 0.0)) - delta)
 	best["going"] = maxf(0.0, float(best.get("going", 0.0)) - delta)
@@ -1643,11 +1655,11 @@ func _process(delta: float) -> void:
 	match int(best["state"]):
 		State.PREVIEW:
 			hud.set_timer(float(best["timer"]), "HUD_PREVIEW")
-			hud.set_bid(int(best.get("min_bid", 0)), tr("AUCTION_START_PRICE"), false)
+			hud.set_bid(int(best.get("min_bid", 0)), tr("AUCTION_START_PRICE"), false, int(best.get("req", 0)))
 		State.BIDDING:
 			hud.set_timer(float(best["going"]), "HUD_BID")
 			var leader := str(best.get("leader_name", ""))
-			hud.set_bid(int(best.get("bid", 0)), leader if bool(best.get("has_bids", false)) else tr("AUCTION_NO_BIDS"), mine)
+			hud.set_bid(int(best.get("bid", 0)), leader if bool(best.get("has_bids", false)) else tr("AUCTION_NO_BIDS"), mine, int(best.get("req", 0)))
 		State.HAMMER:
 			hud.set_timer(0.0, "HUD_BID")
-			hud.set_bid(int(best.get("bid", 0)), str(best.get("leader_name", "")), mine)
+			hud.set_bid(int(best.get("bid", 0)), str(best.get("leader_name", "")), mine, int(best.get("req", 0)))

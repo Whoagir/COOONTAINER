@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://cworld0000001"]
+[gd_scene load_steps=26 format=3 uid="uid://cworld0000001"]
 
 [ext_resource type="Script" path="res://world/World.gd" id="1_world"]
 [ext_resource type="PackedScene" path="res://world/City.tscn" id="2_city"]
@@ -19,7 +19,9 @@
 [ext_resource type="Script" path="res://world/systems/DayNight.gd" id="17_daynight"]
 [ext_resource type="Script" path="res://world/CityDress.gd" id="18_dress"]
 [ext_resource type="Script" path="res://world/systems/Ambience.gd" id="19_ambience"]
+[ext_resource type="Script" path="res://world/systems/Jobs.gd" id="21_jobs"]
 [ext_resource type="Script" path="res://world/systems/StreetLoot.gd" id="20_streetloot"]
+[ext_resource type="Script" path="res://world/systems/Interactables.gd" id="22_interact"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sky"]
 sky_top_color = Color(0.25, 0.45, 0.8, 1)
@@ -135,6 +137,12 @@ script = ExtResource("19_ambience")
 
 [node name="StreetLoot" type="Node3D" parent="Systems"]
 script = ExtResource("20_streetloot")
+
+[node name="Jobs" type="Node3D" parent="Systems"]
+script = ExtResource("21_jobs")
+
+[node name="Interactables" type="Node3D" parent="Systems"]
+script = ExtResource("22_interact")
 
 [node name="HUD" type="CanvasLayer" parent="."]
 script = ExtResource("14_hud")

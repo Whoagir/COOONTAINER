@@ -70,6 +70,7 @@ func _ready() -> void:
 	await get_tree().process_frame
 	await get_tree().process_frame
 	await get_tree().physics_frame
+	await get_tree().physics_frame
 	var w: World = Game.world as World
 	if w == null:
 		return
@@ -201,7 +202,7 @@ func _street_count() -> int:
 
 
 func _scatter(want: int, far_players: bool) -> int:
-	if not Net.is_host() or _common.is_empty() and _finds.is_empty():
+	if not Net.is_host() or (_common.is_empty() and _finds.is_empty()):
 		return 0
 	var placed := 0
 	var spots: Array[Vector3] = []
@@ -213,9 +214,9 @@ func _scatter(want: int, far_players: bool) -> int:
 		if far_players and not _far_from_players(xz):
 			continue
 		var g: Variant = _ground_at(xz)
-		if g == null:
+		if typeof(g) != TYPE_VECTOR3:
 			continue
-		var pos: Vector3 = g
+		var pos: Vector3 = g as Vector3
 		if not _ok_spot(pos, spots):
 			continue
 		var def: ItemDef = _pick_item(0.10, _finds)
@@ -307,7 +308,7 @@ func _ground_at(xz: Vector2) -> Variant:
 	var col: Node = hit.get("collider") as Node
 	if col == null or col.name != "Ground":
 		return null
-	var pos: Vector3 = hit["position"]
+	var pos: Vector3 = hit["position"] as Vector3
 	if pos.y > 0.45 or pos.y < -0.25:
 		return null
 	return pos

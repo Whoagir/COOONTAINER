@@ -197,7 +197,20 @@ func _run() -> void:
 	if stand:
 		await _snap("vendor", stand.global_position + Vector3(0, 1.6, 3.0), stand.global_position + Vector3(0, 1.2, 0), 50.0)
 
-	# 7. город с высоты
+	# 7. доска объявлений + меню вакансий (то, что видит игрок без денег)
+	var jobs = w.system("Jobs")
+	if jobs and jobs.has_method("board_position"):
+		var bp: Vector3 = jobs.board_position(0)
+		var fwd: Vector3 = jobs._boards[0].global_basis.z if jobs._boards.size() > 0 else Vector3.BACK
+		await _snap("jobs_board", bp + fwd * 3.2 + Vector3(0.8, 1.7, 0), bp + Vector3(0, 1.3, 0), 50.0)
+		if jobs._boards.size() > 0:
+			jobs._boards[0].interact(p)
+			await _wait(0.8)
+			await _snap("jobs_menu", bp + fwd * 3.2 + Vector3(0.8, 1.7, 0), bp + Vector3(0, 1.3, 0), 50.0)
+			if "_menu" in jobs and jobs._menu and jobs._menu.has_method("hide_menu"):
+				jobs._menu.hide_menu()
+
+	# 8. город с высоты
 	await _snap("city", trailer + Vector3(0, 28, 62), Vector3(0, 0, -30), 60.0)
 
 	print("[artshot] done: %d shots in %s" % [_n, _dir])
