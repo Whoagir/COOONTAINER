@@ -1,12 +1,12 @@
-# COOONTAINER
+﻿# COOONTAINER
 
-Friendslop-пародия шоу про аукционы складов: вдвоём (или вчетвером) скупаете загадочные лоты из общего **котла**, роетесь руками в барахле против таймера, тащите хаул к скупщикам, торгуетесь, иногда проигрываете всё в казино и прячетесь от ментов. Цель кампании — накопить **$25 000 на дом**, смотреть титры и остаться в городе уже без цели (песочница). Godot **4.6** + Jolt **30 Hz**. RU / EN.
+Friendslop-пародия шоу про аукционы складов: вдвоём (или вчетвером) скупаете загадочные лоты из общего **котла**, роетесь руками в барахле против таймера, тащите хаул к скупщикам, торгуетесь, иногда проигрываете всё в казино и прячетесь от ментов. Цель кампании — накопить **$25 000 на дом**, смотреть титры и остаться в городе уже без цели (песочница). Godot **4.7** + Jolt **30 Hz**. RU / EN.
 
 ---
 
 ## Быстрый старт
 
-1. Откройте проект в **Godot Engine 4.6** (проверено на Steam-сборке **4.6.3**) и нажмите **F5**, либо запустите собранный `.exe`.
+1. Откройте проект в **Godot Engine 4.7** (проверено на Steam-сборке **4.7.2**) и нажмите **F5**, либо запустите собранный `.exe`.
 2. Выберите один из **4 слотов** сохранения.
 3. **Host** — listen server (хост считает физику и экономику). Без GodotSteam — ENet LAN на порту `27015`; с GodotSteam — Steam P2P / лобби.
 4. Друзья жмут **Join** и вводят IP хоста (`host:port` или `127.0.0.1`) либо ID Steam-лобби.
@@ -106,7 +106,7 @@ Friendslop-пародия шоу про аукционы складов: вдв�
 
 ## Dev / тесты
 
-Godot: Steam *«Godot Engine»* **4.6.3**. Из корня проекта:
+Godot: Steam *«Godot Engine»* **4.7.2**. Из корня проекта:
 
 ```powershell
 # дымовой тест (слот 3, спавн/ломка/лужи/огонь)
@@ -180,11 +180,11 @@ powershell -ExecutionPolicy Bypass -File tools\audio\gen_voice.ps1
 
 # COOONTAINER (English)
 
-A friendslop parody of storage-auction shows: buy mystery lots with a shared party **pot** (*котёл*), clear the unit against a timer with your hands, haul junk to vendors, haggle, gamble at the casino, and dodge the cops. Campaign goal: save **$25,000 for a house** → credits → sandbox city. Built in **Godot 4.6** with **Jolt** at **30 Hz**. RU / EN.
+A friendslop parody of storage-auction shows: buy mystery lots with a shared party **pot** (*котёл*), clear the unit against a timer with your hands, haul junk to vendors, haggle, gamble at the casino, and dodge the cops. Campaign goal: save **$25,000 for a house** → credits → sandbox city. Built in **Godot 4.7** with **Jolt** at **30 Hz**. RU / EN.
 
 ## Quick start
 
-1. Open in **Godot 4.6** (tested on Steam **4.6.3**) and press **F5**, or run the exported exe.
+1. Open in **Godot 4.7** (tested on Steam **4.7.2**) and press **F5**, or run the exported exe.
 2. Pick one of **4 save slots**.
 3. **Host** a listen server (host authority). Without GodotSteam → ENet LAN on `27015`; with GodotSteam → Steam P2P / lobby.
 4. Friends **Join** by host IP (`host:port`) or Steam lobby id.

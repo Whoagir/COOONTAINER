@@ -1,6 +1,6 @@
-# COOONTAINER — архитектура кода (для разработчиков и субагентов)
+﻿# COOONTAINER — архитектура кода (для разработчиков и субагентов)
 
-Godot **4.6.3**, GDScript, Jolt, 30 Hz физика, physics interpolation. ТЗ: `DESIGN_TZ.md` (канон).
+Godot **4.7.2**, GDScript, Jolt, 30 Hz физика, physics interpolation. ТЗ: `DESIGN_TZ.md` (канон).
 Рендер: Mobile. Все меши — процедурные примитивы (лоу-поли). Нет внешних ассетов.
 
 ## Проверка

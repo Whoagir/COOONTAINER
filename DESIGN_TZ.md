@@ -1,11 +1,11 @@
-# COOONTAINER — Техническое задание
+﻿# COOONTAINER — Техническое задание
 
 > Версия **1.0** (интервью закрыто)  
 > Рабочее имя: `COOONTAINER`  
 > Документ описывает **игру**, не бизнес, не сроки, не издателя.  
 > Пародия. Не азарт на деньги. Не 18+ секс.
 
-Steam • соло + кооп 1–4 (invite) • Godot **4.6.3** + **Jolt** • RU+EN • клава+мышь  
+Steam • соло + кооп 1–4 (invite) • Godot **4.7.2** + **Jolt** • RU+EN • клава+мышь  
 Friendslop-incremental: аукцион → поиск в барахле → физический проёб → хаул → скупщик.
 
 ---
@@ -60,7 +60,7 @@ Friendslop-incremental: аукцион → поиск в барахле → фи
 
 | Слой | Решение |
 |------|---------|
-| Движок | Godot 4.6.3, GDScript |
+| Движок | Godot 4.7.2, GDScript |
 | Физика | Jolt (`physics/3d/physics_engine = Jolt Physics`), **30 Hz**, physics interpolation |
 | Сеть | Listen server, хост-авторитет |
 | Steam | GodotSteam / GodotSteamKit: лобби, P2P, Steam Voice, Cloud, Stats/Achievements, карточки |

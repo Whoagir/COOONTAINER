@@ -14,7 +14,7 @@ config/name="COOONTAINER"
 config/description="Friendslop-incremental про перекупа из трейлера. Пародия. Соло + кооп 1–4."
 config/version="0.1.0"
 run/main_scene="res://ui/menu/MainMenu.tscn"
-config/features=PackedStringArray("4.6", "Forward Plus")
+config/features=PackedStringArray("4.7", "Forward Plus")
 config/icon="res://icon.svg"
 
 [audio]
