@@ -8,8 +8,13 @@ signal said(text: String)
 
 const SPEED := 4.6
 const SPRINT_MULT := 1.55
+const CROUCH_MULT := 0.42
 const JUMP := 4.2
 const MOUSE_SENS_DEFAULT := 0.0022
+const HEAD_Y_STAND := 1.6
+const HEAD_Y_CROUCH := 1.05
+const COL_H_STAND := 1.8
+const COL_H_CROUCH := 1.05
 const FLAG_TALK := 1
 const FLAG_DEAD := 4
 const FLAG_CUFFED := 8
@@ -17,6 +22,7 @@ const FLAG_BURN := 16
 const FLAG_PADDLE := 32
 const FLAG_SPRINT := 64
 const FLAG_PAINT := 128
+const FLAG_CROUCH := 256
 
 @onready var head: Node3D = $Head
 @onready var camera: Camera3D = $Head/Camera3D
@@ -30,6 +36,7 @@ const FLAG_PAINT := 128
 @onready var talk_icon: MeshInstance3D = $Head/TalkIcon
 @onready var paddle_mount: Node3D = $Head/Hands/PaddleMount
 @onready var look_ray: RayCast3D = $Head/Camera3D/LookRay
+@onready var body_col: CollisionShape3D = $CollisionShape3D
 @onready var arm_r: MeshInstance3D = $Head/Hands/HandR/Arm
 @onready var arm_l: MeshInstance3D = $Head/Hands/HandL/Arm
 
@@ -51,6 +58,8 @@ var talking := false
 var voice_timeout := 0.0
 var paddle_up := false
 var sprinting := false
+var crouching := false
+var _crouch_blend := 0.0
 var respawn_point: Vector3 = Vector3(0, 1, 0)
 var wanted := 0.0 # уровень интереса ментов
 var in_vehicle: Node = null
@@ -534,8 +543,14 @@ func _local_move(delta: float) -> void:
 	elif cinematic and cine_move.length() > 0.01:
 		dir = cine_move.normalized()
 		look_toward(global_position + dir)
-	sprinting = Input.is_action_pressed("sprint") and dir.length() > 0.1 and stuck <= 0.0
+	sprinting = Input.is_action_pressed("sprint") and dir.length() > 0.1 and stuck <= 0.0 and not crouching
+	crouching = Input.is_action_pressed("crouch") and not cinematic and stuck <= 0.0 and not dead and not in_vehicle
+	if crouching:
+		sprinting = false
+	_crouch_blend = move_toward(_crouch_blend, 1.0 if crouching else 0.0, delta * 9.0)
+	_apply_crouch(_crouch_blend)
 	var spd := SPEED * encumbrance * (SPRINT_MULT if sprinting else 1.0)
+	spd *= lerpf(1.0, CROUCH_MULT, _crouch_blend)
 	if cuffed:
 		spd *= 0.5
 	if stuck > 0.0:
@@ -575,6 +590,7 @@ func _local_send() -> void:
 	if burning: _flags |= FLAG_BURN
 	if paddle_up: _flags |= FLAG_PADDLE
 	if sprinting: _flags |= FLAG_SPRINT
+	if crouching: _flags |= FLAG_CROUCH
 	Net.send_player_state(global_position, _yaw, _pitch, _flags)
 
 
@@ -596,8 +612,23 @@ func apply_remote_state(pos: Vector3, yaw: float, pitch: float, flags: int) -> v
 	elif flags & FLAG_DEAD == 0 and dead:
 		dead = false
 	cuffed = flags & FLAG_CUFFED != 0
+	crouching = flags & FLAG_CROUCH != 0
+	if not is_local():
+		_crouch_blend = move_toward(_crouch_blend, 1.0 if crouching else 0.0, 0.35)
+		_apply_crouch(_crouch_blend)
 	if not Net.is_host():
 		burning = flags & FLAG_BURN != 0
+
+
+func _apply_crouch(t: float) -> void:
+	head.position.y = lerpf(HEAD_Y_STAND, HEAD_Y_CROUCH, t)
+	if body_col == null:
+		return
+	var sh: Shape3D = body_col.shape
+	if sh is CapsuleShape3D:
+		var cap := sh as CapsuleShape3D
+		cap.height = lerpf(COL_H_STAND, COL_H_CROUCH, t)
+		body_col.position.y = lerpf(COL_H_STAND * 0.5, COL_H_CROUCH * 0.5, t)
 
 
 func _remote_move(delta: float) -> void:

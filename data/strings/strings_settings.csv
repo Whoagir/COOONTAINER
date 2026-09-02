@@ -72,6 +72,7 @@ SET_ACT_MOVE_LEFT,Влево,Move left
 SET_ACT_MOVE_RIGHT,Вправо,Move right
 SET_ACT_JUMP,Прыжок,Jump
 SET_ACT_SPRINT,Бег,Sprint
+SET_ACT_CROUCH,Присед,Crouch
 SET_ACT_GRAB,Хват,Grab
 SET_ACT_RELEASE,Отпустить,Release
 SET_ACT_SECOND_HAND,Вторая рука,Second hand

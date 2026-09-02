@@ -57,7 +57,8 @@ $g = "C:\Program Files (x86)\Steam\steamapps\common\Godot Engine\godot.windows.o
 
 `peer_id`, `is_local()`, `head`, `camera`, `hands: Hands`, `hp`, `burning`, `drunk`, `dead`, `cuffed`, `wanted`, `in_custody`, `worn`, `pockets`, `respawn_point`.
 Методы: `say(text)`, `look_target() -> Node`, `head_position()`, `take_damage(v, reason)`, `die(reason)`, `set_burning(v)`, `drink(a)`, `splash(liquid, amount)`, `wear(b)`, `unwear()`, `set_cuffed(v)`, `enter_vehicle(v)`, `exit_vehicle(pos)`, `toggle_paddle()`, `paddle()`.
-`Hands`: `held[0..1]`, `active_hand` (0 правая / 1 левая, `swap_hand`=Q), `any_held()`, `holds_tag(tag)`, `host_grab(b, hand)`, `host_release_body(b, throw)`, `host_release_all()`. Мышь ведёт активную ладонь в `ARM_LEN` от плеча; вещь следует В ладонь (не «в воздухе»); `REACH`≈1.45 — высоко не достать без лестницы. Двуручный хват: обе ладони за одной точкой взгляда.
+`Hands`: `held[0..1]`, `active_hand` (0 правая / 1 левая, `swap_hand`=Q), `any_held()`, `holds_tag(tag)`, `host_grab(b, hand)`, `host_release_body(b, throw)`, `host_release_all()`. Мышь ведёт активную ладонь в `ARM_LEN` от плеча; вещь следует В ладонь (не «в воздухе»); `REACH`≈1.45 — высоко не достать без лестницы. Двуручный хват: обе ладони за одной точкой взгляда. Присед: `crouch`=Ctrl, бег=`sprint`=Shift.
+- Разлом: полный shatter только при сильном ударе (`dv ≥ max(threshold*1.85, 8.2)` ≈ падение с 3+ м / врезание в стену); лёгкий стук → CHIPPED. Осколки — `MeshShatter` нарезает меш вещи, спавн `shard_piece` ItemBody (поднимаемые, $1); оригинал → кучка `_become_pile`.
 
 ## Интерактивы мира
 

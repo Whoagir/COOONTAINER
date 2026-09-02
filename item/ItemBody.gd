@@ -298,11 +298,22 @@ func set_proxy(v: bool) -> void:
 
 
 func state_dict() -> Dictionary:
-	return {
+	var d := {
 		"i": integrity, "d": dirt, "p": [paint_color.r, paint_color.g, paint_color.b, paint_color.a],
 		"w": wet, "t": taped, "b": boarded, "lk": locked, "l": lit, "bu": burnt, "lq": liquid_left,
 		"o": is_open, "od": open_drawers, "tr": torn, "g": glued, "lot": lot_id, "sl": sleeping,
 	}
+	if get_meta("shatter_piece", false):
+		d["shatter_piece"] = true
+		var col: Color = _base_colors[0] if not _base_colors.is_empty() else Color(0.6, 0.55, 0.5)
+		d["pc"] = [col.r, col.g, col.b, col.a]
+		var ext := arch.dims * def.scale * 0.3
+		for c in get_children():
+			if c is CollisionShape3D and (c as CollisionShape3D).shape is BoxShape3D:
+				ext = ((c as CollisionShape3D).shape as BoxShape3D).size
+				break
+		d["ext"] = [ext.x, ext.y, ext.z]
+	return d
 
 
 func apply_state(s: Dictionary) -> void:
@@ -326,7 +337,13 @@ func apply_state(s: Dictionary) -> void:
 	torn = bool(s.get("tr", torn))
 	glued = bool(s.get("g", glued))
 	lot_id = str(s.get("lot", lot_id))
-	if integrity == Types.Integrity.SHARDS and was_integrity != Types.Integrity.SHARDS:
+	if s.get("shatter_piece", false) and not get_meta("shatter_piece", false):
+		var pc: Array = s.get("pc", [0.6, 0.55, 0.5, 1.0])
+		var ext: Array = s.get("ext", [0.1, 0.08, 0.1])
+		var extents := Vector3(float(ext[0]), float(ext[1]), float(ext[2]))
+		var col := Color(float(pc[0]), float(pc[1]), float(pc[2]), float(pc[3]) if pc.size() > 3 else 1.0)
+		apply_shatter_piece(LowPoly.chamfer_box(extents, minf(0.012, extents.x * 0.08)), col, extents)
+	elif integrity == Types.Integrity.SHARDS and was_integrity != Types.Integrity.SHARDS:
 		_become_pile()
 	_apply_open_visual(false)
 	_refresh_material()
@@ -396,7 +413,11 @@ func _on_impact(dv: float, at: Vector3) -> void:
 		threshold *= 1.6
 	if boarded:
 		threshold *= 2.2
-	var will_shatter := integrity != Types.Integrity.SHARDS and def.is_fragile() and dv >= threshold
+	# полный развал — только сильный удар (стена / бросок) или падение с высоты (~3+ м → ~8 м/с)
+	const SHATTER_FLOOR := 8.2
+	var shatter_need := maxf(threshold * 1.85, SHATTER_FLOOR)
+	var chip_need := threshold * 0.9
+	var will_shatter := integrity != Types.Integrity.SHARDS and def.is_fragile() and dv >= shatter_need
 	if now - _last_impact_sound > 0.12:
 		_last_impact_sound = now
 		var snd := "thud"
@@ -427,14 +448,14 @@ func _on_impact(dv: float, at: Vector3) -> void:
 	if integrity == Types.Integrity.SHARDS:
 		return
 	if def.is_fragile():
-		if dv >= threshold:
+		if dv >= shatter_need:
 			shatter()
-		elif dv >= threshold * 0.55 and integrity == Types.Integrity.WHOLE:
+		elif dv >= chip_need and integrity == Types.Integrity.WHOLE:
 			integrity = Types.Integrity.CHIPPED
 			AudioBus.play_at("crack", global_position, -2.0)
 			_push_state()
-	elif dv >= threshold * 2.0 and integrity == Types.Integrity.WHOLE and not def.has_facet(Types.Facet.LIQUID):
-		# нехрупкое тоже мнётся при сильном ударе
+	elif dv >= maxf(threshold * 2.8, 12.0) and integrity == Types.Integrity.WHOLE and not def.has_facet(Types.Facet.LIQUID):
+		# нехрупкое мнётся только от очень жёсткого удара
 		integrity = Types.Integrity.CHIPPED
 		_push_state()
 	# жидкость выплёскивается при ударе если бутылка открыта/сколота
@@ -468,22 +489,89 @@ func shatter() -> void:
 	_spawn_loose_shards(spawn_pos)
 	_become_pile()
 	broke.emit(self)
-	Net.broadcast_event("break", {"nid": net_id, "pos": spawn_pos})
+	Net.broadcast_event("break", {"nid": net_id, "pos": spawn_pos, "seed": int(get_meta("shatter_seed", 0))})
 	_push_state()
 
 
 func _spawn_loose_shards(at: Vector3) -> void:
-	var root := Net._items_root()
-	if root == null:
+	if not Net.is_host():
+		# клиент: косметика уже придёт как spawn shard_piece от хоста
 		return
-	var count := arch.shard_count
+	var count := clampi(arch.shard_count if arch.shard_count > 0 else 5, 3, 8)
+	var shatter_seed := hash(str(net_id) + str(Time.get_ticks_msec()))
+	set_meta("shatter_seed", shatter_seed)
+	var pieces: Array = []
+	var ms: GDScript = load("res://core/MeshShatter.gd") as GDScript
+	if ms and mesh_root and ms.has_method("shatter"):
+		pieces = ms.call("shatter", mesh_root, count, shatter_seed) as Array
+	var base_col: Color = _base_colors[0] if not _base_colors.is_empty() else (def.color if def.color != Color.WHITE else arch.base_color)
+	var xf0 := global_transform
 	for i in count:
-		var sh := Shard.make(arch, def, i, count)
-		root.add_child(sh)
-		sh.global_position = at + Vector3(randf_range(-0.1, 0.1), 0.05 + 0.05 * i, randf_range(-0.1, 0.1))
-		sh.linear_velocity = Vector3(randf_range(-2, 2), randf_range(1, 3), randf_range(-2, 2))
-		sh.angular_velocity = Vector3(randf_range(-6, 6), randf_range(-6, 6), randf_range(-6, 6))
-		Shard.register(sh)
+		var piece_mesh: Mesh = null
+		var centroid := Vector3.ZERO
+		var extents := arch.dims * def.scale * 0.28
+		if i < pieces.size() and pieces[i] is Dictionary:
+			var d: Dictionary = pieces[i]
+			piece_mesh = d.get("mesh") as Mesh
+			centroid = d.get("centroid", Vector3.ZERO) as Vector3
+			extents = d.get("extents", extents) as Vector3
+		if piece_mesh == null:
+			# запасной вариант до/без MeshShatter — гранёный кусок из размеров архетипа
+			extents = Vector3(
+				arch.dims.x * def.scale * randf_range(0.2, 0.38),
+				arch.dims.y * def.scale * randf_range(0.15, 0.32),
+				arch.dims.z * def.scale * randf_range(0.2, 0.38)
+			)
+			piece_mesh = LowPoly.chamfer_box(extents, minf(0.012, extents.x * 0.08))
+			centroid = Vector3(randf_range(-0.08, 0.08), 0.05 + 0.04 * i, randf_range(-0.08, 0.08))
+		var world_pos: Vector3 = xf0 * centroid
+		if centroid == Vector3.ZERO:
+			world_pos = at + Vector3(randf_range(-0.12, 0.12), 0.06 + 0.04 * i, randf_range(-0.12, 0.12))
+		var body: ItemBody = Net.spawn_item("shard_piece", Transform3D(Basis.from_euler(Vector3(randf() * 0.5, randf() * TAU, randf() * 0.5)), world_pos), {
+			"shatter_piece": true,
+			"pc": [base_col.r, base_col.g, base_col.b, base_col.a],
+			"ext": [extents.x, extents.y, extents.z],
+			"src": def.id,
+		}) as ItemBody
+		if body == null:
+			continue
+		body.apply_shatter_piece(piece_mesh, base_col, extents)
+		body.linear_velocity = Vector3(randf_range(-2.5, 2.5), randf_range(1.5, 4.0), randf_range(-2.5, 2.5))
+		body.angular_velocity = Vector3(randf_range(-8, 8), randf_range(-8, 8), randf_range(-8, 8))
+
+
+## Подменить меш на осколок, нарезанный из родителя — поднимаемый ItemBody.
+func apply_shatter_piece(piece_mesh: Mesh, color: Color, extents: Vector3) -> void:
+	set_meta("shatter_piece", true)
+	integrity = Types.Integrity.CHIPPED
+	if mesh_root:
+		mesh_root.queue_free()
+		mesh_root = null
+	for c in get_children():
+		if c is CollisionShape3D:
+			c.queue_free()
+	mesh_root = Node3D.new()
+	mesh_root.name = "Mesh"
+	add_child(mesh_root)
+	var mi := MeshInstance3D.new()
+	mi.mesh = piece_mesh
+	var mat := StandardMaterial3D.new()
+	mat.albedo_color = color
+	mat.roughness = 0.85
+	mi.material_override = mat
+	mesh_root.add_child(mi)
+	var cs := CollisionShape3D.new()
+	var bs := BoxShape3D.new()
+	bs.size = extents.max(Vector3(0.04, 0.04, 0.04))
+	cs.shape = bs
+	add_child(cs)
+	mass = maxf(0.08, mass * 0.15)
+	_materials.clear()
+	_base_colors.clear()
+	_collect_materials(mesh_root)
+	_drawers.clear()
+	_lid = null
+	_walls.clear()
 
 
 ## Само тело становится кучкой осколков — можно продать за $1 (§7.2).

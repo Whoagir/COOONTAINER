@@ -168,6 +168,14 @@ func _s_grab() -> void:
 	p.hands.active_hand = 0
 	# короткий хват: точка за REACH недоступна
 	_ok("reach_short", not p.can_reach_point(p.shoulder_world(0) + Vector3(0, 0, -3.5)), "reach=%.2f" % Hands.REACH)
+	# присед на Ctrl
+	p.crouching = true
+	p._crouch_blend = 1.0
+	p._apply_crouch(1.0)
+	_ok("crouch", absf(p.head.position.y - Player.HEAD_Y_CROUCH) < 0.02, "head_y=%.2f" % p.head.position.y)
+	p.crouching = false
+	p._crouch_blend = 0.0
+	p._apply_crouch(0.0)
 	if b2:
 		p.host_pocket_put(b2)
 		_ok("pocket", p.pockets.has(b2), b2.def.id)
@@ -187,11 +195,23 @@ func _s_grab() -> void:
 		_ok("team_carry", p.hands.any_held() == b3 and p.encumbrance <= 0.5, "enc=%.2f size=%d" % [p.encumbrance, b3.arch.size_class])
 		p.hands.host_release_all()
 		Net.despawn_item(b3.net_id)
-	# разлом
+	# разлом — сильный бросок
 	p.hands.host_grab(b1, 0)
 	p.hands.host_release_body(b1, 20.0)
 	await get_tree().create_timer(1.2).timeout
 	_ok("shatter", b1.integrity == Types.Integrity.SHARDS or b1.integrity == Types.Integrity.CHIPPED, "integrity=%d" % b1.integrity)
+	var shard_n := 0
+	for it in Net.items.values():
+		if it is ItemBody and is_instance_valid(it) and it.def and it.def.id == "shard_piece":
+			shard_n += 1
+	_ok("shatter_pieces", shard_n >= 3, "pieces=%d" % shard_n)
+	# лёгкий стук не должен разносить в щепки
+	var soft: ItemDef = Registry.random_item_with_facet(Types.Facet.FRAGILE)
+	var bsoft = Net.spawn_item(soft.id, Transform3D(Basis(), p.global_position + Vector3(0, 1.0, -1.0)))
+	await get_tree().physics_frame
+	bsoft._on_impact(3.0, Vector3.ZERO)
+	_ok("shatter_soft_ok", bsoft.integrity != Types.Integrity.SHARDS, "integrity=%d" % bsoft.integrity)
+	Net.despawn_item(bsoft.net_id)
 	# CHIPPED (бросок пришёлся вскользь) — цена лишь падает; SHARDS — копейки
 	var v_after: int = b1.current_value()
 	_ok("shard_value", (v_after <= 5) if b1.integrity == Types.Integrity.SHARDS else (v_after < b1.def.value_base), "$%d int=%d" % [v_after, b1.integrity])

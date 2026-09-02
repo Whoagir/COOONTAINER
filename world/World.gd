@@ -415,8 +415,8 @@ func on_net_event(kind: String, data: Dictionary) -> void:
 			if not Net.is_host():
 				var b = Net.items.get(int(data["nid"]))
 				if b:
-					b._spawn_loose_shards(data["pos"])
 					AudioBus.play_at("shatter", data["pos"], 2.0)
+					# осколки-куски приходят отдельными spawn_item от хоста
 		"npc_say":
 			var n := get_node_or_null(NodePath(str(data["path"])))
 			if n and n is Npc and not Net.is_host():

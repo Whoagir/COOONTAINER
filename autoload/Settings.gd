@@ -11,7 +11,7 @@ const BINDS_SECTION := "keybinds"
 
 const ACTIONS: PackedStringArray = [
 	"move_forward", "move_back", "move_left", "move_right",
-	"jump", "sprint", "grab", "release", "second_hand", "swap_hand", "use",
+	"jump", "sprint", "crouch", "grab", "release", "second_hand", "swap_hand", "use",
 	"throw", "flashlight", "paddle", "pin", "voice", "pause", "alt_use",
 ]
 const PROTECTED: PackedStringArray = [

@@ -46,7 +46,7 @@ PAUSE_MUSIC,Музыка,Music
 PAUSE_SENS,Чувствительность мыши,Mouse sensitivity
 PAUSE_CODE,Код лобби: %s,Lobby code: %s
 MENU_SUBTITLE,"Перекуп из трейлера. Пародия. Соло + кооп 1–4.","Trailer-park flipper. Parody. Solo + co-op 1–4."
-MENU_FOOTER,"Godot 4.7 • Jolt • WASD, мышь — рука, Q смена руки, ЛКМ хват, E юзать, G бросить","Godot 4.7 • Jolt • WASD, mouse aims hand, Q swap hand, LMB grab, E use, G throw"
+MENU_FOOTER,"Godot 4.7 • Jolt • WASD, Ctrl присед, Shift бег, мышь — рука, Q смена руки, ЛКМ хват","Godot 4.7 • Jolt • WASD, Ctrl crouch, Shift sprint, mouse aims hand, Q swap, LMB grab"
 PAUSE_COPIED,Код скопирован,Code copied
 HUD_DEAD,ТЫ ТРУП. КРОВАТЬ ЖДЁТ.,YOU'RE DEAD. BED AWAITS.
 HANDS_NEED_TWO,Это двумя руками. Освободи.,Two hands needed. Drop stuff.
@@ -101,7 +101,7 @@ HOWTO_1,"1. Котёл общий. Что в котле — то и ваше. П
 HOWTO_2,"2. Аукцион: встань к аукционисту, доставай весло [B], пиши сумму, поднимай [ЛКМ]. Хантеры блефуют. Ты тоже можешь.","2. Auction: stand by the auctioneer, raise the paddle [B], write a number, lift it [LMB]. Hunters bluff. So can you."
 HOWTO_3,"3. Выиграл — вывоз. Таймер. Всё, что осталось внутри, когда дверь упала — не твоё. И штраф.","3. Won a lot — clear it out. Timer. Whatever is still inside when the door drops is not yours. Plus a fine."
 HOWTO_4,"4. Мышь ведёт активную руку (сначала правую). [Q] — сменить руку, [ЛКМ] взять в ладонь, [F] обе руки на вещь, [G] швырнуть. Дотянуться далеко не выйдет — нужна лестница.","4. Mouse steers the active hand (right first). [Q] swap hand, [LMB] grab into the palm, [F] both hands on one item, [G] throw. Short reach — you'll need a ladder."
-HOWTO_5,"5. Хрупкое бьётся. Осколки — доллар. Скотч и доска чинят цену. Тряпка — грязь.","5. Fragile things break. Shards sell for a dollar. Tape and planks patch the price. A rag fixes dirt."
+HOWTO_5,"5. Хрупкое бьётся только от сильного удара о стену или падения с высоты — на куски самой 3D-модели, каждый можно поднять. Лёгкий стук — скол.","5. Fragile stuff only shatters from a hard wall smash or a high drop — into pieces of the 3D model you can pick up. A light bump just chips it."
 HOWTO_6,"6. Скупщики покупают всё, но торгуются полоской. Держи [E] с вещью — перевернёшь: вылить, вытряхнуть, полистать.","6. Vendors buy anything but haggle with a bar. Hold [E] with an item to flip it: pour, shake out, leaf through."
 HOWTO_7,"7. Жидкости текут, огонь распространяется, менты приезжают. Казино нечестное. Дом стоит $25 000.","7. Liquids flow, fire spreads, cops show up. The casino is rigged. The house costs $25,000."
 HOWTO_8,"8. Ничего из этого не обязательно. Развлекайтесь.","8. None of this is mandatory. Have fun."
