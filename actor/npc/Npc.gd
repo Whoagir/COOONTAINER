@@ -45,6 +45,11 @@ var _arm_r: Node3D
 var _leg_l: Node3D
 var _leg_r: Node3D
 var _mouth: MeshInstance3D
+## Рот — эллипсоид: меш круглый, «блин» задаётся сплющиванием по Z. Все режимы рта
+## (покой / хантер / речь) домножаются на эту базу, иначе пасть снова станет шаром.
+const _MOUTH_REST := Vector3(0.85, 0.42, 1.0)
+const _MOUTH_REST_HUNTER := Vector3(1.0, 0.82, 1.0)
+var _mouth_base_scale := Vector3(1.0, 1.0, 0.42)
 var _skin_tone: Color
 var _legs_h := 0.8
 var _torso_h := 0.7
@@ -214,6 +219,9 @@ func _build_visual() -> void:
 		piv.name = "ArmL" if side < 0.0 else "ArmR"
 		piv.position = Vector3(side * (torso_r * 0.95 + arm_r * 0.25), _shoulder_y, 0.04)
 		_visual.add_child(piv)
+		# шар-плечо в точке вращения: заполняет щель между рукавом и торсом на любом
+		# повороте руки (без него в кадре видно, что руки просто висят рядом с телом)
+		_mesh(piv, LowPoly.sphere(arm_r * 1.32, 8, 4), shirt, Vector3.ZERO)
 		_mesh(piv, _capsule(arm_r, arm_len * 0.70, 8), shirt, Vector3(0.0, -arm_len * 0.32, 0.0))
 		var fist := _mesh(piv, _box(fist_s), _skin_tone, Vector3(0.0, _fist_y, 0.0))
 		fist.name = "HandL" if side < 0.0 else "HandR"
@@ -240,17 +248,21 @@ func _build_visual() -> void:
 	_head.position.y = _head_y
 	_visual.add_child(_head)
 
-	# лицо: два огромных вертикальных овала почти встык + чёрный рот с языком
-	var eye_rx := head_r * 0.38
-	var eye_h := head_r * 0.88
-	var eye_x := head_r * 0.36
-	var eye_z := -head_r * 0.82
-	var eye_y := head_r * 0.12
-	_eye_base_scale = Vector3(0.72, 1.05, 0.62)
+	# Лицо (§кей-арт): выпученные ГЛАЗНЫЕ ЯБЛОКИ, а не линзы. Раньше глаз строился
+	# `sphere(r, 8, 3, h=0.88r)` — тянутая по Y сфера с 3 кольцами даёт острые полюса, и
+	# на рендере глаз читался белым шипом, торчащим вбок сквозь козырёк. Теперь это
+	# КРУГЛЫЙ шар (10 сегментов, 5 колец, без растяжки высоты), а овал даёт scale.
+	# Центр шара утоплен внутрь черепа — наружу выходит только купол, как в кей-арте.
+	var eye_rx := head_r * 0.30
+	var eye_x := head_r * 0.34
+	var eye_z := -head_r * 0.72
+	var eye_y := head_r * 0.10
+	_eye_base_scale = Vector3(0.80, 1.18, 0.80)
 	for x in [-eye_x, eye_x]:
-		var eye := _mesh(_head, LowPoly.sphere(eye_rx, 8, 3, false, eye_h), _WHITE, Vector3(x, eye_y, eye_z), 0.70)
+		var eye := _mesh(_head, LowPoly.sphere(eye_rx, 10, 5), _WHITE, Vector3(x, eye_y, eye_z), 0.70)
 		eye.scale = _eye_base_scale
-		var pupil := _mesh(_head, LowPoly.sphere(head_r * 0.10, 6, 3), _PUPIL, Vector3(x, eye_y - head_r * 0.02, eye_z - eye_rx * 0.42), 0.40)
+		# зрачок — жирная точка на передней стенке яблока (читается с 10 м, а не пиксель)
+		var pupil := _mesh(_head, LowPoly.sphere(head_r * 0.13, 8, 4), _PUPIL, Vector3(x, eye_y - head_r * 0.02, eye_z - eye_rx * 0.62), 0.40)
 		if x < 0.0:
 			eye.name = "EyeL"
 			pupil.name = "PupilL"
@@ -265,19 +277,19 @@ func _build_visual() -> void:
 			_pupil_rest_r = pupil.position
 	_bind_life()
 
+	# Рот: был `chamfer_box` — плоская чёрная плита, торчавшая из лица на ~3 см (её ставили
+	# по идеальному радиусу сферы, а гранёный череп лежит заметно внутри него). Теперь это
+	# приплюснутый эллипсоид: спереди — круглый тёмный овал орущей пасти, без углов.
 	_mouth = MeshInstance3D.new()
 	_mouth.name = "Mouth"
-	_mouth.mesh = _box(Vector3(head_r * 0.86, head_r * 0.52, head_r * 0.28))
+	_mouth.mesh = LowPoly.sphere(head_r * 0.46, 10, 5, false, head_r * 0.62)
 	_mouth.material_override = _col_mat(_MOUTH_C, 0.95)
-	_mouth.position = Vector3(0.0, -head_r * 0.36, -head_r * 0.88)
+	_mouth.position = Vector3(0.0, -head_r * 0.36, -head_r * 0.74)
 	_head.add_child(_mouth)
-	var tongue := _mesh(_mouth, _box(Vector3(head_r * 0.50, head_r * 0.16, head_r * 0.12)), _TONGUE, Vector3(0.0, -head_r * 0.14, -head_r * 0.04))
+	var tongue := _mesh(_mouth, _box(Vector3(head_r * 0.42, head_r * 0.14, head_r * 0.10)), _TONGUE, Vector3(0.0, -head_r * 0.16, -head_r * 0.10))
 	tongue.name = "Tongue"
 	# кей-арт орёт всегда; в покое рот всё ещё читается как тёмная дыра, при речи раскрывается
-	if npc_group == "hunter":
-		_mouth.scale = Vector3(1.0, 0.82, 1.0)
-	else:
-		_mouth.scale = Vector3(0.85, 0.42, 0.92)
+	_mouth.scale = _mouth_base_scale * (_MOUTH_REST_HUNTER if npc_group == "hunter" else _MOUTH_REST)
 
 	# волосы / лысина / кепка / бини — через существующие hat/bald
 	if hat:
@@ -377,16 +389,13 @@ func _physics_process(delta: float) -> void:
 		if m == null and _head:
 			m = _head.get_node_or_null("Mouth") as MeshInstance3D
 		if m:
-			m.scale = Vector3(1.05, 1.05 + absf(sin(Time.get_ticks_msec() * 0.028)) * 0.22, 1.0)
+			m.scale = _mouth_base_scale * Vector3(1.05, 1.05 + absf(sin(Time.get_ticks_msec() * 0.028)) * 0.22, 1.0)
 	else:
 		var m: MeshInstance3D = _mouth
 		if m == null and _head:
 			m = _head.get_node_or_null("Mouth") as MeshInstance3D
 		if m:
-			if npc_group == "hunter":
-				m.scale = Vector3(1.0, 0.82, 1.0)
-			else:
-				m.scale = Vector3(0.85, 0.42, 0.92)
+			m.scale = _mouth_base_scale * (_MOUTH_REST_HUNTER if npc_group == "hunter" else _MOUTH_REST)
 	if ragdolled:
 		return
 	if not Net.is_host():

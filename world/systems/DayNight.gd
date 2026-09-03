@@ -163,7 +163,9 @@ func _apply() -> void:
 		e.ambient_light_sky_contribution = lerpf(0.45, 0.2, gold) # на закате небо тёмное сверху — берём цвет, не небо
 		var fog_day := Color(0.72, 0.72, 0.78).lerp(Color(0.84, 0.58, 0.66), gold) # даль уходит в лиловое, как горы на арте
 		e.fog_light_color = Color(0.14, 0.16, 0.28).lerp(fog_day, day)
-		e.fog_density = lerpf(0.0035, 0.002, day)
+		# днём плотнее, чем было (0.002): край терраина должен утонуть в дымке, а не
+		# обрываться в небо. Вместе с fog_sky_affect/aerial_perspective в World.tscn.
+		e.fog_density = lerpf(0.0035, 0.0028, day)
 		e.adjustment_saturation = lerpf(1.18, 1.12, gold) # тёплый свет сам насыщает — не пережигаем в красное
 	if _cloud_mat:
 		var cloud_day := Color(1.0, 0.98, 0.95).lerp(Color(1.0, 0.66, 0.5), gold)

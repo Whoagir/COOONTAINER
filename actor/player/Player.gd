@@ -281,6 +281,11 @@ func _build_3p_extras() -> void:
 		apiv.rotation.z = -side * 0.20
 		apiv.rotation.x = 0.35
 		body_mesh.add_child(apiv)
+		# шар-плечо в точке вращения — заваривает щель между рукавом и торсом (см. Npc.gd)
+		var sh := MeshInstance3D.new()
+		sh.mesh = LowPoly.sphere(0.118, 8, 4)
+		sh.material_override = shirt
+		apiv.add_child(sh)
 		var arm := MeshInstance3D.new()
 		arm.mesh = LowPoly.capsule(0.09, 0.40, 8, 3)
 		arm.material_override = shirt
@@ -316,18 +321,20 @@ func _build_3p_extras() -> void:
 	face.add_child(visor)
 	var eye_w: StandardMaterial3D = _pmat(Color(0.97, 0.97, 0.95), 0.70)
 	var pupil_m: StandardMaterial3D = _pmat(Color(0.06, 0.05, 0.07), 0.40)
-	_p_eye_base = Vector3(0.70, 1.08, 0.60)
-	for x in [-0.125, 0.125]:
+	# Глаза — круглые яблоки, овал даёт scale (было sphere(h=0.30) с 3 кольцами → острые
+	# полюса, белый шип из лица). Центр утоплен в череп, наружу выходит купол.
+	_p_eye_base = Vector3(0.80, 1.18, 0.80)
+	for x in [-0.122, 0.122]:
 		var eye := MeshInstance3D.new()
-		eye.mesh = LowPoly.sphere(0.13, 8, 3, false, 0.30)
+		eye.mesh = LowPoly.sphere(0.108, 10, 5)
 		eye.material_override = eye_w
 		eye.scale = _p_eye_base
-		eye.position = Vector3(x, 0.05, -0.30)
+		eye.position = Vector3(x, 0.05, -0.26)
 		face.add_child(eye)
 		var pupil := MeshInstance3D.new()
-		pupil.mesh = LowPoly.sphere(0.036, 6, 3)
+		pupil.mesh = LowPoly.sphere(0.047, 8, 4)
 		pupil.material_override = pupil_m
-		pupil.position = Vector3(x, 0.04, -0.36)
+		pupil.position = Vector3(x, 0.04, -0.325)
 		face.add_child(pupil)
 		if x < 0.0:
 			eye.name = "EyeL"
@@ -335,17 +342,19 @@ func _build_3p_extras() -> void:
 		else:
 			eye.name = "EyeR"
 			_p_eye_r = eye
+	# Рот — приплюснутый эллипсоид (был chamfer_box: чёрная плита, торчавшая из лица)
 	var mouth := MeshInstance3D.new()
 	mouth.name = "Mouth"
-	mouth.mesh = LowPoly.chamfer_box(Vector3(0.30, 0.18, 0.10), 0.02)
+	mouth.mesh = LowPoly.sphere(0.165, 10, 5, false, 0.22)
 	mouth.material_override = _pmat(Color(0.07, 0.03, 0.04), 0.95)
-	mouth.position = Vector3(0, -0.13, -0.32)
+	mouth.scale = Vector3(0.88, 0.62, 0.42)
+	mouth.position = Vector3(0, -0.13, -0.27)
 	face.add_child(mouth)
 	var tongue := MeshInstance3D.new()
 	tongue.name = "Tongue"
 	tongue.mesh = LowPoly.chamfer_box(Vector3(0.16, 0.055, 0.04), 0.008)
 	tongue.material_override = _pmat(Color(0.90, 0.18, 0.28))
-	tongue.position = Vector3(0, -0.05, -0.012)
+	tongue.position = Vector3(0, -0.048, -0.10)
 	mouth.add_child(tongue)
 
 
