@@ -15,7 +15,15 @@ extends Node3D
 const DASH_STEP := 4.0
 const DASH_LEN := 1.8
 const ASPHALT_THICK := 0.12
-const LAYER_STEP := 0.01 # каждый следующий отрезок чуть выше — нет z-fighting на перекрёстках
+## Каждый следующий отрезок чуть выше — снимает z-fighting на перекрёстках.
+## Больше пары миллиметров нельзя: на 18 отрезках шаг в сантиметр давал ступеньку в 17 см,
+## из-за неё тротуары обрывались в воздухе, а на стыках зияли чёрные щели.
+const LAYER_STEP := 0.0025
+## Тротуар сидит в грунте: тонкая плита мерцала о песок вдоль всей кромки.
+const CURB_H := 0.36
+const CURB_TOP := 0.10
+## Бордюр заходит на асфальт — иначе на стыке видна щель.
+const CURB_OVERLAP := 0.06
 
 var _built := false
 var _mat_asphalt: StandardMaterial3D
@@ -65,14 +73,14 @@ func road_top_at(pos: Vector3) -> float:
 		var a := Vector3(s.x, 0, s.y)
 		var b := Vector3(s.z, 0, s.w)
 		var dir := b - a
-		var len := dir.length()
-		if len < 0.01:
+		var seg_len := dir.length()
+		if seg_len < 0.01:
 			continue
-		dir /= len
+		dir /= seg_len
 		var rel := Vector3(pos.x, 0, pos.z) - (a + b) * 0.5
 		var along := rel.dot(dir)
 		var across := rel.dot(Vector3(-dir.z, 0, dir.x))
-		if absf(along) <= len * 0.5 + width * 0.5 and absf(across) <= width * 0.5:
+		if absf(along) <= seg_len * 0.5 + width * 0.5 and absf(across) <= width * 0.5:
 			best = maxf(best, ASPHALT_THICK * 0.5 + LAYER_STEP * i)
 	return best
 
@@ -88,11 +96,11 @@ func _frame(s: Vector4) -> Dictionary:
 	var a := Vector3(s.x, 0, s.y)
 	var b := Vector3(s.z, 0, s.w)
 	var dir := b - a
-	var len := dir.length()
-	if len < 0.01:
+	var seg_len := dir.length()
+	if seg_len < 0.01:
 		return {}
-	dir /= len
-	return {"a": a, "b": b, "dir": dir, "len": len, "center": (a + b) * 0.5, "normal": Vector3(-dir.z, 0, dir.x)}
+	dir /= seg_len
+	return {"a": a, "b": b, "dir": dir, "len": seg_len, "center": (a + b) * 0.5, "normal": Vector3(-dir.z, 0, dir.x)}
 
 
 func _build_segment(i: int, s: Vector4) -> void:
@@ -169,10 +177,11 @@ func _build_segment(i: int, s: Vector4) -> void:
 				continue
 			var pm := MeshInstance3D.new()
 			var pbm := BoxMesh.new()
-			pbm.size = Vector3(plen, 0.2, sidewalk)
+			pbm.size = Vector3(plen, CURB_H, sidewalk + CURB_OVERLAP)
 			pm.mesh = pbm
 			pm.material_override = _mat_curb
-			pm.position = Vector3((pc.x + pc.y) * 0.5, 0.0, side * (width * 0.5 + sidewalk * 0.5))
+			var cz := width * 0.5 + sidewalk * 0.5 - CURB_OVERLAP * 0.5
+			pm.position = Vector3((pc.x + pc.y) * 0.5, CURB_TOP - CURB_H * 0.5, side * cz)
 			body.add_child(pm)
 			var pcs := CollisionShape3D.new()
 			var pbs := BoxShape3D.new()

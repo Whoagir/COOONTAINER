@@ -7,11 +7,9 @@ const TICK := 6.0
 
 var _t := 0.0
 var _hamster_escapes := 0
-var _last_gag := ""
 var _crow: Node3D = null
 var _crow_target: ItemBody = null
 var _crow_timer := 0.0
-var _dog_timer := 0.0
 var _gag_cooldowns: Dictionary = {}
 
 

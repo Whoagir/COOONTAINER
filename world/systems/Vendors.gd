@@ -54,7 +54,7 @@ class Stand:
 	var items: Array[ItemBody] = []
 	var unlocked := false
 	var closed_label: Label3D
-	var sign: Label3D
+	var sign_lbl: Label3D
 	var interact: Interactable
 
 	func counter_pos() -> Vector3:
@@ -201,15 +201,15 @@ func register_stand(def: VendorDef, root: Node3D) -> Stand:
 	s.interact.on_interact = _on_stand_interact.bind(s)
 	s.interact.on_hint = _stand_hint.bind(s)
 	# вывеска
-	s.sign = Label3D.new()
-	s.sign.text = def.display_name()
-	s.sign.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	s.sign.font_size = 72
-	s.sign.outline_size = 12
-	s.sign.pixel_size = 0.006
-	s.sign.modulate = Color(1, 0.9, 0.5)
-	add_child(s.sign)
-	s.sign.global_position = s.counter_pos() + Vector3(0, 2.3, 0)
+	s.sign_lbl = Label3D.new()
+	s.sign_lbl.text = def.display_name()
+	s.sign_lbl.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	s.sign_lbl.font_size = 72
+	s.sign_lbl.outline_size = 12
+	s.sign_lbl.pixel_size = 0.006
+	s.sign_lbl.modulate = Color(1, 0.9, 0.5)
+	add_child(s.sign_lbl)
+	s.sign_lbl.global_position = s.counter_pos() + Vector3(0, 2.3, 0)
 	stands[def.id] = s
 	_apply_open_state(s)
 	return s

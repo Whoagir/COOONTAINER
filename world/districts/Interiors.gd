@@ -374,10 +374,10 @@ static func _bunting(name: String, a: Vector3, b: Vector3, n := 8, c0 := Color(0
 	var g := _grp(name, Vector3.ZERO)
 	var wire := _mat(Color(0.18, 0.16, 0.14))
 	var d := b - a
-	var len := d.length()
-	if len < 0.3:
+	var seg_len := d.length()
+	if seg_len < 0.3:
 		return
-	_cyl(g, (a + b) * 0.5, 0.012, len, wire, _align_y(d))
+	_cyl(g, (a + b) * 0.5, 0.012, seg_len, wire, _align_y(d))
 	for i in n:
 		var t := (float(i) + 0.5) / float(n)
 		var p: Vector3 = a.lerp(b, t)

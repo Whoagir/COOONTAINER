@@ -163,10 +163,10 @@ func npc_shout(npc_group: String, pos: Vector3, pitch_base: float = 1.0, categor
 	p.bus = "Voice"
 	p.global_position = pos
 	p.volume_db = 2.0
-	p.pitch_scale = pitch_base * randf_range(0.85, 1.2)
+	# узкий разброс: голос живой, но узнаваемый. Широкий (0.85..1.2) читался как разные персонажи
+	p.pitch_scale = pitch_base * randf_range(0.97, 1.04)
 	p.play()
-	var len: float = e["stream"].get_length() / p.pitch_scale
-	return len
+	return e["stream"].get_length() / p.pitch_scale
 
 
 func _scan_voice(lang: String, group: String) -> Array:

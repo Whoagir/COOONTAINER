@@ -35,6 +35,11 @@ var objective_panel: PanelContainer
 var objective_title: Label
 var objective_label: Label
 var objective_dist: Label
+var clock_panel: PanelContainer
+var clock_label: Label
+var _clock_t := 0.0
+var controls_panel: PanelContainer
+var controls_grid: GridContainer
 
 var _objective_target: Vector3 = Vector3.INF
 var _objective_t := 0.0
@@ -58,6 +63,9 @@ func _ready() -> void:
 	Game.notify.connect(toast)
 	Achievements.unlocked.connect(_on_achievement)
 	Game.world_mode_changed.connect(_on_mode)
+	Settings.changed.connect(func(k: String, _v: Variant):
+		if k == "keybinds" or k == "locale":
+			_fill_controls()) # только раскладка и язык, а не каждый шаг слайдера громкости
 	_pot_target = Economy.pot
 	_pot_shown = _pot_target
 	pot_label.text = "$%d" % _pot_target
@@ -247,9 +255,30 @@ func _build() -> void:
 	status_label.visible = false
 	root.add_child(status_label)
 
+	# часы: сутки идут ~24 мин, без них не понять, успеваешь ли до темноты
+	clock_panel = PanelContainer.new()
+	clock_panel.set_anchors_preset(Control.PRESET_CENTER_TOP)
+	clock_panel.grow_horizontal = Control.GROW_DIRECTION_BOTH
+	clock_panel.position = Vector2(-52, 10)
+	clock_panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	var clock_sb := StyleBoxFlat.new()
+	clock_sb.bg_color = Color(UiTheme.PANEL.r, UiTheme.PANEL.g, UiTheme.PANEL.b, 0.6)
+	clock_sb.set_corner_radius_all(8)
+	clock_sb.content_margin_left = 14
+	clock_sb.content_margin_right = 14
+	clock_sb.content_margin_top = 4
+	clock_sb.content_margin_bottom = 4
+	clock_panel.add_theme_stylebox_override("panel", clock_sb)
+	root.add_child(clock_panel)
+	clock_label = _mk_label(22, UiTheme.TEXT, false)
+	clock_label.text = "--:--"
+	clock_panel.add_child(clock_label)
+
+	_build_controls(root)
+
 	toast_box = VBoxContainer.new()
 	toast_box.set_anchors_preset(Control.PRESET_BOTTOM_RIGHT)
-	toast_box.position = Vector2(-440, -260)
+	toast_box.position = Vector2(-440, -430) # выше шпаргалки управления в этом же углу
 	toast_box.add_theme_constant_override("separation", 8)
 	toast_box.alignment = BoxContainer.ALIGNMENT_END
 	toast_box.visible = false
@@ -313,6 +342,10 @@ func _build() -> void:
 
 
 func _process(delta: float) -> void:
+	_clock_t += delta
+	if _clock_t >= 0.5:
+		_clock_t = 0.0
+		_tick_clock()
 	_objective_t += delta
 	if _objective_t >= 0.5:
 		_objective_t = 0.0
@@ -354,6 +387,20 @@ func _process(delta: float) -> void:
 		if _doc_timer <= 0.0:
 			doc_panel.visible = false
 	_update_player_hints()
+
+
+## Часы мира: time_of_day 0 = полночь, 0.5 = полдень. Ночью циферблат синеет.
+func _tick_clock() -> void:
+	var dn = Game.world.system("DayNight") if Game.world else null
+	if dn == null:
+		clock_panel.visible = false
+		return
+	clock_panel.visible = true
+	var t: float = fposmod(float(dn.time_of_day), 1.0)
+	var mins := int(round(t * 1440.0)) % 1440
+	var night: bool = dn.is_night()
+	clock_label.text = "%s %02d:%02d" % ["☾" if night else "☀", mins / 60, mins % 60]
+	clock_label.add_theme_color_override("font_color", Color(0.68, 0.76, 1.0) if night else UiTheme.TEXT)
 
 
 func _fmt(s: float) -> String:
@@ -453,6 +500,78 @@ func clear_timer() -> void:
 	timer_label.scale = Vector2.ONE
 	timer_bar.value = 0.0
 	timer_panel.visible = false
+
+
+## Шпаргалка по управлению в углу: правил много, из «Записки» всё не запомнить.
+## F1 убирает и возвращает её.
+const CONTROLS_ROWS: Array = [
+	["", "HUD_CTRL_MOVE"],
+	["sprint", "SET_ACT_SPRINT"],
+	["crouch", "SET_ACT_CROUCH"],
+	["jump", "SET_ACT_JUMP"],
+	["grab", "SET_ACT_GRAB"],
+	["swap_hand", "SET_ACT_SWAP_HAND"],
+	["second_hand", "SET_ACT_SECOND_HAND"],
+	["throw", "SET_ACT_THROW"],
+	["use", "SET_ACT_USE"],
+	["alt_use", "SET_ACT_ALT_USE"],
+	["arm_out", "HUD_CTRL_ARM"],
+	["paddle", "SET_ACT_PADDLE"],
+	["flashlight", "SET_ACT_FLASHLIGHT"],
+]
+
+
+func _build_controls(root: Control) -> void:
+	controls_panel = PanelContainer.new()
+	controls_panel.set_anchors_preset(Control.PRESET_BOTTOM_RIGHT)
+	controls_panel.grow_horizontal = Control.GROW_DIRECTION_BEGIN
+	controls_panel.grow_vertical = Control.GROW_DIRECTION_BEGIN
+	controls_panel.position = Vector2(-16, -16)
+	controls_panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	controls_panel.modulate.a = 0.72
+	var sb := StyleBoxFlat.new()
+	sb.bg_color = Color(UiTheme.PANEL.r, UiTheme.PANEL.g, UiTheme.PANEL.b, 0.55)
+	sb.set_corner_radius_all(8)
+	sb.set_content_margin_all(8)
+	controls_panel.add_theme_stylebox_override("panel", sb)
+	root.add_child(controls_panel)
+	var col := VBoxContainer.new()
+	col.add_theme_constant_override("separation", 1)
+	controls_panel.add_child(col)
+	controls_grid = GridContainer.new()
+	controls_grid.columns = 4
+	controls_grid.add_theme_constant_override("h_separation", 8)
+	controls_grid.add_theme_constant_override("v_separation", 1)
+	col.add_child(controls_grid)
+	var foot := _mk_label(11, UiTheme.TEXT_DIM, false)
+	foot.text = tr("HUD_CTRL_HIDE")
+	foot.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+	col.add_child(foot)
+	_fill_controls()
+
+
+func _fill_controls() -> void:
+	for c in controls_grid.get_children():
+		controls_grid.remove_child(c) # queue_free отложен: без remove_child кадр рисуется с двойным набором
+		c.queue_free()
+	for row in CONTROLS_ROWS:
+		var action: String = row[0]
+		var keys := "WASD" if action == "" else Settings.hint(action)
+		if action == "arm_out":
+			keys = tr("HUD_CTRL_WHEEL")
+		var k := _mk_label(12, UiTheme.ACCENT, false)
+		k.text = keys
+		k.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
+		k.custom_minimum_size.x = 62
+		controls_grid.add_child(k)
+		var t := _mk_label(12, UiTheme.TEXT_DIM, false)
+		t.text = tr(row[1])
+		controls_grid.add_child(t)
+
+
+func toggle_controls() -> void:
+	if controls_panel:
+		controls_panel.visible = not controls_panel.visible
 
 
 func _mk_keycap(text: String) -> PanelContainer:

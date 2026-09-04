@@ -5,7 +5,6 @@ extends Node
 ## Этапы: трейлер → ангар → аукцион (ставка, молот) → вывоз (вынести лут) → скупщик (оффер + полоска)
 ##        → казино → полиция → тачка → дом. На каждом этапе — проверки и лог.
 
-signal stage_done(name: String, ok: bool, info: String)
 
 const STAGE_TIMEOUT := 90.0
 
@@ -69,7 +68,7 @@ func _process(delta: float) -> void:
 		return
 	_busy = true
 	match _stage:
-		0: await _s_boot()
+		0: _s_boot()
 		1: await _s_grab()
 		2: await _s_travel_hangar()
 		3: await _s_auction()
@@ -319,7 +318,7 @@ func _s_grab() -> void:
 		var oil: ItemBody = Net.spawn_item("oil_barrel", Transform3D(Basis(), camp.global_position + Vector3(0, 0.6, 0)))
 		oil.freeze = true
 		await get_tree().create_timer(2.0).timeout
-		_ok("campfire_ignites", is_instance_valid(oil) and (oil.lit or oil.burnt), "hearths=%d lit=%s" % [fire_sys.hearths.size(), str(oil.lit if is_instance_valid(oil) else "?")])
+		_ok("campfire_ignites", is_instance_valid(oil) and (oil.lit or oil.burnt), "hearths=%d lit=%s" % [fire_sys.hearths.size(), str(oil.lit) if is_instance_valid(oil) else "?"])
 		if is_instance_valid(oil):
 			Net.despawn_item(oil.net_id)
 	_next()
@@ -531,7 +530,7 @@ func _s_vendor() -> void:
 		Economy.add(500, "playtest")
 		locksmith._on_interact(p)
 		await get_tree().create_timer(4.5).timeout
-		_ok("locksmith", is_instance_valid(lb) and (not lb.locked or lb.integrity != Types.Integrity.WHOLE), "locked=%s integrity=%d" % [str(lb.locked if is_instance_valid(lb) else "?"), lb.integrity if is_instance_valid(lb) else -1])
+		_ok("locksmith", is_instance_valid(lb) and (not lb.locked or lb.integrity != Types.Integrity.WHOLE), "locked=%s integrity=%s" % [str(lb.locked) if is_instance_valid(lb) else "?", str(lb.integrity) if is_instance_valid(lb) else "?"])
 		if is_instance_valid(lb):
 			Net.despawn_item(lb.net_id)
 	_next()

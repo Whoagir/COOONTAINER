@@ -150,8 +150,19 @@ py -3.14 tools\gen_lots.py
 # синтез аудио + TTS реплик
 py -3.14 tools\audio\gen_sfx.py
 py -3.14 tools\audio\gen_music.py
-powershell -ExecutionPolicy Bypass -File tools\audio\gen_voice.ps1
+
+# реплики NPC: Piper (нейросетевой TTS, офлайн). Голоса качаются один раз, в гит не идут:
+pip install piper-tts
+py -m piper.download_voices ru_RU-dmitri-medium ru_RU-ruslan-medium ru_RU-irina-medium ^
+    en_US-ryan-high en_US-joe-medium en_US-amy-medium --data-dir tools\audio\piper_voices
+py tools\audio\gen_voice.py            # весь каст; --group cop / --lang en — точечно
 ```
+
+Голос каждого NPC (мужской/женский, скорость, громкость) задан в `CAST` внутри `gen_voice.py`.
+Женские: Тётя Зина (`hunter_f`), крупье, «Всё для дома», бригадир уборки.
+Хантеры разведены по трём папкам (`hunter`, `hunter_m2`, `hunter_f`) — поле `voice_group`
+в `tools/content/hunters.json`; `voice_pitch` там же держим в коридоре 0.88..1.10,
+иначе один и тот же голос читается как несколько разных персонажей.
 
 ---
 
@@ -241,7 +252,7 @@ Game / Controls / Video / Audio: locale `auto|ru|en`, mouse & FOV, key rebinding
 
 ## Dev tools
 
-Same commands as the Russian section above (`--smoke`, `--playtest`, `--shots`, `--nettest [--join=ADDR]` / `tools\nettest.ps1`, `--join=ADDR` auto-join, `--menu-shot`, `--autoshot`, `--time=0.88`, **`tools\trailer.ps1`** renders the ~70 s gameplay trailer to mp4 via Godot Movie Maker + ffmpeg (`-- --trailer` to just watch it), `balance.gd`, `check_scripts.gd`, `gen_content.py` / `gen_lots.py` with `py -3.14`, audio synth + `gen_voice.ps1`).
+Same commands as the Russian section above (`--smoke`, `--playtest`, `--shots`, `--nettest [--join=ADDR]` / `tools\nettest.ps1`, `--join=ADDR` auto-join, `--menu-shot`, `--autoshot`, `--time=0.88`, **`tools\trailer.ps1`** renders the ~70 s gameplay trailer to mp4 via Godot Movie Maker + ffmpeg (`-- --trailer` to just watch it), `balance.gd`, `check_scripts.gd`, `gen_content.py` / `gen_lots.py` with `py -3.14`, audio synth + `gen_voice.py` (Piper neural TTS)).
 
 ## Layout
 

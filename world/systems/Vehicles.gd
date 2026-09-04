@@ -231,7 +231,7 @@ func host_enter(p: Player, v: Vehicle, seat: int) -> void:
 		if h and h.arch.size_class != Types.SizeClass.TEAM and h.arch.size_class != Types.SizeClass.VEHICLE:
 			lap = h
 	for i in 2:
-		var b: ItemBody = p.hands.held[i]
+		var b: ItemBody = p.hands.held[i] if is_instance_valid(p.hands.held[i]) else null
 		if b and b != lap:
 			p.hands.host_release_body(b)
 	if lap:
@@ -261,8 +261,8 @@ func host_exit(p: Player) -> void:
 	v.release_player(p, pos)
 	# вещь с коленей снова физическая и остаётся в руках
 	for i in 2:
-		var b: ItemBody = p.hands.held[i]
-		if b and is_instance_valid(b) and b.get_meta("lap_of", 0) == p.peer_id:
+		var b: ItemBody = p.hands.held[i] if is_instance_valid(p.hands.held[i]) else null
+		if b and b.get_meta("lap_of", 0) == p.peer_id:
 			b.remove_meta("lap_of")
 			b.freeze = false
 			b.global_position = pos + Vector3(0, 1.2, 0)

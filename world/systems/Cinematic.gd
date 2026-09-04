@@ -57,6 +57,7 @@ func _ready() -> void:
 	_title.add_theme_constant_override("shadow_offset_x", 3)
 	_title.add_theme_constant_override("shadow_offset_y", 4)
 	_title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	_title.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	_title.set_anchors_preset(Control.PRESET_CENTER)
 	_title.grow_horizontal = Control.GROW_DIRECTION_BOTH
 	_title.grow_vertical = Control.GROW_DIRECTION_BOTH
@@ -75,8 +76,6 @@ func _ready() -> void:
 	_sub_panel.set_anchors_preset(Control.PRESET_CENTER_BOTTOM)
 	_sub_panel.grow_horizontal = Control.GROW_DIRECTION_BOTH
 	_sub_panel.grow_vertical = Control.GROW_DIRECTION_BEGIN
-	_sub_panel.custom_minimum_size = Vector2(920, 0)
-	_sub_panel.position = Vector2(-460, -130)
 	_sub_panel.visible = false
 	var sub_sb := StyleBoxFlat.new()
 	sub_sb.bg_color = Color(UiTheme.PANEL.r, UiTheme.PANEL.g, UiTheme.PANEL.b, 0.82)
@@ -101,6 +100,25 @@ func _ready() -> void:
 	_skip_hint.position += Vector2(-24, -28)
 	_skip_hint.visible = false
 	_layer.add_child(_skip_hint)
+	get_viewport().size_changed.connect(_layout_text)
+	_layout_text()
+
+
+## Плашка и заголовок жили на жёсткой ширине 920 — на узком окне текст уезжал за левый край.
+func _layout_text() -> void:
+	if not is_instance_valid(_sub_panel):
+		return
+	var vw: float = get_viewport().get_visible_rect().size.x
+	var sub_w: float = clampf(vw - 80.0, 240.0, 920.0)
+	_sub_panel.custom_minimum_size.x = sub_w
+	_sub_panel.offset_left = -sub_w * 0.5
+	_sub_panel.offset_right = sub_w * 0.5
+	# grow_vertical = BEGIN: нулевая высота на -130 от низа, min size растит плашку вверх
+	_sub_panel.offset_top = -130.0
+	_sub_panel.offset_bottom = -130.0
+	var title_w: float = maxf(240.0, vw - 60.0)
+	_title.offset_left = -title_w * 0.5
+	_title.offset_right = title_w * 0.5
 
 
 func _bar(top: bool) -> ColorRect:
@@ -262,6 +280,7 @@ func _advance() -> void:
 
 
 func _show_text(title: String, sub: String, delay: float = 0.0) -> void:
+	_layout_text() # размер окна на момент _ready ещё не финальный — меряем перед показом
 	_title.text = title
 	_sub.text = sub
 	_sub_panel.visible = sub.strip_edges() != ""

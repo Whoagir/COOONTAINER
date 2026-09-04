@@ -56,6 +56,7 @@ func setup_brain(b: AuctionBrain, p_index: int) -> void:
 	brain = b
 	index = p_index
 	npc_group = "hunter"
+	voice_group = b.voice_group if b.voice_group != "" else "hunter"
 	body_color = b.body_color
 	hat = b.hat
 	bald = b.bald
@@ -83,9 +84,10 @@ func _init_marker() -> void:
 
 
 func _ready() -> void:
-	npc_group = "hunter"
 	if brain == null:
 		brain = AuctionBrain.new()
+	npc_group = "hunter"
+	voice_group = brain.voice_group if brain.voice_group != "" else "hunter"
 	if scrawl_seed <= 0:
 		_init_marker()
 	super()

@@ -97,7 +97,7 @@ func _build() -> void:
 		b.custom_minimum_size.y = 40 if compact else 46
 		var idx := i
 		b.pressed.connect(func(): _switch_tab(idx))
-		UiTheme.wire_button(b, "pin", "pin")
+		UiTheme.wire_button(b, "pin")
 		tabs.add_child(b)
 		_tab_btns.append(b)
 	var scroll := ScrollContainer.new()
@@ -302,7 +302,7 @@ func _bind_row(action: String) -> Control:
 		b.modulate = UiTheme.ACCENT
 	var act := action
 	b.pressed.connect(func(): _begin_capture(act))
-	UiTheme.wire_button(b, "pin", "pin")
+	UiTheme.wire_button(b, "pin")
 	row.add_child(b)
 	var rst := Button.new()
 	rst.text = tr("SET_RESET_ACTION")
@@ -311,7 +311,7 @@ func _bind_row(action: String) -> Control:
 		Settings.reset_action(act)
 		_warn.text = ""
 		_fill_body())
-	UiTheme.wire_button(rst, "coin", "pin")
+	UiTheme.wire_button(rst, "coin")
 	row.add_child(rst)
 	return row
 

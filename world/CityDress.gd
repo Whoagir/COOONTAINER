@@ -65,6 +65,7 @@ func _ready() -> void:
 	_dress_billboards(w.city)
 	_fill_interiors(w)
 	_light_campfire(w)
+	_rig_trailer(w)
 	if ResourceLoader.exists("res://world/districts/Interiors.gd"):
 		var scr: GDScript = load("res://world/districts/Interiors.gd")
 		if scr and scr.has_method("dress"):
@@ -142,6 +143,39 @@ static func set_windows_lit(lit: bool) -> void:
 
 ## Костёр в трейлер-парке: к статичным «языкам» из сцены добавляем частицы, дым и мерцание
 ## (тот же FireFx, что у горящих вещей) — это главный тёплый акцент хабного кадра.
+## Трейлер-парк не зря так зовётся: дом на колёсах, а не коробка на земле.
+## Корпус и коллизии не трогаем — навешиваем шасси с колёсами, дышло, крышу и крыльцо.
+## Делается здесь, а не в Props: там на момент постройки районы City ещё не зарегистрированы.
+func _rig_trailer(w) -> void:
+	if w.city == null or not w.city.has_method("district_root"):
+		return
+	var d: Node3D = w.city.district_root(Types.District.TRAILER_PARK)
+	if d == null:
+		return
+	var trailer: Node = d.get_node_or_null("Trailer")
+	if trailer == null or trailer.has_node("Rig"):
+		return
+	_attach_model(trailer, "Rig", "trailer_rig", Vector3.ZERO, 0.0)
+	_attach_model(trailer, "RoofKit", "trailer_roof", Vector3(0, 2.9, 0), 0.0)
+	_attach_model(trailer, "Steps", "trailer_steps", Vector3(2.5, 0, 2.5), 180.0)
+
+
+func _attach_model(parent: Node3D, node_name: String, file: String, pos: Vector3, yaw_deg: float) -> void:
+	var path := "res://assets/models/%s.glb" % file
+	if not ResourceLoader.exists(path):
+		push_warning("[CityDress] нет модели %s" % path)
+		return
+	var packed: PackedScene = load(path)
+	var mdl := packed.instantiate() as Node3D if packed else null
+	if mdl == null:
+		return
+	mdl.name = node_name
+	mdl.transform = Transform3D(Basis(Vector3.UP, deg_to_rad(yaw_deg)), pos)
+	mdl.set_meta("no_dress", true)
+	parent.add_child(mdl)
+	dressed += 1
+
+
 func _light_campfire(w) -> void:
 	var fire: Node3D = w.find_marker(Types.District.TRAILER_PARK, "Campfire")
 	if fire == null or fire.has_node("FireFx"):
@@ -165,6 +199,9 @@ static func tex(name: String) -> Texture2D:
 
 func _walk(n: Node, district: int, depth: int) -> void:
 	if depth > 14:
+		return
+	# у моделей из Blender материалы уже свои — перекраска съедала цвет (диван выцветал, шины серели)
+	if n.has_meta("no_dress"):
 		return
 	if n is District:
 		district = (n as District).district_id
@@ -226,10 +263,10 @@ func _try_dress(mi: MeshInstance3D, district: int) -> void:
 	var aabb: AABB = mi.global_transform * mi.mesh.get_aabb()
 	var s := aabb.size
 	var top := aabb.end.y
-	var base := _base_color(mi)
 	var max_xz := maxf(s.x, s.z)
 	var min_xz := minf(s.x, s.z)
 	var indoor := INDOOR.has(district)
+	var base := _base_color(mi)
 
 	# --- окна: голубые тонкие панели в стенах → общий материал, ночью тёплое свечение (DayNight)
 	if mi.mesh is BoxMesh and _is_window(base, s):
@@ -241,7 +278,7 @@ func _try_dress(mi: MeshInstance3D, district: int) -> void:
 	if _under_roads(mi):
 		if mi.mesh is BoxMesh and s.y <= 0.15 and max_xz > 3.0:
 			_apply(mi, "tex_asphalt", 6.0, 0.95, base, 0.35)
-		elif mi.mesh is BoxMesh and s.y <= 0.3 and min_xz < 2.5 and max_xz > 1.0:
+		elif mi.mesh is BoxMesh and s.y <= 0.5 and min_xz < 2.5 and max_xz > 1.0: # бордюр сидит в грунте — плита выше 0.3
 			_apply(mi, "tex_sidewalk", 2.0, 0.95, base, 0.75)
 		return
 
@@ -314,7 +351,6 @@ func _soften_hill(mi: MeshInstance3D) -> void:
 	var cyl := mi.mesh as CylinderMesh
 	var r := maxf(cyl.top_radius, cyl.bottom_radius)
 	var h := cyl.height
-	var base := _base_color(mi)
 	var sm := SphereMesh.new()
 	sm.radius = 1.0
 	sm.height = 2.0
@@ -387,7 +423,9 @@ func _dress_billboards(root: Node) -> void:
 func _collect_boards(n: Node, out: Array[MeshInstance3D]) -> void:
 	for c in n.get_children():
 		if c is MeshInstance3D:
-			var name := c.name.to_lower() + "/" + (c.get_parent().name.to_lower() if c.get_parent() else "")
-			if name.contains("billboard") or name.contains("ad_") or name.contains("advert") or name.contains("poster"):
+			# по имени самого меша: раньше сюда попадал весь узел Billboard* — опоры и рама
+			# уезжали в рекламную текстуру вместе с полотном
+			var name := c.name.to_lower()
+			if name.contains("adface") or name.contains("billboardface") or name.contains("advert") or name.contains("poster"):
 				out.append(c)
 		_collect_boards(c, out)

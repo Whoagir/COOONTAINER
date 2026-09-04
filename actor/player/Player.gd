@@ -151,6 +151,11 @@ var _leg_r: Node3D
 var _rig_arm_l: Node3D
 var _rig_arm_r: Node3D
 const BODY_Y := 0.90
+## Присед: торс опускается почти на всю посадку головы, ноги складываются под ним.
+const BODY_Y_CROUCH := 0.54
+const LEG_CROUCH_SCALE := 0.37
+var _body_y := BODY_Y
+var _leg_shoes: Array[Node3D] = []
 
 static var _P_MATS: Dictionary = {}
 
@@ -233,6 +238,8 @@ func _build_rig() -> void:
 		sole_mi.material_override = sole
 		sole_mi.position = Vector3(0, -0.575, -0.09)
 		piv.add_child(sole_mi)
+		_leg_shoes.append(shoe)
+		_leg_shoes.append(sole_mi)
 		if side < 0:
 			_leg_l = piv
 		else:
@@ -365,19 +372,19 @@ func _build_hand(hand: Node3D, side: float) -> void:
 	var skin: StandardMaterial3D = _skin()
 	var fist := MeshInstance3D.new()
 	fist.name = "Fist"
-	fist.mesh = LowPoly.chamfer_box(Vector3(0.15, 0.125, 0.14), 0.02)
+	fist.mesh = LowPoly.chamfer_box(Vector3(0.10, 0.085, 0.095), 0.02)
 	fist.material_override = skin
 	fist.position = Vector3(0, 0.0, 0.0)
 	fist.rotation = Vector3(deg_to_rad(-18.0), side * deg_to_rad(12.0), 0.0)
 	hand.add_child(fist)
 	var arm_mi: MeshInstance3D = hand.get_node_or_null("Arm") as MeshInstance3D
 	if arm_mi:
-		arm_mi.mesh = LowPoly.capsule(0.062, 0.30, 8, 3)
+		arm_mi.mesh = LowPoly.capsule(0.037, 0.30, 8, 3)
 		arm_mi.material_override = skin
 	var cuff := MeshInstance3D.new()
-	cuff.mesh = LowPoly.cylinder(0.064, 0.068, 0.08, 8)
+	cuff.mesh = LowPoly.cylinder(0.045, 0.049, 0.07, 8)
 	cuff.material_override = _pmat(_body_mat.albedo_color)
-	cuff.position = Vector3(side * 0.02, -0.05, 0.10)
+	cuff.position = Vector3(side * 0.015, -0.04, 0.08)
 	cuff.rotation.x = deg_to_rad(-60.0)
 	hand.add_child(cuff)
 
@@ -613,7 +620,7 @@ func _look_point() -> Vector3:
 ## Плечо в мире (для длины руки и срыва хвата). hand 0 = правое.
 func shoulder_world(hand: int = 0) -> Vector3:
 	var side := 1.0 if hand == 0 else -1.0
-	return head.global_position + head.global_basis * Vector3(0.20 * side, -0.14, 0.02)
+	return head.global_position + head.global_basis * Vector3(0.22 * side, -0.34, 0.20)
 
 
 ## Достаёт ли активная рука до точки (короткий хват — фича, не баг).
@@ -810,6 +817,16 @@ func apply_remote_state(pos: Vector3, yaw: float, pitch: float, flags: int) -> v
 
 func _apply_crouch(t: float) -> void:
 	head.position.y = lerpf(HEAD_Y_STAND, HEAD_Y_CROUCH, t)
+	# Торс садится вместе с головой, ноги поджимаются — иначе голова уезжала внутрь тела.
+	_body_y = lerpf(BODY_Y, BODY_Y_CROUCH, t)
+	var leg_s := lerpf(1.0, LEG_CROUCH_SCALE, t)
+	if _leg_l:
+		_leg_l.scale.y = leg_s
+	if _leg_r:
+		_leg_r.scale.y = leg_s
+	for shoe in _leg_shoes:
+		if is_instance_valid(shoe):
+			shoe.scale.y = 1.0 / leg_s
 	if body_col == null:
 		return
 	var sh: Shape3D = body_col.shape
@@ -939,8 +956,8 @@ func die(reason: String) -> void:
 	hands.host_release_all()
 	# карманы — на землю в месте смерти, сумка — отдельное тело где упала
 	for i in pockets.size():
-		var b: ItemBody = pockets[i]
-		if b and is_instance_valid(b):
+		var b: ItemBody = pockets[i] if is_instance_valid(pockets[i]) else null
+		if b:
 			_pocket_release(b, i)
 	if worn:
 		unwear()
@@ -1041,8 +1058,8 @@ func host_pocket_put(b: ItemBody) -> void:
 
 func host_pocket_take() -> void:
 	for i in range(pockets.size() - 1, -1, -1):
-		var b: ItemBody = pockets[i]
-		if b and is_instance_valid(b):
+		var b: ItemBody = pockets[i] if is_instance_valid(pockets[i]) else null
+		if b:
 			_pocket_release(b, i)
 			var hand := hands.free_hand()
 			if hand != -1:
@@ -1075,8 +1092,8 @@ func apply_pocket_event(nid: int, slot: int, put: bool) -> void:
 func _process(delta: float) -> void:
 	# карманные вещи едут с игроком (и на хосте, и на клиенте)
 	for i in pockets.size():
-		var b: ItemBody = pockets[i]
-		if b and is_instance_valid(b):
+		var b: ItemBody = pockets[i] if is_instance_valid(pockets[i]) else null
+		if b:
 			var pp := pockets_root.get_child(i) as Node3D
 			b.global_transform = pp.global_transform
 			b.scale = Vector3.ONE * b.def.scale
@@ -1169,7 +1186,7 @@ func _anim_arms(delta: float) -> void:
 
 	_life_t += delta
 	var breath := sin((_life_t + _life_phase) * TAU * 1.1)
-	body_mesh.position.y = BODY_Y + bob * 2.0
+	body_mesh.position.y = _body_y + bob * 2.0
 	body_mesh.rotation.z = sway * 0.8
 	body_mesh.rotation.y = head.rotation.y
 	if moving:
@@ -1226,10 +1243,10 @@ func _hand_want_local(hand: int, holding: bool, both: bool) -> Vector3:
 		var look_w := _look_point()
 		var chest := head.global_position + head.global_basis * Vector3(0.0, -0.18, 0.0)
 		var to := look_w - chest
-		var len := clampf(to.length(), Hands.ARM_LEN_MIN, reach * 0.95)
+		var reach_len := clampf(to.length(), Hands.ARM_LEN_MIN, reach * 0.95)
 		if to.length() < 0.001:
 			to = -head.global_basis.z
-		var mid_w := chest + to.normalized() * len
+		var mid_w := chest + to.normalized() * reach_len
 		var right := head.global_basis.x
 		var palm_w := mid_w + right * (0.14 * side)
 		return hands.to_local(palm_w)

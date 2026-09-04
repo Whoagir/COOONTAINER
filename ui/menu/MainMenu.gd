@@ -4,7 +4,6 @@ extends Control
 var slots_box: VBoxContainer
 var join_edit: LineEdit
 var status: Label
-var _selected := -1
 var _settings: SettingsPanel
 var _loading: LoadingOverlay
 var _chrome: Control
@@ -180,18 +179,20 @@ func _toggle_howto() -> void:
 	overlay.set_anchors_preset(PRESET_FULL_RECT)
 	overlay.mouse_filter = Control.MOUSE_FILTER_STOP
 	overlay.gui_input.connect(func(ev: InputEvent):
-		if ev is InputEventMouseButton and ev.pressed:
+		if ev is InputEventMouseButton and ev.pressed and ev.button_index in [MOUSE_BUTTON_LEFT, MOUSE_BUTTON_RIGHT]:
 			_toggle_howto())
 	add_child(overlay)
+	_howto = overlay
 	var dim := ColorRect.new()
 	dim.color = Color(0, 0, 0, 0.55)
 	dim.set_anchors_preset(PRESET_FULL_RECT)
 	dim.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	overlay.add_child(dim)
+	var center := CenterContainer.new()
+	center.set_anchors_preset(PRESET_FULL_RECT)
+	center.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	overlay.add_child(center)
 	var panel := PanelContainer.new()
-	panel.set_anchors_preset(PRESET_CENTER)
-	panel.custom_minimum_size = Vector2(760, 0)
-	panel.position = Vector2(-380, -330)
 	panel.rotation = 0.012
 	var sb := StyleBoxFlat.new()
 	sb.bg_color = Color(0.93, 0.88, 0.72)
@@ -202,16 +203,26 @@ func _toggle_howto() -> void:
 	sb.shadow_size = 14
 	sb.shadow_offset = Vector2(4, 8)
 	panel.add_theme_stylebox_override("panel", sb)
-	overlay.add_child(panel)
-	var v := VBoxContainer.new()
-	v.add_theme_constant_override("separation", 10)
-	panel.add_child(v)
+	panel.resized.connect(func(): panel.pivot_offset = panel.size * 0.5)
+	center.add_child(panel)
+	var outer := VBoxContainer.new()
+	outer.add_theme_constant_override("separation", 10)
+	panel.add_child(outer)
 	var title := Label.new()
 	title.text = tr("HOWTO_TITLE")
 	title.add_theme_font_size_override("font_size", 34)
 	title.add_theme_color_override("font_color", Color(0.35, 0.2, 0.08))
 	title.add_theme_color_override("font_shadow_color", Color(0, 0, 0, 0))
-	v.add_child(title)
+	outer.add_child(title)
+	## Список пунктов длиннее экрана на низких разрешениях — крутим его, шапка и подпись стоят на месте.
+	var scroll := ScrollContainer.new()
+	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	outer.add_child(scroll)
+	var v := VBoxContainer.new()
+	v.add_theme_constant_override("separation", 10)
+	v.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	scroll.add_child(v)
 	for i in range(1, 10):
 		var l := Label.new()
 		l.text = tr("HOWTO_%d" % i)
@@ -226,9 +237,22 @@ func _toggle_howto() -> void:
 	foot.add_theme_color_override("font_color", Color(0.45, 0.35, 0.25))
 	foot.add_theme_color_override("font_shadow_color", Color(0, 0, 0, 0))
 	foot.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
-	v.add_child(foot)
-	_howto = overlay
+	outer.add_child(foot)
 	UiTheme.click("pin")
+	overlay.modulate.a = 0.0 # пока меряем высоту, карточка сплющена — не показываем эти кадры
+	var vp := get_viewport_rect().size
+	scroll.custom_minimum_size.x = minf(760.0, vp.x - 80.0)
+	# Высота списка известна только после того, как автоперенос ляжет на реальную ширину.
+	await get_tree().process_frame
+	if not is_instance_valid(scroll):
+		return
+	await get_tree().process_frame
+	if not is_instance_valid(scroll):
+		return
+	var chrome := outer.get_combined_minimum_size().y + sb.get_minimum_size().y
+	var room: float = maxf(160.0, vp.y * 0.9 - chrome)
+	scroll.custom_minimum_size.y = minf(v.get_combined_minimum_size().y, room)
+	overlay.create_tween().tween_property(overlay, "modulate:a", 1.0, 0.12)
 
 
 ## Dev: `godot --path . -- --menu-shot` → user://shots/menu*.png (меню и записка), затем выход.

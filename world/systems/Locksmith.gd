@@ -77,15 +77,15 @@ func register_bench(p_bench: Node3D, p_spot: Node3D = null, p_zone: Area3D = nul
 	interact_node.global_basis = Basis.looking_at(front, Vector3.UP)
 	interact_node.on_interact = _on_interact
 	interact_node.on_hint = _hint
-	var sign := Label3D.new()
-	sign.text = tr("LOCK_SIGN")
-	sign.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-	sign.font_size = 64
-	sign.outline_size = 12
-	sign.pixel_size = 0.006
-	sign.modulate = Color(0.8, 0.9, 1.0)
-	add_child(sign)
-	sign.global_position = bench.global_position + Vector3(0, 2.3, 0)
+	var lbl := Label3D.new()
+	lbl.text = tr("LOCK_SIGN")
+	lbl.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+	lbl.font_size = 64
+	lbl.outline_size = 12
+	lbl.pixel_size = 0.006
+	lbl.modulate = Color(0.8, 0.9, 1.0)
+	add_child(lbl)
+	lbl.global_position = bench.global_position + Vector3(0, 2.3, 0)
 	_spawn_npc(front)
 
 

@@ -330,10 +330,10 @@ func _road_dir(pos: Vector3) -> Vector3:
 
 func _board_positions() -> Array:
 	var out: Array = []
-	var sign: Node3D = Game.world.find_marker(Types.District.TRAILER_PARK, "HouseSign") if Game.world else null
-	if sign:
-		var yard := -_road_dir(sign.global_position)
-		out.append(sign.global_position + yard * 3.0)
+	var house_sign: Node3D = Game.world.find_marker(Types.District.TRAILER_PARK, "HouseSign") if Game.world else null
+	if house_sign:
+		var yard := -_road_dir(house_sign.global_position)
+		out.append(house_sign.global_position + yard * 3.0)
 	else:
 		var tp: Node3D = Game.world.district_root(Types.District.TRAILER_PARK) if Game.world else null
 		out.append(tp.global_position + Vector3(3, 0, 2) if tp else Vector3(0, 0, 6))

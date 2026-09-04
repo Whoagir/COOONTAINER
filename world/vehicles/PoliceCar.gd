@@ -158,7 +158,7 @@ func leave(dur: float = 3.0) -> void:
 	arrived.connect(queue_free, CONNECT_ONE_SHOT)
 
 
-func _drive(to: Vector3, dur: float, ease: Tween.EaseType) -> void:
+func _drive(to: Vector3, dur: float, p_ease: Tween.EaseType) -> void:
 	if _tween and _tween.is_valid():
 		_tween.kill()
 	driving = true
@@ -169,7 +169,7 @@ func _drive(to: Vector3, dur: float, ease: Tween.EaseType) -> void:
 		call_deferred("emit_signal", "arrived")
 		return
 	_tween = create_tween()
-	_tween.tween_property(self, "global_position", to, dur).set_trans(Tween.TRANS_SINE).set_ease(ease)
+	_tween.tween_property(self, "global_position", to, dur).set_trans(Tween.TRANS_SINE).set_ease(p_ease)
 	_tween.finished.connect(func():
 		driving = false
 		arrived.emit())

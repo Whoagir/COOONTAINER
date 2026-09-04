@@ -188,3 +188,7 @@ TRL_10_T,СОЛО И КООП 1–4,SOLO AND CO-OP 1–4
 TRL_10,"Копите на дом. Или не копите. Город никуда не уедет.","Save up for the house. Or don't. The city isn't going anywhere."
 TRL_END,"Godot 4.6 • RU / EN • Steam","Godot 4.6 • RU / EN • Steam"
 HUD_OBJECTIVE,ЗАДАЧА,TASK
+HUD_CTRL_MOVE,Движение,Move
+HUD_CTRL_ARM,Длина руки,Arm length
+HUD_CTRL_WHEEL,Колесо,Wheel
+HUD_CTRL_HIDE,F1 — скрыть,F1 — hide

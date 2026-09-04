@@ -1,16 +1,23 @@
 [
   {
     "id": "vendor_tiny",
-    "name_ru": "Ларёк «У Петровича»", "name_en": "Petrovich's Stall",
+    "name_ru": "Ларёк «У Петровича»",
+    "name_en": "Petrovich's Stall",
     "vendor_type": "HOUSEHOLD",
-    "phobias": ["MOUSE"],
+    "phobias": [
+      "MOUSE"
+    ],
     "favorite_facets": [],
     "hated_facets": [],
     "base_multiplier": 0.45,
-    "buys_illegal": false, "calls_police_on_illegal": true,
-    "green_zone_base": 0.45, "greed": 0.4,
-    "unlock_cost": 0, "unlock_requires_vendor": "",
-    "body_color": "7a6a50", "voice_pitch": 0.95,
+    "buys_illegal": false,
+    "calls_police_on_illegal": true,
+    "green_zone_base": 0.45,
+    "greed": 0.4,
+    "unlock_cost": 0,
+    "unlock_requires_vendor": "",
+    "body_color": "7a6a50",
+    "voice_pitch": 0.97,
     "lines_greet_ru": [
       "Клади. Всё беру. Дёшево.",
       "О, покупатель! Или продавец? Не важно, клади.",
@@ -92,16 +99,26 @@
   },
   {
     "id": "vendor_antique",
-    "name_ru": "Салон «Патина»", "name_en": "Patina Antiques",
+    "name_ru": "Салон «Патина»",
+    "name_en": "Patina Antiques",
     "vendor_type": "ANTIQUE",
-    "phobias": ["TAPE"],
-    "favorite_facets": ["FRAGILE", "DOCUMENT"],
+    "phobias": [
+      "TAPE"
+    ],
+    "favorite_facets": [
+      "FRAGILE",
+      "DOCUMENT"
+    ],
     "hated_facets": [],
     "base_multiplier": 0.7,
-    "buys_illegal": false, "calls_police_on_illegal": true,
-    "green_zone_base": 0.3, "greed": 0.6,
-    "unlock_cost": 300, "unlock_requires_vendor": "vendor_tiny",
-    "body_color": "5a3a6a", "voice_pitch": 0.85,
+    "buys_illegal": false,
+    "calls_police_on_illegal": true,
+    "green_zone_base": 0.3,
+    "greed": 0.6,
+    "unlock_cost": 300,
+    "unlock_requires_vendor": "vendor_tiny",
+    "body_color": "5a3a6a",
+    "voice_pitch": 0.93,
     "lines_greet_ru": [
       "Ах. Ещё один охотник за сокровищами.",
       "Осторожнее с прилавком, ему двести лет.",
@@ -183,16 +200,26 @@
   },
   {
     "id": "vendor_household",
-    "name_ru": "База «Всё для дома»", "name_en": "Everything Home Depot",
+    "name_ru": "База «Всё для дома»",
+    "name_en": "Everything Home Depot",
     "vendor_type": "HOUSEHOLD",
-    "phobias": ["PAINT"],
-    "favorite_facets": ["CONTAINER", "DIRTYABLE"],
+    "phobias": [
+      "PAINT"
+    ],
+    "favorite_facets": [
+      "CONTAINER",
+      "DIRTYABLE"
+    ],
     "hated_facets": [],
     "base_multiplier": 0.65,
-    "buys_illegal": false, "calls_police_on_illegal": true,
-    "green_zone_base": 0.4, "greed": 0.5,
-    "unlock_cost": 600, "unlock_requires_vendor": "vendor_tiny",
-    "body_color": "c07030", "voice_pitch": 1.1,
+    "buys_illegal": false,
+    "calls_police_on_illegal": true,
+    "green_zone_base": 0.4,
+    "greed": 0.5,
+    "unlock_cost": 600,
+    "unlock_requires_vendor": "vendor_tiny",
+    "body_color": "c07030",
+    "voice_pitch": 1.03,
     "lines_greet_ru": [
       "Привет! Комоды есть? Комоды всегда надо.",
       "Заезжай! Чистое беру дороже, грязное — тоже беру.",
@@ -274,16 +301,25 @@
   },
   {
     "id": "vendor_tech",
-    "name_ru": "Сервис «Байт и Молоток»", "name_en": "Byte & Hammer Repairs",
+    "name_ru": "Сервис «Байт и Молоток»",
+    "name_en": "Byte & Hammer Repairs",
     "vendor_type": "TECH",
-    "phobias": ["WET"],
+    "phobias": [
+      "WET"
+    ],
     "favorite_facets": [],
-    "hated_facets": ["LIQUID"],
+    "hated_facets": [
+      "LIQUID"
+    ],
     "base_multiplier": 0.7,
-    "buys_illegal": false, "calls_police_on_illegal": true,
-    "green_zone_base": 0.3, "greed": 0.6,
-    "unlock_cost": 1200, "unlock_requires_vendor": "vendor_tiny",
-    "body_color": "30a0c0", "voice_pitch": 1.2,
+    "buys_illegal": false,
+    "calls_police_on_illegal": true,
+    "green_zone_base": 0.3,
+    "greed": 0.6,
+    "unlock_cost": 1200,
+    "unlock_requires_vendor": "vendor_tiny",
+    "body_color": "30a0c0",
+    "voice_pitch": 1.07,
     "lines_greet_ru": [
       "Включается? Нет? Всё равно интересно.",
       "Плазма? Ноут? Или снова тостер?",
@@ -365,16 +401,26 @@
   },
   {
     "id": "vendor_dark",
-    "name_ru": "Гараж «Без Вопросов»", "name_en": "No Questions Garage",
+    "name_ru": "Гараж «Без Вопросов»",
+    "name_en": "No Questions Garage",
     "vendor_type": "DARK",
-    "phobias": ["HAMSTER"],
-    "favorite_facets": ["ILLEGAL", "WEAPON"],
+    "phobias": [
+      "HAMSTER"
+    ],
+    "favorite_facets": [
+      "ILLEGAL",
+      "WEAPON"
+    ],
     "hated_facets": [],
     "base_multiplier": 0.8,
-    "buys_illegal": true, "calls_police_on_illegal": false,
-    "green_zone_base": 0.22, "greed": 0.8,
-    "unlock_cost": 2500, "unlock_requires_vendor": "vendor_tiny",
-    "body_color": "202028", "voice_pitch": 0.7,
+    "buys_illegal": true,
+    "calls_police_on_illegal": false,
+    "green_zone_base": 0.22,
+    "greed": 0.8,
+    "unlock_cost": 2500,
+    "unlock_requires_vendor": "vendor_tiny",
+    "body_color": "202028",
+    "voice_pitch": 0.9,
     "lines_greet_ru": [
       "Тихо. Клади. Не смотри мне в глаза.",
       "Вопросов не задаю. Ты тоже не задавай.",

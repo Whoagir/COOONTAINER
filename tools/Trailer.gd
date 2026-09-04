@@ -371,14 +371,14 @@ func _road_run_start(_v) -> Dictionary:
 		var a := Vector3(s.x, 0, s.y)
 		var b := Vector3(s.z, 0, s.w)
 		var d := b - a
-		var len := d.length()
-		if len < 0.01:
+		var seg_len := d.length()
+		if seg_len < 0.01:
 			continue
-		d /= len
+		d /= seg_len
 		var rel := bump - (a + b) * 0.5
 		var along := rel.dot(d)
 		var across := rel.dot(Vector3(-d.z, 0, d.x))
-		if absf(along) <= len * 0.5 and absf(across) <= roads.width * 0.5:
+		if absf(along) <= seg_len * 0.5 and absf(across) <= roads.width * 0.5:
 			# едем вдоль сегмента к кочке с той стороны, где больше места
 			var dir := d if along > 0.0 else -d
 			var pos := bump - dir * 16.0

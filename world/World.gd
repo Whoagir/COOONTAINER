@@ -79,7 +79,7 @@ func _apply_slot_to_world() -> void:
 			var d: Dictionary = j
 			var pos: Array = d.get("pos", [0, 0, 0])
 			var xf := Transform3D(Basis(Vector3.UP, float(d.get("rot", 0.0))), junk.global_position + Vector3(pos[0], pos[1] + 0.2, pos[2]))
-			var b = Net.spawn_item(str(d["item_id"]), xf, d.get("state", {}))
+			Net.spawn_item(str(d["item_id"]), xf, d.get("state", {}))
 	var veh_sys := system("Vehicles")
 	if veh_sys and veh_sys.has_method("spawn_from_save"):
 		veh_sys.spawn_from_save(Game.save.get("vehicles", []))
@@ -619,3 +619,6 @@ func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("pause"):
 		if pause_menu.has_method("toggle"):
 			pause_menu.toggle()
+	elif event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_F1:
+		if hud and hud.has_method("toggle_controls"):
+			hud.toggle_controls()

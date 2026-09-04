@@ -86,15 +86,13 @@ static func polish(root: Node) -> void:
 		polish(c)
 
 
-static func wire_button(b: BaseButton, click_sfx: String = "coin", hover_sfx: String = "pin") -> void:
+static func wire_button(b: BaseButton, click_sfx: String = "coin") -> void:
 	if b.has_meta("ui_wired"):
 		return
 	b.set_meta("ui_wired", true)
 	b.resized.connect(func(): b.pivot_offset = b.size * 0.5)
 	b.pivot_offset = b.size * 0.5
 	b.mouse_entered.connect(func():
-		if AudioBus:
-			AudioBus.play_ui(hover_sfx, -14.0)
 		var tw := b.create_tween()
 		tw.tween_property(b, "scale", Vector2(1.03, 1.03), 0.08).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	)

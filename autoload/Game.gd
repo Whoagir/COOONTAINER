@@ -17,6 +17,7 @@ const HOUSE_PRICE := 25000
 const SAVE_DIR := "user://slots"
 
 var app_state: int = AppState.MENU
+var _mouse_recapture := false ## мышь была захвачена до сворачивания окна
 var world_mode: int = Types.WorldMode.TRAILER_HUB
 var slot: int = -1
 var save: Dictionary = {}
@@ -180,6 +181,21 @@ func delete_slot(i: int) -> void:
 
 
 # ------------------------------------------------------------------ app flow
+
+## Свернули игру (Alt+Tab, клик по другому окну) — курсор больше не заперт в окне.
+## Вернулись — захват восстанавливаем, но только если игрок в мире и не в паузе.
+func _notification(what: int) -> void:
+	match what:
+		NOTIFICATION_APPLICATION_FOCUS_OUT, NOTIFICATION_WM_WINDOW_FOCUS_OUT:
+			if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+				_mouse_recapture = true
+				Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		NOTIFICATION_APPLICATION_FOCUS_IN, NOTIFICATION_WM_WINDOW_FOCUS_IN:
+			if _mouse_recapture:
+				_mouse_recapture = false
+				if app_state == AppState.IN_WORLD and not get_tree().paused:
+					Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+
 
 func set_app_state(s: int) -> void:
 	if app_state == s:

@@ -19,6 +19,8 @@ extends Resource
 @export var hat: bool = false
 @export var bald: bool = false
 @export var voice_pitch: float = 1.0
+@export var voice_group: String = "hunter" ## папка озвучки: audio/voice/<lang>/<voice_group>;
+## "hunter_f" — женский голос (Тётя Зина), "hunter_m2" — вторая мужская половина каста
 @export var catchphrases_ru: Array[String] = []
 @export var catchphrases_en: Array[String] = []
 @export var height: float = 1.75

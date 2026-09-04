@@ -12,7 +12,7 @@ static func _m(w, d: int, name: String, fallback: Vector3) -> Vector3:
 static func intro(w) -> Array:
 	var TP := Types.District.TRAILER_PARK
 	var trailer := _m(w, TP, "Trailer", Vector3.ZERO)
-	var sign := _m(w, TP, "HouseSign", trailer + Vector3(15, 0, 9))
+	var house_sign := _m(w, TP, "HouseSign", trailer + Vector3(15, 0, 9))
 	var pot := _m(w, TP, "PotSlot", trailer + Vector3(5, 1.1, 2.4))
 	var door := _m(w, TP, "TrailerDoor", trailer + Vector3(2.5, 0, 2.5))
 	var p: Player = w.local_player()
@@ -25,8 +25,8 @@ static func intro(w) -> Array:
 			"fade_in": 1.4, "title": "COOONTAINER", "sub": TranslationServer.translate("CINE_INTRO_1"), "text_delay": 1.2,
 		},
 		{
-			"from": sign + sign_fwd * 5.0 + Vector3(0, 1.9, 0), "to": sign + sign_fwd * 2.6 + Vector3(0.3, 1.5, 0),
-			"look": sign + Vector3(0, 1.6, 0), "dur": 4.2, "fov": 50.0,
+			"from": house_sign + sign_fwd * 5.0 + Vector3(0, 1.9, 0), "to": house_sign + sign_fwd * 2.6 + Vector3(0.3, 1.5, 0),
+			"look": house_sign + Vector3(0, 1.6, 0), "dur": 4.2, "fov": 50.0,
 			"sub": TranslationServer.translate("CINE_INTRO_2"), "text_delay": 0.2,
 		},
 		{
@@ -46,7 +46,7 @@ static func intro(w) -> Array:
 static func ending(w) -> Array:
 	var TP := Types.District.TRAILER_PARK
 	var trailer := _m(w, TP, "Trailer", Vector3.ZERO)
-	var sign := _m(w, TP, "HouseSign", trailer + Vector3(15, 0, 9))
+	var house_sign := _m(w, TP, "HouseSign", trailer + Vector3(15, 0, 9))
 	var p: Player = w.local_player()
 	var me: Vector3 = p.global_position if p else trailer
 	var sign_fwd := Vector3(0.57, 0, 0.82)
@@ -57,10 +57,10 @@ static func ending(w) -> Array:
 			"fade_in": 0.8, "title": TranslationServer.translate("CINE_END_TITLE"), "sub": TranslationServer.translate("CINE_END_1"), "text_delay": 0.8,
 		},
 		{
-			"from": sign + sign_fwd * 4.0 + Vector3(0, 1.8, 0), "to": sign + sign_fwd * 2.2 + Vector3(0, 1.6, 0),
-			"look": sign + Vector3(0, 1.7, 0), "dur": 4.0, "fov": 50.0,
+			"from": house_sign + sign_fwd * 4.0 + Vector3(0, 1.8, 0), "to": house_sign + sign_fwd * 2.2 + Vector3(0, 1.6, 0),
+			"look": house_sign + Vector3(0, 1.7, 0), "dur": 4.0, "fov": 50.0,
 			"sub": TranslationServer.translate("CINE_END_2"), "text_delay": 0.3,
-			"on_start": func(): _stamp_sold(w, sign),
+			"on_start": func(): _stamp_sold(w, house_sign),
 		},
 		{
 			"from": trailer + Vector3(10, 4, 12), "to": trailer + Vector3(34, 38, 40),

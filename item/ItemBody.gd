@@ -1009,12 +1009,12 @@ func _apply_open_visual(animate: bool) -> void:
 		var w := _walls[i]
 		var open_rot := 1.2 if is_open else 0.0
 		var axis := "rotation:z" if i % 2 == 0 else "rotation:x"
-		var sign := 1.0 if i < 2 else -1.0
+		var side := 1.0 if i < 2 else -1.0
 		if dur > 0.0:
 			var tw := create_tween()
-			tw.tween_property(w, axis, open_rot * sign, dur)
+			tw.tween_property(w, axis, open_rot * side, dur)
 		else:
-			w.set_indexed(axis, open_rot * sign)
+			w.set_indexed(axis, open_rot * side)
 	for i in _drawers.size():
 		var d := _drawers[i]
 		var out := 0.28 if i < open_drawers else 0.0

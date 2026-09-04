@@ -532,6 +532,7 @@ def write_hunters() -> int:
             ("hat", gbool(h.get("hat", False))),
             ("bald", gbool(h.get("bald", False))),
             ("voice_pitch", fnum(h.get("voice_pitch", 1.0))),
+            ("voice_group", gstr(h.get("voice_group", "hunter"))),
             ("catchphrases_ru", garr_str(h["catchphrases_ru"])),
             ("catchphrases_en", garr_str(h["catchphrases_en"])),
             ("height", fnum(h.get("height", 1.75))),

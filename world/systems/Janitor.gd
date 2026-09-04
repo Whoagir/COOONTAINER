@@ -41,7 +41,7 @@ var _hud_left := 0.0
 ## Бригадир уборки: зелёный комбинезон, табличка «УБОРКА $», E — работа.
 class JanitorBoss extends Npc:
 	var system: Node = null
-	var sign: Label3D = null
+	var sign_lbl: Label3D = null
 
 	func setup_boss(sys: Node) -> void:
 		system = sys
@@ -52,23 +52,23 @@ class JanitorBoss extends Npc:
 		display_name = tr("NPC_JANITOR_BOSS")
 
 	func attach_sign() -> void:
-		if sign and is_instance_valid(sign):
+		if sign_lbl and is_instance_valid(sign_lbl):
 			return
-		sign = Label3D.new()
-		sign.name = "Sign"
-		sign.billboard = BaseMaterial3D.BILLBOARD_ENABLED
-		sign.font_size = 72
-		sign.outline_size = 14
-		sign.pixel_size = 0.006
-		sign.modulate = Color(0.6, 1.0, 0.5)
-		sign.position.y = height + 1.0
-		add_child(sign)
+		sign_lbl = Label3D.new()
+		sign_lbl.name = "Sign"
+		sign_lbl.billboard = BaseMaterial3D.BILLBOARD_ENABLED
+		sign_lbl.font_size = 72
+		sign_lbl.outline_size = 14
+		sign_lbl.pixel_size = 0.006
+		sign_lbl.modulate = Color(0.6, 1.0, 0.5)
+		sign_lbl.position.y = height + 1.0
+		add_child(sign_lbl)
 		set_sign(0, false)
 
 	func set_sign(earned: int, working: bool) -> void:
-		if sign == null or not is_instance_valid(sign):
+		if sign_lbl == null or not is_instance_valid(sign_lbl):
 			return
-		sign.text = (tr("JANITOR_SIGN") + "%d" % earned) if working else tr("JANITOR_SIGN")
+		sign_lbl.text = (tr("JANITOR_SIGN") + "%d" % earned) if working else tr("JANITOR_SIGN")
 
 	func interact(player: Node) -> void:
 		if system and system.has_method("on_boss_interact"):

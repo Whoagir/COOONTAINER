@@ -226,6 +226,50 @@ albedo_color = Color(0.52, 0.54, 0.58, 1)
 [sub_resource type="BoxMesh" id="BoxMesh_62"]
 size = Vector3(2.1, 0.05, 0.9)
 
+[sub_resource type="BoxMesh" id="BoxMesh_dh_side"]
+size = Vector3(0.12, 0.95, 1.4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_dh_back"]
+size = Vector3(1.2, 0.95, 0.12)
+
+[sub_resource type="BoxMesh" id="BoxMesh_dh_lintel"]
+size = Vector3(1.2, 0.3, 0.14)
+
+[sub_resource type="BoxMesh" id="BoxMesh_dh_jamb"]
+size = Vector3(0.28, 0.66, 0.14)
+
+[sub_resource type="BoxMesh" id="BoxMesh_dh_floor"]
+size = Vector3(1.2, 0.1, 1.4)
+
+[sub_resource type="BoxMesh" id="BoxMesh_dh_dark"]
+size = Vector3(0.98, 0.86, 1.2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_dh_ridge"]
+size = Vector3(0.09, 0.07, 1.6)
+
+[sub_resource type="BoxMesh" id="BoxMesh_dh_plate"]
+size = Vector3(0.66, 0.26, 0.04)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_dh_bowl"]
+top_radius = 0.19
+bottom_radius = 0.15
+height = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dh_dark"]
+albedo_color = Color(0.05, 0.045, 0.05, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dh_ridge"]
+albedo_color = Color(0.42, 0.08, 0.07, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dh_floor"]
+albedo_color = Color(0.36, 0.24, 0.14, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dh_plate"]
+albedo_color = Color(0.88, 0.85, 0.76, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dh_bowl"]
+albedo_color = Color(0.25, 0.5, 0.75, 1)
+
 [sub_resource type="BoxMesh" id="BoxMesh_63"]
 size = Vector3(1.2, 1, 1.4)
 
@@ -998,9 +1042,44 @@ material_override = SubResource("StandardMaterial3D_61")
 transform = Transform3D(0.86603, 0, -0.5, 0, 1, 0, 0.5, 0, 0.86603, 13, 0, 14)
 collision_layer = 1
 
-[node name="M0" type="MeshInstance3D" parent="Doghouse"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-mesh = SubResource("BoxMesh_63")
+[node name="Dark" type="MeshInstance3D" parent="Doghouse"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.53, -0.06)
+mesh = SubResource("BoxMesh_dh_dark")
+material_override = SubResource("StandardMaterial3D_dh_dark")
+
+[node name="Floor" type="MeshInstance3D" parent="Doghouse"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+mesh = SubResource("BoxMesh_dh_floor")
+material_override = SubResource("StandardMaterial3D_dh_floor")
+
+[node name="SideL" type="MeshInstance3D" parent="Doghouse"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.54, 0.5, 0)
+mesh = SubResource("BoxMesh_dh_side")
+material_override = SubResource("StandardMaterial3D_21")
+
+[node name="SideR" type="MeshInstance3D" parent="Doghouse"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.54, 0.5, 0)
+mesh = SubResource("BoxMesh_dh_side")
+material_override = SubResource("StandardMaterial3D_21")
+
+[node name="Back" type="MeshInstance3D" parent="Doghouse"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.64)
+mesh = SubResource("BoxMesh_dh_back")
+material_override = SubResource("StandardMaterial3D_21")
+
+[node name="JambL" type="MeshInstance3D" parent="Doghouse"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.46, 0.35, 0.63)
+mesh = SubResource("BoxMesh_dh_jamb")
+material_override = SubResource("StandardMaterial3D_21")
+
+[node name="JambR" type="MeshInstance3D" parent="Doghouse"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.46, 0.35, 0.63)
+mesh = SubResource("BoxMesh_dh_jamb")
+material_override = SubResource("StandardMaterial3D_21")
+
+[node name="Lintel" type="MeshInstance3D" parent="Doghouse"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.83, 0.63)
+mesh = SubResource("BoxMesh_dh_lintel")
 material_override = SubResource("StandardMaterial3D_21")
 
 [node name="S0" type="CollisionShape3D" parent="Doghouse"]
@@ -1012,14 +1091,29 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 0)
 mesh = SubResource("PrismMesh_65")
 material_override = SubResource("StandardMaterial3D_23")
 
+[node name="Ridge" type="MeshInstance3D" parent="Doghouse"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.57, 0)
+mesh = SubResource("BoxMesh_dh_ridge")
+material_override = SubResource("StandardMaterial3D_dh_ridge")
+
+[node name="Plate" type="MeshInstance3D" parent="Doghouse"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.83, 0.72)
+mesh = SubResource("BoxMesh_dh_plate")
+material_override = SubResource("StandardMaterial3D_dh_plate")
+
+[node name="Bowl" type="MeshInstance3D" parent="Doghouse"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.85, 0.05, 0.95)
+mesh = SubResource("CylinderMesh_dh_bowl")
+material_override = SubResource("StandardMaterial3D_dh_bowl")
+
 [node name="DogSign" type="Label3D" parent="Doghouse"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1, 0.75)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.83, 0.75)
 text = "ЗЛАЯ СОБАКА\nBEWARE OF DOG"
 font_size = 32
-outline_size = 4
-pixel_size = 0.006
-modulate = Color(0.93, 0.93, 0.9, 1)
-outline_modulate = Color(0.07, 0.07, 0.08, 1)
+outline_size = 3
+pixel_size = 0.003
+modulate = Color(0.15, 0.12, 0.1, 1)
+outline_modulate = Color(0.93, 0.9, 0.82, 1)
 
 [node name="OldFridge" type="StaticBody3D" parent="."]
 transform = Transform3D(0.98481, 0, 0.17365, 0, 1, 0, -0.17365, 0, 0.98481, -15, 0, -8)

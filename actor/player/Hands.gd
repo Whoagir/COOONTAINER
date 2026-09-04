@@ -13,7 +13,7 @@ signal held_changed()
 ## Дальность луча взгляда / срыва хвата (≈ длина руки + чуть-чуть).
 const REACH := 1.45
 ## Полностью разогнутая рука (ладонь от плеча).
-const ARM_LEN := 1.08
+const ARM_LEN := 0.92
 ## Максимально согнутая — вещь у груди, не в камере.
 const ARM_LEN_MIN := 0.30
 ## Шаг колеса «согнуть / разогнуть».
@@ -31,7 +31,7 @@ var two_hands_same := false # обе руки на одном предмете
 var flip_held := false # E удерживается → вещь вверх дном (вытряхнуть / вылить)
 var active_hand := 0 # 0 правая (старт), 1 левая — за мышкой
 ## Текущая длина руки от плеча (колесо): притянуть / оттянуть вещь.
-var arm_len: float = ARM_LEN * 0.62
+var arm_len: float = ARM_LEN * 0.55
 var _drop_timer := 0.0
 
 
@@ -226,7 +226,7 @@ func host_grab(b: ItemBody, hand: int) -> void:
 
 
 func host_release(hand: int, throw_force: float) -> void:
-	var b: ItemBody = held[hand]
+	var b: ItemBody = held[hand] if is_instance_valid(held[hand]) else null
 	if b == null:
 		b = any_held()
 	if b == null:
@@ -355,10 +355,13 @@ func _physics_process(delta: float) -> void:
 func _follow_held(delta: float) -> void:
 	var processed: Array = []
 	for i in 2:
-		var b: ItemBody = held[i]
-		if b == null:
+		# валидность проверяем ДО типизированного присваивания: снесённая вещь (разбилась,
+		# сгорела) даёт "assign invalid previously freed instance" каждый кадр
+		if not is_instance_valid(held[i]):
+			held[i] = null
 			continue
-		if not is_instance_valid(b) or b.nested_in != null:
+		var b: ItemBody = held[i]
+		if b.nested_in != null:
 			held[i] = null
 			continue
 		if processed.has(b):

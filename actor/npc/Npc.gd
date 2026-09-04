@@ -6,7 +6,10 @@ extends CharacterBody3D
 signal arrived()
 signal shouted(text: String)
 
-@export var npc_group: String = "generic" # папка голоса: res://audio/voice/<lang>/<group>
+@export var npc_group: String = "generic" # кто это: по нему же ищется поза/мимика (см. "hunter")
+## Папка озвучки: res://audio/voice/<lang>/<voice_group>. Пусто — берём npc_group.
+## Отдельно от npc_group: у хантеров свои голоса (hunter_f, hunter_m2), но поведение общее.
+@export var voice_group: String = ""
 @export var body_color: Color = Color(0.6, 0.5, 0.4)
 @export var height: float = 1.75
 @export var fatness: float = 1.0
@@ -24,7 +27,6 @@ var _head: MeshInstance3D
 var _label: Label3D
 var _say: Label3D
 var _mat: StandardMaterial3D
-var _paddle: Node3D
 var _mouth_timer := 0.0
 var ragdolled := false
 var _rag: Node3D
@@ -345,8 +347,8 @@ func say(text: String, seconds: float = 2.5, category: String = "") -> void:
 		_say.text = text
 	_say_timer = seconds
 	shouted.emit(text)
-	var len := AudioBus.npc_shout(npc_group, global_position + Vector3(0, height, 0), voice_pitch, category)
-	_mouth_timer = maxf(len, 0.4)
+	var secs := AudioBus.npc_shout(voice_folder(), global_position + Vector3(0, height, 0), voice_pitch, category)
+	_mouth_timer = maxf(secs, 0.4)
 	_on_spoke(text)
 	if Net.is_host() and Net.peer_count() > 1:
 		Net.broadcast_event("npc_say", {"path": str(get_path()), "text": text, "sec": seconds, "cat": category})
@@ -356,8 +358,8 @@ func remote_say(text: String, seconds: float, category: String) -> void:
 	if _say:
 		_say.text = text
 	_say_timer = seconds
-	var len := AudioBus.npc_shout(npc_group, global_position + Vector3(0, height, 0), voice_pitch, category)
-	_mouth_timer = maxf(len, 0.4)
+	var secs := AudioBus.npc_shout(voice_folder(), global_position + Vector3(0, height, 0), voice_pitch, category)
+	_mouth_timer = maxf(secs, 0.4)
 	_on_spoke(text)
 
 
@@ -538,6 +540,10 @@ func _anim_alive(delta: float) -> void:
 		_head.rotation.x = sin(_life_t * TAU * 3.0) * deg_to_rad(6.0)
 		if _arm_r and not _paddle_raised():
 			_arm_r.rotation.x = _arm_rest_r + sin(_life_t * TAU * 2.4) * deg_to_rad(25.0)
+
+
+func voice_folder() -> String:
+	return voice_group if voice_group != "" else npc_group
 
 
 func _paddle_raised() -> bool:

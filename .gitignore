@@ -13,3 +13,7 @@ addons/godotsteam/**/*.so
 Thumbs.db
 .DS_Store
 __pycache__/
+
+# нейросетевые голоса Piper и данные espeak — качаются локально (tools/audio/gen_voice.py)
+tools/audio/piper_voices/
+tools/audio/.espeak/

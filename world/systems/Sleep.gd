@@ -116,8 +116,7 @@ func _do_sleep(p: Player, bed_i: int) -> void:
 	if cine:
 		await cine.fade_from_black(0.8)
 	p.cinematic = false
-	p.say(tr("SLEEP_WOKE"), 2.5)
-	Game.notify.emit(tr("SLEEP_WOKE"), 3.0)
+	p.say(tr("SLEEP_WOKE"), 2.5) # say() у локального игрока сам шлёт тост — второй notify дублировал плашку
 	_cool_until = Time.get_ticks_msec() / 1000.0 + SLEEP_COOL
 	_busy = false
 	Net.broadcast_event("sleep", {"peer": p.peer_id, "bed": bed_i, "phase": "wake", "t": _dn().time_of_day if _dn() else WAKE_TIME})

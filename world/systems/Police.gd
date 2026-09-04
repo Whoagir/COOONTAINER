@@ -604,8 +604,8 @@ func _confiscate(p: Player, was_held: Array) -> int:
 			bodies.append(h)
 	p.hands.host_release_all()
 	for i in p.pockets.size():
-		var b: ItemBody = p.pockets[i]
-		if b and is_instance_valid(b):
+		var b: ItemBody = p.pockets[i] if is_instance_valid(p.pockets[i]) else null
+		if b:
 			p._pocket_release(b, i)
 			Net.broadcast_event("pocket", {"peer": p.peer_id, "nid": b.net_id, "slot": i, "put": false})
 			bodies.append(b)

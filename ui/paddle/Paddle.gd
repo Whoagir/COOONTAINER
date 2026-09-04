@@ -288,8 +288,8 @@ func _on_net_event(kind: String, data: Dictionary) -> void:
 # ------------------------------------------------------------------ кривой шрифт (общее с хантерами)
 
 ## Мазня на текстуре: то же перо, что у игрока. seed фиксирует почерк («лысый всегда красным»).
-static func draw_face(amount: int, seed: int, ink: Color = Color(0.12, 0.1, 0.3, 0.92), px: int = 256) -> ImageTexture:
-	var img: Image = PaddleFace.render_image(amount, seed, ink, px)
+static func draw_face(amount: int, p_seed: int, ink: Color = Color(0.12, 0.1, 0.3, 0.92), px: int = 256) -> ImageTexture:
+	var img: Image = PaddleFace.render_image(amount, p_seed, ink, px)
 	var tex: ImageTexture = ImageTexture.create_from_image(img)
 	return tex
 
@@ -335,9 +335,9 @@ class PaddleFace extends Control:
 				draw_polyline(pts, ln["col"], float(ln["width"]), true)
 
 	## Общая раскладка штрихов: и Control._draw, и Image для хантера.
-	static func layout_strokes(p_text: String, seed: int, canvas: Vector2, ink: Color) -> Dictionary:
+	static func layout_strokes(p_text: String, p_seed: int, canvas: Vector2, ink: Color) -> Dictionary:
 		var rng := RandomNumberGenerator.new()
-		rng.seed = seed if seed != 0 else 1
+		rng.seed = p_seed if p_seed != 0 else 1
 		var stains: Array = []
 		for i in 6:
 			stains.append({
@@ -385,11 +385,11 @@ class PaddleFace extends Control:
 		local += Vector2(rng.randf_range(-jitter, jitter), rng.randf_range(-jitter, jitter))
 		return center + local
 
-	static func render_image(amount: int, seed: int, ink: Color, px: int) -> Image:
+	static func render_image(amount: int, p_seed: int, ink: Color, px: int) -> Image:
 		var canvas := Vector2(float(px), float(px))
 		var img := Image.create(px, px, false, Image.FORMAT_RGBA8)
 		img.fill(PAPER)
-		var layout: Dictionary = layout_strokes("$%d" % amount, seed, canvas, ink)
+		var layout: Dictionary = layout_strokes("$%d" % amount, p_seed, canvas, ink)
 		for stn in layout["stains"]:
 			_stamp_disk(img, stn["c"], float(stn["r"]), stn["col"])
 		for ln in layout["lines"]:
