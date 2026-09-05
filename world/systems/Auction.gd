@@ -26,6 +26,7 @@ const HAUL_SECONDS := 8.0
 const PHOTO_SIZE := Vector2i(256, 192)
 const SLIT_OPEN := 0.4
 const STATE_NAMES := ["IDLE", "PREVIEW", "BIDDING", "HAMMER", "COOLDOWN"]
+const CARE_HEARING := 16.0 ## с какого расстояния смотритель слышит ор на превью
 
 
 class Session extends RefCounted:
@@ -50,6 +51,7 @@ class Session extends RefCounted:
 	var caretaker: Caretaker
 	var stand_timer := 0.0
 	var trespass: Dictionary = {} # peer → предупреждений
+	var shouts: Dictionary = {} # peer → сколько раз орал на превью
 	var inside: Dictionary = {} # peer → был внутри
 	var props: Array = []
 	var bluff_amount := 0
@@ -1174,6 +1176,33 @@ func _client_clear(key: String) -> void:
 
 
 # ------------------------------------------------------------------ превью: смотритель против нарушителей
+
+## Орать на превью нельзя: смотритель сначала рявкает, на второй раз выгоняет весь двор в ЧС.
+## Зовётся из World._host_shout — и с клавиши, и с ора в микрофон.
+func on_shout(p: Player, _loud: float) -> void:
+	if not Net.is_host() or p == null or p.dead:
+		return
+	for s in sessions:
+		if s.state != State.PREVIEW or s.anchor == null or not is_instance_valid(s.anchor):
+			continue
+		if p.global_position.distance_to(s.anchor.global_position) > CARE_HEARING:
+			continue
+		var n: int = int(s.shouts.get(p.peer_id, 0)) + 1
+		s.shouts[p.peer_id] = n
+		if s.caretaker and is_instance_valid(s.caretaker):
+			s.caretaker.shout("warn" if n == 1 else "angry", line("CARE_SHOUT" if n == 1 else "CARE_BAN"), 3.0)
+		if n == 1:
+			p.say(tr("AUCTION_SHOUT_WARN"), 3.0)
+		else:
+			p.say(tr("AUCTION_SHOUT_BAN"), 3.0)
+			if s.district_id >= 0:
+				Game.blacklist(s.district_id)
+			var police = Game.world.system("Police")
+			if police and police.has_method("trigger"):
+				police.trigger(Types.PoliceTrigger.BLACKLIST_ENTRY, p.global_position, p)
+		return
+
+
 
 func _check_trespass(s: Session) -> void:
 	for pid in Net.players:

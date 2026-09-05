@@ -1,15 +1,17 @@
-[gd_resource type="Resource" script_class="Archetype" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="Archetype" load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://core/Archetype.gd" id="1"]
+[ext_resource type="PackedScene" path="res://assets/models/items/toaster.glb" id="2"]
 
 [resource]
 script = ExtResource("1")
+scene = ExtResource("2")
 id = "toaster"
 builder = "toaster"
 shard_count = 5
 size_class = 1
 mass_default = 1.8
-dims = Vector3(0.28, 0.18, 0.18)
+dims = Vector3(0.3, 0.2, 0.2)
 cloth = false
 container = false
 container_capacity = 3

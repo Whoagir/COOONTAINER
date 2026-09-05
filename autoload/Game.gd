@@ -17,7 +17,9 @@ const HOUSE_PRICE := 25000
 const SAVE_DIR := "user://slots"
 
 var app_state: int = AppState.MENU
-var _mouse_recapture := false ## мышь была захвачена до сворачивания окна
+var _want_mouse := false ## курсор должен быть захвачен: никто из UI его сейчас не просит
+var _win_focused := true
+var _mouse_applied := -1 ## что уже отдали в Input (читать назад нельзя: в headless всегда VISIBLE)
 var world_mode: int = Types.WorldMode.TRAILER_HUB
 var slot: int = -1
 var save: Dictionary = {}
@@ -37,6 +39,11 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if app_state == AppState.IN_WORLD:
 		playtime += delta
+	# Одних уведомлений мало: на Windows FOCUS_OUT долетает не всегда (клик по окну на втором
+	# мониторе, Alt+Tab через оверлей), и курсор оставался заперт в игре. Поэтому каждый кадр
+	# сверяемся с реальным фокусом окна и переприменяем режим мыши.
+	_win_focused = DisplayServer.window_is_focused()
+	_apply_mouse()
 
 
 # ------------------------------------------------------------------ slots
@@ -187,20 +194,44 @@ func delete_slot(i: int) -> void:
 func _notification(what: int) -> void:
 	match what:
 		NOTIFICATION_APPLICATION_FOCUS_OUT, NOTIFICATION_WM_WINDOW_FOCUS_OUT:
-			if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
-				_mouse_recapture = true
-				Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+			_win_focused = false
+			_apply_mouse()
 		NOTIFICATION_APPLICATION_FOCUS_IN, NOTIFICATION_WM_WINDOW_FOCUS_IN:
-			if _mouse_recapture:
-				_mouse_recapture = false
-				if app_state == AppState.IN_WORLD and not get_tree().paused:
-					Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+			_win_focused = true
+			_apply_mouse()
+
+
+## Единственное место, которое трогает Input.mouse_mode. Раньше его писали пятеро (игрок, пауза,
+## оффер скупщика, доска работ, меню), и возврат фокуса в окно перехватывал курсор поверх
+## открытого диалога — мышь исчезала, а в окне было нечего выбрать. Кто показывает UI, зовёт
+## set_mouse_captured(false); кто закрыл — true. Фокус окна решает всё остальное.
+func set_mouse_captured(v: bool) -> void:
+	_want_mouse = v
+	_apply_mouse()
+
+
+func _apply_mouse() -> void:
+	var want := _want_mouse and _win_focused and app_state == AppState.IN_WORLD
+	var m: int = Input.MOUSE_MODE_CAPTURED if want else Input.MOUSE_MODE_VISIBLE
+	if m == _mouse_applied:
+		return
+	_mouse_applied = m
+	Input.mouse_mode = m
+
+
+## Режим, который мы держим сейчас. Отдельный геттер, потому что Input.mouse_mode в headless
+## всегда читается как VISIBLE — тесты по нему сравнивать нельзя.
+func mouse_mode_wanted() -> int:
+	return _mouse_applied
 
 
 func set_app_state(s: int) -> void:
 	if app_state == s:
 		return
 	app_state = s
+	if s != AppState.IN_WORLD:
+		_want_mouse = false
+	_apply_mouse()
 	app_state_changed.emit(s)
 
 

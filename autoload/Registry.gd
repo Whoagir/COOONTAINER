@@ -227,6 +227,9 @@ func vendor(id: String) -> VendorDef:
 	return vendors.get(id)
 
 
+var _content_items: Array = [] ## all_items() без служебных карточек, считается один раз
+
+
 func all_vendors() -> Array:
 	return vendors.values()
 
@@ -235,13 +238,22 @@ func items_with_tag(tag: String) -> Array:
 	return _items_by_tag.get(tag, [])
 
 
+## Служебные карточки, которых не должно быть в пулах лута, лотов и витрин: их спавнит код
+## по имени (мешок покойника — на смерти игрока). Достать всё равно можно через item(id).
+const SYSTEM_ITEMS := ["bag_dead"]
+
+
 func all_items() -> Array:
-	return items.values()
+	if _content_items.is_empty():
+		for d in items.values():
+			if not SYSTEM_ITEMS.has(d.id):
+				_content_items.append(d)
+	return _content_items
 
 
 func random_item_with_facet(f: int) -> ItemDef:
 	var pool: Array = []
-	for d in items.values():
+	for d in all_items():
 		if d.has_facet(f):
 			pool.append(d)
 	if pool.is_empty():

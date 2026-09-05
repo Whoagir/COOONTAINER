@@ -19,6 +19,7 @@ var _result: Label
 var _flash: ColorRect
 var _open := false
 var _result_t := 0.0
+var _capturing := false
 
 
 func _ready() -> void:
@@ -142,7 +143,29 @@ func snap(player: Player) -> Dictionary:
 	if float(res.get("lie", 1.0)) > 3.0:
 		Achievements.unlock("phone_liar")
 	photo_taken.emit(res)
+	_capture(res)
 	return res
+
+
+## Кадр в плёнку: на один кадр убираем рамку телефона и худ, иначе на снимке будет интерфейс,
+## а не то, что снимали. Подпись — то, что сказал ЦеноБот (он же и врёт).
+func _capture(res: Dictionary) -> void:
+	var roll: Node = Game.world.system("PhotoRoll") if Game.world else null
+	if roll == null or not roll.has_method("add_shot") or _capturing:
+		return # два снимка подряд не должны перепрятать друг у друга худ
+	_capturing = true
+	var hud: CanvasLayer = Game.world.hud if Game.world else null
+	var hud_was: bool = hud.visible if hud else false
+	_root.visible = false
+	if hud:
+		hud.visible = false
+	await RenderingServer.frame_post_draw
+	var img := get_viewport().get_texture().get_image()
+	_root.visible = _open
+	if hud:
+		hud.visible = hud_was
+	_capturing = false
+	roll.add_shot(img, str(res.get("text", "")))
 
 
 func _process(delta: float) -> void:

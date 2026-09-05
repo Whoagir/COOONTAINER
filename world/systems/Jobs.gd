@@ -168,7 +168,6 @@ class JobsMenu extends CanvasLayer:
 	var _root: Control
 	var _panel: PanelContainer
 	var _open := false
-	var _mouse_was := Input.MOUSE_MODE_CAPTURED
 
 	func _ready() -> void:
 		layer = 25
@@ -240,15 +239,14 @@ class JobsMenu extends CanvasLayer:
 		box.add_child(close_row)
 		_open = true
 		visible = true
-		_mouse_was = Input.mouse_mode
-		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		Game.set_mouse_captured(false)
 
 	func hide_menu() -> void:
 		if not _open:
 			return
 		_open = false
 		visible = false
-		Input.mouse_mode = _mouse_was
+		Game.set_mouse_captured(true)
 		closed.emit()
 
 	func _input(event: InputEvent) -> void:

@@ -1,15 +1,17 @@
-[gd_resource type="Resource" script_class="Archetype" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="Archetype" load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://core/Archetype.gd" id="1"]
+[ext_resource type="PackedScene" path="res://assets/models/items/tablet.glb" id="2"]
 
 [resource]
 script = ExtResource("1")
+scene = ExtResource("2")
 id = "tablet"
 builder = "tablet"
 shard_count = 4
 size_class = 1
 mass_default = 0.5
-dims = Vector3(0.18, 0.01, 0.25)
+dims = Vector3(0.18, 0.02, 0.25)
 cloth = false
 container = false
 container_capacity = 3

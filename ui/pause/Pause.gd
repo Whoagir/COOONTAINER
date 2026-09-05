@@ -110,7 +110,7 @@ func _set_open(v: bool) -> void:
 	_open = v
 	visible = v
 	get_tree().paused = v and Net.peer_count() <= 1
-	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE if v else Input.MOUSE_MODE_CAPTURED
+	Game.set_mouse_captured(not v)
 	if _settings:
 		if not v:
 			_settings.hide_panel()

@@ -285,7 +285,10 @@ func _paint_zone(z: Dictionary, col: Color, label: String) -> void:
 		var q := PhysicsRayQueryParameters3D.create(c + Vector3(0, 2, 0), c + Vector3(0, -2, 0), Types.L_WORLD)
 		var hit := space.intersect_ray(q)
 		if not hit.is_empty():
-			y = (hit["position"] as Vector3).y + 0.1
+			# луч из центра зоны попадает в поднятый пол трейлера — рамку всё равно кладём по земле
+			var hy: float = (hit["position"] as Vector3).y
+			if hy < 0.6:
+				y = hy + 0.1
 	var mat := StandardMaterial3D.new()
 	mat.albedo_color = col
 	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA

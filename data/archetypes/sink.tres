@@ -1,15 +1,17 @@
-[gd_resource type="Resource" script_class="Archetype" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="Archetype" load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://core/Archetype.gd" id="1"]
+[ext_resource type="PackedScene" path="res://assets/models/items/sink.glb" id="2"]
 
 [resource]
 script = ExtResource("1")
+scene = ExtResource("2")
 id = "sink"
 builder = "sink"
 shard_count = 5
 size_class = 2
 mass_default = 20.0
-dims = Vector3(0.6, 0.85, 0.5)
+dims = Vector3(0.6, 0.94, 0.5)
 cloth = false
 container = false
 container_capacity = 3

@@ -389,6 +389,7 @@ barrel_wine,Бочка винная,Wine Barrel,barrel,LIQUID|HEAVY_CHEAP,80,,wh
 barrel_rusty,Бочка ржавая,Rusty Barrel,barrel,DIRTYABLE|HEAVY_CHEAP,5,,,,,,0.9,,tiny,,,6a3a2a,,,,
 bag_work,Сумка рабочая,Work Bag,hero_bag,CONTAINER,15,,,,1,,,,tiny|household,,,,,,,
 bag_gym,Сумка спортивная,Gym Bag,bag,CONTAINER|DIRTYABLE,4,,,,1,,0.3,cassette_mixtape:0.3|cash_5:0.5|tape_scotch:0.2,tiny,,,222222,,,,
+bag_dead,Барахло покойника,Dead Man's Bag,bag_dead,CONTAINER|SHAKE_OUT,0,,,,1,,,,,,40,343840,,gag,Всё что было в штанах. Донеси.,Everything from the pockets. Carry it home.
 bag_ladies_leopard,Сумка леопардовая,Leopard Handbag,bag,CONTAINER,25,,,,1,,,phone_flip:0.5|cash_20:0.5:1:2|perfume_cheap:0.4|tool_lighter:0.3,household|tiny,,,c0a040,0.8,,,
 bag_tote,Авоська «Спасём планету»,«Save the Planet» Tote,bag,CONTAINER,1,,,,1,,,cash_1:0.5|bill_coupon:0.5,tiny,,,c0d0a0,,,,
 backpack_school,Рюкзак школьный,School Backpack,backpack,CONTAINER|DIRTYABLE,6,,,,1,,0.3,cassette_mixtape:0.3|cash_5:0.4|usb_cat_videos:0.3,tiny,,,3050a0,,,,

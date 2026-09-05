@@ -7,6 +7,10 @@ extends Node
 ## Ничего не двигает и не ломает коллизии — только материалы. Дешёво для слабого ПК.
 
 const TEX := "res://assets/textures/"
+
+## Пол трейлера над землёй. Под эту высоту собраны trailer_rig.glb (колёса, юбка, дышло)
+## и trailer_steps.glb (площадка вровень с полом); TrailerPark.tscn/Trailer поднят на неё же.
+const TRAILER_LIFT := 0.85
 const BILLBOARD_TEX := ["ad_pricebot", "ad_casino", "ad_carmarket", "tex_poster_auction", "tex_flyer_hamster"]
 
 ## районы с крышей — пол внутри бетонный, стены интерьерные
@@ -144,7 +148,7 @@ static func set_windows_lit(lit: bool) -> void:
 ## Костёр в трейлер-парке: к статичным «языкам» из сцены добавляем частицы, дым и мерцание
 ## (тот же FireFx, что у горящих вещей) — это главный тёплый акцент хабного кадра.
 ## Трейлер-парк не зря так зовётся: дом на колёсах, а не коробка на земле.
-## Корпус и коллизии не трогаем — навешиваем шасси с колёсами, дышло, крышу и крыльцо.
+## Корпус поднят в сцене; здесь навешиваем шасси с колёсами, дышло, крышу и крыльцо со ступенями.
 ## Делается здесь, а не в Props: там на момент постройки районы City ещё не зарегистрированы.
 func _rig_trailer(w) -> void:
 	if w.city == null or not w.city.has_method("district_root"):
@@ -155,9 +159,45 @@ func _rig_trailer(w) -> void:
 	var trailer: Node = d.get_node_or_null("Trailer")
 	if trailer == null or trailer.has_node("Rig"):
 		return
-	_attach_model(trailer, "Rig", "trailer_rig", Vector3.ZERO, 0.0)
+	# корпус поднят на TRAILER_LIFT (TrailerPark.tscn), поэтому шасси и крыльцо вешаем ниже —
+	# колёса и ступени остаются на земле, ось больше не торчит сквозь пол в комнату
+	_attach_model(trailer, "Rig", "trailer_rig", Vector3(0, -TRAILER_LIFT, 0), 0.0)
 	_attach_model(trailer, "RoofKit", "trailer_roof", Vector3(0, 2.9, 0), 0.0)
-	_attach_model(trailer, "Steps", "trailer_steps", Vector3(2.5, 0, 2.5), 180.0)
+	# дверь на +Z (x = 2.0..3.0); у модели крыльца стена в −Z, спуск в +Z — разворот не нужен
+	_attach_model(trailer, "Steps", "trailer_steps", Vector3(2.5, -TRAILER_LIFT, 1.90), 0.0)
+	_step_collision(trailer)
+
+
+## Крыльцо — только меш, коллизии к нему: площадка-блок вровень с полом и наклонный пандус
+## под ступенями. CharacterBody3D в Godot сам на ступеньку не шагает, зато уклон 34° проходит
+## обычным шагом, так что игрок въезжает наверх плавно, а под площадку не залезет.
+func _step_collision(trailer: Node) -> void:
+	var body := trailer as StaticBody3D
+	if body == null or body.has_node("StepDeckCol"):
+		return
+	const DECK_W := 1.16
+	const DECK_Z0 := 1.90
+	const DECK_Z1 := 2.55
+	const RAMP_Z1 := 3.91 # линия по носкам ступеней, продлённая до земли (33.8°)
+	const TOP_Y := 0.06
+	var deck := CollisionShape3D.new()
+	deck.name = "StepDeckCol"
+	var ds := BoxShape3D.new()
+	ds.size = Vector3(DECK_W, TOP_Y + TRAILER_LIFT, DECK_Z1 - DECK_Z0)
+	deck.shape = ds
+	deck.position = Vector3(2.5, (TOP_Y - TRAILER_LIFT) * 0.5, (DECK_Z0 + DECK_Z1) * 0.5)
+	body.add_child(deck)
+	var run := RAMP_Z1 - DECK_Z1
+	var rise := TOP_Y + TRAILER_LIFT
+	var ang := atan2(rise, run)
+	var ramp := CollisionShape3D.new()
+	ramp.name = "StepRampCol"
+	var rs := BoxShape3D.new()
+	rs.size = Vector3(DECK_W, 0.24, sqrt(run * run + rise * rise))
+	ramp.shape = rs
+	var mid := Vector3(2.5, (TOP_Y - TRAILER_LIFT) * 0.5, (DECK_Z1 + RAMP_Z1) * 0.5)
+	ramp.transform = Transform3D(Basis(Vector3.RIGHT, ang), mid - Vector3(0.0, cos(ang), sin(ang)) * 0.12)
+	body.add_child(ramp)
 
 
 func _attach_model(parent: Node3D, node_name: String, file: String, pos: Vector3, yaw_deg: float) -> void:

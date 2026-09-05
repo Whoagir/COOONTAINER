@@ -146,6 +146,8 @@ func _build_visual() -> void:
 			cs.transform.origin *= def.scale
 			add_child(cs)
 	_collect_materials(mesh_root)
+	if arch.scene:
+		_tint_model()
 	for path in arch.drawer_paths:
 		var n := mesh_root.get_node_or_null(path)
 		if n:
@@ -191,6 +193,22 @@ func _collect_materials(n: Node) -> void:
 			_surface_overridden.append(mi)
 	for child in n.get_children():
 		_collect_materials(child)
+
+
+## Модель из Blender приносит свои материалы, и цвет карточки (§7.2 color) иначе теряется —
+## тринадцать бутылок стали бы одинаковыми. Договор с моделью: материал с именем "tint" — это
+## «место под цвет карточки», остальные (металл, стекло, дерево) запечены и не трогаются.
+func _tint_model() -> void:
+	if def == null or arch == null:
+		return
+	var c: Color = arch.base_color if def.color == Color.WHITE else def.color
+	for i in _materials.size():
+		var m: StandardMaterial3D = _materials[i]
+		if m == null or not str(m.resource_name).begins_with("tint"):
+			continue
+		m.albedo_color = c
+		if i < _base_colors.size():
+			_base_colors[i] = c
 
 
 static func _own_material(src: Material) -> StandardMaterial3D:

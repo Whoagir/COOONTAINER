@@ -253,6 +253,9 @@ func handle_action(peer: int, kind: String, data: Dictionary) -> void:
 	if p == null:
 		return
 	match kind:
+		"shout":
+			_host_shout(p, float(data.get("loud", 1.0)))
+			return
 		"pocket_put":
 			var b = Net.items.get(int(data.get("nid", 0)))
 			if b:
@@ -369,8 +372,28 @@ func _show_pin(peer: int, pos: Vector3) -> void:
 
 # ------------------------------------------------------------------ события (все)
 
+## Крик (§3 голос — механика): хост раздаёт его всем системам, которые умеют on_shout —
+## смотритель на превью, менты, гэги, скупщик. Свой кулдаун поверх войсового: клиент мог
+## прислать пачку, а последствия должны быть одни.
+var _shout_at: Dictionary = {}
+
+func _host_shout(p: Player, loud: float) -> void:
+	var now := Time.get_ticks_msec()
+	if now - int(_shout_at.get(p.peer_id, -99999)) < 900:
+		return
+	_shout_at[p.peer_id] = now
+	Net.broadcast_event("shout", {"peer": p.peer_id, "loud": loud})
+	for sys in systems_root.get_children():
+		if sys.has_method("on_shout"):
+			sys.on_shout(p, loud)
+
+
 func on_net_event(kind: String, data: Dictionary) -> void:
 	match kind:
+		"shout":
+			var sp := player_of(int(data["peer"]))
+			if sp:
+				AudioBus.play_at("shout_generic", sp.head_position(), -1.0, 0.3, 1.0 + randf_range(-0.1, 0.25))
 		"hands":
 			var p := player_of(int(data["peer"]))
 			if p and not Net.is_host():

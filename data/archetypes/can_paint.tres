@@ -1,15 +1,17 @@
-[gd_resource type="Resource" script_class="Archetype" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="Archetype" load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://core/Archetype.gd" id="1"]
+[ext_resource type="PackedScene" path="res://assets/models/items/can_paint.glb" id="2"]
 
 [resource]
 script = ExtResource("1")
+scene = ExtResource("2")
 id = "can_paint"
 builder = "can_paint"
 shard_count = 4
 size_class = 1
 mass_default = 2.5
-dims = Vector3(0.18, 0.2, 0.18)
+dims = Vector3(0.2, 0.23, 0.19)
 cloth = false
 container = false
 container_capacity = 3

@@ -1,15 +1,17 @@
-[gd_resource type="Resource" script_class="Archetype" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="Archetype" load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://core/Archetype.gd" id="1"]
+[ext_resource type="PackedScene" path="res://assets/models/items/plank.glb" id="2"]
 
 [resource]
 script = ExtResource("1")
+scene = ExtResource("2")
 id = "plank"
 builder = "plank"
 shard_count = 4
 size_class = 2
 mass_default = 2.0
-dims = Vector3(0.12, 0.025, 1.2)
+dims = Vector3(0.12, 0.06, 1.18)
 cloth = false
 container = false
 container_capacity = 3

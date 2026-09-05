@@ -228,7 +228,7 @@ func _build_slots(w: World, dist: District, o: Vector3) -> Array[Dictionary]:
 	if door:
 		for i in 5:
 			out.append({
-				"pos": door.global_position + Vector3(-0.6 + float(i) * 0.3, 0.08, 0.55 + float(i % 2) * 0.25),
+				"pos": door.global_position + Vector3(-1.55 + float(i) * 0.3, 0.08 - CityDress.TRAILER_LIFT, 0.3 + float(i % 2) * 0.35),
 				"spread": Vector2(0.1, 0.08),
 			})
 	# гитара у стены

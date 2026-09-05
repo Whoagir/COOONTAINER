@@ -265,3 +265,8 @@ HUD_BID_MINE,"Твоя: $%d","Yours: $%d"
 HUD_BID_HELP_DOWN,"— поднять весло","— raise paddle"
 HUD_BID_HELP_UP,"убрать весло,сумма,колесо ±шаг,ставка","put away,amount,wheel ±step,bid"
 HUD_BID_HELP_MIN,минимум,min bid
+AUCTION_SHOUT_WARN,"Смотритель обернулся. Ещё раз заорёшь — ЧС.","Caretaker turned around. Yell again — blacklist."
+AUCTION_SHOUT_BAN,Доорался. ЧС площадки и менты.,You yelled your way into a blacklist. Cops incoming.
+CARE_SHOUT_1,"ТИХО! Тут превью, а не рынок!","QUIET! This is a preview, not a market!"
+CARE_SHOUT_2,Ещё раз гавкнешь — выведу.,One more bark and you are out.
+CARE_SHOUT_3,Рот закрой! Люди смотрят лот.,Shut it! People are viewing the lot.

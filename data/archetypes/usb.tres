@@ -1,15 +1,17 @@
-[gd_resource type="Resource" script_class="Archetype" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="Archetype" load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://core/Archetype.gd" id="1"]
+[ext_resource type="PackedScene" path="res://assets/models/items/usb.glb" id="2"]
 
 [resource]
 script = ExtResource("1")
+scene = ExtResource("2")
 id = "usb"
 builder = "usb"
 shard_count = 3
 size_class = 0
 mass_default = 0.01
-dims = Vector3(0.02, 0.008, 0.06)
+dims = Vector3(0.02, 0.01, 0.06)
 cloth = false
 container = false
 container_capacity = 3

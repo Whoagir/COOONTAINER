@@ -52,3 +52,6 @@ POLICE_COP_IDLE_1,Не мешай работать.,Don't bother me.
 POLICE_COP_SHOVED_0,Э! Ты на кого руку поднял?!,Hey! Who do you think you're pushing?!
 POLICE_COP_SHOVED_1,Ещё раз — и поедешь.,Once more and you're coming with me.
 POLICE_COP_LOCKPICK_0,Эй! Что ты там ковыряешь?!,Hey! What are you picking at?!
+POLICE_COP_SHOUT_0,Чего разорался?,What are you yelling about?
+POLICE_COP_SHOUT_1,"Тише, гражданин. Документы есть?","Keep it down, citizen. Got ID?"
+POLICE_COP_SHOUT_2,Так-так. А ну иди сюда.,Well well. Come here.

@@ -518,6 +518,7 @@ const CONTROLS_ROWS: Array = [
 	["arm_out", "HUD_CTRL_ARM"],
 	["paddle", "SET_ACT_PADDLE"],
 	["flashlight", "SET_ACT_FLASHLIGHT"],
+	["shout", "SET_ACT_SHOUT"],
 ]
 
 
@@ -715,6 +716,8 @@ func _tick_objective() -> void:
 func toast(text: String, seconds: float = 3.0) -> void:
 	if text.strip_edges() == "":
 		return
+	# длинная строка гасла раньше, чем её дочитывали (у вызовов зашито 2-3 с) — держим ~18 знаков/с
+	seconds = maxf(seconds, 1.2 + float(text.length()) / 18.0)
 	toast_box.visible = true
 	var card := PanelContainer.new()
 	card.add_theme_stylebox_override("panel", UiTheme.card_panel())
@@ -781,6 +784,46 @@ func _on_mode(m: int, _prev: int) -> void:
 
 var _lot_card: Control
 
+const REEL_SEC := 2.4   ## сколько висит один кадр плёнки
+const REEL_MAX := 5     ## больше пяти — уже не выпуск, а отпускные фотки
+const REEL_WINDOW := 420.0 ## берём снимки только за этот вывоз, а не за всю сессию
+
+
+## «Выпуск передачи»: под итогами лота листаем то, что наснимали телефоном за вывоз.
+## Снимков нет — карточка ровно та же, что была. Возвращает, сколько кадров показываем.
+func _add_photo_reel(box: VBoxContainer) -> int:
+	var roll: Node = Game.world.system("PhotoRoll") if Game.world else null
+	if roll == null or not roll.has_method("recent"):
+		return 0
+	var shots: Array = roll.recent(REEL_WINDOW, REEL_MAX)
+	if shots.is_empty():
+		return 0
+	var head := _mk_label(16, UiTheme.ACCENT, false)
+	head.text = tr("LOTCARD_REEL")
+	head.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	box.add_child(head)
+	var rect := TextureRect.new()
+	rect.custom_minimum_size = Vector2(480, 270)
+	rect.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	rect.texture = shots[0]["tex"]
+	box.add_child(rect)
+	var cap := _mk_label(15, UiTheme.TEXT_DIM, false)
+	cap.text = str(shots[0].get("caption", ""))
+	cap.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	cap.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	cap.custom_minimum_size.x = 480
+	box.add_child(cap)
+	if shots.size() > 1:
+		var rtw := create_tween()
+		for i in range(1, shots.size()):
+			rtw.tween_interval(REEL_SEC)
+			rtw.tween_callback(func():
+				if is_instance_valid(rect):
+					rect.texture = shots[i]["tex"]
+					cap.text = str(shots[i].get("caption", ""))
+					AudioBus.play_ui("camera_shutter", -16.0))
+	return shots.size()
+
 
 func show_lot_card(d: Dictionary) -> void:
 	if _lot_card and is_instance_valid(_lot_card):
@@ -842,13 +885,14 @@ func show_lot_card(d: Dictionary) -> void:
 		bl.text = tr(broom_key)
 		bl.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		v.add_child(bl)
+	var reel := _add_photo_reel(v)
 	card.modulate.a = 0.0
 	card.scale = Vector2(0.9, 0.9)
 	card.pivot_offset = card.size * 0.5
 	var tw := create_tween()
 	tw.tween_property(card, "modulate:a", 1.0, 0.25)
 	tw.parallel().tween_property(card, "scale", Vector2.ONE, 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
-	tw.tween_interval(7.5)
+	tw.tween_interval(maxf(7.5, float(reel) * REEL_SEC + 1.6))
 	tw.tween_property(card, "modulate:a", 0.0, 0.5)
 	tw.tween_callback(func():
 		if _lot_card == card:

@@ -1,15 +1,17 @@
-[gd_resource type="Resource" script_class="Archetype" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="Archetype" load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://core/Archetype.gd" id="1"]
+[ext_resource type="PackedScene" path="res://assets/models/items/fridge.glb" id="2"]
 
 [resource]
 script = ExtResource("1")
+scene = ExtResource("2")
 id = "fridge"
 builder = "fridge"
 shard_count = 5
 size_class = 3
 mass_default = 65.0
-dims = Vector3(0.7, 1.7, 0.7)
+dims = Vector3(0.68, 1.71, 0.71)
 cloth = false
 container = true
 container_capacity = 5

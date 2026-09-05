@@ -28,6 +28,7 @@
 [ext_resource type="Script" path="res://world/systems/Traffic.gd" id="26_traffic"]
 [ext_resource type="Script" path="res://world/systems/BuildingDoors.gd" id="27_bdoors"]
 [ext_resource type="Script" path="res://world/systems/Ladders.gd" id="28_ladders"]
+[ext_resource type="Script" path="res://world/systems/PhotoRoll.gd" id="29_photoroll"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sky"]
 sky_top_color = Color(0.25, 0.45, 0.8, 1)
@@ -174,6 +175,9 @@ script = ExtResource("27_bdoors")
 
 [node name="Ladders" type="Node3D" parent="Systems"]
 script = ExtResource("28_ladders")
+
+[node name="PhotoRoll" type="Node" parent="Systems"]
+script = ExtResource("29_photoroll")
 
 [node name="HUD" type="CanvasLayer" parent="."]
 script = ExtResource("14_hud")

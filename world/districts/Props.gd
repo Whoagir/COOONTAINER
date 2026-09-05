@@ -47,9 +47,8 @@ extends Node3D
 const CAR_COLORS := [
 	Color(0.6, 0.55, 0.2), Color(0.3, 0.5, 0.6), Color(0.55, 0.3, 0.15), Color(0.6, 0.2, 0.5), Color(0.85, 0.75, 0.2),
 ]
-const FROND_TOP := Color(0.306, 0.545, 0.227) ## #4e8b3a
-const FROND_UNDER := Color(0.184, 0.353, 0.149) ## #2f5a26
-const PALM_TRUNK := Color(0.62, 0.5, 0.36)
+## Пол соседского трейлера над землёй — ровно под него собрано trailer_rig_neighbor.glb.
+const TRAILER_BASE_N := 0.80
 const SAGE := Color(0.42, 0.48, 0.36)
 const TEX_RUST := "res://assets/textures/tex_rust_teal.png"
 const TEX_PLANKS := "res://assets/textures/tex_planks.png"
@@ -209,10 +208,6 @@ func _cyl(parent: Node3D, pos: Vector3, r: float, h: float, m: Material, collide
 		_cyl_col(parent, pos, maxf(r, top), h, basis)
 
 
-func _sphere(parent: Node3D, pos: Vector3, r: float, m: Material) -> void:
-	_mi(parent, LowPoly.sphere(r, 8, 4), pos, m)
-
-
 func _align_y(dir: Vector3) -> Basis:
 	var y := dir.normalized()
 	var x := y.cross(Vector3.UP)
@@ -284,73 +279,20 @@ func _tree(i: int, d: Vector3) -> void:
 		return
 	if kind < 3:
 		var lean := float((seed_v % 17) - 8) * 1.15
-		_palm(i, pos, s, lean, false)
+		_palm(i, pos, s, lean)
 	else:
 		_cactus(i, pos, s, false)
 
 
-func _palm(i: int, pos: Vector3, s: float, lean_deg: float, fancy := false) -> void:
+## Пальма — модель из Blender (assets/models/palm.glb): изогнутый кольчатый ствол, перистые
+## листья из отдельных «зубьев», сухие бурые ветки и кокосы под кроной. Раньше это были шесть
+## плоских дощечек-вееров — с земли читалось как зонтик, а не как дерево.
+func _palm(i: int, pos: Vector3, s: float, lean_deg: float) -> void:
 	var b := _body("Palm%d" % i, pos, float(i * 37 % 360))
 	b.rotate_object_local(Vector3.FORWARD, deg_to_rad(lean_deg))
-	var wood := _mat(PALM_TRUNK, Color(0, 0, 0, 0), 1.0, TEX_PLANKS)
+	_model(b, "palm", Vector3.ZERO, 0.0, 0.0, s)
 	var trunk_h := 4.2 * s
-	if fancy or i >= 100:
-		fancy = true
-		var rings: Array[Vector3] = [
-			Vector3(0.28 * s, 0.22 * s, trunk_h * 0.30),
-			Vector3(0.20 * s, 0.15 * s, trunk_h * 0.34),
-			Vector3(0.14 * s, 0.09 * s, trunk_h * 0.36),
-		]
-		var y_acc := 0.0
-		for ring in rings:
-			var rb: float = ring.x
-			var rt: float = ring.y
-			var rh: float = ring.z
-			_cyl(b, Vector3(0, y_acc + rh * 0.5, 0), rb, rh, wood, false, Basis(), rt)
-			y_acc += rh
-	else:
-		_cyl(b, Vector3(0, trunk_h * 0.5, 0), 0.24 * s, trunk_h, wood, false, Basis(), 0.10 * s)
-	_cyl_col(b, Vector3(0, trunk_h * 0.5, 0), 0.28 * s, trunk_h)
-	var top_m := _mat(FROND_TOP)
-	var under_m := _mat(FROND_UNDER)
-	var n_fronds := 6
-	var crown := Vector3(0.0, trunk_h - 0.02 * s, 0.0)
-	for f in n_fronds:
-		var yaw := float(f) * TAU / float(n_fronds) + float(i) * 0.11 + float(f) * 0.04
-		_palm_frond(b, crown, yaw, s, 2, top_m, under_m)
-	if fancy:
-		var nut := _mat(Color(0.42, 0.28, 0.14))
-		_sphere(b, crown + Vector3(0.12 * s, -0.20 * s, 0.06 * s), 0.09 * s, nut)
-		_sphere(b, crown + Vector3(-0.10 * s, -0.18 * s, 0.10 * s), 0.08 * s, nut)
-		_sphere(b, crown + Vector3(0.02 * s, -0.22 * s, -0.12 * s), 0.075 * s, nut)
-
-
-func _palm_frond(parent: Node3D, crown: Vector3, yaw: float, s: float, segs: int, top_m: Material, under_m: Material) -> void:
-	## Ленты: почти горизонтально у кроны, кончик ~−45°. Никаких конусов.
-	var pitches: Array[float]
-	var lengths: Array[float]
-	var widths: Array[float]
-	pitches = [6.0, 52.0]
-	lengths = [0.68 * s, 0.95 * s]
-	widths = [0.26 * s, 0.12 * s]
-	var cursor := crown + Vector3(sin(yaw), 0.0, cos(yaw)) * (0.16 * s)
-	var n := mini(segs, pitches.size())
-	for si in n:
-		var pitch := deg_to_rad(pitches[si])
-		var z_axis := Vector3(sin(yaw) * cos(pitch), -sin(pitch), cos(yaw) * cos(pitch))
-		if z_axis.length_squared() < 0.0001:
-			z_axis = Vector3.DOWN
-		z_axis = z_axis.normalized()
-		var x_axis := Vector3.UP.cross(z_axis)
-		if x_axis.length_squared() < 0.0001:
-			x_axis = Vector3.RIGHT
-		x_axis = x_axis.normalized()
-		var basis := Basis(x_axis, z_axis.cross(x_axis), z_axis)
-		var slen: float = lengths[si]
-		var mid: Vector3 = cursor + z_axis * (slen * 0.5)
-		var mat := top_m if si == 0 else under_m
-		_box(parent, mid, Vector3(widths[si], 0.045 * s, slen), mat, false, basis)
-		cursor = cursor + z_axis * slen
+	_cyl_col(b, Vector3(0, trunk_h * 0.5, 0), 0.26 * s, trunk_h)
 
 
 func _cactus(i: int, pos: Vector3, s: float, detail := false) -> void:
@@ -440,7 +382,7 @@ func _junk_car(i: int, d: Vector4) -> void:
 ## Реквизит трейлер-парка вылеплен в Blender (assets/models/park_*.glb): у дивана просевшие
 ## подушки и заплатка, у ящика отходит доска, у штакетника выломана штакетина.
 ## Коллизии остаются кодовыми — модель только заменяет вид.
-func _model(parent: Node3D, file: String, pos := Vector3.ZERO, yaw_deg := 0.0, tilt_deg := 0.0) -> void:
+func _model(parent: Node3D, file: String, pos := Vector3.ZERO, yaw_deg := 0.0, tilt_deg := 0.0, scl := 1.0) -> void:
 	var path := "res://assets/models/%s.glb" % file
 	if not ResourceLoader.exists(path):
 		push_warning("[Props] нет модели %s" % path)
@@ -454,6 +396,8 @@ func _model(parent: Node3D, file: String, pos := Vector3.ZERO, yaw_deg := 0.0, t
 	var b := Basis(Vector3.UP, deg_to_rad(yaw_deg))
 	if absf(tilt_deg) > 0.01:
 		b = b * Basis(Vector3.FORWARD, deg_to_rad(tilt_deg))
+	if absf(scl - 1.0) > 0.001:
+		b = b.scaled(Vector3(scl, scl, scl))
 	mdl.transform = Transform3D(b, pos)
 	mdl.set_meta("no_dress", true) # CityDress мимо: материалы уже запечены в модель
 	parent.add_child(mdl)
@@ -645,28 +589,33 @@ func _build_power_grid() -> void:
 	_power_line("PolePark", park_xs, -31.5, 12.0)
 
 
+## Настенный фонарь: стена со стороны −Z (площадка кронштейна упирается в неё на z = −0.22),
+## свет уходит в +Z. Был плоский тёмный брусок-«кирпич» — стал конический плафон на штанге.
 func _wall_lamp(name: String, pos: Vector3, yaw: float) -> void:
 	var n := _group(name, pos, yaw)
 	var hood := _mat(Color(0.28, 0.26, 0.22))
 	var glow := _mat(Color(1.0, 0.92, 0.65), Color(1.0, 0.85, 0.45), 2.2)
-	_box(n, Vector3(0, 0.08, -0.08), Vector3(0.12, 0.1, 0.28), hood)
-	_box(n, Vector3(0, 0.02, 0.16), Vector3(0.38, 0.16, 0.34), hood, false, Basis(Vector3.RIGHT, deg_to_rad(18)))
-	_box(n, Vector3(0, -0.04, 0.14), Vector3(0.16, 0.06, 0.16), glow)
+	_box(n, Vector3(0, 0.06, -0.12), Vector3(0.14, 0.16, 0.20), hood)
+	_cyl(n, Vector3(0, 0.06, 0.09), 0.022, 0.24, hood, false, Basis(Vector3.RIGHT, deg_to_rad(90)))
+	_cyl(n, Vector3(0, -0.03, 0.20), 0.17, 0.15, hood, false, Basis(), 0.05)
+	_mi(n, LowPoly.sphere(0.055, 6, 3), Vector3(0, -0.12, 0.20), glow)
 	var l := OmniLight3D.new()
 	l.light_color = Color(1.0, 0.88, 0.55)
 	l.light_energy = 1.15
 	l.omni_range = 9.0
 	l.omni_attenuation = 1.4
 	l.shadow_enabled = false
-	l.position = Vector3(0, -0.2, 0.2)
+	l.position = Vector3(0, -0.22, 0.22)
 	n.add_child(l)
 	_light_count += 1
 
 
 func _build_wall_lamps() -> void:
 	# 2 у трейлера, 2 на фасаде ангара, 2 на гаражах, 2 на складе — всего 8.
-	_wall_lamp("WallLampTrailerDoor", Vector3(2.5, 2.55, -11.52), 0.0)
-	_wall_lamp("WallLampTrailerWest", Vector3(-4.22, 2.42, -13.6), 90.0)
+	# у трейлера: над дверью (перемычка +Z, внешняя грань z = −12.10) и на западной стене
+	# (внешняя грань x = −4.2); кронштейн уходит на 0.22 назад, плафон светит от стены
+	_wall_lamp("WallLampTrailerDoor", Vector3(2.5, CityDress.TRAILER_LIFT + 2.30, -11.88), 0.0)
+	_wall_lamp("WallLampTrailerWest", Vector3(-4.42, CityDress.TRAILER_LIFT + 2.42, -13.6), -90.0)
 	_wall_lamp("WallLampHangarL", Vector3(-14.0, 6.1, -109.6), 0.0)
 	_wall_lamp("WallLampHangarR", Vector3(14.0, 6.1, -109.6), 0.0)
 	_wall_lamp("WallLampGarageL", Vector3(-124.0, 4.7, -104.2), 0.0)
@@ -752,7 +701,7 @@ func _dress_park() -> void:
 	_crate("ParkCrate0", Vector3(-14.8, 0, -8.6), 15.0)
 	_crate("ParkCrate1", Vector3(11.2, 0, -20.6), -25.0, Vector3(0.62, 0.48, 0.62))
 	_hide_stock_dish()
-	_dish("ParkDishRoof", Vector3(-2.15, 3.02, -12.35), 55.0, true)
+	_dish("ParkDishRoof", Vector3(-2.15, CityDress.TRAILER_LIFT + 2.90, -12.35), 55.0, true)
 	_dish("ParkDishPost", Vector3(-6.4, 0, -21.8), 30.0, false)
 	_clothesline("ParkLine", Vector3(-14.6, 0, -11.4), 6.0)
 	_chair("ParkChair", Vector3(11.8, 0, -8.6), -50.0)
@@ -1156,12 +1105,27 @@ func _wood_fence(name: String, pos: Vector3, yaw: float, span := 3.8) -> void:
 		_box(n, Vector3(x, 0.5, 0), Vector3(0.07, 0.95, 0.04), white)
 
 
+## Пандус-коллизия под видимыми ступенями: CharacterBody3D в Godot сам на ступень не шагает,
+## поэтому под лесенкой лежит наклонная плита (≤45°) — по ней игрок въезжает наверх плавно.
+func _step_ramp(parent: Node3D, x: float, z_top: float, z_bot: float, y_top: float, width: float) -> void:
+	var run := z_bot - z_top
+	var rise := y_top
+	if run <= 0.01 or rise <= 0.01:
+		return
+	var ang := atan2(rise, run)
+	var length := sqrt(run * run + rise * rise)
+	var mid := Vector3(x, rise * 0.5, (z_top + z_bot) * 0.5)
+	var nrm := Vector3(0.0, cos(ang), sin(ang))
+	_box_col(parent, mid - nrm * 0.12, Vector3(width, 0.24, length), Basis(Vector3.RIGHT, ang))
+
+
 func _neighbor_trailer(name: String, pos: Vector3, yaw: float, seed_i: int) -> void:
 	if not _room():
 		return
 	var w := 9.0 + float(seed_i % 2) * 0.8
 	var h := 2.8
 	var d := 3.0
+	var base := TRAILER_BASE_N # соседи стоят на шасси, а не на земле: пол над колёсами
 	var b := _body(name, pos, yaw)
 	var tex := TEX_TRAILER if seed_i % 2 == 0 else TEX_CORRUGATED
 	var body_c := Color(0.82, 0.78, 0.68) if seed_i % 2 == 0 else Color(0.62, 0.58, 0.52)
@@ -1170,25 +1134,33 @@ func _neighbor_trailer(name: String, pos: Vector3, yaw: float, seed_i: int) -> v
 	var stripe := stripe_cols[seed_i % 3]
 	var roof_m := _mat(Color(0.38, 0.24, 0.16))
 	var glass := _mat(Color(0.55, 0.75, 0.9), Color(0.3, 0.45, 0.6), 0.5)
-	_box(b, Vector3(0, h * 0.5, 0), Vector3(w, h, d), body_m, true)
-	_box(b, Vector3(0, h + 0.06, 0), Vector3(w + 0.12, 0.12, d + 0.1), roof_m)
-	_box(b, Vector3(0, h * 0.62, d * 0.5 + 0.03), Vector3(w * 0.92, 0.14, 0.05), _mat(stripe))
-	_box(b, Vector3(w * 0.22, h + 0.18, -0.15), Vector3(0.55, 0.32, 0.42), _mat(Color(0.72, 0.74, 0.76)))
+	_box(b, Vector3(0, base + h * 0.5, 0), Vector3(w, h, d), body_m, true)
+	_box(b, Vector3(0, base + h + 0.06, 0), Vector3(w + 0.12, 0.12, d + 0.1), roof_m)
+	_box(b, Vector3(0, base + h * 0.62, d * 0.5 + 0.03), Vector3(w * 0.92, 0.14, 0.05), _mat(stripe))
+	_box(b, Vector3(w * 0.22, base + h + 0.18, -0.15), Vector3(0.55, 0.32, 0.42), _mat(Color(0.72, 0.74, 0.76)))
 	var door_z := d * 0.5 + 0.04
-	_box(b, Vector3(0, h * 0.42, door_z), Vector3(0.72, 1.45, 0.05), _mat(Color(0.32, 0.22, 0.14)))
-	_box(b, Vector3(-w * 0.28, h * 0.58, door_z), Vector3(0.85, 0.62, 0.04), glass)
-	_box(b, Vector3(w * 0.22, h * 0.58, door_z), Vector3(0.85, 0.62, 0.04), glass)
-	_box(b, Vector3(0, 0.22, door_z + 0.08), Vector3(0.72, 0.44, 0.42), _mat(Color(0.48, 0.32, 0.18), Color(0, 0, 0, 0), 1.0, TEX_PLANKS))
+	_box(b, Vector3(0, base + 0.75, door_z), Vector3(0.72, 1.5, 0.05), _mat(Color(0.32, 0.22, 0.14)))
+	_box(b, Vector3(-w * 0.28, base + h * 0.52, door_z), Vector3(0.85, 0.62, 0.04), glass)
+	_box(b, Vector3(w * 0.22, base + h * 0.52, door_z), Vector3(0.85, 0.62, 0.04), glass)
 	_cyl(b, Vector3(-w * 0.38, 0.42, -d * 0.35), 0.18, 0.72, _mat(Color(0.78, 0.72, 0.68)), false, Basis(), 0.16)
 	var wood := _mat(Color(0.45, 0.28, 0.14), Color(0, 0, 0, 0), 1.0, TEX_PLANKS)
-	_cyl(b, Vector3(w * 0.35, 1.85, door_z + 0.55), 0.045, 1.65, wood)
-	_cyl(b, Vector3(w * 0.35 + 1.4, 1.85, door_z + 0.55), 0.045, 1.65, wood)
-	_box(b, Vector3(w * 0.35 + 0.7, 2.55, door_z + 0.62), Vector3(1.5, 0.06, 0.55), _mat(Color(0.95, 0.55, 0.12)))
-	_box(b, Vector3(w * 0.35 + 0.7, 2.48, door_z + 0.62), Vector3(1.5, 0.04, 0.55), _mat(Color(0.15, 0.42, 0.62)))
+	# крыльцо: площадка вровень с полом + две ступени, под ними пандус
+	var deck_m := _mat(Color(0.48, 0.34, 0.18), Color(0, 0, 0, 0), 1.0, TEX_PLANKS)
+	_box(b, Vector3(0, base * 0.5, door_z + 0.32), Vector3(1.06, base, 0.62), deck_m, true)
+	_box(b, Vector3(0, base * 0.335, door_z + 0.81), Vector3(0.96, base * 0.67, 0.36), deck_m)
+	_box(b, Vector3(0, base * 0.165, door_z + 1.17), Vector3(0.96, base * 0.33, 0.36), deck_m)
+	_step_ramp(b, 0.0, door_z + 0.63, door_z + 1.721, base, 0.96) # линия по носкам ступеней (36°)
+	_cyl(b, Vector3(-0.56, base + 0.45, door_z + 0.06), 0.035, 0.9, _mat(Color(0.62, 0.64, 0.66)))
+	_cyl(b, Vector3(0.56, base + 0.45, door_z + 0.06), 0.035, 0.9, _mat(Color(0.62, 0.64, 0.66)))
+	# навес у двери: столбы теперь достают до земли (висели в воздухе)
+	_cyl(b, Vector3(w * 0.35, 1.42, door_z + 0.55), 0.045, 2.84, wood)
+	_cyl(b, Vector3(w * 0.35 + 1.4, 1.42, door_z + 0.55), 0.045, 2.84, wood)
+	_box(b, Vector3(w * 0.35 + 0.7, 2.88, door_z + 0.62), Vector3(1.5, 0.06, 0.55), _mat(Color(0.95, 0.55, 0.12)))
+	_box(b, Vector3(w * 0.35 + 0.7, 2.81, door_z + 0.62), Vector3(1.5, 0.04, 0.55), _mat(Color(0.15, 0.42, 0.62)))
 	if seed_i % 3 == 0:
 		_box(b, Vector3(-w * 0.42, 0.12, door_z + 0.65), Vector3(1.1, 0.24, 0.85), _mat(Color(0.52, 0.38, 0.22), Color(0, 0, 0, 0), 1.0, TEX_PLANKS))
 	_model(b, "trailer_rig_neighbor") # соседи тоже на колёсах: шасси, дышло, баллон
-	_mark_enter(b, Vector3(0, 1.05, door_z + 0.55), "trailer")
+	_mark_enter(b, Vector3(0, base + 1.05, door_z + 0.55), "trailer")
 
 
 func _mark_enter(b: StaticBody3D, local_pos: Vector3, kind: String) -> void:
@@ -1227,7 +1199,7 @@ func _neighbor_yard(name: String, pos: Vector3, yaw: float, seed_i: int) -> void
 		8: _shopping_cart(name + "Cart", pos + off, yaw)
 		9: _puddle(name + "Pd", pos + off, 0.75)
 		10: _oil_stain(name + "Oil", pos + off, 0.55)
-		11: _dish(name + "D", pos + off + Vector3(0, 2.85, 0), yaw, true)
+		11: _dish(name + "D", pos + Basis(Vector3.UP, deg_to_rad(yaw)) * Vector3(off.x, TRAILER_BASE_N + 2.88, 0.55), yaw, true)
 	match p1:
 		0: _flamingo(seed_i + 200, pos + Vector3(2.2, 0, 2.8), yaw + 20.0)
 		1: _tire_pile(name + "T2", pos + Vector3(-2.0, 0, 3.5), yaw + 30.0, false)
@@ -1503,9 +1475,10 @@ func _dress_ghetto() -> void:
 			_sheet_fence("GhettoFence%d" % i, Vector3(f.x, 0, f.y), f.z, int(f.w) == 1)
 	if _park_ok(-22.5, 12.8, 1.5):
 		_clothesline_ghetto("GhettoLine", Vector3(-22.5, 0, 12.8), 8.0)
-	_dish("GhettoDish0", Vector3(1.8, 3.02, -12.1), -35.0, true)
-	_dish("GhettoDish1", Vector3(-3.4, 3.02, -11.6), 48.0, true)
-	_tv_antenna(Vector3(0.6, 2.85, -12.8))
+	# крыша трейлера: верх на TRAILER_LIFT + 2.90, край по z = −11.9 (GhettoDish1 висела за ним)
+	_dish("GhettoDish0", Vector3(1.8, CityDress.TRAILER_LIFT + 2.90, -12.3), -35.0, true)
+	_dish("GhettoDish1", Vector3(-3.6, CityDress.TRAILER_LIFT + 2.90, -12.45), 48.0, true)
+	_tv_antenna(Vector3(0.6, CityDress.TRAILER_LIFT + 2.85, -12.8))
 	if _park_ok(12.5, -25.8, 0.5):
 		_shopping_cart("GhettoCart", Vector3(12.5, 0, -25.8), 42.0)
 	if _park_ok(4.8, -11.2, 0.6):

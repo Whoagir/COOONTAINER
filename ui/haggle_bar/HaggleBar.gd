@@ -143,13 +143,13 @@ func _set_mode(m: int) -> void:
 	_bar_panel.visible = m == Mode.BAR
 	set_process(m == Mode.BAR)
 	if m == Mode.OFFER or m == Mode.BET:
-		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		Game.set_mouse_captured(false)
 		var w := _offer_win if m == Mode.OFFER else _bet_win
 		w.popup_centered()
 		w.grab_focus()
 	elif prev == Mode.OFFER or prev == Mode.BET:
 		if not _pause_open():
-			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+			Game.set_mouse_captured(true)
 	if m == Mode.NONE:
 		closed.emit()
 

@@ -166,6 +166,20 @@ func _crow_tick(delta: float) -> void:
 		_crow_target = null
 
 
+## Ор в мире (§3 голос — механика): ворона рядом шарахается и роняет добычу, а на пустом
+## месте вопль может привести бродячую собаку. Зовётся из World._host_shout.
+func on_shout(p, _loud: float) -> void:
+	if not Net.is_host() or p == null or Game.world == null:
+		return
+	if _crow and is_instance_valid(_crow) and _crow.global_position.distance_to(p.global_position) < 22.0:
+		_crow_timer = maxf(_crow_timer, 9.2) # следующий тик уронит вещь и распустит ворону
+		AudioBus.play_at("squeak", _crow.global_position, 2.0, 0.6)
+		Game.notify.emit(tr("GAG_CROW_SCARED"), 2.5)
+		return
+	if randf() < 0.25 and _cool("dog", 120.0):
+		_stray_dog(p)
+
+
 ## Люстра/полка срывается рядом с игроком (§7.1 light_fixture: «люстра, падает»).
 func _drop_something_heavy(p) -> void:
 	for nid in Net.items:

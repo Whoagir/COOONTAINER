@@ -254,6 +254,8 @@ func _advance() -> void:
 			stop()
 		return
 	_cur = _shots[_i]
+	if not _manual:
+		_pace_subtitle(_cur)
 	_t = 0.0
 	_shake = float(_cur.get("shake", 0.0))
 	cam.fov = float(_cur.get("fov", 60.0))
@@ -277,6 +279,20 @@ func _advance() -> void:
 	if _cur.has("title") or _cur.has("sub"):
 		_show_text(str(_cur.get("title", "")), str(_cur.get("sub", "")), float(_cur.get("text_delay", 0.4)))
 	shot_started.emit(_i)
+
+
+## Реплики интро пролетали: кадр жил 3.6-4.2 с, а плашка всплывает 0.5 с после text_delay
+## и гаснет за 0.5 с до конца — на длинную строку оставалось ~2.5 с. Тянем кадр под длину
+## текста (~18 знаков/с). Ручной режим (трейлер под музыку) не трогаем — там тайминг под звук.
+func _pace_subtitle(shot: Dictionary) -> void:
+	var sub := str(shot.get("sub", ""))
+	if sub.strip_edges().is_empty():
+		return
+	var read := 1.1 + float(sub.length()) / 18.0
+	if str(shot.get("title", "")) != "":
+		read += 0.8
+	var need := float(shot.get("text_delay", 0.4)) + 0.5 + read + 0.5
+	shot["dur"] = maxf(float(shot.get("dur", 3.0)), need)
 
 
 func _show_text(title: String, sub: String, delay: float = 0.0) -> void:

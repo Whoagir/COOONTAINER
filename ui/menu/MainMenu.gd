@@ -12,7 +12,7 @@ var _join_keep := "127.0.0.1"
 
 
 func _ready() -> void:
-	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	Game.set_mouse_captured(false)
 	Game.set_app_state(Game.AppState.MENU)
 	if not AudioBus.has("menu_loop") and ResourceLoader.exists("res://audio/music/menu_loop.wav"):
 		pass

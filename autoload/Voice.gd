@@ -6,6 +6,16 @@ extends Node
 const SAMPLE_RATE := 16000
 const CHUNK := 1024
 
+## Крик — механика, а не только чат (§3). Порог по RMS куска микрофона; клавиша `shout` даёт
+## то же самое тем, у кого микрофона нет. Кулдаун, чтобы один вопль не сработал десять раз:
+## микрофон отдаёт чанки по 1024 сэмпла, это ~20 срабатываний в секунду.
+const SHOUT_RMS := 0.16
+const SHOUT_CD := 1.2
+
+signal shouted(loud: float)
+
+var loudness := 0.0 ## RMS последнего чанка микрофона с учётом mic_gain (0..~1)
+var _shout_cd := 0.0
 var talking := false
 var _capture: AudioEffectCapture
 var _mic: AudioStreamPlayer
@@ -43,6 +53,9 @@ func _setup_mic() -> void:
 func _process(_delta: float) -> void:
 	if Game.app_state != Game.AppState.IN_WORLD:
 		return
+	_shout_cd = maxf(0.0, _shout_cd - _delta)
+	if Input.is_action_just_pressed("shout") and not get_tree().paused:
+		_try_shout(1.0)
 	var want := Input.is_action_pressed("voice") and not get_tree().paused
 	if want != talking:
 		talking = want
@@ -59,18 +72,49 @@ func _process(_delta: float) -> void:
 		var me = Net.players.get(Net.my_id())
 		if me and me.has_method("set_talking"):
 			me.set_talking(talking)
-	if not talking or Net.peer_count() <= 1:
+	if not talking:
 		if _capture and _capture.get_frames_available() > 0:
 			_capture.clear_buffer()
+		loudness = 0.0
 		return
+	# соло тоже мерим: орать в микрофон на смотрителя можно и без кореша, просто некому слушать
 	if SteamBoot.voice_available():
 		var d := SteamBoot.get_voice()
-		if d.size() > 0:
+		if d.size() > 0 and Net.peer_count() > 1:
 			Net.send_voice(PackedByteArray([1]) + d)
 	elif mic_ok and _capture:
 		while _capture.get_frames_available() >= CHUNK:
 			var frames := _capture.get_buffer(CHUNK)
-			Net.send_voice(PackedByteArray([0]) + _downsample(frames))
+			_measure(frames)
+			if Net.peer_count() > 1:
+				Net.send_voice(PackedByteArray([0]) + _downsample(frames))
+
+
+## Громкость чанка. Ор в микрофон = тот же крик, что и клавишей: смотритель выгоняет,
+## менты греются, ворона улетает.
+func _measure(frames: PackedVector2Array) -> void:
+	if frames.is_empty():
+		return
+	var sum := 0.0
+	for v in frames:
+		var m := (v.x + v.y) * 0.5
+		sum += m * m
+	loudness = sqrt(sum / float(frames.size())) * float(Settings.get_value("mic_gain"))
+	if loudness >= SHOUT_RMS:
+		_try_shout(loudness)
+
+
+## Хост считает последствия; клиент только сообщает «я заорал».
+func _try_shout(loud: float) -> void:
+	if _shout_cd > 0.0 or Game.app_state != Game.AppState.IN_WORLD:
+		return
+	var me = Net.players.get(Net.my_id())
+	if me == null or not is_instance_valid(me):
+		return
+	# мёртвым орать можно: труп слышно, а последствия каждая система отсеивает у себя
+	_shout_cd = SHOUT_CD
+	shouted.emit(loud)
+	Net.request_action("shout", {"loud": clampf(loud, 0.0, 2.0)})
 
 
 ## 48k stereo → 16k mono int16.

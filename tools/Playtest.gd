@@ -19,6 +19,7 @@ var p: Player
 var w
 var _bid_sent := false
 var _bid_kbd_tested := false
+var _shout_tested := false
 var _carried: Array = []
 var _sold := 0
 var _log: Array[String] = []
@@ -321,7 +322,115 @@ func _s_grab() -> void:
 		_ok("campfire_ignites", is_instance_valid(oil) and (oil.lit or oil.burnt), "hearths=%d lit=%s" % [fire_sys.hearths.size(), str(oil.lit) if is_instance_valid(oil) else "?"])
 		if is_instance_valid(oil):
 			Net.despawn_item(oil.net_id)
+	await _porch_climb()
+	await _death_bag()
+	await _photo_roll()
 	_next()
+
+
+## Плёнка: снимок телефона должен пережить кадр, лечь в плёнку и попасть в карточку лота.
+func _photo_roll() -> void:
+	var roll = w.system("PhotoRoll")
+	if roll == null or not roll.has_method("add_shot"):
+		_ok("photo_roll", false, "no PhotoRoll system")
+		return
+	var before: int = roll.shots.size()
+	var img := Image.create(320, 180, false, Image.FORMAT_RGB8)
+	img.fill(Color(0.2, 0.5, 0.3))
+	roll.add_shot(img, "playtest_shot")
+	var recent: Array = roll.recent(60.0, 5)
+	_ok("photo_roll", roll.shots.size() == before + 1 and not recent.is_empty()
+			and str(recent[recent.size() - 1].get("caption", "")) == "playtest_shot",
+		"shots=%d recent=%d dir=%s" % [roll.shots.size(), recent.size(), roll.dir().get_file()])
+	if w.hud and w.hud.has_method("show_lot_card"):
+		w.hud.show_lot_card({"haul": 3, "value": 100, "paid": 50, "best": "test", "best_value": 40})
+		await get_tree().process_frame
+		_ok("lot_card_reel", true, "карточка собрана с плёнкой")
+	# реальный снимок с экрана — только с окном: в headless рисовать нечего
+	var vend = w.system("Vendors")
+	if DisplayServer.get_name() != "headless" and vend and vend.phone:
+		var n0: int = roll.shots.size()
+		vend.phone.snap(p)
+		for i in 4:
+			await get_tree().process_frame
+		_ok("photo_capture", roll.shots.size() == n0 + 1 and w.hud.visible,
+			"shots=%d hud=%s" % [roll.shots.size(), str(w.hud.visible)])
+		vend.phone.close()
+
+
+## Смерть отдаёт карманы не россыпью, а «барахлом покойника»: за мешком надо сходить.
+func _death_bag() -> void:
+	var pocketable: ItemDef = null
+	for d in Registry.all_items():
+		if Registry.archetype_for(d).size_class == Types.SizeClass.POCKET:
+			pocketable = d
+			break
+	if pocketable == null:
+		_ok("death_bag", false, "no pocketable item")
+		return
+	p.hands.host_release_all()
+	var b = Net.spawn_item(pocketable.id, Transform3D(Basis(), p.global_position + Vector3(0, 1.2, 0)))
+	await get_tree().physics_frame
+	p.host_pocket_put(b)
+	await get_tree().physics_frame
+	var died_at := p.global_position
+	p.die("playtest")
+	await get_tree().create_timer(0.6).timeout
+	var bag: ItemBody = null
+	for it in Net.items.values():
+		if it is ItemBody and is_instance_valid(it) and it.def and it.def.id == "bag_dead" 				and it.global_position.distance_to(died_at) < 4.0:
+			bag = it
+			break
+	_ok("death_bag", bag != null and bag.nested.has(b),
+		"bag=%s nested=%d pockets_empty=%s" % [str(bag != null), bag.nested.size() if bag else -1, str(p.pockets.count(null) == p.pockets.size())])
+	await get_tree().create_timer(5.4).timeout # die() воскрешает сам через 5 с
+	_ok("death_respawn", not p.dead, "dead=%s hp=%.0f" % [str(p.dead), p.hp])
+	if bag and is_instance_valid(bag):
+		Net.despawn_item(bag.net_id)
+
+
+## Трейлер стоит на шасси — внутрь ведут ступени. CharacterBody3D сам на ступеньку не шагает,
+## поэтому под ними лежит пандус; регресс ловит, если крыльцо снова станет стеной.
+func _porch_climb() -> void:
+	var tr: Node3D = w.find_marker(Types.District.TRAILER_PARK, "Trailer")
+	if tr == null:
+		_ok("trailer_porch_climb", false, "no Trailer marker")
+		return
+	p.hands.host_release_all()
+	var lift: float = CityDress.TRAILER_LIFT
+	p.global_position = tr.to_global(Vector3(2.5, -lift + 0.3, 4.6))
+	p.velocity = Vector3.ZERO
+	for i in 24:
+		await get_tree().physics_frame
+	var y0 := p.global_position.y
+	p.cinematic = true
+	p.cine_move = (tr.global_basis * Vector3(0, 0, -1)).normalized() # к двери, вглубь трейлера
+	for i in 220:
+		await get_tree().physics_frame
+	p.cine_move = Vector3.ZERO
+	p.cinematic = false
+	var loc := tr.to_local(p.global_position)
+	_ok("trailer_porch_climb", p.global_position.y > y0 + lift * 0.7 and loc.z < 1.7,
+		"y %.2f→%.2f local_z=%.2f" % [y0, p.global_position.y, loc.z])
+
+
+## Окно оффера скупщика: пока оно открыто, курсор обязан быть видимым (мышь пропадала —
+## возврат фокуса в окно перехватывал захват поверх диалога, и выбрать было нечего).
+func _offer_cursor(ven) -> void:
+	var ui = ven.ui if ven else null
+	if ui == null or not ui.has_method("open_offer"):
+		_ok("offer_cursor", false, "no haggle ui")
+		return
+	ui.open_offer({"stand": "vendor_tiny", "vendor": "test",
+		"items": [{"nid": 0, "name": "test", "fair": 10}]})
+	for i in 3:
+		await get_tree().process_frame
+	var open_mode := Game.mouse_mode_wanted()
+	ui.close()
+	for i in 3:
+		await get_tree().process_frame
+	_ok("offer_cursor", open_mode != Input.MOUSE_MODE_CAPTURED and Game.mouse_mode_wanted() == Input.MOUSE_MODE_CAPTURED,
+		"open=%d closed=%d" % [open_mode, Game.mouse_mode_wanted()])
 
 
 func _s_travel_hangar() -> void:
@@ -368,6 +477,15 @@ func _s_auction() -> void:
 		return
 	var state: int = auc.state_of(anchor)
 	var s = auc.session_for(anchor)
+	# ор на превью: смотритель обязан обернуться (второй раз был бы ЧС — его не трогаем)
+	if state == 1 and s != null and not _shout_tested:
+		_shout_tested = true
+		p.global_position = anchor.global_position + Vector3(2.0, 1.0, 2.0)
+		await get_tree().physics_frame
+		w.handle_action(p.peer_id, "shout", {"loud": 1.0})
+		await get_tree().process_frame
+		_ok("shout_caretaker", int(s.shouts.get(p.peer_id, 0)) == 1,
+			"warns=%d blacklisted=%s" % [int(s.shouts.get(p.peer_id, 0)), str(Game.is_blacklisted(s.district_id))])
 	if state == 2 and s != null and not _bid_kbd_tested:
 		await _test_bid_keyboard(auc, s)
 	# ставим ставку каждый раз, когда сессия в BIDDING и лидер не мы
@@ -494,6 +612,7 @@ func _s_vendor() -> void:
 	_sold = gained
 	_ok("vendor_sale", gained > 0, "%s base=$%d fair=$%d gained=+$%d" % [pick.id, pick.value_base, fair, gained])
 	_ok("vendor_despawn", not Net.items.has(nid), "item removed from world")
+	await _offer_cursor(ven)
 	# крупную вещь на прилавок не поставишь — жёлтая зона на земле перед ним тоже продаёт
 	var st: Vendors.Stand = ven.stands.get("vendor_tiny")
 	if st:

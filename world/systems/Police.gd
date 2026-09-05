@@ -17,6 +17,7 @@ const HEAT := {
 	Types.PoliceTrigger.ARSON: 1.0,
 	Types.PoliceTrigger.PROPERTY_THEFT: 0.55,
 }
+const SHOUT_HEARING := 14.0 ## с какого расстояния мент слышит ор
 const TRIGGER_KEYS := [
 	"POLICE_TRIGGER_ILLEGAL_SALE", "POLICE_TRIGGER_THREAT", "POLICE_TRIGGER_BRAWL", "POLICE_TRIGGER_CAR_THEFT",
 	"POLICE_TRIGGER_OVERTIME", "POLICE_TRIGGER_BLACKLIST_ENTRY", "POLICE_TRIGGER_ARSON",
@@ -25,7 +26,7 @@ const TRIGGER_KEYS := [
 ## Сколько вариантов реплики на категорию: POLICE_COP_<CAT>_<i>.
 const LINES := {
 	"STOP": 3, "CHASE": 3, "GIVEUP": 2, "ARREST": 2, "RELEASE": 2,
-	"BRIBE_OK": 2, "BRIBE_NO": 2, "IDLE": 2, "SHOVED": 2, "LOCKPICK": 1,
+	"BRIBE_OK": 2, "BRIBE_NO": 2, "IDLE": 2, "SHOVED": 2, "LOCKPICK": 1, "SHOUT": 3,
 }
 
 const DISPATCH_AT := 0.5
@@ -262,6 +263,25 @@ func trigger(kind: int, pos: Vector3, culprit: Node = null) -> void:
 		_toast_all(TRIGGER_KEYS[kind])
 	Game.stat_add("police_triggers")
 	_add_heat(p, float(HEAT.get(kind, 0.5)), pos)
+
+
+## Орать рядом с ментом — плохая идея: он оборачивается, розыск подрастает.
+## Дежурный за стойкой в участке не считается: там орут все.
+func on_shout(p: Player, loud: float) -> void:
+	if not Net.is_host() or p == null or p.dead:
+		return
+	var near: Cop = null
+	for cid in _cops:
+		var c = _cops[cid]
+		if not is_instance_valid(c) or c == _desk_cop:
+			continue
+		if c.global_position.distance_to(p.global_position) < SHOUT_HEARING:
+			near = c
+			break
+	if near == null:
+		return
+	near.say(cop_line("SHOUT"), 2.5)
+	_add_heat(p, 0.2 * clampf(loud, 0.5, 1.5), p.global_position)
 
 
 ## Есть ли активная погоня/арест или кто-то сидит.

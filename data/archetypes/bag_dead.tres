@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="Archetype" load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://core/Archetype.gd" id="1"]
+[ext_resource type="PackedScene" path="res://assets/models/items/bag.glb" id="2"]
+
+[resource]
+script = ExtResource("1")
+scene = ExtResource("2")
+id = "bag_dead"
+builder = "bag"
+shard_count = 4
+size_class = 2
+mass_default = 6.0
+dims = Vector3(0.47, 0.37, 0.21)
+cloth = true
+container = true
+container_capacity = 6
+light_fixture = false
+base_color = Color(0.2039, 0.2196, 0.2431, 1.0)
+secondary_color = Color(0.7451, 0.6, 0.1608, 1.0)
+friction = 1.0
+bounce = 0.0

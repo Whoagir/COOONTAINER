@@ -1,15 +1,17 @@
-[gd_resource type="Resource" script_class="Archetype" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="Archetype" load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://core/Archetype.gd" id="1"]
+[ext_resource type="PackedScene" path="res://assets/models/items/hero_plasma.glb" id="2"]
 
 [resource]
 script = ExtResource("1")
+scene = ExtResource("2")
 id = "hero_plasma"
 builder = "tv_plasma"
 shard_count = 6
 size_class = 2
 mass_default = 18.0
-dims = Vector3(1.25, 0.75, 0.06)
+dims = Vector3(1.24, 0.8, 0.24)
 cloth = false
 container = false
 container_capacity = 3

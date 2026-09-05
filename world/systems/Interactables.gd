@@ -152,7 +152,7 @@ func _build_all() -> void:
 	_mk_vending("Vending_1", Types.District.VENDORS, "Parking", Vector3(14.0, 0, -8.0), Vector3(0, 0, 1))
 	_mk_vending("Vending_2", Types.District.CASINO, "Building", Vector3(-8.0, 0, -15.0), Vector3(0, 0, 1))
 	# таксофоны: двор у трейлера (в кадре art_00) и участок
-	_mk_phone("Phone_0", Types.District.TRAILER_PARK, "Trailer", Vector3(-7.6, 0, 8.0), Vector3(0.7, 0, -0.7))
+	_mk_phone("Phone_0", Types.District.TRAILER_PARK, "Trailer", Vector3(-7.6, -CityDress.TRAILER_LIFT, 8.0), Vector3(0.7, 0, -0.7))
 	_mk_phone("Phone_1", Types.District.POLICE, "Parking", Vector3(5.5, 0, -9.0), Vector3(0, 0, 1))
 	_mk_wc()
 	_mk_jukebox()

@@ -1,15 +1,17 @@
-[gd_resource type="Resource" script_class="Archetype" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="Archetype" load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://core/Archetype.gd" id="1"]
+[ext_resource type="PackedScene" path="res://assets/models/items/boombox.glb" id="2"]
 
 [resource]
 script = ExtResource("1")
+scene = ExtResource("2")
 id = "boombox"
 builder = "boombox"
 shard_count = 5
 size_class = 1
 mass_default = 4.0
-dims = Vector3(0.55, 0.25, 0.18)
+dims = Vector3(0.53, 0.24, 0.24)
 cloth = false
 container = false
 container_capacity = 3

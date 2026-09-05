@@ -1,0 +1,27 @@
+[gd_resource type="Resource" script_class="ItemDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://core/ItemDef.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = "bag_dead"
+name_ru = "Барахло покойника"
+name_en = "Dead Man's Bag"
+archetype_id = "bag_dead"
+facets = Array[int]([2, 3])
+value_base = 0
+mass_override = 0.0
+liquid_id = 0
+liquid_amount = 1.0
+flammable = true
+illegal = false
+dusty_default = 0.0
+nest_loot = Array[Resource]([])
+vendor_affinity = Array[String]([])
+wearable_slot = "none"
+break_threshold = 40.0
+color = Color(0.2039, 0.2196, 0.2431, 1.0)
+scale = 1.0
+tags = Array[String](["gag"])
+lore_ru = "Всё, что было в штанах. Донеси."
+lore_en = "Everything from the pockets. Carry it home."

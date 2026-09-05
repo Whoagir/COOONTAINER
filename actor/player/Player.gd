@@ -132,7 +132,7 @@ func _ready() -> void:
 		camera.current = true
 		head_mesh.visible = false
 		name_plate.visible = false
-		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+		Game.set_mouse_captured(true)
 		Game.world_mode_changed.connect(func(m: int, _prev: int):
 			if m != Types.WorldMode.AUCTION:
 				lower_paddle())
@@ -381,11 +381,13 @@ func _build_hand(hand: Node3D, side: float) -> void:
 	if arm_mi:
 		arm_mi.mesh = LowPoly.capsule(0.037, 0.30, 8, 3)
 		arm_mi.material_override = skin
+	# Манжета рукава: висела на фиксированном офсете кисти, пока предплечье каждый кадр
+	# целится из плеча в ладонь — отсюда «синие прямоугольники» сбоку от рук. Ставит её
+	# на место _orient_fp_arm(), здесь только меш.
 	var cuff := MeshInstance3D.new()
-	cuff.mesh = LowPoly.cylinder(0.045, 0.049, 0.07, 8)
+	cuff.name = "Cuff"
+	cuff.mesh = LowPoly.cylinder(0.052, 0.056, 0.10, 8)
 	cuff.material_override = _pmat(_body_mat.albedo_color)
-	cuff.position = Vector3(side * 0.015, -0.04, 0.08)
-	cuff.rotation.x = deg_to_rad(-60.0)
 	hand.add_child(cuff)
 
 
@@ -640,8 +642,8 @@ func look_target() -> Node:
 
 func _physics_process(delta: float) -> void:
 	if dead or in_vehicle:
-		if _ragdoll and is_local():
-			camera.global_position = camera.global_position.lerp(_ragdoll.global_position + Vector3(0, 1.2, 0), delta * 3.0)
+		if dead and is_local():
+			_spectate_tick(delta)
 		return
 	if is_local():
 		if on_ladder != null and is_instance_valid(on_ladder):
@@ -656,6 +658,27 @@ func _physics_process(delta: float) -> void:
 	_status_tick(delta)
 	if is_local():
 		_scrub_tick(delta)
+
+
+## Пока ждёшь кровать — камера едет за живым корешем, а не висит над своим трупом.
+## Смерть должна быть сценой для пати: ты всё ещё в голосе и всё видишь.
+func _spectate_tick(delta: float) -> void:
+	var target: Node3D = null
+	for pid in Net.players:
+		var o = Net.players[pid]
+		if o != self and is_instance_valid(o) and not o.dead:
+			target = o
+			break
+	if target == null:
+		if _ragdoll and is_instance_valid(_ragdoll):
+			camera.global_position = camera.global_position.lerp(_ragdoll.global_position + Vector3(0, 1.2, 0), delta * 3.0)
+		return
+	var basis_z: Vector3 = target.head.global_basis.z if target.head else target.global_basis.z
+	var want: Vector3 = target.global_position + basis_z * 2.8 + Vector3(0, 2.0, 0)
+	camera.global_position = camera.global_position.lerp(want, delta * 4.0)
+	var look: Vector3 = target.global_position + Vector3(0, 1.4, 0)
+	if camera.global_position.distance_to(look) > 0.2:
+		camera.look_at(look, Vector3.UP)
 
 
 func _local_move(delta: float) -> void:
@@ -954,11 +977,7 @@ func die(reason: String) -> void:
 	hp = 0.0
 	set_burning(false)
 	hands.host_release_all()
-	# карманы — на землю в месте смерти, сумка — отдельное тело где упала
-	for i in pockets.size():
-		var b: ItemBody = pockets[i] if is_instance_valid(pockets[i]) else null
-		if b:
-			_pocket_release(b, i)
+	_spawn_death_bag()
 	if worn:
 		unwear()
 	Game.stat_add("deaths")
@@ -971,6 +990,26 @@ func die(reason: String) -> void:
 		Game.world.on_player_died(self, reason)
 	await get_tree().create_timer(5.0).timeout
 	respawn()
+
+
+## Карманы больше не рассыпаются по земле: всё уходит в «барахло покойника» — двуручный мешок,
+## который кто-то должен дойти и принести. Смерть становится задачей пати, а не личной потерей.
+func _spawn_death_bag() -> void:
+	var carried: Array[ItemBody] = []
+	for i in pockets.size():
+		var b: ItemBody = pockets[i] if is_instance_valid(pockets[i]) else null
+		if b:
+			_pocket_release(b, i)
+			carried.append(b)
+	if carried.is_empty() or Registry.item("bag_dead") == null:
+		return
+	var bag = Net.spawn_item("bag_dead", Transform3D(Basis(Vector3.UP, _yaw), global_position + Vector3(0, 0.5, 0)))
+	if bag == null:
+		for b in carried:
+			b.global_position = global_position + Vector3(randf_range(-0.4, 0.4), 0.4, randf_range(-0.4, 0.4))
+		return
+	for b in carried:
+		bag.nest_child(b)
 
 
 func _do_death_visual(pos: Vector3, yaw: float) -> void:
@@ -1297,6 +1336,13 @@ func _orient_fp_arm(hand: Node3D, side: float) -> void:
 		arm.rotate_object_local(Vector3.RIGHT, -PI * 0.5)
 	var base_h := 0.30
 	arm.scale = Vector3(1.0, maxf(length / base_h, 0.35), 1.0)
+	# манжета — на запястье, вдоль предплечья (без Y-растяжения руки)
+	var cuff: MeshInstance3D = hand.get_node_or_null("Cuff") as MeshInstance3D
+	if cuff:
+		cuff.visible = length > 0.08
+		if cuff.visible:
+			var dir := delta_w / length
+			cuff.global_transform = Transform3D(arm.global_basis.orthonormalized(), palm_w - dir * 0.06)
 
 
 func _tint_active_fist() -> void:

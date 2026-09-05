@@ -1,15 +1,17 @@
-[gd_resource type="Resource" script_class="Archetype" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="Archetype" load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://core/Archetype.gd" id="1"]
+[ext_resource type="PackedScene" path="res://assets/models/items/wardrobe.glb" id="2"]
 
 [resource]
 script = ExtResource("1")
+scene = ExtResource("2")
 id = "wardrobe"
 builder = "wardrobe"
 shard_count = 5
 size_class = 3
 mass_default = 70.0
-dims = Vector3(1.0, 2.0, 0.6)
+dims = Vector3(1.06, 2.02, 0.66)
 cloth = false
 container = true
 container_capacity = 5

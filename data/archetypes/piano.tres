@@ -1,15 +1,17 @@
-[gd_resource type="Resource" script_class="Archetype" load_steps=2 format=3]
+[gd_resource type="Resource" script_class="Archetype" load_steps=3 format=3]
 
 [ext_resource type="Script" path="res://core/Archetype.gd" id="1"]
+[ext_resource type="PackedScene" path="res://assets/models/items/piano.glb" id="2"]
 
 [resource]
 script = ExtResource("1")
+scene = ExtResource("2")
 id = "piano"
 builder = "piano"
 shard_count = 6
 size_class = 3
 mass_default = 220.0
-dims = Vector3(1.5, 1.2, 0.65)
+dims = Vector3(1.5, 1.22, 0.64)
 cloth = false
 container = false
 container_capacity = 3
